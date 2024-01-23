@@ -1,0 +1,28 @@
+include: package:very_good_analysis/analysis_options.5.1.0.yaml
+analyzer:
+  exclude:
+    - lib/gen/*
+    - lib/**/*freezed.dart
+    - lib/**/*gr.dart
+    - lib/**l10n**
+    - lib/**icons**
+    - lib/**font**
+    - lib/**firebase_options**
+
+  errors:
+    dead_code: warning
+    missing_required_param: warning
+    missing_return: warning
+    unused_catch_clause: warning
+    unused_catch_stack: warning
+    unused_element: warning
+    unused_field: warning
+    unused_import: warning
+    unused_label: warning
+    unused_local_variable: warning
+    unused_result: warning
+    unused_shown_name: warning
+
+linter:
+  rules:
+    public_member_api_docs: false
