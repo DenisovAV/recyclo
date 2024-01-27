@@ -2,7 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/cache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/l10n/l10n.dart';
+import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/loading/loading.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -33,15 +33,19 @@ class AppView extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: const Color(0xFF2A48DF),
-        appBarTheme: const AppBarTheme(color: Color(0xFF2A48DF)),
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF2A48DF),
+        primaryColor: FlutterGameChallengeColors.primary1,
+        appBarTheme: const AppBarTheme(
+          color: FlutterGameChallengeColors.primary1,
         ),
-        scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+        colorScheme: ColorScheme.fromSwatch(
+          accentColor: FlutterGameChallengeColors.primary1,
+        ),
+        scaffoldBackgroundColor: FlutterGameChallengeColors.white,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(const Color(0xFF2A48DF)),
+            backgroundColor: MaterialStateProperty.all(
+              FlutterGameChallengeColors.primary1,
+            ),
           ),
         ),
         textTheme: GoogleFonts.poppinsTextTheme(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/game/game.dart';
-import 'package:flutter_game_challenge/l10n/l10n.dart';
 
 class TitlePage extends StatelessWidget {
   const TitlePage({super.key});

@@ -2,8 +2,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/game/game.dart';
-import 'package:flutter_game_challenge/l10n/l10n.dart';
 
 class FlutterGameChallenge extends FlameGame {
   FlutterGameChallenge({
@@ -23,7 +23,7 @@ class FlutterGameChallenge extends FlameGame {
   int counter = 0;
 
   @override
-  Color backgroundColor() => const Color(0xFF2A48DF);
+  Color backgroundColor() => FlutterGameChallengeColors.primary1;
 
   @override
   Future<void> onLoad() async {
