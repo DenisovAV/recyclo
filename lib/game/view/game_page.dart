@@ -2,9 +2,8 @@ import 'package:flame/game.dart' hide Route;
 import 'package:flame_audio/bgm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/game/game.dart';
-import 'package:flutter_game_challenge/gen/assets.gen.dart';
-import 'package:flutter_game_challenge/l10n/l10n.dart';
 import 'package:flutter_game_challenge/loading/cubit/cubit.dart';
 
 class GamePage extends StatelessWidget {

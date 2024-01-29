@@ -4,9 +4,9 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame_test/flame_test.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/game/entities/unicorn/behaviors/behaviors.dart';
 import 'package:flutter_game_challenge/game/game.dart';
-import 'package:flutter_game_challenge/l10n/l10n.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

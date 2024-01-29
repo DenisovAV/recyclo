@@ -2,8 +2,8 @@ import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/game/entities/unicorn/behaviors/tapping_behavior.dart';
-import 'package:flutter_game_challenge/gen/assets.gen.dart';
 
 class Unicorn extends PositionedEntity with HasGameRef {
   Unicorn({
@@ -25,8 +25,7 @@ class Unicorn extends PositionedEntity with HasGameRef {
   late SpriteAnimationComponent _animationComponent;
 
   @visibleForTesting
-  SpriteAnimationTicker get animationTicker =>
-      _animationComponent.animationTicker!;
+  SpriteAnimationTicker get animationTicker => _animationComponent.animationTicker!;
 
   @override
   Future<void> onLoad() async {
