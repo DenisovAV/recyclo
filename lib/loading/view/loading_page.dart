@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/l10n/l10n.dart';
+import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/loading/loading.dart';
 import 'package:flutter_game_challenge/title/title.dart';
 
@@ -24,8 +24,7 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<PreloadCubit, PreloadState>(
-      listenWhen: (prevState, state) =>
-          !prevState.isComplete && state.isComplete,
+      listenWhen: (prevState, state) => !prevState.isComplete && state.isComplete,
       listener: (context, state) => onPreloadComplete(context),
       child: const Scaffold(
         body: Center(
@@ -55,14 +54,14 @@ class _LoadingInternal extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: AnimatedProgressBar(
                 progress: state.progress,
-                backgroundColor: const Color(0xFF2A48DF),
-                foregroundColor: const Color(0xFFFFFFFF),
+                backgroundColor: FlutterGameChallengeColors.primary1,
+                foregroundColor: FlutterGameChallengeColors.white,
               ),
             ),
             Text(
               loadingMessage,
               style: primaryTextTheme.bodySmall!.copyWith(
-                color: const Color(0xFF2A48DF),
+                color: FlutterGameChallengeColors.primary1,
                 fontWeight: FontWeight.w900,
               ),
             ),
