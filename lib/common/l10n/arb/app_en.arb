@@ -40,5 +40,13 @@
         "description": "The current count"
       }
     }
+  },
+  "mainMenuGamesItemTitle": "Games",
+  "@mainMenuGamesItemTitle": {
+    "description": "Text shown in the first item of the main menu"
+  },
+  "mainMenuArtifactsItemTitle": "Artifacts",
+  "@mainMenuArtifactsItemTitle": {
+    "description": "Text shown in the second item of the main menu"
   }
 }
