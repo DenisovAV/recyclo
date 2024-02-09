@@ -17,6 +17,33 @@ class FlutterGameChallengeColors {
   static const Color black = Color(0xFF000000);
 
   /// MaterialColor:
+  ///   50: #FFEFF2F8
+  ///   100: #FFD7DFEE
+  ///   200: #FFBDCAE3
+  ///   300: #FFA3B4D8
+  ///   400: #FF8FA4CF
+  ///   500: #FF7B94C7
+  ///   600: #FF738CC1
+  ///   700: #FF6881BA
+  ///   800: #FF5E77B3
+  ///   900: #FF4B65A6
+  static const MaterialColor blueSky = MaterialColor(
+    0xFF7B94C7,
+    <int, Color>{
+      50: Color(0xFFEFF2F8),
+      100: Color(0xFFD7DFEE),
+      200: Color(0xFFBDCAE3),
+      300: Color(0xFFA3B4D8),
+      400: Color(0xFF8FA4CF),
+      500: Color(0xFF7B94C7),
+      600: Color(0xFF738CC1),
+      700: Color(0xFF6881BA),
+      800: Color(0xFF5E77B3),
+      900: Color(0xFF4B65A6),
+    },
+  );
+
+  /// MaterialColor:
   ///   50: #FFF9E5E5
   ///   100: #FFF1BFBF
   ///   200: #FFE79595
@@ -51,6 +78,33 @@ class FlutterGameChallengeColors {
 
   /// Color: #FF042B59
   static const Color primary1 = Color(0xFF042B59);
+
+  /// MaterialColor:
+  ///   50: #FFE8E5EA
+  ///   100: #FFC7BDCA
+  ///   200: #FFA192A6
+  ///   300: #FF7B6682
+  ///   400: #FF5F4568
+  ///   500: #FF43244D
+  ///   600: #FF3D2046
+  ///   700: #FF341B3D
+  ///   800: #FF2C1634
+  ///   900: #FF1E0D25
+  static const MaterialColor textStroke = MaterialColor(
+    0xFF43244D,
+    <int, Color>{
+      50: Color(0xFFE8E5EA),
+      100: Color(0xFFC7BDCA),
+      200: Color(0xFFA192A6),
+      300: Color(0xFF7B6682),
+      400: Color(0xFF5F4568),
+      500: Color(0xFF43244D),
+      600: Color(0xFF3D2046),
+      700: Color(0xFF341B3D),
+      800: Color(0xFF2C1634),
+      900: Color(0xFF1E0D25),
+    },
+  );
 
   /// Color: #FFFFFF
   static const Color white = Color(0xFFFFFFFF);

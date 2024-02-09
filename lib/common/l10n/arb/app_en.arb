@@ -48,5 +48,21 @@
   "mainMenuArtifactsItemTitle": "Artifacts",
   "@mainMenuArtifactsItemTitle": {
     "description": "Text shown in the second item of the main menu"
+  },
+  "mainMenuSettingsItemTitle": "Settings",
+  "@mainMenuSettingsItemTitle": {
+    "description": "Text shown in the third item of the main menu"
+  },
+  "gameModeCatcherItemTitle": "Catcher",
+  "@gameModeCatcherItemTitle": {
+    "description": "Text shown in the catcher game mode button"
+  },
+  "gameModeClickerItemTitle": "Clicker",
+  "@gameModeClickerItemTitle": {
+    "description": "Text shown in the clicker game mode button"
+  },
+  "gameModeFinderItemTitle": "Finder",
+  "@gameModeFinderItemTitle": {
+    "description": "Text shown in the finder game mode button"
   }
 }

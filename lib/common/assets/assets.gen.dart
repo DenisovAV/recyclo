@@ -25,12 +25,18 @@ class $AssetsAudioGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/clouds.png
+  AssetGenImage get clouds => const AssetGenImage('assets/images/clouds.png');
+
+  /// File path: assets/images/earth.png
+  AssetGenImage get earth => const AssetGenImage('assets/images/earth.png');
+
   /// File path: assets/images/unicorn_animation.png
   AssetGenImage get unicornAnimation =>
       const AssetGenImage('assets/images/unicorn_animation.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [unicornAnimation];
+  List<AssetGenImage> get values => [clouds, earth, unicornAnimation];
 }
 
 class $AssetsLicensesGen {
