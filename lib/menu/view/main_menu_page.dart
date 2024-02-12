@@ -43,7 +43,7 @@ class MainMenuPage extends StatelessWidget {
                           key: ValueKey(state.runtimeType),
                           builder: (context) {
                             switch (state.runtimeType) {
-                              case MainPageInitialState:
+                              case MainPageState:
                                 return _MainMenuContent();
                               case MainPageChooseGameState:
                                 return _ChooseGameContent();
