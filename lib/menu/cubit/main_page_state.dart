@@ -8,7 +8,7 @@ abstract class MainPageState {
   final bool isBackgroundHighlighted;
 }
 
-class MainPageInitialState extends MainPageState {
+sealed class MainPageInitialState extends MainPageState {
   MainPageInitialState()
       : super(
           isBackgroundCompact: false,
@@ -16,7 +16,7 @@ class MainPageInitialState extends MainPageState {
         );
 }
 
-class MainPageChooseGameState extends MainPageState {
+sealed class MainPageChooseGameState extends MainPageState {
   MainPageChooseGameState()
       : super(
           isBackgroundCompact: false,
@@ -24,7 +24,7 @@ class MainPageChooseGameState extends MainPageState {
         );
 }
 
-class MainPageArtifactsState extends MainPageState {
+sealed class MainPageArtifactsState extends MainPageState {
   MainPageArtifactsState()
       : super(
           isBackgroundCompact: true,
@@ -32,7 +32,7 @@ class MainPageArtifactsState extends MainPageState {
         );
 }
 
-class MainPageSettingsState extends MainPageState {
+sealed class MainPageSettingsState extends MainPageState {
   MainPageSettingsState()
       : super(
           isBackgroundCompact: true,

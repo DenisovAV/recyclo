@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common/assets.dart';
 
-const _kRotationDuration = Duration(seconds: 120);
-const _kHighlightDuratioh = Duration(milliseconds: 200);
-
 class MainMenuBackground extends StatefulWidget {
   const MainMenuBackground({
     required this.isHighlighted,
@@ -28,23 +25,26 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
   late final Animation<double> _rotationAnimation;
   late final Animation<Offset> _compactAnimation;
 
+  static const _rotationDuration = Duration(seconds: 120);
+  static const _highlightDuratioh = Duration(milliseconds: 200);
+
   @override
   void initState() {
     super.initState();
 
     _spinningController = AnimationController(
       vsync: this,
-      duration: _kRotationDuration,
+      duration: _rotationDuration,
     )..repeat();
 
     _compactController = AnimationController(
       vsync: this,
-      duration: _kHighlightDuratioh,
+      duration: _highlightDuratioh,
     );
 
     _highlightController = AnimationController(
       vsync: this,
-      duration: _kHighlightDuratioh,
+      duration: _highlightDuratioh,
     );
 
     _compactAnimation = Tween<Offset>(
@@ -84,6 +84,8 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
   @override
   void dispose() {
     _spinningController.dispose();
+    _highlightController.dispose();
+    _compactController.dispose();
     super.dispose();
   }
 
