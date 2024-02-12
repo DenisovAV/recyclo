@@ -1,4 +1,4 @@
-abstract class MainPageState {
+sealed class MainPageState {
   MainPageState({
     required this.isBackgroundCompact,
     required this.isBackgroundHighlighted,

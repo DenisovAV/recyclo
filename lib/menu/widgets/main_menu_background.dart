@@ -94,7 +94,7 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 80),
+          padding: const EdgeInsets.only(top: 100),
           child: _Clouds(
             highlightAnimation: _scaleAnimation,
           ),
@@ -102,7 +102,7 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
         Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 200),
+            padding: const EdgeInsets.only(bottom: 120),
             child: _Clouds(
               highlightAnimation: _scaleAnimation,
             ),

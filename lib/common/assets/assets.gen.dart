@@ -31,12 +31,31 @@ class $AssetsImagesGen {
   /// File path: assets/images/earth.png
   AssetGenImage get earth => const AssetGenImage('assets/images/earth.png');
 
+  /// File path: assets/images/game_mode_cathcer.png
+  AssetGenImage get gameModeCathcer =>
+      const AssetGenImage('assets/images/game_mode_cathcer.png');
+
+  /// File path: assets/images/game_mode_clicker.png
+  AssetGenImage get gameModeClicker =>
+      const AssetGenImage('assets/images/game_mode_clicker.png');
+
+  /// File path: assets/images/game_mode_finder.png
+  AssetGenImage get gameModeFinder =>
+      const AssetGenImage('assets/images/game_mode_finder.png');
+
   /// File path: assets/images/unicorn_animation.png
   AssetGenImage get unicornAnimation =>
       const AssetGenImage('assets/images/unicorn_animation.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [clouds, earth, unicornAnimation];
+  List<AssetGenImage> get values => [
+        clouds,
+        earth,
+        gameModeCathcer,
+        gameModeClicker,
+        gameModeFinder,
+        unicornAnimation
+      ];
 }
 
 class $AssetsLicensesGen {

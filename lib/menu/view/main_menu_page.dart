@@ -42,18 +42,12 @@ class MainMenuPage extends StatelessWidget {
                         child: Builder(
                           key: ValueKey(state.runtimeType),
                           builder: (context) {
-                            switch (state.runtimeType) {
-                              case MainPageInitialState:
-                                return _MainMenuContent();
-                              case MainPageChooseGameState:
-                                return _ChooseGameContent();
-                              case MainPageArtifactsState:
-                                return _ArtifactsContent();
-                              case MainPageSettingsState:
-                                return _SettingsContent();
-                              default:
-                                return const SizedBox();
-                            }
+                            return switch (state) {
+                              MainPageInitialState() => _MainMenuContent(),
+                              MainPageChooseGameState() => _ChooseGameContent(),
+                              MainPageArtifactsState() => _ArtifactsContent(),
+                              MainPageSettingsState() => _SettingsContent(),
+                            };
                           },
                         ),
                       ),
@@ -73,18 +67,20 @@ class MenuItem extends StatelessWidget {
   const MenuItem({
     required this.text,
     required this.onTap,
+    this.assetId,
     super.key,
   });
 
   final String text;
   final VoidCallback onTap;
+  final String? assetId;
 
   @override
   Widget build(BuildContext context) {
     const style = TextStyle(
       fontSize: 46,
       fontFamily: 'Mplus',
-      height: 1.8,
+      height: 2,
       color: FlutterGameChallengeColors.white,
       shadows: [
         Shadow(
@@ -112,9 +108,23 @@ class MenuItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
-      child: Text(
-        text,
-        style: style,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (assetId != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Image.asset(
+                assetId!,
+                width: 60,
+                height: 60,
+              ),
+            ),
+          Text(
+            text,
+            style: style,
+          ),
+        ],
       ),
     );
   }
@@ -169,6 +179,7 @@ class _ChooseGameContent extends StatelessWidget {
               children: [
                 MenuItem(
                   text: context.l10n.gameModeCatcherItemTitle,
+                  assetId: Assets.images.gameModeCathcer.path,
                   onTap: () {
                     BlocProvider.of<MainPageCubit>(context)
                         .navigateToChooseGame();
@@ -176,6 +187,7 @@ class _ChooseGameContent extends StatelessWidget {
                 ),
                 MenuItem(
                   text: context.l10n.gameModeClickerItemTitle,
+                  assetId: Assets.images.gameModeClicker.path,
                   onTap: () {
                     BlocProvider.of<MainPageCubit>(context)
                         .navigateToArtifacts();
@@ -183,6 +195,7 @@ class _ChooseGameContent extends StatelessWidget {
                 ),
                 MenuItem(
                   text: context.l10n.gameModeFinderItemTitle,
+                  assetId: Assets.images.gameModeFinder.path,
                   onTap: () {
                     BlocProvider.of<MainPageCubit>(context)
                         .navigateToSettings();
