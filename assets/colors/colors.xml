@@ -9,4 +9,9 @@
     <color name="yellow_ocher" type="material material-accent">#DF9527</color>
     <color name="blue_sky" type="material">#7B94C7</color>
     <color name="text_stroke" type="material">#43244D</color>
+    <color name="category_green" type="material">#ABE492</color>
+    <color name="category_violet" type="material">#7E7EE3</color>
+    <color name="category_orange" type="material">#D7A66F</color>
+    <color name="category_yellow" type="material">#DCE85F</color>
+    <color name="category_pink" type="material">DDCADB</color>
 </resources>

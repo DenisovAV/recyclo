@@ -31,6 +31,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/earth.png
   AssetGenImage get earth => const AssetGenImage('assets/images/earth.png');
 
+  /// File path: assets/images/energy.png
+  AssetGenImage get energy => const AssetGenImage('assets/images/energy.png');
+
   /// File path: assets/images/game_mode_cathcer.png
   AssetGenImage get gameModeCathcer =>
       const AssetGenImage('assets/images/game_mode_cathcer.png');
@@ -43,6 +46,18 @@ class $AssetsImagesGen {
   AssetGenImage get gameModeFinder =>
       const AssetGenImage('assets/images/game_mode_finder.png');
 
+  /// File path: assets/images/glass.png
+  AssetGenImage get glass => const AssetGenImage('assets/images/glass.png');
+
+  /// File path: assets/images/organic.png
+  AssetGenImage get organic => const AssetGenImage('assets/images/organic.png');
+
+  /// File path: assets/images/paper.png
+  AssetGenImage get paper => const AssetGenImage('assets/images/paper.png');
+
+  /// File path: assets/images/plastic.png
+  AssetGenImage get plastic => const AssetGenImage('assets/images/plastic.png');
+
   /// File path: assets/images/unicorn_animation.png
   AssetGenImage get unicornAnimation =>
       const AssetGenImage('assets/images/unicorn_animation.png');
@@ -51,9 +66,14 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
         clouds,
         earth,
+        energy,
         gameModeCathcer,
         gameModeClicker,
         gameModeFinder,
+        glass,
+        organic,
+        paper,
+        plastic,
         unicornAnimation
       ];
 }

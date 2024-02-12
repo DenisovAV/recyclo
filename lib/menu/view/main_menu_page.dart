@@ -4,14 +4,20 @@ import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';
 import 'package:flutter_game_challenge/menu/widgets/main_menu_background.dart';
+import 'package:flutter_game_challenge/service_provider.dart';
+import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
+import 'package:flutter_game_challenge/trash_reserve/trash_reserve_widget.dart';
 
 class MainMenuPage extends StatelessWidget {
   const MainMenuPage({super.key});
 
   static Route<void> route() {
     return MaterialPageRoute<void>(
-      builder: (_) => BlocProvider(
-        create: (_) => MainPageCubit(),
+      builder: (_) => MultiBlocProvider(
+        providers: [
+          BlocProvider<MainPageCubit>(create: (_) => MainPageCubit()),
+          BlocProvider<TrashReserveCubit>(create: (_) => ServiceProvider.get()),
+        ],
         child: const MainMenuPage(),
       ),
     );
@@ -32,25 +38,57 @@ class MainMenuPage extends StatelessWidget {
                     isCompact: state.isBackgroundCompact,
                   ),
                   SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 12,
-                        right: 12,
-                      ),
-                      child: AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 200),
-                        child: Builder(
-                          key: ValueKey(state.runtimeType),
-                          builder: (context) {
-                            return switch (state) {
-                              MainPageInitialState() => _MainMenuContent(),
-                              MainPageChooseGameState() => _ChooseGameContent(),
-                              MainPageArtifactsState() => _ArtifactsContent(),
-                              MainPageSettingsState() => _SettingsContent(),
-                            };
-                          },
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(width: 12),
+                            Visibility(
+                              visible: state is! MainPageInitialState,
+                              child: GameBackButton(
+                                onPressed: () {
+                                  BlocProvider.of<MainPageCubit>(context)
+                                      .navigateToMainPage();
+                                },
+                              ),
+                            ),
+                            const Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: TrashReserveWidget(),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                              right: 12,
+                            ),
+                            child: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 200),
+                              child: Builder(
+                                key: ValueKey(state.runtimeType),
+                                builder: (context) {
+                                  return switch (state) {
+                                    MainPageInitialState() =>
+                                      _MainMenuContent(),
+                                    MainPageChooseGameState() =>
+                                      _ChooseGameContent(),
+                                    MainPageArtifactsState() =>
+                                      _ArtifactsContent(),
+                                    MainPageSettingsState() =>
+                                      _SettingsContent(),
+                                  };
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 80)
+                      ],
                     ),
                   ),
                 ],
@@ -164,48 +202,33 @@ class _MainMenuContent extends StatelessWidget {
 class _ChooseGameContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        GameBackButton(
-          onPressed: () {
-            BlocProvider.of<MainPageCubit>(context).navigateToMainPage();
-          },
-        ),
-        Expanded(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MenuItem(
-                  text: context.l10n.gameModeCatcherItemTitle,
-                  assetId: Assets.images.gameModeCathcer.path,
-                  onTap: () {
-                    BlocProvider.of<MainPageCubit>(context)
-                        .navigateToChooseGame();
-                  },
-                ),
-                MenuItem(
-                  text: context.l10n.gameModeClickerItemTitle,
-                  assetId: Assets.images.gameModeClicker.path,
-                  onTap: () {
-                    BlocProvider.of<MainPageCubit>(context)
-                        .navigateToArtifacts();
-                  },
-                ),
-                MenuItem(
-                  text: context.l10n.gameModeFinderItemTitle,
-                  assetId: Assets.images.gameModeFinder.path,
-                  onTap: () {
-                    BlocProvider.of<MainPageCubit>(context)
-                        .navigateToSettings();
-                  },
-                ),
-              ],
-            ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          MenuItem(
+            text: context.l10n.gameModeCatcherItemTitle,
+            assetId: Assets.images.gameModeCathcer.path,
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToChooseGame();
+            },
           ),
-        ),
-      ],
+          MenuItem(
+            text: context.l10n.gameModeClickerItemTitle,
+            assetId: Assets.images.gameModeClicker.path,
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
+            },
+          ),
+          MenuItem(
+            text: context.l10n.gameModeFinderItemTitle,
+            assetId: Assets.images.gameModeFinder.path,
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToSettings();
+            },
+          ),
+        ],
+      ),
     );
   }
 }
@@ -213,26 +236,14 @@ class _ChooseGameContent extends StatelessWidget {
 class _ArtifactsContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        GameBackButton(
-          onPressed: () {
-            BlocProvider.of<MainPageCubit>(context).navigateToMainPage();
-          },
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Container(
+        decoration: BoxDecoration(
+          color: FlutterGameChallengeColors.black.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(20),
         ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Container(
-              decoration: BoxDecoration(
-                color: FlutterGameChallengeColors.black.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
@@ -240,26 +251,14 @@ class _ArtifactsContent extends StatelessWidget {
 class _SettingsContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        GameBackButton(
-          onPressed: () {
-            BlocProvider.of<MainPageCubit>(context).navigateToMainPage();
-          },
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Container(
+        decoration: BoxDecoration(
+          color: FlutterGameChallengeColors.black.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(20),
         ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Container(
-              decoration: BoxDecoration(
-                color: FlutterGameChallengeColors.black.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

@@ -44,6 +44,141 @@ class FlutterGameChallengeColors {
   );
 
   /// MaterialColor:
+  ///   50: #FFF5FCF2
+  ///   100: #FFE6F7DE
+  ///   200: #FFD5F2C9
+  ///   300: #FFC4ECB3
+  ///   400: #FFB8E8A2
+  ///   500: #FFABE492
+  ///   600: #FFA4E18A
+  ///   700: #FF9ADD7F
+  ///   800: #FF91D975
+  ///   900: #FF80D163
+  static const MaterialColor categoryGreen = MaterialColor(
+    0xFFABE492,
+    <int, Color>{
+      50: Color(0xFFF5FCF2),
+      100: Color(0xFFE6F7DE),
+      200: Color(0xFFD5F2C9),
+      300: Color(0xFFC4ECB3),
+      400: Color(0xFFB8E8A2),
+      500: Color(0xFFABE492),
+      600: Color(0xFFA4E18A),
+      700: Color(0xFF9ADD7F),
+      800: Color(0xFF91D975),
+      900: Color(0xFF80D163),
+    },
+  );
+
+  /// MaterialColor:
+  ///   50: #FFFAF4EE
+  ///   100: #FFF3E4D4
+  ///   200: #FFEBD3B7
+  ///   300: #FFE3C19A
+  ///   400: #FFDDB385
+  ///   500: #FFD7A66F
+  ///   600: #FFD39E67
+  ///   700: #FFCD955C
+  ///   800: #FFC78B52
+  ///   900: #FFBE7B40
+  static const MaterialColor categoryOrange = MaterialColor(
+    0xFFD7A66F,
+    <int, Color>{
+      50: Color(0xFFFAF4EE),
+      100: Color(0xFFF3E4D4),
+      200: Color(0xFFEBD3B7),
+      300: Color(0xFFE3C19A),
+      400: Color(0xFFDDB385),
+      500: Color(0xFFD7A66F),
+      600: Color(0xFFD39E67),
+      700: Color(0xFFCD955C),
+      800: Color(0xFFC78B52),
+      900: Color(0xFFBE7B40),
+    },
+  );
+
+  /// MaterialColor:
+  ///   50: #FFFBF9FB
+  ///   100: #FFF5EFF4
+  ///   200: #FFEEE5ED
+  ///   300: #FFE7DAE6
+  ///   400: #FFE2D2E0
+  ///   500: #FFDDCADB
+  ///   600: #FFD9C5D7
+  ///   700: #FFD4BDD2
+  ///   800: #FFCFB7CD
+  ///   900: #FFC7ABC4
+  static const MaterialColor categoryPink = MaterialColor(
+    0xFFDDCADB,
+    <int, Color>{
+      50: Color(0xFFFBF9FB),
+      100: Color(0xFFF5EFF4),
+      200: Color(0xFFEEE5ED),
+      300: Color(0xFFE7DAE6),
+      400: Color(0xFFE2D2E0),
+      500: Color(0xFFDDCADB),
+      600: Color(0xFFD9C5D7),
+      700: Color(0xFFD4BDD2),
+      800: Color(0xFFCFB7CD),
+      900: Color(0xFFC7ABC4),
+    },
+  );
+
+  /// MaterialColor:
+  ///   50: #FFF0F0FC
+  ///   100: #FFD8D8F7
+  ///   200: #FFBFBFF1
+  ///   300: #FFA5A5EB
+  ///   400: #FF9191E7
+  ///   500: #FF7E7EE3
+  ///   600: #FF7676E0
+  ///   700: #FF6B6BDC
+  ///   800: #FF6161D8
+  ///   900: #FF4E4ED0
+  static const MaterialColor categoryViolet = MaterialColor(
+    0xFF7E7EE3,
+    <int, Color>{
+      50: Color(0xFFF0F0FC),
+      100: Color(0xFFD8D8F7),
+      200: Color(0xFFBFBFF1),
+      300: Color(0xFFA5A5EB),
+      400: Color(0xFF9191E7),
+      500: Color(0xFF7E7EE3),
+      600: Color(0xFF7676E0),
+      700: Color(0xFF6B6BDC),
+      800: Color(0xFF6161D8),
+      900: Color(0xFF4E4ED0),
+    },
+  );
+
+  /// MaterialColor:
+  ///   50: #FFFBFCEC
+  ///   100: #FFF5F8CF
+  ///   200: #FFEEF4AF
+  ///   300: #FFE7EF8F
+  ///   400: #FFE1EB77
+  ///   500: #FFDCE85F
+  ///   600: #FFD8E557
+  ///   700: #FFD3E24D
+  ///   800: #FFCEDE43
+  ///   900: #FFC5D832
+  static const MaterialColor categoryYellow = MaterialColor(
+    0xFFDCE85F,
+    <int, Color>{
+      50: Color(0xFFFBFCEC),
+      100: Color(0xFFF5F8CF),
+      200: Color(0xFFEEF4AF),
+      300: Color(0xFFE7EF8F),
+      400: Color(0xFFE1EB77),
+      500: Color(0xFFDCE85F),
+      600: Color(0xFFD8E557),
+      700: Color(0xFFD3E24D),
+      800: Color(0xFFCEDE43),
+      900: Color(0xFFC5D832),
+    },
+  );
+
+  /// MaterialColor:
   ///   50: #FFF9E5E5
   ///   100: #FFF1BFBF
   ///   200: #FFE79595
