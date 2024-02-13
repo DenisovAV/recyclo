@@ -187,29 +187,32 @@ class MenuItem extends StatelessWidget {
 class _MainMenuContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          MenuItem(
-            text: context.l10n.mainMenuGamesItemTitle,
-            onTap: () {
-              BlocProvider.of<MainPageCubit>(context).navigateToChooseGame();
-            },
-          ),
-          MenuItem(
-            text: context.l10n.mainMenuArtifactsItemTitle,
-            onTap: () {
-              BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
-            },
-          ),
-          MenuItem(
-            text: context.l10n.mainMenuSettingsItemTitle,
-            onTap: () {
-              BlocProvider.of<MainPageCubit>(context).navigateToSettings();
-            },
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 180),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MenuItem(
+              text: context.l10n.mainMenuGamesItemTitle,
+              onTap: () {
+                BlocProvider.of<MainPageCubit>(context).navigateToChooseGame();
+              },
+            ),
+            MenuItem(
+              text: context.l10n.mainMenuArtifactsItemTitle,
+              onTap: () {
+                BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
+              },
+            ),
+            MenuItem(
+              text: context.l10n.mainMenuSettingsItemTitle,
+              onTap: () {
+                BlocProvider.of<MainPageCubit>(context).navigateToSettings();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -218,32 +221,35 @@ class _MainMenuContent extends StatelessWidget {
 class _ChooseGameContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          MenuItem(
-            text: context.l10n.gameModeCatcherItemTitle,
-            assetId: Assets.images.gameModeCathcer.path,
-            onTap: () {
-              BlocProvider.of<MainPageCubit>(context).navigateToChooseGame();
-            },
-          ),
-          MenuItem(
-            text: context.l10n.gameModeClickerItemTitle,
-            assetId: Assets.images.gameModeClicker.path,
-            onTap: () {
-              BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
-            },
-          ),
-          MenuItem(
-            text: context.l10n.gameModeFinderItemTitle,
-            assetId: Assets.images.gameModeFinder.path,
-            onTap: () {
-              BlocProvider.of<MainPageCubit>(context).navigateToSettings();
-            },
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 180),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MenuItem(
+              text: context.l10n.gameModeCatcherItemTitle,
+              assetId: Assets.images.gameModeCathcer.path,
+              onTap: () {
+                BlocProvider.of<MainPageCubit>(context).navigateToChooseGame();
+              },
+            ),
+            MenuItem(
+              text: context.l10n.gameModeClickerItemTitle,
+              assetId: Assets.images.gameModeClicker.path,
+              onTap: () {
+                BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
+              },
+            ),
+            MenuItem(
+              text: context.l10n.gameModeFinderItemTitle,
+              assetId: Assets.images.gameModeFinder.path,
+              onTap: () {
+                BlocProvider.of<MainPageCubit>(context).navigateToSettings();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
