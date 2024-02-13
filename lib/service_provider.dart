@@ -1,3 +1,4 @@
+import 'package:flutter_game_challenge/artifacts/artifacts_repository.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
 import 'package:get_it/get_it.dart';
@@ -7,6 +8,12 @@ class ServiceProvider {
     ///Repositories
     await GetIt.instance
         .registerSingleton<TrashReserveRepository>(TrashReserveRepository())
+        .initialize();
+
+    await GetIt.instance
+        .registerSingleton<ArtifactsRepository>(
+          ArtifactsRepository(GetIt.instance.get()),
+        )
         .initialize();
 
     ///Cubits
