@@ -13,6 +13,87 @@ import 'package:flutter/material.dart';
 class FlutterGameChallengeColors {
   FlutterGameChallengeColors._();
 
+  /// MaterialColor:
+  ///   50: #FFE7F7E0
+  ///   100: #FFC3EBB3
+  ///   200: #FF9BDE80
+  ///   300: #FF72D04D
+  ///   400: #FF54C626
+  ///   500: #FF36BC00
+  ///   600: #FF30B600
+  ///   700: #FF29AD00
+  ///   800: #FF22A500
+  ///   900: #FF169700
+  static const MaterialColor artifactGreen = MaterialColor(
+    0xFF36BC00,
+    <int, Color>{
+      50: Color(0xFFE7F7E0),
+      100: Color(0xFFC3EBB3),
+      200: Color(0xFF9BDE80),
+      300: Color(0xFF72D04D),
+      400: Color(0xFF54C626),
+      500: Color(0xFF36BC00),
+      600: Color(0xFF30B600),
+      700: Color(0xFF29AD00),
+      800: Color(0xFF22A500),
+      900: Color(0xFF169700),
+    },
+  );
+
+  /// MaterialColor:
+  ///   50: #FFFAF0E4
+  ///   100: #FFF2DABB
+  ///   200: #FFEAC18E
+  ///   300: #FFE1A861
+  ///   400: #FFDA953F
+  ///   500: #FFD4821D
+  ///   600: #FFCF7A1A
+  ///   700: #FFC96F15
+  ///   800: #FFC36511
+  ///   900: #FFB9520A
+  static const MaterialColor artifactOrange = MaterialColor(
+    0xFFD4821D,
+    <int, Color>{
+      50: Color(0xFFFAF0E4),
+      100: Color(0xFFF2DABB),
+      200: Color(0xFFEAC18E),
+      300: Color(0xFFE1A861),
+      400: Color(0xFFDA953F),
+      500: Color(0xFFD4821D),
+      600: Color(0xFFCF7A1A),
+      700: Color(0xFFC96F15),
+      800: Color(0xFFC36511),
+      900: Color(0xFFB9520A),
+    },
+  );
+
+  /// MaterialColor:
+  ///   50: #FFF3E5E4
+  ///   100: #FFE1BEBC
+  ///   200: #FFCD938F
+  ///   300: #FFB86862
+  ///   400: #FFA94740
+  ///   500: #FF9A271E
+  ///   600: #FF92231A
+  ///   700: #FF881D16
+  ///   800: #FF7E1712
+  ///   900: #FF6C0E0A
+  static const MaterialColor artifactRed = MaterialColor(
+    0xFF9A271E,
+    <int, Color>{
+      50: Color(0xFFF3E5E4),
+      100: Color(0xFFE1BEBC),
+      200: Color(0xFFCD938F),
+      300: Color(0xFFB86862),
+      400: Color(0xFFA94740),
+      500: Color(0xFF9A271E),
+      600: Color(0xFF92231A),
+      700: Color(0xFF881D16),
+      800: Color(0xFF7E1712),
+      900: Color(0xFF6C0E0A),
+    },
+  );
+
   /// Color: #000000
   static const Color black = Color(0xFF000000);
 
@@ -202,6 +283,33 @@ class FlutterGameChallengeColors {
       700: Color(0xFFC31F1F),
       800: Color(0xFFBD1919),
       900: Color(0xFFB20F0F),
+    },
+  );
+
+  /// MaterialColor:
+  ///   50: #FFFCFBFC
+  ///   100: #FFF9F5F8
+  ///   200: #FFF5EEF4
+  ///   300: #FFF0E7EF
+  ///   400: #FFEDE2EB
+  ///   500: #FFEADDE8
+  ///   600: #FFE7D9E5
+  ///   700: #FFE4D4E2
+  ///   800: #FFE1CFDE
+  ///   900: #FFDBC7D8
+  static const MaterialColor detailsBackground = MaterialColor(
+    0xFFEADDE8,
+    <int, Color>{
+      50: Color(0xFFFCFBFC),
+      100: Color(0xFFF9F5F8),
+      200: Color(0xFFF5EEF4),
+      300: Color(0xFFF0E7EF),
+      400: Color(0xFFEDE2EB),
+      500: Color(0xFFEADDE8),
+      600: Color(0xFFE7D9E5),
+      700: Color(0xFFE4D4E2),
+      800: Color(0xFFE1CFDE),
+      900: Color(0xFFDBC7D8),
     },
   );
 

@@ -2,8 +2,8 @@ import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
 
 class Requirements {
   static const shampoo = ArtifactRequirements(
-    organic: 340,
-    plastic: 450,
+    organic: 10,
+    plastic: 20,
   );
 
   static const car = ArtifactRequirements(

@@ -25,6 +25,30 @@ class $AssetsAudioGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/artifact_car.png
+  AssetGenImage get artifactCar =>
+      const AssetGenImage('assets/images/artifact_car.png');
+
+  /// File path: assets/images/artifact_house.png
+  AssetGenImage get artifactHouse =>
+      const AssetGenImage('assets/images/artifact_house.png');
+
+  /// File path: assets/images/artifact_laptop.png
+  AssetGenImage get artifactLaptop =>
+      const AssetGenImage('assets/images/artifact_laptop.png');
+
+  /// File path: assets/images/artifact_newspaper.png
+  AssetGenImage get artifactNewspaper =>
+      const AssetGenImage('assets/images/artifact_newspaper.png');
+
+  /// File path: assets/images/artifact_plant.png
+  AssetGenImage get artifactPlant =>
+      const AssetGenImage('assets/images/artifact_plant.png');
+
+  /// File path: assets/images/artifact_shampoo.png
+  AssetGenImage get artifactShampoo =>
+      const AssetGenImage('assets/images/artifact_shampoo.png');
+
   /// File path: assets/images/clouds.png
   AssetGenImage get clouds => const AssetGenImage('assets/images/clouds.png');
 
@@ -49,6 +73,21 @@ class $AssetsImagesGen {
   /// File path: assets/images/glass.png
   AssetGenImage get glass => const AssetGenImage('assets/images/glass.png');
 
+  /// File path: assets/images/icon_forbidden.png
+  AssetGenImage get iconForbidden =>
+      const AssetGenImage('assets/images/icon_forbidden.png');
+
+  /// File path: assets/images/icon_geer.png
+  AssetGenImage get iconGeer =>
+      const AssetGenImage('assets/images/icon_geer.png');
+
+  /// File path: assets/images/icon_ok.png
+  AssetGenImage get iconOk => const AssetGenImage('assets/images/icon_ok.png');
+
+  /// File path: assets/images/icon_wallet.png
+  AssetGenImage get iconWallet =>
+      const AssetGenImage('assets/images/icon_wallet.png');
+
   /// File path: assets/images/organic.png
   AssetGenImage get organic => const AssetGenImage('assets/images/organic.png');
 
@@ -64,6 +103,12 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        artifactCar,
+        artifactHouse,
+        artifactLaptop,
+        artifactNewspaper,
+        artifactPlant,
+        artifactShampoo,
         clouds,
         earth,
         energy,
@@ -71,6 +116,10 @@ class $AssetsImagesGen {
         gameModeClicker,
         gameModeFinder,
         glass,
+        iconForbidden,
+        iconGeer,
+        iconOk,
+        iconWallet,
         organic,
         paper,
         plastic,

@@ -13,5 +13,9 @@
     <color name="category_violet" type="material">#7E7EE3</color>
     <color name="category_orange" type="material">#D7A66F</color>
     <color name="category_yellow" type="material">#DCE85F</color>
-    <color name="category_pink" type="material">DDCADB</color>
+    <color name="category_pink" type="material">#DDCADB</color>
+    <color name="artifact_green" type="material">#36BC00</color>
+    <color name="artifact_red" type="material">#9A271E</color>
+    <color name="artifact_orange" type="material">#D4821D</color>
+    <color name="details_background" type="material">#EADDE8</color>
 </resources>

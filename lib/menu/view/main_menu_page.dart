@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
+import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
+import 'package:flutter_game_challenge/artifacts/widgets/artifact_details.dart';
+import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';
@@ -48,8 +52,13 @@ class MainMenuPage extends StatelessWidget {
                               visible: state is! MainPageInitialState,
                               child: GameBackButton(
                                 onPressed: () {
-                                  BlocProvider.of<MainPageCubit>(context)
-                                      .navigateToMainPage();
+                                  if (state is MainPageArtefactDetailsState) {
+                                    BlocProvider.of<MainPageCubit>(context)
+                                        .navigateToArtifacts();
+                                  } else {
+                                    BlocProvider.of<MainPageCubit>(context)
+                                        .navigateToMainPage();
+                                  }
                                 },
                               ),
                             ),
@@ -61,11 +70,12 @@ class MainMenuPage extends StatelessWidget {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 40),
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(
-                              left: 12,
-                              right: 12,
+                              left: 20,
+                              right: 20,
                             ),
                             child: AnimatedSwitcher(
                               duration: const Duration(milliseconds: 200),
@@ -81,13 +91,19 @@ class MainMenuPage extends StatelessWidget {
                                       _ArtifactsContent(),
                                     MainPageSettingsState() =>
                                       _SettingsContent(),
+                                    MainPageArtefactDetailsState() =>
+                                      _ArtifactDetailsContent(
+                                        description: state.description,
+                                        name: state.name,
+                                        imagePath: state.imagePath,
+                                        model: state.model,
+                                      )
                                   };
                                 },
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 80)
                       ],
                     ),
                   ),
@@ -236,13 +252,35 @@ class _ChooseGameContent extends StatelessWidget {
 class _ArtifactsContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Container(
-        decoration: BoxDecoration(
-          color: FlutterGameChallengeColors.black.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(20),
-        ),
+    return BlocProvider<ArtifactsCubit>(
+      create: (_) => ServiceProvider.get<ArtifactsCubit>(),
+      child: const ArtifactsListPage(),
+    );
+  }
+}
+
+class _ArtifactDetailsContent extends StatelessWidget {
+  const _ArtifactDetailsContent({
+    required this.name,
+    required this.description,
+    required this.imagePath,
+    required this.model,
+  });
+
+  final String name;
+  final String description;
+  final String imagePath;
+  final ArtifactModel model;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<ArtifactsCubit>(
+      create: (_) => ServiceProvider.get<ArtifactsCubit>(),
+      child: ArtifactDetails(
+        name: name,
+        imagePath: imagePath,
+        description: description,
+        model: model,
       ),
     );
   }
