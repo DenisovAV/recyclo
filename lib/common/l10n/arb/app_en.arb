@@ -48,5 +48,73 @@
   "mainMenuArtifactsItemTitle": "Artifacts",
   "@mainMenuArtifactsItemTitle": {
     "description": "Text shown in the second item of the main menu"
+  },
+  "mainMenuSettingsItemTitle": "Settings",
+  "@mainMenuSettingsItemTitle": {
+    "description": "Text shown in the third item of the main menu"
+  },
+  "gameModeCatcherItemTitle": "Catcher",
+  "@gameModeCatcherItemTitle": {
+    "description": "Text shown in the catcher game mode button"
+  },
+  "gameModeClickerItemTitle": "Clicker",
+  "@gameModeClickerItemTitle": {
+    "description": "Text shown in the clicker game mode button"
+  },
+  "gameModeFinderItemTitle": "Finder",
+  "@gameModeFinderItemTitle": {
+    "description": "Text shown in the finder game mode button"
+  },
+  "artifactCarTitle": "Trashmobile",
+  "@artifactCarTitle": {
+    "description": "Title of car made from trash"
+  },
+  "artifactCarDescripton": "The car looks lile a futuristic city SUV, but what makes is special is that every part of this made from recycled materials. The body is made up of metal sheets assembled from old tin cans and car parts, giving it a unique and varied appearance.",
+  "@artifactCarDescripton": {
+    "description": "Description of car made from trash"
+  },
+  "artifactShampooTitle": "Scrub-Scrap",
+  "@artifactShampooTitle": {
+    "description": "Title of shampoo made from trash"
+  },
+  "artifactShampooDescripton": "The car looks lile a futuristic city SUV, but what makes is special is that every part of this made from recycled materials. The body is made up of metal sheets assembled from old tin cans and car parts, giving it a unique and varied appearance.",
+  "@artifactShampooDescripton": {
+    "description": "Description of shampoo made from trash"
+  },
+  "artifactHouseTitle": "Trashome",
+  "@artifactHouseTitle": {
+    "description": "Title of house made from trash"
+  },
+  "artifactHouseDescripton": "The car looks lile a futuristic city SUV, but what makes is special is that every part of this made from recycled materials. The body is made up of metal sheets assembled from old tin cans and car parts, giving it a unique and varied appearance.",
+  "@artifactHouseDescripton": {
+    "description": "Description of house made from trash"
+  },
+  "artifactNewspaperTitle": "Trashpaper",
+  "@artifactNewspaperTitle": {
+    "description": "Title of newspaper made from trash"
+  },
+  "artifactNewspaperDescripton": "The car looks lile a futuristic city SUV, but what makes is special is that every part of this made from recycled materials. The body is made up of metal sheets assembled from old tin cans and car parts, giving it a unique and varied appearance.",
+  "@artifactNewspaperDescripton": {
+    "description": "Description of newspaper made from trash"
+  },
+  "artifactLaptopTitle": "Trashputer",
+  "@artifactLaptopTitle": {
+    "description": "Title of laptop made from trash"
+  },
+  "artifactLaptopDescripton": "The car looks lile a futuristic city SUV, but what makes is special is that every part of this made from recycled materials. The body is made up of metal sheets assembled from old tin cans and car parts, giving it a unique and varied appearance.",
+  "@artifactLaptopDescripton": {
+    "description": "Description of laptop made from trash"
+  },
+  "artifactPlantTitle": "Pnaltrash",
+  "@artifactPlantTitle": {
+    "description": "Title of plant made from trash"
+  },
+  "artifactPlantDescripton": "The car looks lile a futuristic city SUV, but what makes is special is that every part of this made from recycled materials. The body is made up of metal sheets assembled from old tin cans and car parts, giving it a unique and varied appearance.",
+  "@artifactPlantDescripton": {
+    "description": "Description of plant made from trash"
+  },
+  "buttonCraft": "Craft",
+  "@buttonCraft": {
+    "description": "Text for Craft button"
   }
 }
