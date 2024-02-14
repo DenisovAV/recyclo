@@ -26,7 +26,6 @@ class GameButton extends StatelessWidget {
         opacity: isActive ? 1 : 0.4,
         child: Container(
           height: 52,
-          width: double.infinity,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: FlutterGameChallengeColors.textStroke,
