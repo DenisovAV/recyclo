@@ -39,12 +39,12 @@ class ArtifactRequirements {
     this.organic = 0,
     this.glass = 0,
     this.paper = 0,
-    this.energy = 0,
+    this.electronics = 0,
   });
 
   final int plastic;
   final int organic;
   final int glass;
   final int paper;
-  final int energy;
+  final int electronics;
 }

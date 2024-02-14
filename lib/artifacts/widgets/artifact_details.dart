@@ -116,7 +116,7 @@ class ArtifactDetails extends StatelessWidget {
                 const SizedBox(width: 4),
                 ArtifactRequirementsStatus(
                   imagePath: Assets.images.energy.path,
-                  count: model.requirements.energy,
+                  count: model.requirements.electronics,
                   isEnough: false,
                   color: FlutterGameChallengeColors.categoryPink,
                 ),

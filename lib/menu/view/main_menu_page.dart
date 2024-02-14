@@ -7,6 +7,7 @@ import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dar
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';
+import 'package:flutter_game_challenge/menu/view/menu_item.dart';
 import 'package:flutter_game_challenge/menu/widgets/main_menu_background.dart';
 import 'package:flutter_game_challenge/service_provider.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
@@ -113,73 +114,6 @@ class MainMenuPage extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class MenuItem extends StatelessWidget {
-  const MenuItem({
-    required this.text,
-    required this.onTap,
-    this.assetId,
-    super.key,
-  });
-
-  final String text;
-  final VoidCallback onTap;
-  final String? assetId;
-
-  @override
-  Widget build(BuildContext context) {
-    const style = TextStyle(
-      fontSize: 46,
-      fontFamily: 'Mplus',
-      height: 2,
-      color: FlutterGameChallengeColors.white,
-      shadows: [
-        Shadow(
-          // bottomLeft
-          offset: Offset(-1.5, -1.5),
-          color: FlutterGameChallengeColors.textStroke,
-        ),
-        Shadow(
-          // bottomRight
-          offset: Offset(1.5, -1.5),
-          color: FlutterGameChallengeColors.textStroke,
-        ),
-        Shadow(
-          // topRight
-          offset: Offset(1.5, 1.5),
-          color: FlutterGameChallengeColors.textStroke,
-        ),
-        Shadow(
-          // topLeft
-          offset: Offset(-1.5, 1.5),
-          color: FlutterGameChallengeColors.textStroke,
-        ),
-      ],
-    );
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (assetId != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: Image.asset(
-                assetId!,
-                width: 60,
-                height: 60,
-              ),
-            ),
-          Text(
-            text,
-            style: style,
-          ),
-        ],
-      ),
     );
   }
 }

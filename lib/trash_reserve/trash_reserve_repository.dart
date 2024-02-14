@@ -31,13 +31,13 @@ class TrashReserveRepository {
       // organic: _sharedPreferences.getInt(_StorageKeys.organicCountKey) ?? 0,
       // glass: _sharedPreferences.getInt(_StorageKeys.glassCountKey) ?? 0,
       // paper: _sharedPreferences.getInt(_StorageKeys.paperCountKey) ?? 0,
-      // energy: _sharedPreferences.getInt(_StorageKeys.energyCountKey) ?? 0,
+      // electronics: _sharedPreferences.getInt(_StorageKeys.electronicsCountKey) ?? 0,
       //TODO Remove it later. Just for test
       plastic: _sharedPreferences.getInt(_StorageKeys.plasticCountKey) ?? 130,
       organic: _sharedPreferences.getInt(_StorageKeys.organicCountKey) ?? 16,
       glass: _sharedPreferences.getInt(_StorageKeys.glassCountKey) ?? 323,
       paper: _sharedPreferences.getInt(_StorageKeys.paperCountKey) ?? 465,
-      energy: _sharedPreferences.getInt(_StorageKeys.energyCountKey) ?? 990,
+      electronics: _sharedPreferences.getInt(_StorageKeys.electronicsCountKey) ?? 990,
     );
 
     _reservedTrash = reservedTrash;
@@ -50,14 +50,14 @@ class TrashReserveRepository {
     int organic = 0,
     int glass = 0,
     int paper = 0,
-    int energy = 0,
+    int electronics = 0,
   }) async {
     _reservedTrash = _reservedTrash.copyWith(
       plastic: _reservedTrash.plastic + plastic,
       organic: _reservedTrash.organic + organic,
       glass: _reservedTrash.glass + glass,
       paper: _reservedTrash.paper + paper,
-      energy: _reservedTrash.energy + energy,
+      electronics: _reservedTrash.electronics + electronics,
     );
 
     _reservedTrashController.add(_reservedTrash);
@@ -70,14 +70,14 @@ class TrashReserveRepository {
     int organic = 0,
     int glass = 0,
     int paper = 0,
-    int energy = 0,
+    int electronics = 0,
   }) async {
     _reservedTrash = _reservedTrash.copyWith(
       plastic: _reservedTrash.plastic - plastic,
       organic: _reservedTrash.organic - organic,
       glass: _reservedTrash.glass - glass,
       paper: _reservedTrash.paper - paper,
-      energy: _reservedTrash.energy - energy,
+      electronics: _reservedTrash.electronics - electronics,
     );
 
     _reservedTrashController.add(_reservedTrash);
@@ -118,11 +118,11 @@ class TrashReserveRepository {
       );
     }
 
-    if (_sharedPreferences.getInt(_StorageKeys.energyCountKey) !=
-        _reservedTrash.energy) {
+    if (_sharedPreferences.getInt(_StorageKeys.electronicsCountKey) !=
+        _reservedTrash.electronics) {
       await _sharedPreferences.setInt(
-        _StorageKeys.energyCountKey,
-        _reservedTrash.energy,
+        _StorageKeys.electronicsCountKey,
+        _reservedTrash.electronics,
       );
     }
   }
@@ -134,7 +134,7 @@ class TrashReserveModel {
     required this.organic,
     required this.glass,
     required this.paper,
-    required this.energy,
+    required this.electronics,
   });
 
   const TrashReserveModel.empty()
@@ -142,27 +142,27 @@ class TrashReserveModel {
         organic = 0,
         glass = 0,
         paper = 0,
-        energy = 0;
+        electronics = 0;
 
   final int plastic;
   final int organic;
   final int glass;
   final int paper;
-  final int energy;
+  final int electronics;
 
   TrashReserveModel copyWith({
     int? plastic = 0,
     int? organic = 0,
     int? glass = 0,
     int? paper = 0,
-    int? energy = 0,
+    int? electronics = 0,
   }) {
     return TrashReserveModel(
       plastic: plastic ?? this.plastic,
       organic: organic ?? this.organic,
       glass: glass ?? this.glass,
       paper: paper ?? this.paper,
-      energy: energy ?? this.energy,
+      electronics: electronics ?? this.electronics,
     );
   }
 }
@@ -172,5 +172,5 @@ class _StorageKeys {
   static const organicCountKey = 'organicTrashCount';
   static const glassCountKey = 'glassTrashCount';
   static const paperCountKey = 'paperTrashCount';
-  static const energyCountKey = 'energyTrashCount';
+  static const electronicsCountKey = 'electronicsTrashCount';
 }

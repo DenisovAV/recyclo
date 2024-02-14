@@ -8,7 +8,7 @@ class ArtifactsRepository {
 
   late final SharedPreferences _sharedPreferences;
   late final ArtifactsModel _artifactsModel;
-  
+
   final TrashReserveRepository _trashReserveRepository;
 
   ArtifactsModel get artifactModel => _artifactsModel;
@@ -88,7 +88,7 @@ class ArtifactsRepository {
   bool _isEnoughResources(ArtifactRequirements requirements) {
     final reservedTrash = _trashReserveRepository.reservedTrash;
 
-    return reservedTrash.energy >= requirements.energy &&
+    return reservedTrash.electronics >= requirements.electronics &&
         reservedTrash.glass >= requirements.glass &&
         reservedTrash.organic >= requirements.organic &&
         reservedTrash.paper >= requirements.paper &&

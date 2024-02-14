@@ -8,12 +8,12 @@ class Requirements {
 
   static const car = ArtifactRequirements(
     glass: 340,
-    energy: 999,
+    electronics: 999,
   );
 
   static const laptop = ArtifactRequirements(
     glass: 340,
-    energy: 999,
+    electronics: 999,
     organic: 10,
     paper: 30,
     plastic: 400,
@@ -21,16 +21,16 @@ class Requirements {
 
   static const house = ArtifactRequirements(
     glass: 340,
-    energy: 999,
+    electronics: 999,
   );
 
   static const plant = ArtifactRequirements(
     glass: 340,
-    energy: 999,
+    electronics: 999,
   );
 
   static const newspaper = ArtifactRequirements(
     glass: 340,
-    energy: 999,
+    electronics: 999,
   );
 }

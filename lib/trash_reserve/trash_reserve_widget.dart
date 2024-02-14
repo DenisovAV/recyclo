@@ -38,7 +38,7 @@ class TrashReserveWidget extends StatelessWidget {
           _TrashReserveItemWidget(
             color: FlutterGameChallengeColors.categoryPink,
             imagePath: Assets.images.energy.path,
-            count: state.model.energy,
+            count: state.model.electronics,
           ),
         ],
       );
