@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/service_provider.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -26,6 +27,8 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
+  await ServiceProvider.initialize();
+
   Bloc.observer = AppBlocObserver();
 
   LicenseRegistry.addLicense(() async* {
@@ -34,6 +37,5 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   });
 
   // Add cross-flavor configuration here
-
   runApp(await builder());
 }

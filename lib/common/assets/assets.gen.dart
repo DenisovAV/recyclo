@@ -25,12 +25,106 @@ class $AssetsAudioGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/artifact_car.png
+  AssetGenImage get artifactCar =>
+      const AssetGenImage('assets/images/artifact_car.png');
+
+  /// File path: assets/images/artifact_house.png
+  AssetGenImage get artifactHouse =>
+      const AssetGenImage('assets/images/artifact_house.png');
+
+  /// File path: assets/images/artifact_laptop.png
+  AssetGenImage get artifactLaptop =>
+      const AssetGenImage('assets/images/artifact_laptop.png');
+
+  /// File path: assets/images/artifact_newspaper.png
+  AssetGenImage get artifactNewspaper =>
+      const AssetGenImage('assets/images/artifact_newspaper.png');
+
+  /// File path: assets/images/artifact_plant.png
+  AssetGenImage get artifactPlant =>
+      const AssetGenImage('assets/images/artifact_plant.png');
+
+  /// File path: assets/images/artifact_shampoo.png
+  AssetGenImage get artifactShampoo =>
+      const AssetGenImage('assets/images/artifact_shampoo.png');
+
+  /// File path: assets/images/clouds.png
+  AssetGenImage get clouds => const AssetGenImage('assets/images/clouds.png');
+
+  /// File path: assets/images/earth.png
+  AssetGenImage get earth => const AssetGenImage('assets/images/earth.png');
+
+  /// File path: assets/images/energy.png
+  AssetGenImage get energy => const AssetGenImage('assets/images/energy.png');
+
+  /// File path: assets/images/game_mode_cathcer.png
+  AssetGenImage get gameModeCathcer =>
+      const AssetGenImage('assets/images/game_mode_cathcer.png');
+
+  /// File path: assets/images/game_mode_clicker.png
+  AssetGenImage get gameModeClicker =>
+      const AssetGenImage('assets/images/game_mode_clicker.png');
+
+  /// File path: assets/images/game_mode_finder.png
+  AssetGenImage get gameModeFinder =>
+      const AssetGenImage('assets/images/game_mode_finder.png');
+
+  /// File path: assets/images/glass.png
+  AssetGenImage get glass => const AssetGenImage('assets/images/glass.png');
+
+  /// File path: assets/images/icon_forbidden.png
+  AssetGenImage get iconForbidden =>
+      const AssetGenImage('assets/images/icon_forbidden.png');
+
+  /// File path: assets/images/icon_geer.png
+  AssetGenImage get iconGeer =>
+      const AssetGenImage('assets/images/icon_geer.png');
+
+  /// File path: assets/images/icon_ok.png
+  AssetGenImage get iconOk => const AssetGenImage('assets/images/icon_ok.png');
+
+  /// File path: assets/images/icon_wallet.png
+  AssetGenImage get iconWallet =>
+      const AssetGenImage('assets/images/icon_wallet.png');
+
+  /// File path: assets/images/organic.png
+  AssetGenImage get organic => const AssetGenImage('assets/images/organic.png');
+
+  /// File path: assets/images/paper.png
+  AssetGenImage get paper => const AssetGenImage('assets/images/paper.png');
+
+  /// File path: assets/images/plastic.png
+  AssetGenImage get plastic => const AssetGenImage('assets/images/plastic.png');
+
   /// File path: assets/images/unicorn_animation.png
   AssetGenImage get unicornAnimation =>
       const AssetGenImage('assets/images/unicorn_animation.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [unicornAnimation];
+  List<AssetGenImage> get values => [
+        artifactCar,
+        artifactHouse,
+        artifactLaptop,
+        artifactNewspaper,
+        artifactPlant,
+        artifactShampoo,
+        clouds,
+        earth,
+        energy,
+        gameModeCathcer,
+        gameModeClicker,
+        gameModeFinder,
+        glass,
+        iconForbidden,
+        iconGeer,
+        iconOk,
+        iconWallet,
+        organic,
+        paper,
+        plastic,
+        unicornAnimation
+      ];
 }
 
 class $AssetsLicensesGen {
