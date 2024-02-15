@@ -15,8 +15,9 @@ class GameButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
+    return AnimatedOpacity(
       opacity: isActive ? 1 : 0.4,
+      duration: const Duration(milliseconds: 500),
       child: Material(
         color: FlutterGameChallengeColors.textStroke,
         borderRadius: BorderRadius.circular(26),
