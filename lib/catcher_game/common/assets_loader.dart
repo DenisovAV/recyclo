@@ -53,15 +53,15 @@ class AssetsLoader {
     for (final box in RecycleType.values) {
       switch (box) {
         case RecycleType.organic:
-          list.add('boxes/organic.png');
+          list.add('catcher/boxes/organic.png');
         case RecycleType.glass:
-          list.add('boxes/glass.png');
+          list.add('catcher/boxes/glass.png');
         case RecycleType.plastic:
-          list.add('boxes/plastic.png');
+          list.add('catcher/boxes/plastic.png');
         case RecycleType.electric:
-          list.add('boxes/electric.png');
+          list.add('catcher/boxes/electric.png');
         case RecycleType.paper:
-          list.add('boxes/paper.png');
+          list.add('catcher/boxes/paper.png');
       }
     }
     return list;
@@ -70,7 +70,7 @@ class AssetsLoader {
   List<String> _loadDropGlass() {
     final list = <String>[];
     for (var i = 0; i < 8; i++) {
-      list.add('drops/glass/$i.png');
+      list.add('catcher/drops/glass/$i.png');
     }
     return list;
   }
@@ -78,7 +78,7 @@ class AssetsLoader {
   List<String> _loadDropOrganic() {
     final list = <String>[];
     for (var i = 0; i < 11; i++) {
-      list.add('drops/organic/$i.png');
+      list.add('catcher/drops/organic/$i.png');
     }
     return list;
   }
@@ -86,7 +86,7 @@ class AssetsLoader {
   List<String> _loadDropPlastic() {
     final list = <String>[];
     for (var i = 0; i < 5; i++) {
-      list.add('drops/plastic/$i.png');
+      list.add('catcher/drops/plastic/$i.png');
     }
     return list;
   }
@@ -94,7 +94,7 @@ class AssetsLoader {
   List<String> _loadDropElectric() {
     final list = <String>[];
     for (var i = 0; i < 4; i++) {
-      list.add('drops/electric/$i.png');
+      list.add('catcher/drops/electric/$i.png');
     }
     return list;
   }
@@ -102,7 +102,7 @@ class AssetsLoader {
   List<String> _loadDropPaper() {
     final list = <String>[];
     for (var i = 0; i < 5; i++) {
-      list.add('drops/paper/$i.png');
+      list.add('catcher/drops/paper/$i.png');
     }
     return list;
   }

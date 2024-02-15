@@ -444,10 +444,10 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   }
 
   String _getAssetPath(int index) => switch (initialBoxList[index]) {
-        RecycleType.organic => 'boxes/organic.png',
-        RecycleType.glass => 'boxes/glass.png',
-        RecycleType.plastic => 'boxes/plastic.png',
-        RecycleType.electric => 'boxes/electric.png',
-        RecycleType.paper => 'boxes/paper.png',
+        RecycleType.organic => 'catcher/boxes/organic.png',
+        RecycleType.glass => 'catcher/boxes/glass.png',
+        RecycleType.plastic => 'catcher/boxes/plastic.png',
+        RecycleType.electric => 'catcher/boxes/electric.png',
+        RecycleType.paper => 'catcher/boxes/paper.png',
       };
 }

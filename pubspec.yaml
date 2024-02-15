@@ -45,16 +45,16 @@ flutter:
     - assets/audio/
     - assets/images/
     - assets/licenses/poppins/
-    - assets/images/boxes/
-    - assets/images/bg/bg.png
-    - assets/images/drops/glass/
-    - assets/images/drops/organic/
-    - assets/images/drops/plastic/
-    - assets/images/drops/electric/
-    - assets/images/drops/paper/
-    - assets/images/animations/
-    - assets/images/tutorial/
-    - assets/images/button/
+    - assets/images/catcher/boxes/
+    - assets/images/catcher/bg/bg.png
+    - assets/images/catcher/drops/glass/
+    - assets/images/catcher/drops/organic/
+    - assets/images/catcher/drops/plastic/
+    - assets/images/catcher/drops/electric/
+    - assets/images/catcher/drops/paper/
+    - assets/images/catcher/animations/
+    - assets/images/catcher/tutorial/
+    - assets/images/catcher/button/
 
   fonts:
     - family: Mplus
