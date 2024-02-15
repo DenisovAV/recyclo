@@ -2,7 +2,6 @@ import 'package:flame/game.dart' hide Route;
 import 'package:flame_audio/bgm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/catcher_game/game.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/game/game.dart';
 import 'package:flutter_game_challenge/loading/cubit/cubit.dart';
@@ -23,7 +22,7 @@ class GamePage extends StatelessWidget {
         return AudioCubit(audioCache: context.read<PreloadCubit>().audio);
       },
       child: const Scaffold(
-        body: GameView(),
+        body: SafeArea(child: GameView()),
       ),
     );
   }
@@ -58,8 +57,17 @@ class _GameViewState extends State<GameView> {
 
   @override
   Widget build(BuildContext context) {
-    _game ??= widget.game ?? CatcherGame();
+    final textStyle = Theme.of(context).textTheme.bodySmall!.copyWith(
+          color: Colors.white,
+          fontSize: 4,
+        );
 
+    _game ??= widget.game ??
+        FlutterGameChallenge(
+          l10n: context.l10n,
+          effectPlayer: context.read<AudioCubit>().effectPlayer,
+          textStyle: textStyle,
+        );
     return Stack(
       children: [
         Positioned.fill(child: GameWidget(game: _game!)),
@@ -67,13 +75,11 @@ class _GameViewState extends State<GameView> {
           alignment: Alignment.topRight,
           child: BlocBuilder<AudioCubit, AudioState>(
             builder: (context, state) {
-              return SafeArea(
-                child: IconButton(
-                  icon: Icon(
-                    state.volume == 0 ? Icons.volume_off : Icons.volume_up,
-                  ),
-                  onPressed: () => context.read<AudioCubit>().toggleVolume(),
+              return IconButton(
+                icon: Icon(
+                  state.volume == 0 ? Icons.volume_off : Icons.volume_up,
                 ),
+                onPressed: () => context.read<AudioCubit>().toggleVolume(),
               );
             },
           ),
