@@ -7,4 +7,15 @@
     <color name="gray_410">#979797</color>
     <color name="crimson_red" type="material">#CF2A2A</color>
     <color name="yellow_ocher" type="material material-accent">#DF9527</color>
+    <color name="blue_sky" type="material">#7B94C7</color>
+    <color name="text_stroke" type="material">#43244D</color>
+    <color name="category_green" type="material">#ABE492</color>
+    <color name="category_violet" type="material">#7E7EE3</color>
+    <color name="category_orange" type="material">#D7A66F</color>
+    <color name="category_yellow" type="material">#DCE85F</color>
+    <color name="category_pink" type="material">#DDCADB</color>
+    <color name="artifact_green" type="material">#36BC00</color>
+    <color name="artifact_red" type="material">#9A271E</color>
+    <color name="artifact_orange" type="material">#D4821D</color>
+    <color name="details_background" type="material">#EADDE8</color>
 </resources>
