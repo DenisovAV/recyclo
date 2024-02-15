@@ -25,6 +25,10 @@ class $AssetsAudioGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/add_to_wallet.png
+  AssetGenImage get addToWallet =>
+      const AssetGenImage('assets/images/add_to_wallet.png');
+
   /// File path: assets/images/artifact_car.png
   AssetGenImage get artifactCar =>
       const AssetGenImage('assets/images/artifact_car.png');
@@ -103,6 +107,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        addToWallet,
         artifactCar,
         artifactHouse,
         artifactLaptop,
