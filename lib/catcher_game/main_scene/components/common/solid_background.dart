@@ -5,7 +5,9 @@ import 'package:flutter_game_challenge/catcher_game/common/config.dart';
 
 class SolidBackground extends PositionComponent {
   SolidBackground() {
-    paint.color = _defaultSolidBackgroundColor.withAlpha(DebugBalancingTableConfig.backgroundAlpha);
+    paint.color = _defaultSolidBackgroundColor.withAlpha(
+      DebugBalancingTableConfig.backgroundAlpha,
+    );
   }
 
   SolidBackground.withAlpha(int alpha) {

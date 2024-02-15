@@ -11,10 +11,11 @@ import 'package:flutter_game_challenge/catcher_game/main_scene/main_scene.dart';
 
 enum ButtonType {
   reset,
-  pause,
+  pausePlay,
 }
 
-class ButtonsContainer extends PositionComponent with TapCallbacks, HasGameRef<CatcherGame> {
+class ButtonsContainer extends PositionComponent
+    with TapCallbacks, HasGameRef<CatcherGame> {
   ButtonsContainer({
     required this.scene,
     required this.onPauseOrPlayCallback,
@@ -25,7 +26,8 @@ class ButtonsContainer extends PositionComponent with TapCallbacks, HasGameRef<C
   final VoidCallback onPauseOrPlayCallback;
   final VoidCallback onResetCallback;
 
-  final Map<ButtonType, SpriteSheetUtil> _buttonsAssets = <ButtonType, SpriteSheetUtil>{};
+  final Map<ButtonType, SpriteSheetUtil> _buttonsAssets =
+      <ButtonType, SpriteSheetUtil>{};
   final List<ButtonAnimated> buttonList = <ButtonAnimated>[];
 
   late VisibleComponent _pauseOverlay;
@@ -62,22 +64,23 @@ class ButtonsContainer extends PositionComponent with TapCallbacks, HasGameRef<C
     _pauseOverlay = VisibleComponent(
       sprite: Sprite(
         game.images.fromCache(
-          ButtonsContainerConfig.buttonPauseOverlayAsset,
+          ButtonsContainerConfig.buttonPauseAsset,
         ),
       ),
-      isVisible: false,
     );
     await add(_pauseOverlay);
   }
 
   @override
+  //ignore: must_call_super, intended function override
   void onGameResize(Vector2 size) {
     if (isLoaded) {
       final tile = game.sizeConfig.tileSize;
       final gameSize = game.canvasSize.toSize();
 
       x = 0;
-      y = gameSize.height - (tile * ButtonsContainerConfig.buttonsContainerPositionY);
+      y = gameSize.height -
+          (tile * ButtonsContainerConfig.buttonsContainerPositionY);
       final buttonsSize = tile * ButtonsContainerConfig.buttonSize;
 
       for (final button in buttonList) {
@@ -89,26 +92,35 @@ class ButtonsContainer extends PositionComponent with TapCallbacks, HasGameRef<C
         switch (button.buttonType) {
           case ButtonType.reset:
             button.x = gameSize.width / 2 + (buttonsSize * 1.05);
-          case ButtonType.pause:
+          case ButtonType.pausePlay:
             button.x = gameSize.width / 2 - (buttonsSize * 1.05);
         }
       }
 
-      final overlayHook = buttonList.firstWhere((btn) => btn.buttonType == ButtonType.pause);
+      final overlayHook = buttonList
+          .firstWhere((btn) => btn.buttonType == ButtonType.pausePlay);
 
       _pauseOverlay
         ..width = buttonsSize
         ..height = buttonsSize
         ..x = overlayHook.x
-        ..y = overlayHook.y + buttonsSize / ButtonsContainerConfig.buttonPauseOverlayPositionY;
+        ..y = overlayHook.y +
+            buttonsSize / ButtonsContainerConfig.buttonPauseOverlayPositionY;
     }
   }
 
   @override
+  bool containsLocalPoint(Vector2 point) => switch (game.status) {
+        CatcherGameStatus.playing || CatcherGameStatus.pause => true,
+        _ => false,
+      };
+
+  @override
   void onTapDown(TapDownEvent event) {
     for (final button in buttonList) {
-      if (button.tappingArea.contains(event.devicePosition.toOffset()) && button.isVisible) {
-        if (button.buttonType == ButtonType.pause) {
+      if (button.tappingArea.contains(event.devicePosition.toOffset()) &&
+          button.isVisible) {
+        if (button.buttonType == ButtonType.pausePlay) {
           if (game.status != CatcherGameStatus.result) {
             onPauseOrPlayCallback();
             _pauseOverlay.isVisible = false;
@@ -126,14 +138,16 @@ class ButtonsContainer extends PositionComponent with TapCallbacks, HasGameRef<C
     switch (type) {
       case ButtonType.reset:
         callBack = onResetCallback;
-      case ButtonType.pause:
+      case ButtonType.pausePlay:
         callBack = showPauseOverlay;
     }
     return callBack;
   }
 
   void showPauseOverlay() {
-    if (game.status == CatcherGameStatus.pause && !isAnimationStarted && !_pauseOverlay.isVisible) {
+    if (game.status == CatcherGameStatus.pause &&
+        !isAnimationStarted &&
+        !_pauseOverlay.isVisible) {
       _pauseOverlay.isVisible = true;
     }
   }
@@ -143,15 +157,17 @@ class ButtonsContainer extends PositionComponent with TapCallbacks, HasGameRef<C
       switch (type) {
         case ButtonType.reset:
           _buttonsAssets[type] = SpriteSheetUtil(
-            image: game.images.fromCache(ButtonsContainerConfig.buttonResetAnimatedAsset),
+            image: game.images
+                .fromCache(ButtonsContainerConfig.buttonResetAnimatedAsset),
             textureWidth: ButtonsContainerConfig.animationFrameSize,
             textureHeight: ButtonsContainerConfig.animationFrameSize,
             columns: ButtonsContainerConfig.buttonAnimationRowsAndColumns,
             rows: ButtonsContainerConfig.buttonAnimationRowsAndColumns,
           );
-        case ButtonType.pause:
+        case ButtonType.pausePlay:
           _buttonsAssets[type] = SpriteSheetUtil(
-            image: game.images.fromCache(ButtonsContainerConfig.buttonPauseAnimatedAsset),
+            image: game.images
+                .fromCache(ButtonsContainerConfig.buttonPauseAnimatedAsset),
             textureWidth: ButtonsContainerConfig.animationFrameSize,
             textureHeight: ButtonsContainerConfig.animationFrameSize,
             columns: ButtonsContainerConfig.buttonAnimationRowsAndColumns,

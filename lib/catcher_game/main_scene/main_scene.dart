@@ -10,11 +10,11 @@ import 'package:flutter_game_challenge/catcher_game/common/config.dart';
 import 'package:flutter_game_challenge/catcher_game/common/levels_config.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
 import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/fallen/recycle_type.dart';
 
 typedef CatchCallback = void Function(RecycleType dropType);
 
-class MainScene extends PositionComponent with TapCallbacks, HasGameRef<CatcherGame> {
+class MainScene extends PositionComponent
+    with TapCallbacks, HasGameRef<CatcherGame> {
   MainScene({
     required this.onPauseResumeGameCallback,
   });
@@ -27,22 +27,23 @@ class MainScene extends PositionComponent with TapCallbacks, HasGameRef<CatcherG
   int currentWave = 0;
   int _spawned = 0;
   int _omissionsToShowTutorial = 0;
+  bool _isHorizontalDragHandled = true;
 
   late Background _background;
   late BoxContainer _boxContainer;
-  late FallenContainer _dropContainer;
+  late DropContainer _dropContainer;
   late ButtonsContainer _buttonsContainer;
   late DropSpawner _dropSpawner;
   late WaveDelay _waveDelay;
   late TutorialContainer _tutorialContainer;
 
-  bool _isHorizontalDragHandled = true;
-
   @override
   FutureOr<void> onLoad() async {
     waveList = initialWaveList;
 
-    _background = Background(sprite: Sprite(game.images.fromCache(BackgroundConfig.sceneAsset)));
+    _background = Background(
+      sprite: Sprite(game.images.fromCache(BackgroundConfig.sceneAsset)),
+    );
     _boxContainer = BoxContainer();
     _buttonsContainer = ButtonsContainer(
       scene: this,
@@ -50,19 +51,21 @@ class MainScene extends PositionComponent with TapCallbacks, HasGameRef<CatcherG
       onResetCallback: _handleResetCallback,
     );
     _waveDelay = WaveDelay(
-        scene: this,
-        duration: waveList[0].delay,
-        onWaveFinished: () {
-          _dropSpawner.start();
-        });
+      scene: this,
+      duration: waveList[0].delay,
+      onWaveFinished: () {
+        _dropSpawner.start();
+      },
+    );
 
     _dropSpawner = DropSpawner(
-        onSpawnerUpdate: _onNextSpawn,
-        repeatNumber: waveList[currentWave].itemsInWave,
-        ceilingTimeLimit: waveList[currentWave].maxDroppingInterval,
-        floorTimeLimit: waveList[currentWave].minDroppingInterval);
+      onSpawnerUpdate: _onNextSpawn,
+      repeatNumber: waveList[currentWave].itemsInWave,
+      ceilingTimeLimit: waveList[currentWave].maxDroppingInterval,
+      floorTimeLimit: waveList[currentWave].minDroppingInterval,
+    );
 
-    _dropContainer = FallenContainer(
+    _dropContainer = DropContainer(
       scene: this,
       catchCallback: _onCatch,
       boxContainer: _boxContainer,
@@ -97,8 +100,8 @@ class MainScene extends PositionComponent with TapCallbacks, HasGameRef<CatcherG
       );
     _dropContainer.render(canvas);
     canvas.restore();
-    _tutorialContainer.render(canvas);
     _buttonsContainer.render(canvas);
+    _tutorialContainer.render(canvas);
   }
 
   @override
@@ -114,13 +117,6 @@ class MainScene extends PositionComponent with TapCallbacks, HasGameRef<CatcherG
     }
   }
 
-  @override
-  void onTapDown(TapDownEvent event) {
-    if (!_buttonsContainer.isAnimationStarted) {
-      _buttonsContainer.onTapDown(event);
-    }
-  }
-
   void onDragStart(DragStartDetails details) {
     if (game.status == CatcherGameStatus.playing) {
       if (_boxContainer.toRect().contains(details.localPosition)) {
@@ -132,7 +128,8 @@ class MainScene extends PositionComponent with TapCallbacks, HasGameRef<CatcherG
 
   void onDragUpdate(DragUpdateDetails details) {
     if (game.status == CatcherGameStatus.playing) {
-      if (_boxContainer.toRect().contains(details.localPosition) && !_isHorizontalDragHandled) {
+      if (_boxContainer.toRect().contains(details.localPosition) &&
+          !_isHorizontalDragHandled) {
         _boxContainer.handleDragUpdate(details);
       } else if (!_boxContainer.toRect().contains(details.localPosition) &&
           !_isHorizontalDragHandled) {
@@ -152,20 +149,22 @@ class MainScene extends PositionComponent with TapCallbacks, HasGameRef<CatcherG
 
   void changeWave(int wave) {
     currentWave = wave;
-    _dropSpawner.stop();
-    _dropSpawner.repeatNumber = waveList[currentWave].itemsInWave;
-    _dropSpawner.ceilingTimeLimit = waveList[currentWave].maxDroppingInterval;
-    _dropSpawner.floorTimeLimit = waveList[currentWave].minDroppingInterval;
+    _dropSpawner
+      ..stop()
+      ..repeatNumber = waveList[currentWave].itemsInWave
+      ..ceilingTimeLimit = waveList[currentWave].maxDroppingInterval
+      ..floorTimeLimit = waveList[currentWave].minDroppingInterval;
     _waveDelay.reset(waveList[currentWave].delay);
     _boxContainer.isChangeWave = true;
-    _spawned = waveList[currentWave].itemsInWave.toInt();
+    _spawned = waveList[currentWave].itemsInWave;
   }
 
   void _onNextSpawn() {
     _dropContainer.genDrop(
-        speedMin: waveList[currentWave].minDroppingSpeed,
-        speedMax: waveList[currentWave].maxDroppingSpeed,
-        dropDiversityList: waveList[currentWave].dropDiversityList);
+      speedMin: waveList[currentWave].minDroppingSpeed,
+      speedMax: waveList[currentWave].maxDroppingSpeed,
+      dropDiversityList: waveList[currentWave].dropDiversityList,
+    );
   }
 
   void _onCatch(RecycleType dropType) {
@@ -175,13 +174,11 @@ class MainScene extends PositionComponent with TapCallbacks, HasGameRef<CatcherG
       _omissionsToShowTutorial++;
     }
 
-    if (_omissionsToShowTutorial >= DebugBalancingTableConfig.maxOmissionsToShowTutorial) {
-      if (_buttonsContainer.isAnimationStarted) {
-        // Need this line to prevent interruption of the button animation with tutorial.
-        _omissionsToShowTutorial--;
-      } else {
-        _omissionsToShowTutorial = 0;
-      }
+    if (_omissionsToShowTutorial >=
+            DebugBalancingTableConfig.maxOmissionsToShowTutorial &&
+        !_buttonsContainer.isAnimationStarted) {
+      _omissionsToShowTutorial = 0;
+      _tutorialContainer.showTutorial();
     }
 
     --_spawned;

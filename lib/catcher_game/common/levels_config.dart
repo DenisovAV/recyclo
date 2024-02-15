@@ -1,13 +1,10 @@
 import 'package:flutter_game_challenge/catcher_game/common/speed_convector.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/fallen/recycle_type.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/model/drop.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/model/level.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/model/wave.dart';
+import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
 
-// ignore: avoid_classes_with_only_static_members
 abstract class Levels {
   static const int initialLevel = 1;
 
+  // TODO(viktor): At this stage, we could still reuse this class to configure the 1 minute game.
   static List<Level> levels = [
     Level(
       number: 0,
@@ -74,7 +71,7 @@ abstract class Levels {
         ),
         Wave(
           delay: 1,
-          itemsInWave: 10,
+          itemsInWave: 1000,
           dropDiversityList: const [
             Drop(type: RecycleType.organic, varietyBounder: 11),
             Drop(type: RecycleType.electric, varietyBounder: 5),

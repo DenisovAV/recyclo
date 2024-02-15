@@ -22,8 +22,10 @@ class Level {
           extraDifficulty == other.extraDifficulty;
 
   @override
-  int get hashCode => number.hashCode ^ waves.hashCode ^ extraDifficulty.hashCode;
+  int get hashCode =>
+      number.hashCode ^ waves.hashCode ^ extraDifficulty.hashCode;
 
   @override
-  String toString() => 'Level{number: $number, waves: $waves, extra: $extraDifficulty }';
+  String toString() =>
+      'Level{number: $number, waves: $waves, extra: $extraDifficulty }';
 }

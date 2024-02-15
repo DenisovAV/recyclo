@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/fallen/recycle_type.dart';
+import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
 
 @immutable
 class Drop {

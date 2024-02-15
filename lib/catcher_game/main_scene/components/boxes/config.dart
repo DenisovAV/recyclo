@@ -1,4 +1,3 @@
-// ignore: avoid_classes_with_only_static_members
 abstract class BoxContainerConfig {
   static const double smallBoxSize = 2.6;
   static const double bigBoxSize = 3.3;
@@ -15,8 +14,7 @@ abstract class BoxContainerConfig {
   static const double containerTouchArea = 0.2;
   static const double distortionDistance = 1.8;
   static const double distortionSevenDistance = 1.3;
-  static const double containerClipFromRight = 0.1;
-  static const double containerClipFromLeft = 0.1;
+  static const double containerClipFromLeft = 0.5;
   static const double containerClipSize = 0.67;
   static const int containerCapacityExpand = 3;
 }

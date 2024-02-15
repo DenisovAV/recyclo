@@ -4,14 +4,14 @@ import 'dart:ui';
 import 'package:bezier/bezier.dart';
 import 'package:flame/components.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/fallen/recycle_type.dart';
+import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
 import 'package:flutter_game_challenge/catcher_game/main_scene/main_scene.dart';
 
-class Fallen extends SpriteComponent with HasVisibility, HasGameRef<CatcherGame> {
-  Fallen({
+class DropComponent extends SpriteComponent
+    with HasVisibility, HasGameRef<CatcherGame> {
+  DropComponent({
     required super.sprite,
     required super.paint,
-    required this.scene,
     required this.type,
     required this.wave,
     required this.catchCallback,
@@ -24,7 +24,6 @@ class Fallen extends SpriteComponent with HasVisibility, HasGameRef<CatcherGame>
   final RecycleType type;
   final int wave;
   final CatchCallback catchCallback;
-  final MainScene scene;
   final QuadraticBezier cubicCurve;
   final double speed;
   final bool isLeft;
@@ -32,6 +31,7 @@ class Fallen extends SpriteComponent with HasVisibility, HasGameRef<CatcherGame>
   double rotation = 6;
 
   @override
+  //ignore: must_call_super, intended function override
   void render(Canvas canvas) {
     sprite?.render(
       canvas,

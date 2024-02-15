@@ -1,24 +1,28 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_game_challenge/catcher_game/common/config.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/fallen/recycle_type.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/model/drop.dart';
+import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
 
 @immutable
 class Wave {
-  const Wave(
-      {int? itemsInWave,
-      List<Drop>? dropDiversityList,
-      double? minDroppingInterval,
-      double? maxDroppingInterval,
-      double? minDroppingSpeed,
-      double? maxDroppingSpeed,
-      double? delay})
-      : itemsInWave = itemsInWave ?? DebugBalancingTableConfig.defaultItems,
-        dropDiversityList = dropDiversityList ?? const [Drop(type: RecycleType.organic)],
-        minDroppingInterval = minDroppingInterval ?? DebugBalancingTableConfig.minInterval,
-        maxDroppingInterval = maxDroppingInterval ?? DebugBalancingTableConfig.maxInterval,
-        minDroppingSpeed = minDroppingSpeed ?? DebugBalancingTableConfig.minSpeed,
-        maxDroppingSpeed = maxDroppingSpeed ?? DebugBalancingTableConfig.maxSpeed,
+  const Wave({
+    int? itemsInWave,
+    List<Drop>? dropDiversityList,
+    double? minDroppingInterval,
+    double? maxDroppingInterval,
+    double? minDroppingSpeed,
+    double? maxDroppingSpeed,
+    double? delay,
+  })  : itemsInWave = itemsInWave ?? DebugBalancingTableConfig.defaultItems,
+        dropDiversityList =
+            dropDiversityList ?? const [Drop(type: RecycleType.organic)],
+        minDroppingInterval =
+            minDroppingInterval ?? DebugBalancingTableConfig.minInterval,
+        maxDroppingInterval =
+            maxDroppingInterval ?? DebugBalancingTableConfig.maxInterval,
+        minDroppingSpeed =
+            minDroppingSpeed ?? DebugBalancingTableConfig.minSpeed,
+        maxDroppingSpeed =
+            maxDroppingSpeed ?? DebugBalancingTableConfig.maxSpeed,
         delay = delay ?? DebugBalancingTableConfig.defaultDelay;
 
   final int itemsInWave;
@@ -39,13 +43,14 @@ class Wave {
     double? delay,
   }) =>
       Wave(
-          itemsInWave: itemsInWave ?? this.itemsInWave,
-          dropDiversityList: dropDiversityList ?? this.dropDiversityList,
-          minDroppingInterval: minDroppingInterval ?? this.minDroppingInterval,
-          maxDroppingInterval: maxDroppingInterval ?? this.maxDroppingInterval,
-          minDroppingSpeed: minDroppingSpeed ?? this.minDroppingSpeed,
-          maxDroppingSpeed: maxDroppingSpeed ?? this.maxDroppingSpeed,
-          delay: delay ?? this.delay);
+        itemsInWave: itemsInWave ?? this.itemsInWave,
+        dropDiversityList: dropDiversityList ?? this.dropDiversityList,
+        minDroppingInterval: minDroppingInterval ?? this.minDroppingInterval,
+        maxDroppingInterval: maxDroppingInterval ?? this.maxDroppingInterval,
+        minDroppingSpeed: minDroppingSpeed ?? this.minDroppingSpeed,
+        maxDroppingSpeed: maxDroppingSpeed ?? this.maxDroppingSpeed,
+        delay: delay ?? this.delay,
+      );
 
   @override
   int get hashCode =>

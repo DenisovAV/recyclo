@@ -12,6 +12,7 @@ class VisibleComponent extends SpriteComponent {
   bool isVisible;
 
   @override
+  //ignore: must_call_super, intended function override
   void render(Canvas canvas) {
     if (isVisible) {
       sprite?.render(

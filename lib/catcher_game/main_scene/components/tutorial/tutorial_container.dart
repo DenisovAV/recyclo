@@ -4,12 +4,14 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_game_challenge/catcher_game/background/background.dart';
+import 'package:flutter_game_challenge/catcher_game/common/visible_component.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/common/solid_background.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/tutorial/tutorial_config.dart';
+import 'package:flutter_game_challenge/catcher_game/main_scene/components/common/common.dart';
+import 'package:flutter_game_challenge/catcher_game/main_scene/components/tutorial/tutorial.dart';
 import 'package:flutter_game_challenge/catcher_game/main_scene/main_scene.dart';
 
-class TutorialContainer extends PositionComponent with HasGameRef<CatcherGame> {
+class TutorialContainer extends PositionComponent
+    with HasGameRef<CatcherGame>, TapCallbacks {
   TutorialContainer({
     required this.scene,
   });
@@ -19,24 +21,28 @@ class TutorialContainer extends PositionComponent with HasGameRef<CatcherGame> {
   late final Sprite _tutorialBackground;
   late final SolidBackground _resultBackgroundComponent;
   late final Background _backgroundComponent;
-  late final SpriteComponent _buttonComponent;
+  late final VisibleComponent _buttonComponent;
 
   @override
-  FutureOr<void> onLoad() {
-    _resultBackgroundComponent = SolidBackground.withAlpha(TutorialContainerConfig.backgroundAlpha);
+  FutureOr<void> onLoad() async {
+    _resultBackgroundComponent =
+        SolidBackground.withAlpha(TutorialContainerConfig.backgroundAlpha);
 
-    _buttonComponent = SpriteComponent.fromImage(
-      game.images.fromCache(TutorialContainerConfig.tutorialButtonPlayAsset),
-      anchor: Anchor.center,
+    _buttonComponent = VisibleComponent(
+      sprite: Sprite(
+        game.images.fromCache(TutorialContainerConfig.tutorialButtonPlayAsset),
+      ),
     );
 
-    _tutorialBackground = Sprite(game.images.fromCache(TutorialContainerConfig.tutorialAsset));
+    _tutorialBackground =
+        Sprite(game.images.fromCache(TutorialContainerConfig.tutorialAsset));
     _backgroundComponent = Background(sprite: _tutorialBackground);
 
-    this
-      ..add(_resultBackgroundComponent)
-      ..add(_backgroundComponent)
-      ..add(_buttonComponent);
+    await addAll([
+      _resultBackgroundComponent,
+      _backgroundComponent,
+      _buttonComponent,
+    ]);
     return super.onLoad();
   }
 
@@ -44,16 +50,22 @@ class TutorialContainer extends PositionComponent with HasGameRef<CatcherGame> {
   void onGameResize(Vector2 size) {
     if (isLoaded) {
       final newSize = size.toSize();
+      final tile = game.sizeConfig.tileSize;
 
       x = newSize.width / 2;
       y = newSize.height / 2;
 
-      final buttonSize = game.sizeConfig.tileSize * TutorialContainerConfig.buttonSize;
+      final buttonSize =
+          game.sizeConfig.tileSize * TutorialContainerConfig.buttonSize;
+
+      y = newSize.height - (tile * TutorialContainerConfig.buttonPositionY);
 
       _buttonComponent
         ..size = Vector2(buttonSize, buttonSize)
-        ..position = Vector2(newSize.width / 2,
-            newSize.height - (buttonSize * TutorialContainerConfig.buttonPositionY));
+        ..position = Vector2(
+          newSize.width / 2,
+          y,
+        );
 
       _resultBackgroundComponent.size = Vector2(newSize.width, newSize.height);
 
@@ -64,7 +76,9 @@ class TutorialContainer extends PositionComponent with HasGameRef<CatcherGame> {
   @override
   void render(Canvas canvas) {
     if (game.status == CatcherGameStatus.tutorial) {
-      super.render(canvas);
+      _resultBackgroundComponent.render(canvas);
+      _backgroundComponent.render(canvas);
+      _buttonComponent.render(canvas);
     }
   }
 
@@ -80,11 +94,18 @@ class TutorialContainer extends PositionComponent with HasGameRef<CatcherGame> {
 
   void showTutorial() {
     game.status = CatcherGameStatus.tutorial;
+    _buttonComponent.isVisible = true;
   }
 
+  @override
+  bool containsLocalPoint(Vector2 point) =>
+      game.status == CatcherGameStatus.tutorial;
+
+  @override
   void onTapDown(TapDownEvent event) {
-    if (_buttonComponent.toRect().contains(event.localPosition.toOffset())) {
+    if (_buttonComponent.toRect().contains(event.canvasPosition.toOffset())) {
       game.status = CatcherGameStatus.playing;
+      _buttonComponent.isVisible = false;
     }
   }
 }

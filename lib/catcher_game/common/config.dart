@@ -1,4 +1,3 @@
-// ignore: avoid_classes_with_only_static_members
 abstract class DebugBalancingTableConfig {
   static const int tileProportions = 9;
   static const double defaultDelay = 1;
@@ -15,6 +14,6 @@ abstract class DebugBalancingTableConfig {
   static const double minSpeedRange = 1;
   static const double maxSpeedRange = 30;
   static const bool extraLevel = false;
-  static const int maxOmissionsToShowTutorial = 7;
+  static const int maxOmissionsToShowTutorial = 5;
   static const int backgroundAlpha = 230;
 }

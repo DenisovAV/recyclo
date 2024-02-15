@@ -1,14 +1,11 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
 import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/fallen/recycle_type.dart';
 
-///Base container responsible for displaying boxes and user interaction with them
 class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   BoxContainer() {
     super.anchor = Anchor.centerLeft;
@@ -55,21 +52,24 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
 
       x = 0;
       y = initialBoxList.length == 7
-          ? screenSize.height - (tile * BoxContainerConfig.containerSevenPositionY)
+          ? screenSize.height -
+              (tile * BoxContainerConfig.containerSevenPositionY)
           : screenSize.height - (tile * BoxContainerConfig.containerPositionY);
 
-      _chosenPositionY = y - (_chosenBoxWidth - _swappingBoxWidth) / initialBoxList.length;
+      _chosenPositionY =
+          y - (_chosenBoxWidth - _swappingBoxWidth) / initialBoxList.length;
 
       _containerClip = Rect.fromLTRB(
-        x + (game.sizeConfig.tileSize * BoxContainerConfig.containerClipFromLeft),
+        x,
         height,
-        screenSize.width - (game.sizeConfig.tileSize * BoxContainerConfig.containerClipFromLeft),
+        screenSize.width,
         screenSize.height,
       );
       boxContainerClip = Rect.fromCenter(
-          center: Offset(screenSize.width / 2, y),
-          width: screenSize.width,
-          height: _chosenBoxWidth * BoxContainerConfig.containerClipSize);
+        center: Offset(screenSize.width / 2, y),
+        width: screenSize.width,
+        height: _chosenBoxWidth * BoxContainerConfig.containerClipSize,
+      );
 
       final spacing = initialBoxList.length == 7
           ? (tile * BoxContainerConfig.gapSevenSize)
@@ -120,11 +120,17 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   void update(double dt) {
     if (_startAnimationToHook) {
       for (final box in boxContainerList) {
-        final stepDistance = (game.sizeConfig.tileSize * BoxContainerConfig.boxAnimationSpeed) * dt;
-        final toTarget = Offset(_hooksPosX[box.order], box.order == 0 ? _chosenPositionY : y) -
+        final stepDistance =
+            (game.sizeConfig.tileSize * BoxContainerConfig.boxAnimationSpeed) *
+                dt;
+        final toTarget = Offset(
+              _hooksPosX[box.order],
+              box.order == 0 ? _chosenPositionY : y,
+            ) -
             Offset(box.x, box.y);
         if (stepDistance < toTarget.distance) {
-          final stepToTarget = Offset.fromDirection(toTarget.direction, stepDistance);
+          final stepToTarget =
+              Offset.fromDirection(toTarget.direction, stepDistance);
           box.setByRect(box.toRect().shift(stepToTarget));
         } else {
           if (!_finishAnimation) {
@@ -141,8 +147,8 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
       }
     }
 
-    for (final box in boxContainerList) {
-      box.update(dt);
+    if (game.isRemoving) {
+      removeFromParent();
     }
   }
 
@@ -180,12 +186,15 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
       final map = <int, int>{};
 
       final startBox = boxContainerList.firstWhere((box) => box.order == 0);
-      minimalDistance = Vector2(startBox.x, y).distanceTo(Vector2(_hooksPosX[0], y));
-      final distance = Vector2(startBox.x, y).distanceTo(Vector2(_hooksPosX[0], y));
+      minimalDistance =
+          Vector2(startBox.x, y).distanceTo(Vector2(_hooksPosX[0], y));
+      final distance =
+          Vector2(startBox.x, y).distanceTo(Vector2(_hooksPosX[0], y));
       averageMinimal = distance.roundToDouble();
 
       for (final box in boxContainerList) {
-        final distance = Vector2(box.x, y).distanceTo(Vector2(_hooksPosX[0], y));
+        final distance =
+            Vector2(box.x, y).distanceTo(Vector2(_hooksPosX[0], y));
         if (box.order != 0 && distance.compareTo(minimalDistance) == -1) {
           if (distance.compareTo(averageMinimal) == -1) {
             averageMinimal = distance.roundToDouble();
@@ -198,11 +207,11 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
         }
       }
 
-      for (var i in _hooksPosX) {
-        final index = _hooksPosX.indexOf(i);
+      for (final hookPosX in _hooksPosX) {
+        final index = _hooksPosX.indexOf(hookPosX);
         int? boxIndex;
         for (final box in boxContainerList) {
-          final distance = Vector2(box.x, y).distanceTo(Vector2(i, y));
+          final distance = Vector2(box.x, y).distanceTo(Vector2(hookPosX, y));
           if (distance.roundToDouble() == averageMinimal) {
             boxIndex = box.order;
           }
@@ -262,7 +271,7 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
     }
   }
 
-  //todo we might do this in slightly elegant way
+  // TODO(viktor): should come up with the better approach to handle over swipe
   void _resizeEachBox({
     required double spacing,
     required double smallWidth,
@@ -318,15 +327,13 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
 
     for (final box in boxContainerList) {
       if (box.order == 0) {
-        box.x = _hooksPosX[0];
-        box.y = _chosenPositionY;
-        box.width = bigWidth;
-        box.height = bigWidth;
+        box
+          ..position = Vector2(_hooksPosX[0], _chosenPositionY)
+          ..size = Vector2(bigWidth, bigWidth);
       } else {
-        box.width = smallWidth;
-        box.height = smallWidth;
-        box.x = _hooksPosX[box.order];
-        box.y = y;
+        box
+          ..position = Vector2(_hooksPosX[box.order], y)
+          ..size = Vector2(smallWidth, smallWidth);
       }
     }
   }
@@ -336,7 +343,6 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
       ..save()
       ..clipRect(
         _containerClip,
-        clipOp: ClipOp.intersect,
       );
     c.render(canvas);
     canvas.restore();
@@ -364,7 +370,9 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
     for (final box in boxContainerList) {
       if (box.position.distanceTo(Vector2(size.toSize().width / 2, box.y)) <
           game.sizeConfig.tileSize * _distortionDistance) {
-        final s = _distanceToSize(box.position.distanceTo(Vector2(size.toSize().width / 2, box.y)));
+        final s = _distanceToSize(
+          box.position.distanceTo(Vector2(size.toSize().width / 2, box.y)),
+        );
         box
           ..width = s
           ..height = s
@@ -387,9 +395,10 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   void _boxClip(Box box) {
     if (box.width >= _chosenBoxWidth * BoxContainerConfig.chosenBoxMinSize) {
       boxContainerClip = Rect.fromCenter(
-          center: Offset(size.toSize().width / 2, y),
-          width: size.toSize().width,
-          height: box.width * BoxContainerConfig.containerClipSize);
+        center: Offset(size.toSize().width / 2, y),
+        width: size.toSize().width,
+        height: box.width * BoxContainerConfig.containerClipSize,
+      );
     }
   }
 
@@ -399,7 +408,9 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
 
     boxContainerList = List<Box>.empty(growable: true);
 
-    for (var i = 0; i < initialBoxList.length * BoxContainerConfig.containerCapacityExpand; i++) {
+    for (var i = 0;
+        i < initialBoxList.length * BoxContainerConfig.containerCapacityExpand;
+        i++) {
       if (i < initialBoxList.length) {
         boxContainerList.add(
           Box(
@@ -411,7 +422,8 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
       } else {
         boxContainerList.add(
           Box(
-            // Index is zero is same box as the center one, to propagate the same image from both sides
+            // Index is zero is same box as the center one, to propagate
+            // the same image from both sides.
             sprite: Sprite(game.images.fromCache(_getAssetPath(0))),
             type: initialBoxList[1],
             order: i,

@@ -20,6 +20,7 @@ class ButtonAnimated extends SpriteAnimationComponent {
   bool isVisible = true;
 
   @override
+  //ignore: must_call_super, intended function override
   void render(Canvas canvas) {
     if (isVisible) {
       animationTicker?.getSprite().render(
@@ -33,6 +34,7 @@ class ButtonAnimated extends SpriteAnimationComponent {
   }
 
   @override
+  //ignore: must_call_super, intended function override
   void update(double dt) {
     if (playing) {
       animationTicker?.update(dt);

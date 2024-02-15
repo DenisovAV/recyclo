@@ -8,12 +8,12 @@ import 'package:flutter_game_challenge/catcher_game/common/assets_loader.dart';
 import 'package:flutter_game_challenge/catcher_game/common/random_generator.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
 import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/fallen/recycle_type.dart';
 import 'package:flutter_game_challenge/catcher_game/main_scene/main_scene.dart';
 import 'package:vector_math/vector_math.dart' as vector_math;
 
-class FallenContainer extends PositionComponent with RandomGenerator, HasGameRef<CatcherGame> {
-  FallenContainer({
+class DropContainer extends PositionComponent
+    with RandomGenerator, HasGameRef<CatcherGame> {
+  DropContainer({
     required this.scene,
     required this.catchCallback,
     required this.boxContainer,
@@ -24,19 +24,20 @@ class FallenContainer extends PositionComponent with RandomGenerator, HasGameRef
   final BoxContainer boxContainer;
   final CatchCallback catchCallback;
 
-  final Map<RecycleType, List<Sprite>> _fallenAssets = <RecycleType, List<Sprite>>{};
-  final Map<RecycleType, int> _fallenReiteration = <RecycleType, int>{};
+  final Map<RecycleType, List<Sprite>> _dropAssets =
+      <RecycleType, List<Sprite>>{};
+  final Map<RecycleType, int> _dropReiteration = <RecycleType, int>{};
   final List<QuadraticBezier> trajectory = List.empty(growable: true);
   final List<QuadraticBezier> leftTrajectory = List.empty(growable: true);
   final Paint paint = Paint()..filterQuality = FilterQuality.high;
 
   RecycleType? _reiterationTyped;
-  late double _leftFallenInitialPositionX;
-  late double _fallenInitialPositionX;
-  late double _commonFallenInitialPositionY;
-  late double _fallenWidth;
-  late double _fallenFinalPointPositionX;
-  late double _fallenFinalPointPositionY;
+  late double _leftDropInitialPositionX;
+  late double _dropInitialPositionX;
+  late double _commonDropInitialPositionY;
+  late double _dropWidth;
+  late double _dropFinalPointPositionX;
+  late double _dropFinalPointPositionY;
 
   @override
   void render(Canvas canvas) {
@@ -52,34 +53,62 @@ class FallenContainer extends PositionComponent with RandomGenerator, HasGameRef
     return super.onLoad();
   }
 
-  //todo final point should be pined to center of the middle box
   void resize(Size size) {
     final tile = game.sizeConfig.tileSize;
 
-    _fallenWidth = tile * DropContainerConfig.dropSize;
+    _dropWidth = tile * DropContainerConfig.dropSize;
 
-    _fallenFinalPointPositionX = size.width / 2;
-    _fallenFinalPointPositionY = boxContainer.y - (tile * DropContainerConfig.finalDropY);
+    _dropFinalPointPositionX = size.width / 2;
+    _dropFinalPointPositionY =
+        boxContainer.y - (tile * DropContainerConfig.finalDropY);
 
-    _fallenInitialPositionX = (size.width / 2) * DropContainerConfig.firstDropX;
-    _leftFallenInitialPositionX = (size.width / 2) * DropContainerConfig.secondDropX;
+    _dropInitialPositionX = (size.width / 2) * DropContainerConfig.firstDropX;
+    _leftDropInitialPositionX =
+        (size.width / 2) * DropContainerConfig.secondDropX;
 
-    _commonFallenInitialPositionY = size.height - (tile * DropContainerConfig.commonDropY);
+    _commonDropInitialPositionY =
+        size.height - (tile * DropContainerConfig.commonDropY);
 
     for (var i = 0; i < DropContainerConfig.trajectoryCount; i++) {
-      trajectory.add(QuadraticBezier([
-        vector_math.Vector2(_fallenInitialPositionX, _commonFallenInitialPositionY),
-        vector_math.Vector2(_fallenFinalPointPositionX,
-            doubleInRange(_commonFallenInitialPositionY, _commonFallenInitialPositionY / 2)),
-        vector_math.Vector2(_fallenFinalPointPositionX, _fallenFinalPointPositionY)
-      ]));
+      trajectory.add(
+        QuadraticBezier([
+          vector_math.Vector2(
+            _dropInitialPositionX,
+            _commonDropInitialPositionY,
+          ),
+          vector_math.Vector2(
+            _dropFinalPointPositionX,
+            doubleInRange(
+              _commonDropInitialPositionY,
+              _commonDropInitialPositionY / 2,
+            ),
+          ),
+          vector_math.Vector2(
+            _dropFinalPointPositionX,
+            _dropFinalPointPositionY,
+          ),
+        ]),
+      );
 
-      leftTrajectory.add(QuadraticBezier([
-        vector_math.Vector2(_leftFallenInitialPositionX, _commonFallenInitialPositionY),
-        vector_math.Vector2(_fallenFinalPointPositionX,
-            doubleInRange(_commonFallenInitialPositionY, _commonFallenInitialPositionY / 2)),
-        vector_math.Vector2(_fallenFinalPointPositionX, _fallenFinalPointPositionY)
-      ]));
+      leftTrajectory.add(
+        QuadraticBezier([
+          vector_math.Vector2(
+            _leftDropInitialPositionX,
+            _commonDropInitialPositionY,
+          ),
+          vector_math.Vector2(
+            _dropFinalPointPositionX,
+            doubleInRange(
+              _commonDropInitialPositionY,
+              _commonDropInitialPositionY / 2,
+            ),
+          ),
+          vector_math.Vector2(
+            _dropFinalPointPositionX,
+            _dropFinalPointPositionY,
+          ),
+        ]),
+      );
     }
   }
 
@@ -105,39 +134,45 @@ class FallenContainer extends PositionComponent with RandomGenerator, HasGameRef
     required double speedMax,
     required List<Drop> dropDiversityList,
   }) {
-    //todo here check if preveosly spawend fallen was the same type
     final t = _getDiversityIndex(dropDiversityList);
 
     final n = RecycleType.values.indexOf(dropDiversityList[t].type);
 
     final s = (dropDiversityList[t].varietyBounder - 1) <= 0
         ? 0
-        : _getTypedDiversity(RecycleType.values[t], dropDiversityList[t].varietyBounder);
+        : _getTypedDiversity(
+            RecycleType.values[t],
+            dropDiversityList[t].varietyBounder,
+          );
 
     final i = Random().nextInt(DropContainerConfig.trajectoryCount);
 
     final isLeft = Random().nextBool();
 
-    final fallen = Fallen(
-        sprite: s <= (_fallenAssets[RecycleType.values[n]]!.length - 1)
-            ? _fallenAssets[RecycleType.values[n]]![s]
-            : _fallenAssets[RecycleType.values[n]]![0],
-        type: RecycleType.values[n],
-        catchCallback: catchCallback,
-        wave: scene.currentWave,
-        scene: scene,
-        paint: paint,
-        cubicCurve: isLeft ? trajectory[i] : leftTrajectory[i],
-        speed: doubleInRange(speedMin, speedMax),
-        isLeft: isLeft);
-    fallen.angle = isLeft ? sin(random.nextDouble()) : -sin(random.nextDouble());
-    fallen.rotation =
-        doubleInRange(DropContainerConfig.minInitialAngle, DropContainerConfig.maxInitialAngle);
-    fallen.x = fallen.cubicCurve.pointAt(0).x;
-    fallen.y = fallen.cubicCurve.pointAt(0).y;
-    fallen.width = _fallenWidth;
-    fallen.height = _fallenWidth;
-    fallen.isVisible = true;
+    final fallen = DropComponent(
+      sprite: s <= (_dropAssets[RecycleType.values[n]]!.length - 1)
+          ? _dropAssets[RecycleType.values[n]]![s]
+          : _dropAssets[RecycleType.values[n]]![0],
+      type: RecycleType.values[n],
+      catchCallback: catchCallback,
+      wave: scene.currentWave,
+      paint: paint,
+      cubicCurve: isLeft ? trajectory[i] : leftTrajectory[i],
+      speed: doubleInRange(speedMin, speedMax),
+      isLeft: isLeft,
+    );
+    fallen
+      ..angle = isLeft ? sin(random.nextDouble()) : -sin(random.nextDouble())
+      ..rotation = doubleInRange(
+        DropContainerConfig.minInitialAngle,
+        DropContainerConfig.maxInitialAngle,
+      )
+      ..x = fallen.cubicCurve.pointAt(0).x
+      ..y = fallen.cubicCurve.pointAt(0).y
+      ..width = _dropWidth
+      ..height = _dropWidth
+      ..isVisible = true;
+
     add(fallen);
   }
 
@@ -147,13 +182,13 @@ class FallenContainer extends PositionComponent with RandomGenerator, HasGameRef
       for (final index in AssetsLoader().getAssets(dropType)) {
         list.add(Sprite(game.images.fromCache(index)));
       }
-      _fallenAssets[dropType] = list;
+      _dropAssets[dropType] = list;
     }
   }
 
   void _fillReiterationContainer() {
     for (final index in RecycleType.values) {
-      _fallenReiteration[index] = 0;
+      _dropReiteration[index] = 0;
     }
   }
 
@@ -161,8 +196,8 @@ class FallenContainer extends PositionComponent with RandomGenerator, HasGameRef
     var i = 0;
     do {
       i = Random().nextInt(diversityBounder);
-    } while (_fallenReiteration[type]?.compareTo(i) == 0);
-    _fallenReiteration[type] = i;
+    } while (_dropReiteration[type]?.compareTo(i) == 0);
+    _dropReiteration[type] = i;
     return i;
   }
 
@@ -174,7 +209,8 @@ class FallenContainer extends PositionComponent with RandomGenerator, HasGameRef
     } else {
       result = Random().nextInt(listLength);
 
-      if (_reiterationTyped != null && _reiterationTyped == dropDiversity[result].type) {
+      if (_reiterationTyped != null &&
+          _reiterationTyped == dropDiversity[result].type) {
         result = _chooseIndex(result, listLength - 1);
       }
 

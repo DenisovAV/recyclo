@@ -4,7 +4,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/catcher_game/common.dart';
+import 'package:flutter_game_challenge/catcher_game/common/size_config.dart';
 import 'package:flutter_game_challenge/catcher_game/main_scene/main_scene.dart';
 
 enum CatcherGameStatus { playing, pause, result, tutorial }
@@ -35,6 +35,7 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
 
   @override
   void lifecycleStateChange(AppLifecycleState state) {
+    super.lifecycleStateChange(state);
     if (state == AppLifecycleState.inactive) {
       _pauseGame();
     } else if (state == AppLifecycleState.resumed) {

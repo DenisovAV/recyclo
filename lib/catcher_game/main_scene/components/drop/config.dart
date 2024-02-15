@@ -1,4 +1,3 @@
-// ignore: avoid_classes_with_only_static_members
 abstract class DropContainerConfig {
   static const double dropSize = 1.6;
   static const double firstDropX = 0.27;

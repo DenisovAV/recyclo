@@ -28,14 +28,17 @@ class SpriteSheetUtil {
 
   Sprite getSprite(int row, int column) => _sprites[row][column];
 
-  //TODO(vikrech): try to make more efficient solution
   SpriteAnimation createAnimation({
     required double stepTime,
     bool loop = false,
   }) {
     final flattenList = <Sprite>[];
 
-    _sprites.forEach((list) => list.forEach((itm) => flattenList.add(itm)));
+    for (final innerSpriteListItem in _sprites) {
+      for (final sprite in innerSpriteListItem) {
+        flattenList.add(sprite);
+      }
+    }
 
     return SpriteAnimation.spriteList(
       flattenList.toList(),

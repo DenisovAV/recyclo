@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flame/flame.dart';
 import 'package:flutter_game_challenge/catcher_game/background/config.dart';
 import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/fallen/recycle_type.dart';
 
 class AssetsLoader {
   factory AssetsLoader() => _instance;
@@ -12,7 +11,8 @@ class AssetsLoader {
 
   static final AssetsLoader _instance = AssetsLoader._internal();
 
-  Future<List<Image>> loadAssets() async => Flame.images.loadAll(_getAssetsList());
+  Future<List<Image>> loadAssets() async =>
+      Flame.images.loadAll(_getAssetsList());
 
   List<String> getAssets(RecycleType type) {
     var list = <String>[];
@@ -32,25 +32,21 @@ class AssetsLoader {
     return list;
   }
 
-  List<String> _getAssetsList() {
-    final list = <String>[];
-    list
-      ..add(BackgroundConfig.sceneAsset)
-      ..add(ButtonsContainerConfig.buttonPauseAnimatedAsset)
-      ..add(ButtonsContainerConfig.buttonResetAnimatedAsset)
-      ..add(TutorialContainerConfig.tutorialAsset)
-      ..add(TutorialContainerConfig.tutorialButtonPlayAsset)
-      ..add(ButtonsContainerConfig.buttonPauseOverlayAsset);
-    list
-      ..addAll(_loadBoxes())
-      ..addAll(_loadDropGlass())
-      ..addAll(_loadDropOrganic())
-      ..addAll(_loadDropPaper())
-      ..addAll(_loadDropElectric())
-      ..addAll(_loadDropPlastic());
-
-    return list;
-  }
+  List<String> _getAssetsList() => List<String>.empty(growable: true)
+    ..addAll([
+      BackgroundConfig.sceneAsset,
+      ButtonsContainerConfig.buttonPauseAnimatedAsset,
+      ButtonsContainerConfig.buttonResetAnimatedAsset,
+      TutorialContainerConfig.tutorialAsset,
+      TutorialContainerConfig.tutorialButtonPlayAsset,
+      ButtonsContainerConfig.buttonPauseAsset,
+      ..._loadBoxes(),
+      ..._loadDropGlass(),
+      ..._loadDropOrganic(),
+      ..._loadDropPaper(),
+      ..._loadDropElectric(),
+      ..._loadDropPlastic(),
+    ]);
 
   List<String> _loadBoxes() {
     final list = <String>[];

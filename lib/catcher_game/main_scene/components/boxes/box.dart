@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/fallen/recycle_type.dart';
+import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
 
 class Box extends SpriteComponent {
   Box({
@@ -18,6 +18,7 @@ class Box extends SpriteComponent {
   bool isChosen = false;
 
   @override
+  //ignore: must_call_super, intended function override
   void render(Canvas canvas) {
     sprite?.render(
       canvas,
