@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/game/finder/view/finder_page.dart';
 import 'package:flutter_game_challenge/game/game.dart';
 import 'package:flutter_game_challenge/title/title.dart';
 
@@ -30,7 +31,9 @@ class MainMenuPage extends StatelessWidget {
               ),
               MenuItem(
                 text: l10n.mainMenuArtifactsItemTitle,
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(FinderPage.route());
+                },
               ),
             ],
           ),
