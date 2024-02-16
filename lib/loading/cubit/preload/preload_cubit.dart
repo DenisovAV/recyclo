@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flame/cache.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_game_challenge/catcher_game/common/assets_loader.dart';
 import 'package:flutter_game_challenge/common.dart';
 
 part 'preload_state.dart';
@@ -24,6 +25,7 @@ class PreloadCubit extends Cubit<PreloadState> {
         'images',
         () => images.loadAll([Assets.images.unicornAnimation.path]),
       ),
+      PreloadPhase('Loading assets', () => AssetsLoader().loadAssets()),
     ];
 
     emit(state.copyWith(totalCount: phases.length));
