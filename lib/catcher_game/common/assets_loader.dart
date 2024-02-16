@@ -11,8 +11,7 @@ class AssetsLoader {
 
   static final AssetsLoader _instance = AssetsLoader._internal();
 
-  Future<List<Image>> loadAssets() async =>
-      Flame.images.loadAll(_getAssetsList());
+  Future<List<Image>> loadAssets() => Flame.images.loadAll(_getAssetsList());
 
   List<String> getAssets(RecycleType type) {
     var list = <String>[];
