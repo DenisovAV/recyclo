@@ -5,6 +5,7 @@ import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifact_details.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/game/finder/view/finder_page.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';
 import 'package:flutter_game_challenge/menu/view/menu_item.dart';
@@ -92,6 +93,7 @@ class MainMenuPage extends StatelessWidget {
                                       _ArtifactsContent(),
                                     MainPageSettingsState() =>
                                       _SettingsContent(),
+                                    MainPageFinderState() => _FinderContent(),
                                     MainPageArtefactDetailsState() =>
                                       _ArtifactDetailsContent(
                                         description: state.description,
@@ -99,6 +101,7 @@ class MainMenuPage extends StatelessWidget {
                                         imagePath: state.imagePath,
                                         model: state.model,
                                       )
+                                    // TODO: Handle this case.
                                   };
                                 },
                               ),
@@ -179,9 +182,26 @@ class _ChooseGameContent extends StatelessWidget {
               text: context.l10n.gameModeFinderItemTitle,
               assetId: Assets.images.gameModeFinder.path,
               onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToSettings();
+                Navigator.of(context).push(FinderPage.route());
               },
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _FinderContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 180),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FinderPage(),
           ],
         ),
       ),

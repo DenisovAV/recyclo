@@ -34,6 +34,14 @@ class MainPageArtifactsState extends MainPageState {
         );
 }
 
+class MainPageFinderState extends MainPageState {
+  MainPageFinderState()
+      : super(
+          isBackgroundCompact: true,
+          isBackgroundHighlighted: false,
+        );
+}
+
 class MainPageSettingsState extends MainPageState {
   MainPageSettingsState()
       : super(

@@ -4,8 +4,11 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
+import 'package:flame/rendering.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
 import 'package:flutter_game_challenge/game/finder/components/item.dart';
+import 'package:flutter_game_challenge/game/finder/components/overlay.dart';
 
 class FinderWorld extends World with HasGameReference {
   static const double kTopGap = 200;
@@ -28,22 +31,21 @@ class FinderWorld extends World with HasGameReference {
     final image = Flame.images.fromCache(Assets.images.fog.path);
     final sprite = Sprite(
       image,
-      srcPosition: Vector2(0, 0),
-      srcSize: image.size,
+      srcPosition: Vector2(0, kTopGap),
+      srcSize: Vector2(4 * 256, 6 * 256),
     );
     final background = SpriteComponent(
       sprite: sprite,
-      size: sprite.srcSize,
-      position: Vector2(0, 0 + kTopGap),
-      scale: Vector2.all(1),
-    );
+    )..decorator = PaintDecorator.tint(const Color.fromARGB(84, 158, 158, 158));
 
-    add(background);
+    await add(background); //TODO fix background position
     await addAll(items);
+    add(OverlayFog()..priority = 5);
 
     final playAreaSize = Vector2(4 * 256, 6 * 256 + kTopGap);
     final gameMidX = playAreaSize.x / 2;
 
+    //TODO fix camera position  
     camera.viewfinder.visibleGameSize = playAreaSize;
     camera.viewfinder.position = Vector2(gameMidX, 0);
     camera.viewfinder.anchor = Anchor.topCenter;
@@ -52,6 +54,7 @@ class FinderWorld extends World with HasGameReference {
   Future<void> _loadImageAssets() async {
     Flame.images.prefix = '';
     await Flame.images.load(Assets.images.fog.path);
+    await Flame.images.load(Assets.images.holeMask.path);
     await Flame.images.loadAll(itemTypes);
   }
 
@@ -64,7 +67,7 @@ class FinderWorld extends World with HasGameReference {
       Item(
         position: Vector2(0, 0),
         spritePath: '',
-      ),
+      )..priority = 2,
     );
 
     for (var i = 0; i < generatedListLength; i++) {

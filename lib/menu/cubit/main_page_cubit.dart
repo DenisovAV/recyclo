@@ -17,6 +17,10 @@ class MainPageCubit extends Cubit<MainPageState> {
     emit(MainPageArtifactsState());
   }
 
+   void navigateToFinderGame() {
+    emit(MainPageFinderState());
+  }
+
   void navigateToSettings() {
     emit(MainPageSettingsState());
   }
