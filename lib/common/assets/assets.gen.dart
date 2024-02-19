@@ -98,8 +98,7 @@ class $AssetsImagesGen {
   AssetGenImage get plastic => const AssetGenImage('assets/images/plastic.png');
 
   /// File path: assets/images/unicorn_animation.png
-  AssetGenImage get unicornAnimation =>
-      const AssetGenImage('assets/images/unicorn_animation.png');
+  AssetGenImage get unicornAnimation => const AssetGenImage('assets/images/unicorn_animation.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [

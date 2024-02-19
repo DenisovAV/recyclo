@@ -4,6 +4,7 @@ import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifact_details.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dart';
+import 'package:flutter_game_challenge/catcher_game/catcher_game_page.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';
@@ -164,9 +165,7 @@ class _ChooseGameContent extends StatelessWidget {
             MenuItem(
               text: context.l10n.gameModeCatcherItemTitle,
               assetId: Assets.images.gameModeCathcer.path,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToChooseGame();
-              },
+              onTap: () => _handleNavigateToCatcherGame(context),
             ),
             MenuItem(
               text: context.l10n.gameModeClickerItemTitle,
@@ -186,6 +185,10 @@ class _ChooseGameContent extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _handleNavigateToCatcherGame(BuildContext context) {
+    Navigator.of(context).push<void>(CatcherGamePage.route());
   }
 }
 
