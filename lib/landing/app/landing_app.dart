@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/landing/index.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LandingApp extends StatelessWidget {
@@ -29,7 +30,7 @@ class LandingApp extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const Placeholder(),
-    );();
+      home: const MainPage(),
+    );
   }
 }
