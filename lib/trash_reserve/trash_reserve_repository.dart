@@ -34,7 +34,7 @@ class TrashReserveRepository {
       // electronics: _sharedPreferences.getInt(_StorageKeys.electronicsCountKey) ?? 0,
       //TODO Remove it later. Just for test
       plastic: _sharedPreferences.getInt(_StorageKeys.plasticCountKey) ?? 130,
-      organic: _sharedPreferences.getInt(_StorageKeys.organicCountKey) ?? 16,
+      organic: _sharedPreferences.getInt(_StorageKeys.organicCountKey) ?? 200,
       glass: _sharedPreferences.getInt(_StorageKeys.glassCountKey) ?? 323,
       paper: _sharedPreferences.getInt(_StorageKeys.paperCountKey) ?? 465,
       electronics: _sharedPreferences.getInt(_StorageKeys.electronicsCountKey) ?? 990,

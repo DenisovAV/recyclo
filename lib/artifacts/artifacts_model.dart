@@ -1,11 +1,25 @@
 class ArtifactModel {
   ArtifactModel({
     required this.requirements,
+    required this.artifactType,
     required this.status,
   });
 
   final ArtifactRequirements requirements;
   final ArtifactStatus status;
+  final ArtifactType artifactType;
+
+  ArtifactModel copyWithStatus(ArtifactStatus status) {
+    return ArtifactModel(
+      requirements: requirements,
+      artifactType: artifactType,
+      status: status,
+    );
+  }
+
+  bool get isCrafted =>
+      status == ArtifactStatus.crafted ||
+      status == ArtifactStatus.addedToWallet;
 }
 
 class ArtifactsModel {
@@ -24,6 +38,33 @@ class ArtifactsModel {
   final ArtifactModel laptop;
   final ArtifactModel house;
   final ArtifactModel newspaper;
+
+  ArtifactsModel copyWith({
+    ArtifactModel? shampoo,
+    ArtifactModel? car,
+    ArtifactModel? plant,
+    ArtifactModel? laptop,
+    ArtifactModel? house,
+    ArtifactModel? newspaper,
+  }) {
+    return ArtifactsModel(
+      shampoo: shampoo ?? this.shampoo,
+      car: car ?? this.car,
+      plant: plant ?? this.plant,
+      laptop: laptop ?? this.laptop,
+      house: house ?? this.house,
+      newspaper: newspaper ?? this.newspaper,
+    );
+  }
+}
+
+enum ArtifactType {
+  newspaper,
+  shampoo,
+  plant,
+  laptop,
+  car,
+  house,
 }
 
 enum ArtifactStatus {

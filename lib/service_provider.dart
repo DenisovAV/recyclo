@@ -1,3 +1,4 @@
+import 'package:flutter_game_challenge/artifact_details/cubit/artifact_details_cubit.dart';
 import 'package:flutter_game_challenge/artifacts/artifacts_repository.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
@@ -26,6 +27,13 @@ class ServiceProvider {
 
     GetIt.instance.registerFactory<ArtifactsCubit>(
       () => ArtifactsCubit(
+        GetIt.instance.get(),
+      ),
+    );
+
+    GetIt.instance.registerFactory<ArtifactDetailsCubit>(
+      () => ArtifactDetailsCubit(
+        GetIt.instance.get(),
         GetIt.instance.get(),
       ),
     );

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_game_challenge/artifact_details/cubit/artifact_details_cubit.dart';
 import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
-import 'package:flutter_game_challenge/artifacts/widgets/artifact_details.dart';
+import 'package:flutter_game_challenge/artifact_details/widgets/artifact_details.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dart';
 import 'package:flutter_game_challenge/catcher_game/catcher_game_page.dart';
 import 'package:flutter_game_challenge/common.dart';
@@ -217,14 +218,15 @@ class _ArtifactDetailsContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ArtifactsCubit>(
-      create: (_) => ServiceProvider.get<ArtifactsCubit>(),
-      child: ArtifactDetails(
-        name: name,
-        imagePath: imagePath,
-        description: description,
-        model: model,
-      ),
+    return BlocProvider<ArtifactDetailsCubit>(
+      create: (_) => ServiceProvider.get<ArtifactDetailsCubit>()
+        ..initialize(
+          name: name,
+          imagePath: imagePath,
+          description: description,
+          model: model,
+        ),
+      child: const ArtifactDetails(),
     );
   }
 }
