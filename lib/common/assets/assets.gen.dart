@@ -56,8 +56,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/clouds.png
   AssetGenImage get clouds => const AssetGenImage('assets/images/clouds.png');
 
-  /// File path: assets/images/earth.png
-  AssetGenImage get earth => const AssetGenImage('assets/images/earth.png');
+  /// File path: assets/images/earth.mp4
+  String get earth => 'assets/images/earth.mp4';
+
+  /// File path: assets/images/earth_halo.png
+  AssetGenImage get earthHalo =>
+      const AssetGenImage('assets/images/earth_halo.png');
 
   /// File path: assets/images/energy.png
   AssetGenImage get energy => const AssetGenImage('assets/images/energy.png');
@@ -106,7 +110,7 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/unicorn_animation.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [
+  List<dynamic> get values => [
         addToWallet,
         artifactCar,
         artifactHouse,
@@ -116,6 +120,7 @@ class $AssetsImagesGen {
         artifactShampoo,
         clouds,
         earth,
+        earthHalo,
         energy,
         gameModeCathcer,
         gameModeClicker,

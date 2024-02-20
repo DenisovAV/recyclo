@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common/assets.dart';
+import 'package:video_player/video_player.dart';
 
 class MainMenuBackground extends StatefulWidget {
   const MainMenuBackground({
@@ -17,25 +18,26 @@ class MainMenuBackground extends StatefulWidget {
 
 class _MainMenuBackgroundState extends State<MainMenuBackground>
     with TickerProviderStateMixin {
-  late final AnimationController _spinningController;
   late final AnimationController _highlightController;
   late final AnimationController _compactController;
+  late final VideoPlayerController _playerController;
 
   late final Animation<double> _scaleAnimation;
-  late final Animation<double> _rotationAnimation;
   late final Animation<Offset> _compactAnimation;
 
-  static const _rotationDuration = Duration(seconds: 120);
   static const _highlightDuratioh = Duration(milliseconds: 200);
 
   @override
   void initState() {
     super.initState();
 
-    _spinningController = AnimationController(
-      vsync: this,
-      duration: _rotationDuration,
-    )..repeat();
+    _playerController = VideoPlayerController.asset(Assets.images.earth)
+      ..setLooping(true)
+      ..play()
+      ..initialize().then((_) {
+        setState(() {});
+      });
+    ;
 
     _compactController = AnimationController(
       vsync: this,
@@ -59,9 +61,6 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
 
     _scaleAnimation =
         Tween<double>(begin: 1, end: 1.6).animate(highlightAnimationCurved);
-
-    _rotationAnimation =
-        Tween<double>(begin: 0, end: 0.3).animate(highlightAnimationCurved);
   }
 
   @override
@@ -83,7 +82,7 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
 
   @override
   void dispose() {
-    _spinningController.dispose();
+    _playerController.dispose();
     _highlightController.dispose();
     _compactController.dispose();
     super.dispose();
@@ -115,17 +114,28 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
             child: Align(
               alignment: Alignment.bottomCenter,
               child: SizedBox(
-                width: 320,
-                height: 320,
-                child: RotationTransition(
-                  turns: _rotationAnimation,
-                  child: ScaleTransition(
-                    scale: _scaleAnimation,
-                    child: RotationTransition(
-                      turns: _spinningController,
-                      child: Assets.images.earth.image(),
-                    ),
-                  ),
+                width: 340,
+                height: 340,
+                child: ScaleTransition(
+                  scale: _scaleAnimation,
+                  child: _playerController.value.isInitialized
+                      ? Stack(
+                          children: [
+                            Assets.images.earthHalo.image(),
+                            Padding(
+                              padding: const EdgeInsets.all(18),
+                              child: AspectRatio(
+                                aspectRatio:
+                                    _playerController.value.aspectRatio,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(170),
+                                  child: VideoPlayer(_playerController),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Container(),
                 ),
               ),
             ),
