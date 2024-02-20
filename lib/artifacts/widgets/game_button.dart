@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common/assets/colors.gen.dart';
 
 class GameButton extends StatelessWidget {
@@ -15,27 +15,24 @@ class GameButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (!isActive) {
-          return;
-        }
-        onPressed.call();
-      },
-      child: Opacity(
-        opacity: isActive ? 1 : 0.4,
-        child: Container(
-          height: 52,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: FlutterGameChallengeColors.textStroke,
-            borderRadius: BorderRadius.circular(26),
-          ),
-          child: Text(
-            text,
-            style: const TextStyle(
-              color: FlutterGameChallengeColors.white,
-              fontSize: 24,
+    return AnimatedOpacity(
+      opacity: isActive ? 1 : 0.4,
+      duration: const Duration(milliseconds: 500),
+      child: Material(
+        color: FlutterGameChallengeColors.textStroke,
+        borderRadius: BorderRadius.circular(26),
+        clipBehavior: Clip.hardEdge,
+        child: InkWell(
+          onTap: isActive ? onPressed : null,
+          child: Container(
+            height: 52,
+            alignment: Alignment.center,
+            child: Text(
+              text,
+              style: const TextStyle(
+                color: FlutterGameChallengeColors.white,
+                fontSize: 24,
+              ),
             ),
           ),
         ),
