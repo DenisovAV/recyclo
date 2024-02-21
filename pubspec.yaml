@@ -46,7 +46,7 @@ flutter:
     - assets/images/
     - assets/licenses/poppins/
     - assets/images/catcher/boxes/
-    - assets/images/catcher/bg/bg.png
+    - assets/images/catcher/bg/
     - assets/images/catcher/drops/glass/
     - assets/images/catcher/drops/organic/
     - assets/images/catcher/drops/plastic/

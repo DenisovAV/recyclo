@@ -5,7 +5,6 @@ import 'package:flutter_game_challenge/artifact_details/cubit/artifact_details_s
 import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifact_requirements_status.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifact_status_icon.dart';
-import 'package:flutter_game_challenge/artifacts/widgets/game_button.dart';
 import 'package:flutter_game_challenge/common.dart';
 
 class ArtifactDetails extends StatelessWidget {
@@ -143,7 +142,7 @@ class ArtifactDetails extends StatelessWidget {
                       right: 20,
                       bottom: 20,
                     ),
-                    child: GameButton(
+                    child: FlatButton(
                       onPressed: () {
                         BlocProvider.of<ArtifactDetailsCubit>(context)
                             .craftArtifact(state.model);

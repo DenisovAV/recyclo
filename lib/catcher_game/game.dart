@@ -4,8 +4,10 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_challenge/catcher_game/common/size_config.dart';
 import 'package:flutter_game_challenge/catcher_game/main_scene/main_scene.dart';
+import 'package:flutter_game_challenge/common.dart';
 
 enum CatcherGameStatus { playing, pause, result, tutorial }
 
@@ -19,6 +21,9 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
   late SizeConfig sizeConfig;
   late CatcherGameStatus status;
   MainScene? mainScene;
+  bool _timerStarted = false;
+
+  static const String timerOverlayKey = 'timer';
 
   @override
   FutureOr<void> onLoad() async {
@@ -27,19 +32,32 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
 
     mainScene = MainScene(
       onPauseResumeGameCallback: _handlePauseResumeGameCallback,
+      onResetCallback: _handleOnResetCallback,
     );
 
     await add(mainScene!);
+    overlays.add(timerOverlayKey);
     return super.onLoad();
   }
 
   @override
   void lifecycleStateChange(AppLifecycleState state) {
     super.lifecycleStateChange(state);
-    if (state == AppLifecycleState.inactive) {
-      _pauseGame();
-    } else if (state == AppLifecycleState.resumed) {
-      mainScene?.resumed();
+    if (isAttached) {
+      if (state == AppLifecycleState.inactive) {
+        _pauseGame();
+      } else if (state == AppLifecycleState.resumed) {
+        mainScene?.resumed();
+      }
+    }
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    if (!_timerStarted && isAttached) {
+      _timerStarted = true;
+      BlocProvider.of<TimerCubit>(buildContext!).start();
     }
   }
 
@@ -67,11 +85,17 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
   void _pauseGame() {
     if (status == CatcherGameStatus.playing) {
       status = CatcherGameStatus.pause;
+      if (isAttached) {
+        BlocProvider.of<TimerCubit>(buildContext!).pause();
+      }
     }
   }
 
   void _resumeGame() {
     status = CatcherGameStatus.playing;
+    if (isAttached) {
+      BlocProvider.of<TimerCubit>(buildContext!).play();
+    }
   }
 
   void _handlePauseResumeGameCallback() {
@@ -79,6 +103,16 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
       _resumeGame();
     } else {
       _pauseGame();
+    }
+  }
+
+  void _handleOnResetCallback() {
+    if (status == CatcherGameStatus.pause) {
+      BlocProvider.of<TimerCubit>(buildContext!).restart();
+    } else {
+      BlocProvider.of<TimerCubit>(buildContext!)
+        ..restart()
+        ..start();
     }
   }
 }
