@@ -117,7 +117,7 @@
   "@buttonCraft": {
     "description": "Text for Craft button"
   },
-  "gameFinishDialogTitle": "End Game",
+  "gameFinishDialogTitle": "Time Out",
   "@gameFinishDialogTitle": {
     "description": "Text for game finish dialog title"
   },
@@ -133,7 +133,7 @@
   "@gameFinishDialogButtonTitle": {
     "description": "Text for game finish dialog button title"
   },
-  "gameFinishDialogTryAgainButtonTitle": "Try again",
+  "gameFinishDialogTryAgainButtonTitle": "Go to menu",
   "@gameFinishDialogTryAgainButtonTitle": {
     "description": "Text for game finish dialog button title to try again"
   }
