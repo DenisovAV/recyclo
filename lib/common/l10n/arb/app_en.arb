@@ -116,5 +116,25 @@
   "buttonCraft": "Craft",
   "@buttonCraft": {
     "description": "Text for Craft button"
+  },
+  "gameFinishDialogTitle": "Time Out",
+  "@gameFinishDialogTitle": {
+    "description": "Text for game finish dialog title"
+  },
+  "gameFinishDialogDescription": "Your results",
+  "@gameFinishDialogDescription": {
+    "description": "Text for game finish dialog description"
+  },
+  "gameFinishDialogTryAgainDescription": "Better luck next time!",
+  "@gameFinishDialogTryAgainDescription": {
+    "description": "Text for game finish dialog description to try again"
+  },
+  "gameFinishDialogButtonTitle": "Collect",
+  "@gameFinishDialogButtonTitle": {
+    "description": "Text for game finish dialog button title"
+  },
+  "gameFinishDialogTryAgainButtonTitle": "Go to menu",
+  "@gameFinishDialogTryAgainButtonTitle": {
+    "description": "Text for game finish dialog button title to try again"
   }
 }
