@@ -313,6 +313,33 @@ class FlutterGameChallengeColors {
     },
   );
 
+  /// MaterialColor:
+  ///   50: #FFF2F9FF
+  ///   100: #FFDFF1FE
+  ///   200: #FFCAE8FE
+  ///   300: #FFB4DEFE
+  ///   400: #FFA4D7FD
+  ///   500: #FF94D0FD
+  ///   600: #FF8CCBFD
+  ///   700: #FF81C4FC
+  ///   800: #FF77BEFC
+  ///   900: #FF65B3FC
+  static const MaterialColor earthGlow = MaterialColor(
+    0xFF94D0FD,
+    <int, Color>{
+      50: Color(0xFFF2F9FF),
+      100: Color(0xFFDFF1FE),
+      200: Color(0xFFCAE8FE),
+      300: Color(0xFFB4DEFE),
+      400: Color(0xFFA4D7FD),
+      500: Color(0xFF94D0FD),
+      600: Color(0xFF8CCBFD),
+      700: Color(0xFF81C4FC),
+      800: Color(0xFF77BEFC),
+      900: Color(0xFF65B3FC),
+    },
+  );
+
   /// Color: #979797
   static const Color gray410 = Color(0xFF979797);
 

@@ -23,6 +23,7 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
   late final VideoPlayerController _playerController;
 
   late final Animation<double> _scaleAnimation;
+  late final Animation<Offset> _offsetAnimation;
   late final Animation<Offset> _compactAnimation;
 
   static const _highlightDuratioh = Duration(milliseconds: 200);
@@ -61,6 +62,11 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
 
     _scaleAnimation =
         Tween<double>(begin: 1, end: 1.6).animate(highlightAnimationCurved);
+
+    _offsetAnimation = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(0, 0.3),
+    ).animate(highlightAnimationCurved);
   }
 
   @override
@@ -116,26 +122,31 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
               child: SizedBox(
                 width: 340,
                 height: 340,
-                child: ScaleTransition(
-                  scale: _scaleAnimation,
-                  child: _playerController.value.isInitialized
-                      ? Stack(
-                          children: [
-                            Assets.images.earthHalo.image(),
-                            Padding(
-                              padding: const EdgeInsets.all(18),
-                              child: AspectRatio(
-                                aspectRatio:
-                                    _playerController.value.aspectRatio,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(170),
-                                  child: VideoPlayer(_playerController),
+                child: SlideTransition(
+                  position: _offsetAnimation,
+                  child: ScaleTransition(
+                    scale: _scaleAnimation,
+                    child: _playerController.value.isInitialized
+                        ? Stack(
+                            children: [
+                              Assets.images.earthHalo.image(
+                                color: FlutterGameChallengeColors.earthGlow,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(22),
+                                child: AspectRatio(
+                                  aspectRatio:
+                                      _playerController.value.aspectRatio,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(170),
+                                    child: VideoPlayer(_playerController),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        )
-                      : Container(),
+                            ],
+                          )
+                        : const SizedBox(),
+                  ),
                 ),
               ),
             ),
