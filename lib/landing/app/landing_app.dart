@@ -26,7 +26,7 @@ class LandingApp extends StatelessWidget {
             ),
           ),
         ),
-        textTheme: GoogleFonts.poppinsTextTheme(),
+        textTheme: GoogleFonts.snigletTextTheme(),
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
