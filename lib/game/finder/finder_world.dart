@@ -40,9 +40,11 @@ class FinderWorld extends World with HasGameReference {
 
     await add(background); //TODO fix background position
     await addAll(items);
-    add(OverlayFog()..priority = 5);
-
+    
     final playAreaSize = Vector2(4 * 256, 6 * 256 + kTopGap);
+
+    add(OverlayFog()..priority = 5..size = playAreaSize);
+
     final gameMidX = playAreaSize.x / 2;
 
     //TODO fix camera position  
