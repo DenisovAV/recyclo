@@ -69,7 +69,7 @@ class AssetsLoader {
   List<String> _loadDropGlass() {
     final list = <String>[];
     for (var i = 0; i < 8; i++) {
-      list.add('catcher/drops/glass/$i.png');
+      list.add('catcher/drops/glass/g$i.png');
     }
     return list;
   }
@@ -77,7 +77,7 @@ class AssetsLoader {
   List<String> _loadDropOrganic() {
     final list = <String>[];
     for (var i = 0; i < 11; i++) {
-      list.add('catcher/drops/organic/$i.png');
+      list.add('catcher/drops/organic/o$i.png');
     }
     return list;
   }
@@ -85,7 +85,7 @@ class AssetsLoader {
   List<String> _loadDropPlastic() {
     final list = <String>[];
     for (var i = 0; i < 5; i++) {
-      list.add('catcher/drops/plastic/$i.png');
+      list.add('catcher/drops/plastic/p$i.png');
     }
     return list;
   }
@@ -93,7 +93,7 @@ class AssetsLoader {
   List<String> _loadDropElectric() {
     final list = <String>[];
     for (var i = 0; i < 4; i++) {
-      list.add('catcher/drops/electric/$i.png');
+      list.add('catcher/drops/electric/e$i.png');
     }
     return list;
   }
@@ -101,7 +101,7 @@ class AssetsLoader {
   List<String> _loadDropPaper() {
     final list = <String>[];
     for (var i = 0; i < 5; i++) {
-      list.add('catcher/drops/paper/$i.png');
+      list.add('catcher/drops/paper/p$i.png');
     }
     return list;
   }

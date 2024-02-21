@@ -27,6 +27,10 @@ class $AssetsAudioGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/add_to_wallet.png
+  AssetGenImage get addToWallet =>
+      const AssetGenImage('assets/images/add_to_wallet.png');
+
   /// File path: assets/images/artifact_car.png
   AssetGenImage get artifactCar =>
       const AssetGenImage('assets/images/artifact_car.png');
@@ -50,6 +54,8 @@ class $AssetsImagesGen {
   /// File path: assets/images/artifact_shampoo.png
   AssetGenImage get artifactShampoo =>
       const AssetGenImage('assets/images/artifact_shampoo.png');
+
+  $AssetsImagesCatcherGen get catcher => const $AssetsImagesCatcherGen();
 
   /// File path: assets/images/clouds.png
   AssetGenImage get clouds => const AssetGenImage('assets/images/clouds.png');
@@ -134,7 +140,8 @@ class $AssetsImagesGen {
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
 
   /// List of all assets
-  List<dynamic> get values => [
+  List<AssetGenImage> get values => [
+        addToWallet,
         artifactCar,
         artifactHouse,
         artifactLaptop,
@@ -173,6 +180,22 @@ class $AssetsLicensesGen {
   $AssetsLicensesPoppinsGen get poppins => const $AssetsLicensesPoppinsGen();
 }
 
+class $AssetsImagesCatcherGen {
+  const $AssetsImagesCatcherGen();
+
+  $AssetsImagesCatcherAnimationsGen get animations =>
+      const $AssetsImagesCatcherAnimationsGen();
+  $AssetsImagesCatcherBgGen get bg => const $AssetsImagesCatcherBgGen();
+  $AssetsImagesCatcherBoxesGen get boxes =>
+      const $AssetsImagesCatcherBoxesGen();
+  $AssetsImagesCatcherButtonGen get button =>
+      const $AssetsImagesCatcherButtonGen();
+  $AssetsImagesCatcherDropsGen get drops =>
+      const $AssetsImagesCatcherDropsGen();
+  $AssetsImagesCatcherTutorialGen get tutorial =>
+      const $AssetsImagesCatcherTutorialGen();
+}
+
 class $AssetsLicensesPoppinsGen {
   const $AssetsLicensesPoppinsGen();
 
@@ -181,6 +204,268 @@ class $AssetsLicensesPoppinsGen {
 
   /// List of all assets
   List<String> get values => [ofl];
+}
+
+class $AssetsImagesCatcherAnimationsGen {
+  const $AssetsImagesCatcherAnimationsGen();
+
+  /// File path: assets/images/catcher/animations/pause.png
+  AssetGenImage get pause =>
+      const AssetGenImage('assets/images/catcher/animations/pause.png');
+
+  /// File path: assets/images/catcher/animations/reset.png
+  AssetGenImage get reset =>
+      const AssetGenImage('assets/images/catcher/animations/reset.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [pause, reset];
+}
+
+class $AssetsImagesCatcherBgGen {
+  const $AssetsImagesCatcherBgGen();
+
+  /// File path: assets/images/catcher/bg/bg.png
+  AssetGenImage get bg =>
+      const AssetGenImage('assets/images/catcher/bg/bg.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [bg];
+}
+
+class $AssetsImagesCatcherBoxesGen {
+  const $AssetsImagesCatcherBoxesGen();
+
+  /// File path: assets/images/catcher/boxes/electric.png
+  AssetGenImage get electric =>
+      const AssetGenImage('assets/images/catcher/boxes/electric.png');
+
+  /// File path: assets/images/catcher/boxes/glass.png
+  AssetGenImage get glass =>
+      const AssetGenImage('assets/images/catcher/boxes/glass.png');
+
+  /// File path: assets/images/catcher/boxes/organic.png
+  AssetGenImage get organic =>
+      const AssetGenImage('assets/images/catcher/boxes/organic.png');
+
+  /// File path: assets/images/catcher/boxes/paper.png
+  AssetGenImage get paper =>
+      const AssetGenImage('assets/images/catcher/boxes/paper.png');
+
+  /// File path: assets/images/catcher/boxes/plastic.png
+  AssetGenImage get plastic =>
+      const AssetGenImage('assets/images/catcher/boxes/plastic.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [electric, glass, organic, paper, plastic];
+}
+
+class $AssetsImagesCatcherButtonGen {
+  const $AssetsImagesCatcherButtonGen();
+
+  /// File path: assets/images/catcher/button/play.png
+  AssetGenImage get play =>
+      const AssetGenImage('assets/images/catcher/button/play.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [play];
+}
+
+class $AssetsImagesCatcherDropsGen {
+  const $AssetsImagesCatcherDropsGen();
+
+  $AssetsImagesCatcherDropsElectricGen get electric =>
+      const $AssetsImagesCatcherDropsElectricGen();
+  $AssetsImagesCatcherDropsGlassGen get glass =>
+      const $AssetsImagesCatcherDropsGlassGen();
+  $AssetsImagesCatcherDropsOrganicGen get organic =>
+      const $AssetsImagesCatcherDropsOrganicGen();
+  $AssetsImagesCatcherDropsPaperGen get paper =>
+      const $AssetsImagesCatcherDropsPaperGen();
+  $AssetsImagesCatcherDropsPlasticGen get plastic =>
+      const $AssetsImagesCatcherDropsPlasticGen();
+}
+
+class $AssetsImagesCatcherTutorialGen {
+  const $AssetsImagesCatcherTutorialGen();
+
+  /// File path: assets/images/catcher/tutorial/play.png
+  AssetGenImage get play =>
+      const AssetGenImage('assets/images/catcher/tutorial/play.png');
+
+  /// File path: assets/images/catcher/tutorial/tutorial.png
+  AssetGenImage get tutorial =>
+      const AssetGenImage('assets/images/catcher/tutorial/tutorial.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [play, tutorial];
+}
+
+class $AssetsImagesCatcherDropsElectricGen {
+  const $AssetsImagesCatcherDropsElectricGen();
+
+  /// File path: assets/images/catcher/drops/electric/e0.png
+  AssetGenImage get e0 =>
+      const AssetGenImage('assets/images/catcher/drops/electric/e0.png');
+
+  /// File path: assets/images/catcher/drops/electric/e1.png
+  AssetGenImage get e1 =>
+      const AssetGenImage('assets/images/catcher/drops/electric/e1.png');
+
+  /// File path: assets/images/catcher/drops/electric/e2.png
+  AssetGenImage get e2 =>
+      const AssetGenImage('assets/images/catcher/drops/electric/e2.png');
+
+  /// File path: assets/images/catcher/drops/electric/e3.png
+  AssetGenImage get e3 =>
+      const AssetGenImage('assets/images/catcher/drops/electric/e3.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [e0, e1, e2, e3];
+}
+
+class $AssetsImagesCatcherDropsGlassGen {
+  const $AssetsImagesCatcherDropsGlassGen();
+
+  /// File path: assets/images/catcher/drops/glass/g0.png
+  AssetGenImage get g0 =>
+      const AssetGenImage('assets/images/catcher/drops/glass/g0.png');
+
+  /// File path: assets/images/catcher/drops/glass/g1.png
+  AssetGenImage get g1 =>
+      const AssetGenImage('assets/images/catcher/drops/glass/g1.png');
+
+  /// File path: assets/images/catcher/drops/glass/g2.png
+  AssetGenImage get g2 =>
+      const AssetGenImage('assets/images/catcher/drops/glass/g2.png');
+
+  /// File path: assets/images/catcher/drops/glass/g3.png
+  AssetGenImage get g3 =>
+      const AssetGenImage('assets/images/catcher/drops/glass/g3.png');
+
+  /// File path: assets/images/catcher/drops/glass/g4.png
+  AssetGenImage get g4 =>
+      const AssetGenImage('assets/images/catcher/drops/glass/g4.png');
+
+  /// File path: assets/images/catcher/drops/glass/g5.png
+  AssetGenImage get g5 =>
+      const AssetGenImage('assets/images/catcher/drops/glass/g5.png');
+
+  /// File path: assets/images/catcher/drops/glass/g6.png
+  AssetGenImage get g6 =>
+      const AssetGenImage('assets/images/catcher/drops/glass/g6.png');
+
+  /// File path: assets/images/catcher/drops/glass/g7.png
+  AssetGenImage get g7 =>
+      const AssetGenImage('assets/images/catcher/drops/glass/g7.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [g0, g1, g2, g3, g4, g5, g6, g7];
+}
+
+class $AssetsImagesCatcherDropsOrganicGen {
+  const $AssetsImagesCatcherDropsOrganicGen();
+
+  /// File path: assets/images/catcher/drops/organic/o0.png
+  AssetGenImage get o0 =>
+      const AssetGenImage('assets/images/catcher/drops/organic/o0.png');
+
+  /// File path: assets/images/catcher/drops/organic/o1.png
+  AssetGenImage get o1 =>
+      const AssetGenImage('assets/images/catcher/drops/organic/o1.png');
+
+  /// File path: assets/images/catcher/drops/organic/o10.png
+  AssetGenImage get o10 =>
+      const AssetGenImage('assets/images/catcher/drops/organic/o10.png');
+
+  /// File path: assets/images/catcher/drops/organic/o2.png
+  AssetGenImage get o2 =>
+      const AssetGenImage('assets/images/catcher/drops/organic/o2.png');
+
+  /// File path: assets/images/catcher/drops/organic/o3.png
+  AssetGenImage get o3 =>
+      const AssetGenImage('assets/images/catcher/drops/organic/o3.png');
+
+  /// File path: assets/images/catcher/drops/organic/o4.png
+  AssetGenImage get o4 =>
+      const AssetGenImage('assets/images/catcher/drops/organic/o4.png');
+
+  /// File path: assets/images/catcher/drops/organic/o5.png
+  AssetGenImage get o5 =>
+      const AssetGenImage('assets/images/catcher/drops/organic/o5.png');
+
+  /// File path: assets/images/catcher/drops/organic/o6.png
+  AssetGenImage get o6 =>
+      const AssetGenImage('assets/images/catcher/drops/organic/o6.png');
+
+  /// File path: assets/images/catcher/drops/organic/o7.png
+  AssetGenImage get o7 =>
+      const AssetGenImage('assets/images/catcher/drops/organic/o7.png');
+
+  /// File path: assets/images/catcher/drops/organic/o8.png
+  AssetGenImage get o8 =>
+      const AssetGenImage('assets/images/catcher/drops/organic/o8.png');
+
+  /// File path: assets/images/catcher/drops/organic/o9.png
+  AssetGenImage get o9 =>
+      const AssetGenImage('assets/images/catcher/drops/organic/o9.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values =>
+      [o0, o1, o10, o2, o3, o4, o5, o6, o7, o8, o9];
+}
+
+class $AssetsImagesCatcherDropsPaperGen {
+  const $AssetsImagesCatcherDropsPaperGen();
+
+  /// File path: assets/images/catcher/drops/paper/p0.png
+  AssetGenImage get p0 =>
+      const AssetGenImage('assets/images/catcher/drops/paper/p0.png');
+
+  /// File path: assets/images/catcher/drops/paper/p1.png
+  AssetGenImage get p1 =>
+      const AssetGenImage('assets/images/catcher/drops/paper/p1.png');
+
+  /// File path: assets/images/catcher/drops/paper/p2.png
+  AssetGenImage get p2 =>
+      const AssetGenImage('assets/images/catcher/drops/paper/p2.png');
+
+  /// File path: assets/images/catcher/drops/paper/p3.png
+  AssetGenImage get p3 =>
+      const AssetGenImage('assets/images/catcher/drops/paper/p3.png');
+
+  /// File path: assets/images/catcher/drops/paper/p4.png
+  AssetGenImage get p4 =>
+      const AssetGenImage('assets/images/catcher/drops/paper/p4.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [p0, p1, p2, p3, p4];
+}
+
+class $AssetsImagesCatcherDropsPlasticGen {
+  const $AssetsImagesCatcherDropsPlasticGen();
+
+  /// File path: assets/images/catcher/drops/plastic/p0.png
+  AssetGenImage get p0 =>
+      const AssetGenImage('assets/images/catcher/drops/plastic/p0.png');
+
+  /// File path: assets/images/catcher/drops/plastic/p1.png
+  AssetGenImage get p1 =>
+      const AssetGenImage('assets/images/catcher/drops/plastic/p1.png');
+
+  /// File path: assets/images/catcher/drops/plastic/p2.png
+  AssetGenImage get p2 =>
+      const AssetGenImage('assets/images/catcher/drops/plastic/p2.png');
+
+  /// File path: assets/images/catcher/drops/plastic/p3.png
+  AssetGenImage get p3 =>
+      const AssetGenImage('assets/images/catcher/drops/plastic/p3.png');
+
+  /// File path: assets/images/catcher/drops/plastic/p4.png
+  AssetGenImage get p4 =>
+      const AssetGenImage('assets/images/catcher/drops/plastic/p4.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [p0, p1, p2, p3, p4];
 }
 
 class Assets {
