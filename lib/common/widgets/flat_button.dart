@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_game_challenge/common/assets/colors.gen.dart';
 
-class GameButton extends StatelessWidget {
-  const GameButton({
+class FlatButton extends StatelessWidget {
+  const FlatButton({
     required this.onPressed,
     required this.text,
     this.isActive = true,
