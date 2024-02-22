@@ -40,7 +40,6 @@ linked_*.ds
 unlinked.ds
 unlinked_spec.ds
 .fvm/
-flutter_sdk
 
 # Android related
 **/android/**/gradle-wrapper.jar
