@@ -273,10 +273,7 @@ class _ScrollableTextState extends State<_ScrollableText> {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  widget.description +
-                                      widget.description +
-                                      widget.description +
-                                      widget.description,
+                                  widget.description,
                                   style: const TextStyle(
                                     color:
                                         FlutterGameChallengeColors.textStroke,
