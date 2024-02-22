@@ -65,7 +65,7 @@ class OverlayFog extends PositionComponent with DragCallbacks {
           fogImage,
           sourceRect,
           overlayTargetRect,
-          paint..blendMode = BlendMode.srcIn,
+          paint,
         )
         ..restore();
       return;
