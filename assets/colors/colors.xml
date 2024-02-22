@@ -18,5 +18,5 @@
     <color name="artifact_red" type="material">#9A271E</color>
     <color name="artifact_orange" type="material">#D4821D</color>
     <color name="details_background" type="material">#EADDE8</color>
-    <color name="earth_glow" type="material">#94D0FD</color>
+    <color name="earth_glow" type="material">#96D4FF</color>
 </resources>

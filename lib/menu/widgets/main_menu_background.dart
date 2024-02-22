@@ -133,7 +133,7 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
                                 color: FlutterGameChallengeColors.earthGlow,
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(22),
+                                padding: const EdgeInsets.all(18),
                                 child: AspectRatio(
                                   aspectRatio:
                                       _playerController.value.aspectRatio,
