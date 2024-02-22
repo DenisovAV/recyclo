@@ -26,6 +26,7 @@ dependencies:
   shared_preferences: ^2.2.2
   video_player: ^2.8.2
   vector_math: ^2.1.4
+  flutter_statusbarcolor_ns: ^0.5.0
 
 dev_dependencies:
   bloc_test: ^9.1.5

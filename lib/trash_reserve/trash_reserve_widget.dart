@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_challenge/common/assets.dart';
@@ -65,7 +63,7 @@ class _TrashReserveItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 56,
-      height: 74,
+      height: 64,
       decoration: BoxDecoration(
         color: color,
         border: const Border(
@@ -83,10 +81,9 @@ class _TrashReserveItemWidget extends StatelessWidget {
           ),
         ),
         borderRadius: isRounded
-            ? BorderRadius.only(
-                bottomLeft: const Radius.circular(12),
-                topLeft:
-                    Platform.isIOS ? const Radius.circular(12) : Radius.zero,
+            ? const BorderRadius.only(
+                bottomLeft: Radius.circular(12),
+                topLeft: Radius.circular(12),
               )
             : null,
       ),
