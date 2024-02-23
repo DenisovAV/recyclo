@@ -7,6 +7,7 @@ import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
+import 'package:flutter_game_challenge/game/finder/components/collider.dart';
 
 class OverlayFog extends PositionComponent with DragCallbacks {
   static const overlayTargetRect = Rect.fromLTRB(0, 200, 1024, 2060);
@@ -22,6 +23,7 @@ class OverlayFog extends PositionComponent with DragCallbacks {
   Vector2 holeSpawnPosition = Vector2(0, 0);
   Vector2 currentDragPosition = Vector2(0, 0);
   bool isDragInProgress = false;
+  HoleCollider collider = HoleCollider();
 
   @override
   Future<void> onLoad() async {
@@ -31,15 +33,22 @@ class OverlayFog extends PositionComponent with DragCallbacks {
   }
 
   @override
-  void onDragStart(DragStartEvent event) {
+  Future<void> onDragStart(DragStartEvent event) async {
     super.onDragStart(event);
     isDragInProgress = true;
     holeSpawnPosition = event.localPosition;
+    await add(
+      collider
+        ..size = Vector2(200, 200)
+        ..priority = 2
+        ..position = event.localPosition,
+    );
   }
 
   @override
   void onDragUpdate(DragUpdateEvent event) {
     currentDragPosition = event.localEndPosition;
+    collider.position = currentDragPosition;
   }
 
   @override
@@ -47,6 +56,7 @@ class OverlayFog extends PositionComponent with DragCallbacks {
     super.onDragEnd(event);
 
     isDragInProgress = false;
+    remove(collider);
   }
 
   @override

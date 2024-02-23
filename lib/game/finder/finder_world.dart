@@ -5,12 +5,11 @@ import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/rendering.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
 import 'package:flutter_game_challenge/game/finder/components/item.dart';
 import 'package:flutter_game_challenge/game/finder/components/overlay.dart';
 
-class FinderWorld extends World with HasGameReference {
+class FinderWorld extends World with HasGameReference, HasCollisionDetection {
   static const double kTopGap = 200;
 
   final List<String> itemTypes = [
@@ -20,6 +19,8 @@ class FinderWorld extends World with HasGameReference {
     Assets.images.concrete.path,
     Assets.images.gamepad.path,
   ];
+
+  List<Item> collectedItems = List.empty();
 
   @override
   Future<void> onLoad() async {
@@ -40,14 +41,16 @@ class FinderWorld extends World with HasGameReference {
 
     await add(background); //TODO fix background position
     await addAll(items);
-    
+
     final playAreaSize = Vector2(4 * 256, 6 * 256 + kTopGap);
 
-    add(OverlayFog()..priority = 5..size = playAreaSize);
+    add(OverlayFog()
+      ..priority = 4
+      ..size = playAreaSize);
 
     final gameMidX = playAreaSize.x / 2;
 
-    //TODO fix camera position  
+    //TODO fix camera position
     camera.viewfinder.visibleGameSize = playAreaSize;
     camera.viewfinder.position = Vector2(gameMidX, 0);
     camera.viewfinder.anchor = Anchor.topCenter;
@@ -69,7 +72,7 @@ class FinderWorld extends World with HasGameReference {
       Item(
         position: Vector2(0, 0),
         spritePath: '',
-      )..priority = 2,
+      ),
     );
 
     for (var i = 0; i < generatedListLength; i++) {
@@ -77,7 +80,7 @@ class FinderWorld extends World with HasGameReference {
       final itemFromRandom = Item(
         position: Vector2(0, 0 + kTopGap), //Calculate offset
         spritePath: itemTypes[randomInt],
-      );
+      )..priority = 2;
       generatedList[i] = itemFromRandom;
     }
 
