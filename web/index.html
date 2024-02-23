@@ -27,7 +27,8 @@
     <meta name="apple-mobile-web-app-title" content="Flutter Game Challenge">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap"
+          rel="stylesheet">
     <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
     <!-- Favicon -->
@@ -64,13 +65,23 @@
    .logo {
       text-align: center;
    }
+   .flutter-loader {
+        background-color: #B2DE9F;
+   }
+   .indeterminate:before {
+        background-color: #ECDC6E;
+   }
+   .indeterminate:after {
+        background-color: #E3D3DF;
+   }
 }
+
 
 </style>
 
 <div class="logo">
-  <img src="recycle_logo.svg" width="350px">
-  <h2>Recyclo</h2>
+    <img src="recycle_logo.svg" width="350px">
+    <h2>Recyclo</h2>
 </div>
 
 <script>
@@ -136,6 +147,7 @@
       // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
     }
+
 
 </script>
 </body>
