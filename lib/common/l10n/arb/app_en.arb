@@ -157,7 +157,7 @@
   "@artifactCraftedDialogTitle" : {
     "description": "Artifact crafted dialog header"
   },
-  "artifactCraftedDialogBody": "You successfully have created an artifact and now you can add it to a wallet.",
+  "artifactCraftedDialogBody": "You successfully have crafted an artifact and now you can add it to a wallet.",
   "@artifactCraftedDialogBody" : {
     "description": "Artifact crafted dialog body"
   }

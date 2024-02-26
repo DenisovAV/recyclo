@@ -28,7 +28,7 @@ class _TrashReserveItemWidgetState extends State<TrashReserveItemWidget>
   void didUpdateWidget(TrashReserveItemWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (oldWidget.color != widget.count) {
+    if (widget.count < oldWidget.count) {
       _resourceTween = Tween<double>(
         begin: oldWidget.count.toDouble(),
         end: widget.count.toDouble(),
@@ -39,6 +39,11 @@ class _TrashReserveItemWidgetState extends State<TrashReserveItemWidget>
       _animation = _resourcesController.drive(_resourceTween);
 
       _resourcesController.forward();
+    } else {
+      _animation = Tween<double>(
+        begin: widget.count.toDouble(),
+        end: widget.count.toDouble(),
+      ).animate(_resourcesController);
     }
   }
 
@@ -52,6 +57,11 @@ class _TrashReserveItemWidgetState extends State<TrashReserveItemWidget>
         milliseconds: 800,
       ),
     );
+
+    _animation = Tween<double>(
+      begin: widget.count.toDouble(),
+      end: widget.count.toDouble(),
+    ).animate(_resourcesController);
   }
 
   @override

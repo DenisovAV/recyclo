@@ -36,10 +36,11 @@ extension BuildContextExtensions on BuildContext {
 
   TextStyle generalTextStyle({
     double fontSize = 46,
+    Color color = FlutterGameChallengeColors.textStroke,
   }) =>
       TextStyle(
         fontSize: fontSize,
         fontFamily: 'Sniglet',
-        color: FlutterGameChallengeColors.textStroke,
+        color: color,
       );
 }

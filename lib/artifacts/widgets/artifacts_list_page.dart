@@ -122,9 +122,9 @@ class _ArtifactItem extends StatelessWidget {
                         color: FlutterGameChallengeColors.textStroke,
                         child: Text(
                           name,
-                          style: const TextStyle(
-                            color: FlutterGameChallengeColors.white,
+                          style: context.generalTextStyle(
                             fontSize: 18,
+                            color: FlutterGameChallengeColors.white,
                           ),
                         ),
                       ),
