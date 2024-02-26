@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_challenge/artifact_details/cubit/artifact_details_cubit.dart';
 import 'package:flutter_game_challenge/artifact_details/cubit/artifact_details_state.dart';
+import 'package:flutter_game_challenge/artifact_details/widgets/artifact_crafted_dialog.dart';
 import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifact_requirements_status.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifact_status_icon.dart';
@@ -118,17 +120,6 @@ class ArtifactDetails extends StatelessWidget {
                           ],
                         ),
                       ),
-                      if (state.model.status == ArtifactStatus.crafted)
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20,
-                            right: 20,
-                            bottom: 20,
-                          ),
-                          child: Assets.images.addToWallet.image(
-                            height: 52,
-                          ),
-                        ),
                       if (state.model.status == ArtifactStatus.readyForCraft ||
                           state.model.status ==
                               ArtifactStatus.notEnoughResources)
@@ -142,6 +133,15 @@ class ArtifactDetails extends StatelessWidget {
                             onPressed: () {
                               BlocProvider.of<ArtifactDetailsCubit>(context)
                                   .craftArtifact(state.model);
+
+                              unawaited(showDialog(
+                                context: context,
+                                builder: (_) => GameMessageDialog(
+                                  title:
+                                      context.l10n.artifactCraftedDialogTitle,
+                                  body: context.l10n.artifactCraftedDialogBody,
+                                ),
+                              ));
                             },
                             isActive: state.model.status ==
                                 ArtifactStatus.readyForCraft,
@@ -275,19 +275,15 @@ class _ScrollableTextState extends State<_ScrollableText> {
                                 const SizedBox(height: 8),
                                 Text(
                                   widget.title,
-                                  style: const TextStyle(
-                                    color:
-                                        FlutterGameChallengeColors.textStroke,
+                                  style: context.generalTextStyle(
                                     fontSize: 28,
                                   ),
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
                                   widget.description,
-                                  style: const TextStyle(
-                                    color:
-                                        FlutterGameChallengeColors.textStroke,
-                                    fontSize: 16,
+                                  style: context.generalTextStyle(
+                                    fontSize: 18,
                                   ),
                                 ),
                               ],

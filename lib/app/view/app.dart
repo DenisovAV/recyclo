@@ -33,6 +33,7 @@ class AppView extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Sniglet',
         primaryColor: FlutterGameChallengeColors.primary1,
         appBarTheme: const AppBarTheme(
           color: FlutterGameChallengeColors.primary1,

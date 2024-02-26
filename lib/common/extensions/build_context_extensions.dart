@@ -7,7 +7,7 @@ extension BuildContextExtensions on BuildContext {
   }) =>
       TextStyle(
         fontSize: fontSize,
-        fontFamily: 'Mplus',
+        fontFamily: 'Sniglet',
         height: 2,
         color: FlutterGameChallengeColors.white,
         shadows: const [
@@ -32,5 +32,14 @@ extension BuildContextExtensions on BuildContext {
             color: FlutterGameChallengeColors.textStroke,
           ),
         ],
+      );
+
+  TextStyle generalTextStyle({
+    double fontSize = 46,
+  }) =>
+      TextStyle(
+        fontSize: fontSize,
+        fontFamily: 'Sniglet',
+        color: FlutterGameChallengeColors.textStroke,
       );
 }

@@ -145,9 +145,20 @@
   "@aboutAppRecycle": {
     "description": "Tittle for 'About app' item in landing page"
   },
-  "aboutAppRecycleContentText": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n  For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium. \n\nRecycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n  For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "aboutAppRecycleContentText": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium. \n\nRecycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
   "@aboutAppRecycleContentText" : {
     "description": "Text for content on the About us item page"
+  },
+  "buttonOk": "Ok",
+  "@buttonOk" : {
+    "description": "Text for Ok button"
+  },
+  "artifactCraftedDialogTitle": "Congradulations!",
+  "@artifactCraftedDialogTitle" : {
+    "description": "Artifact crafted dialog header"
+  },
+  "artifactCraftedDialogBody": "You successfully have created an artifact and now you can add it to a wallet.",
+  "@artifactCraftedDialogBody" : {
+    "description": "Artifact crafted dialog body"
   }
-
 }

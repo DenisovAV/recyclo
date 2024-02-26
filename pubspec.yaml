@@ -61,9 +61,9 @@ flutter:
     - assets/images/catcher/button/
 
   fonts:
-    - family: Mplus
+    - family: Sniglet
       fonts:
-        - asset: assets/fonts/MPLUSRounded1c-Regular.ttf
+        - asset: assets/fonts/Sniglet-Regular.ttf
 
 flutter_gen:
   output: lib/common/assets/
