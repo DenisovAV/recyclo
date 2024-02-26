@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame/flame.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_game_challenge/clicker_game/components/bound_component.dart';
@@ -9,7 +8,6 @@ import 'package:flutter_game_challenge/clicker_game/const/clicker_constraints.da
 import 'package:flutter_game_challenge/clicker_game/game_state.dart';
 
 class ClickerGame extends Forge2DGame with TapDetector {
-
   ClickerGame({
     required this.context,
   }) : super(
@@ -22,14 +20,13 @@ class ClickerGame extends Forge2DGame with TapDetector {
 
   @override
   Future<void> onLoad() async {
-    Flame.images.prefix = '';
-    await super.onLoad();
     camera.moveTo(size / 2);
     gameState = ClickerState(gameWidgetSize: size);
     await addAll(createBoundaries());
     await add(gameState);
     await addAll(gameState.trashItems.value);
 
+    return super.onLoad();
   }
 
   List<Component> createBoundaries() {
@@ -61,7 +58,7 @@ class ClickerGame extends Forge2DGame with TapDetector {
     if (tappedItem != null) {
       if (gameState.currentTargetTypes.value.lastOrNull ==
           tappedItem.trashData.classification) {
-        tappedItem.removeFromParent();
+        tappedItem.onCollected();
         gameState.collectTrash(tappedItem);
       } else {
         tappedItem.onMiss();

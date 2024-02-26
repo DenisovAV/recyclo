@@ -29,7 +29,7 @@ class ClickerState extends Component {
   }
 
   void punishPlayer() {
-
+    // TODO: show tutorial overlay on 3-rd miss =- take 5 seconds away
   }
 
   void collectTrash(TrashItemComponent trash) {

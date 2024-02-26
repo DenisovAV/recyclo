@@ -61,14 +61,19 @@ class GameHUD extends StatelessWidget {
                   final visibleItems = targetTypes.reversed.take(5).toList();
                   return Stack(
                     alignment: Alignment.centerRight,
+                    clipBehavior: Clip.none,
                     children: List.generate(visibleItems.length, (index) {
                       final itemIndex = visibleItems.length - 1 - index;
                       final trashType = visibleItems[itemIndex];
                       return Positioned(
                         right: 10 + (itemIndex * -8.0),
-                        child: TargetCategories(
-                          itemIndex: itemIndex,
-                          trashType: trashType,
+                        child: Transform.scale(
+                          scale: 1 - ((itemIndex * 5) / 100),
+                          child: TargetCategories(
+                            key: UniqueKey(),
+                            animate: index == visibleItems.length - 1,
+                            trashType: trashType,
+                          ),
                         ),
                       );
                     }),

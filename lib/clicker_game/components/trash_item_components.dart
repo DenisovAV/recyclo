@@ -22,7 +22,12 @@ class TrashItemComponent extends BodyComponent {
 
     backgroundSprite = SpriteComponent(
       sprite: Sprite(
-        await Flame.images.load(Assets.images.clicker.images.cloud.path),
+        await Flame.images.load(
+          Assets.images.clicker.images.cloud.path.replaceFirst(
+            'assets/images/',
+            '',
+          ),
+        ),
       ),
       size: baseSize * trashData.sizeMultiplier,
       position: Vector2.zero(),
@@ -31,7 +36,14 @@ class TrashItemComponent extends BodyComponent {
     add(backgroundSprite);
 
     trashSprite = SpriteComponent(
-      sprite: Sprite(await Flame.images.load(trashData.assetPath)),
+      sprite: Sprite(
+        await Flame.images.load(
+          trashData.assetPath.replaceFirst(
+            'assets/images/',
+            '',
+          ),
+        ),
+      ),
       size: (baseSize * trashData.sizeMultiplier) - Vector2.all(10),
       anchor: Anchor.center,
     );
@@ -69,8 +81,36 @@ class TrashItemComponent extends BodyComponent {
     return distance <= radius;
   }
 
+  void onCollected() async {
+    Effect getResizeEvent() {
+      return SequenceEffect(
+        [
+          ScaleEffect.by(
+            Vector2(1.5, 1.5),
+            EffectController(
+              duration: 0.1,
+            ),
+          ),
+          ScaleEffect.by(
+            Vector2(.1, .1),
+            EffectController(
+              duration: 0.1,
+            ),
+          ),
+        ],
+        infinite: false,
+      );
+    }
+
+    await backgroundSprite.add(getResizeEvent());
+    await trashSprite.add(getResizeEvent()
+      ..onComplete = () {
+        removeFromParent();
+      });
+  }
+
   void onMiss() {
-    Effect getShakeEvent() {
+    Effect getShakeEffect() {
       return SequenceEffect(
         [
           MoveEffect.by(
@@ -93,7 +133,7 @@ class TrashItemComponent extends BodyComponent {
       );
     }
 
-    Effect colorChangeEffect() {
+    Effect getColorEffect() {
       return ColorEffect(
         Colors.red.shade400,
         EffectController(
@@ -103,9 +143,9 @@ class TrashItemComponent extends BodyComponent {
       );
     }
 
-    backgroundSprite.add(getShakeEvent());
-    backgroundSprite.add(colorChangeEffect());
-    trashSprite.add(getShakeEvent());
-    trashSprite.add(colorChangeEffect());
+    backgroundSprite.add(getShakeEffect());
+    backgroundSprite.add(getColorEffect());
+    trashSprite.add(getShakeEffect());
+    trashSprite.add(getColorEffect());
   }
 }
