@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:collection/collection.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
@@ -76,13 +78,13 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
         context: context,
         items: playerScore,
         onDismiss: () {
-          ServiceProvider.get<TrashReserveRepository>().addResource(
+          unawaited(ServiceProvider.get<TrashReserveRepository>().addResource(
             plastic: playerScore.getPlayerScore(ItemType.plastic),
             paper: playerScore.getPlayerScore(ItemType.paper),
             glass: playerScore.getPlayerScore(ItemType.glass),
             organic: playerScore.getPlayerScore(ItemType.organic),
             electronics: playerScore.getPlayerScore(ItemType.electronic),
-          );
+          ));
           Navigator.of(context).maybePop();
         },
       );
