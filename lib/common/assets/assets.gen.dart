@@ -8,6 +8,8 @@
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
 
 class $AssetsAudioGen {
   const $AssetsAudioGen();
@@ -55,30 +57,33 @@ class $AssetsImagesGen {
 
   $AssetsImagesCatcherGen get catcher => const $AssetsImagesCatcherGen();
 
-  /// File path: assets/images/cheese.png
-  AssetGenImage get cheese => const AssetGenImage('assets/images/cheese.png');
-
   /// File path: assets/images/clouds.png
   AssetGenImage get clouds => const AssetGenImage('assets/images/clouds.png');
 
-  /// File path: assets/images/concrete.png
-  AssetGenImage get concrete =>
-      const AssetGenImage('assets/images/concrete.png');
+  /// File path: assets/images/clouds_background.png
+  AssetGenImage get cloudsBackground =>
+      const AssetGenImage('assets/images/clouds_background.png');
 
-  /// File path: assets/images/cup.png
-  AssetGenImage get cup => const AssetGenImage('assets/images/cup.png');
+  /// File path: assets/images/down.png
+  AssetGenImage get down => const AssetGenImage('assets/images/down.png');
 
-  /// File path: assets/images/duck.png
-  AssetGenImage get duck => const AssetGenImage('assets/images/duck.png');
+  /// File path: assets/images/download_apple_store_button.png
+  AssetGenImage get downloadAppleStoreButton =>
+      const AssetGenImage('assets/images/download_apple_store_button.png');
 
-  /// File path: assets/images/earth.png
-  AssetGenImage get earth => const AssetGenImage('assets/images/earth.png');
+  /// File path: assets/images/download_google_play_button.png
+  AssetGenImage get downloadGooglePlayButton =>
+      const AssetGenImage('assets/images/download_google_play_button.png');
+
+  /// File path: assets/images/earth.mp4
+  String get earth => 'assets/images/earth.mp4';
+
+  /// File path: assets/images/earth_halo.png
+  AssetGenImage get earthHalo =>
+      const AssetGenImage('assets/images/earth_halo.png');
 
   /// File path: assets/images/energy.png
   AssetGenImage get energy => const AssetGenImage('assets/images/energy.png');
-
-  /// File path: assets/images/fog.png
-  AssetGenImage get fog => const AssetGenImage('assets/images/fog.png');
 
   /// File path: assets/images/game_mode_cathcer.png
   AssetGenImage get gameModeCathcer =>
@@ -92,18 +97,8 @@ class $AssetsImagesGen {
   AssetGenImage get gameModeFinder =>
       const AssetGenImage('assets/images/game_mode_finder.png');
 
-  /// File path: assets/images/gamepad.png
-  AssetGenImage get gamepad => const AssetGenImage('assets/images/gamepad.png');
-
   /// File path: assets/images/glass.png
   AssetGenImage get glass => const AssetGenImage('assets/images/glass.png');
-
-  /// File path: assets/images/hole.png
-  AssetGenImage get hole => const AssetGenImage('assets/images/hole.png');
-
-  /// File path: assets/images/hole_mask.png
-  AssetGenImage get holeMask =>
-      const AssetGenImage('assets/images/hole_mask.png');
 
   /// File path: assets/images/icon_forbidden.png
   AssetGenImage get iconForbidden =>
@@ -120,25 +115,36 @@ class $AssetsImagesGen {
   AssetGenImage get iconWallet =>
       const AssetGenImage('assets/images/icon_wallet.png');
 
+  /// File path: assets/images/logo_description.png
+  AssetGenImage get logoDescription =>
+      const AssetGenImage('assets/images/logo_description.png');
+
   /// File path: assets/images/organic.png
   AssetGenImage get organic => const AssetGenImage('assets/images/organic.png');
 
   /// File path: assets/images/paper.png
   AssetGenImage get paper => const AssetGenImage('assets/images/paper.png');
 
-  /// File path: assets/images/paper_boat.png
-  AssetGenImage get paperBoat =>
-      const AssetGenImage('assets/images/paper_boat.png');
-
   /// File path: assets/images/plastic.png
   AssetGenImage get plastic => const AssetGenImage('assets/images/plastic.png');
+
+  /// File path: assets/images/recycle_logo.png
+  AssetGenImage get recycleLogoPng =>
+      const AssetGenImage('assets/images/recycle_logo.png');
+
+  /// File path: assets/images/recycle_logo.svg
+  SvgGenImage get recycleLogoSvg =>
+      const SvgGenImage('assets/images/recycle_logo.svg');
 
   /// File path: assets/images/unicorn_animation.png
   AssetGenImage get unicornAnimation =>
       const AssetGenImage('assets/images/unicorn_animation.png');
 
+  /// File path: assets/images/up.png
+  AssetGenImage get up => const AssetGenImage('assets/images/up.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [
+  List<dynamic> get values => [
         addToWallet,
         artifactCar,
         artifactHouse,
@@ -146,30 +152,30 @@ class $AssetsImagesGen {
         artifactNewspaper,
         artifactPlant,
         artifactShampoo,
-        cheese,
         clouds,
-        concrete,
-        cup,
-        duck,
+        cloudsBackground,
+        down,
+        downloadAppleStoreButton,
+        downloadGooglePlayButton,
         earth,
+        earthHalo,
         energy,
-        fog,
         gameModeCathcer,
         gameModeClicker,
         gameModeFinder,
-        gamepad,
         glass,
-        hole,
-        holeMask,
         iconForbidden,
         iconGeer,
         iconOk,
         iconWallet,
+        logoDescription,
         organic,
         paper,
-        paperBoat,
         plastic,
-        unicornAnimation
+        recycleLogoPng,
+        recycleLogoSvg,
+        unicornAnimation,
+        up
       ];
 }
 
@@ -541,6 +547,59 @@ class AssetGenImage {
       _assetName,
       bundle: bundle,
       package: package,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName);
+
+  final String _assetName;
+
+  SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    SvgTheme theme = const SvgTheme(),
+    ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated bool cacheColorFilter = false,
+  }) {
+    return SvgPicture.asset(
+      _assetName,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      bundle: bundle,
+      package: package,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      theme: theme,
+      colorFilter: colorFilter,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
     );
   }
 

@@ -63,7 +63,7 @@ class _TrashReserveItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 56,
-      height: 74,
+      height: 64,
       decoration: BoxDecoration(
         color: color,
         border: const Border(
@@ -83,6 +83,7 @@ class _TrashReserveItemWidget extends StatelessWidget {
         borderRadius: isRounded
             ? const BorderRadius.only(
                 bottomLeft: Radius.circular(12),
+                topLeft: Radius.circular(12),
               )
             : null,
       ),

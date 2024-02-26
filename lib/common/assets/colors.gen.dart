@@ -14,6 +14,33 @@ class FlutterGameChallengeColors {
   FlutterGameChallengeColors._();
 
   /// MaterialColor:
+  ///   50: #FFFDFBEE
+  ///   100: #FFF9F5D4
+  ///   200: #FFF6EEB7
+  ///   300: #FFF2E79A
+  ///   400: #FFEFE184
+  ///   500: #FFECDC6E
+  ///   600: #FFEAD866
+  ///   700: #FFE7D35B
+  ///   800: #FFE4CE51
+  ///   900: #FFDFC53F
+  static const MaterialColor aboutAppBackground = MaterialColor(
+    0xFFECDC6E,
+    <int, Color>{
+      50: Color(0xFFFDFBEE),
+      100: Color(0xFFF9F5D4),
+      200: Color(0xFFF6EEB7),
+      300: Color(0xFFF2E79A),
+      400: Color(0xFFEFE184),
+      500: Color(0xFFECDC6E),
+      600: Color(0xFFEAD866),
+      700: Color(0xFFE7D35B),
+      800: Color(0xFFE4CE51),
+      900: Color(0xFFDFC53F),
+    },
+  );
+
+  /// MaterialColor:
   ///   50: #FFE7F7E0
   ///   100: #FFC3EBB3
   ///   200: #FF9BDE80
@@ -313,11 +340,65 @@ class FlutterGameChallengeColors {
     },
   );
 
+  /// MaterialColor:
+  ///   50: #FFF2FAFF
+  ///   100: #FFE0F2FF
+  ///   200: #FFCBEAFF
+  ///   300: #FFB6E1FF
+  ///   400: #FFA6DAFF
+  ///   500: #FF96D4FF
+  ///   600: #FF8ECFFF
+  ///   700: #FF83C9FF
+  ///   800: #FF79C3FF
+  ///   900: #FF68B9FF
+  static const MaterialColor earthGlow = MaterialColor(
+    0xFF96D4FF,
+    <int, Color>{
+      50: Color(0xFFF2FAFF),
+      100: Color(0xFFE0F2FF),
+      200: Color(0xFFCBEAFF),
+      300: Color(0xFFB6E1FF),
+      400: Color(0xFFA6DAFF),
+      500: Color(0xFF96D4FF),
+      600: Color(0xFF8ECFFF),
+      700: Color(0xFF83C9FF),
+      800: Color(0xFF79C3FF),
+      900: Color(0xFF68B9FF),
+    },
+  );
+
   /// Color: #979797
   static const Color gray410 = Color(0xFF979797);
 
   /// Color: #EEEEEE
   static const Color gray70 = Color(0xFFEEEEEE);
+
+  /// MaterialColor:
+  ///   50: #FFEEF5F9
+  ///   100: #FFD5E5F0
+  ///   200: #FFB9D4E6
+  ///   300: #FF9CC2DC
+  ///   400: #FF87B5D5
+  ///   500: #FF72A8CD
+  ///   600: #FF6AA0C8
+  ///   700: #FF5F97C1
+  ///   800: #FF558DBA
+  ///   900: #FF427DAE
+  static const MaterialColor landingBackground = MaterialColor(
+    0xFF72A8CD,
+    <int, Color>{
+      50: Color(0xFFEEF5F9),
+      100: Color(0xFFD5E5F0),
+      200: Color(0xFFB9D4E6),
+      300: Color(0xFF9CC2DC),
+      400: Color(0xFF87B5D5),
+      500: Color(0xFF72A8CD),
+      600: Color(0xFF6AA0C8),
+      700: Color(0xFF5F97C1),
+      800: Color(0xFF558DBA),
+      900: Color(0xFF427DAE),
+    },
+  );
 
   /// Color: #FF042B59
   static const Color primary1 = Color(0xFF042B59);

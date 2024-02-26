@@ -164,6 +164,7 @@ class ArtifactsRepository {
         );
     }
     _streamController.add(artifactModel);
+    _artifactsModel = artifactModel;
     return newArtifact;
   }
 }
