@@ -4,8 +4,8 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
-import 'package:flame/rendering.dart';
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
+import 'package:flutter_game_challenge/game/finder/components/background_image.dart';
 
 import 'package:flutter_game_challenge/game/finder/components/item.dart';
 import 'package:flutter_game_challenge/game/finder/components/overlay.dart';
@@ -14,6 +14,8 @@ class FinderWorld extends World with HasGameReference, HasCollisionDetection {
   static const double kTopGap = 200;
   static const double _kPlayAreaHeight = 6 * 256 + kTopGap;
   static const double _kPlayAreaWidth = 4 * 256;
+
+  static const worldAreaRect = Rect.fromLTRB(0, 200, 1024, 2220);
 
   final List<String> _itemTypes = [
     Assets.images.duck.path,
@@ -33,20 +35,18 @@ class FinderWorld extends World with HasGameReference, HasCollisionDetection {
     await _loadImageAssets();
     final items = _generateItemsRandomly();
 
-    add(
-      SpriteComponent.fromImage(
-        Flame.images.fromCache(Assets.images.fog.path),
-        srcPosition: Vector2(0, -kTopGap),
-        srcSize: Vector2(1080, 1920),
-        priority: 1,
-      )..decorator =
-          PaintDecorator.tint(const Color.fromARGB(84, 158, 158, 158)),
-    );
-    await addAll(items);
-    add(
-      OverlayFog()
-        ..priority = 4
-        ..size = playAreaSize,
+    addAll(
+      [
+            BackgroundImage(
+              sprite: Sprite(
+                Flame.images.fromCache(Assets.images.fog.path),
+              ),
+            )..priority = 1,
+            OverlayFog()
+              ..priority = 4
+              ..size = playAreaSize,
+          ] +
+          items,
     );
   }
 

@@ -5,13 +5,13 @@ import 'package:flutter_game_challenge/game/finder/components/item.dart';
 import 'package:flutter_game_challenge/game/finder/finder_world.dart';
 
 class HoleCollider extends PositionComponent
-    with CollisionCallbacks, HasWorldReference {
+    with CollisionCallbacks, HasWorldReference<FinderWorld> {
   static const double maxTickCount = 2;
 
   final _collisionStartColor = const Color.fromARGB(255, 7, 255, 15);
   final _defaultColor = Colors.red;
 
-  FinderWorld get finderWorld => world as FinderWorld;
+  FinderWorld get finderWorld => world;
 
   Vector2 dragPosition = Vector2(0, 0);
   Item? currentCollisionItem;
