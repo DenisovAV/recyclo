@@ -37,6 +37,7 @@ class HoleCollider extends PositionComponent
     PositionComponent other,
   ) {
     super.onCollisionStart(intersectionPoints, other);
+
     if (other is Item) {
       currentCollisionItem = other;
       hitbox.paint.color = _collisionStartColor;
@@ -55,13 +56,18 @@ class HoleCollider extends PositionComponent
   }
 
   void _onTick() {
-    if (timer.current <= 0 && currentCollisionItem != null) {
-      finderWorld.collectedItems.add(currentCollisionItem!);
+    if (timer.current > 0 || currentCollisionItem == null) return;
+
+    finderWorld.collectedItems.add(currentCollisionItem!);
+    
+    if (world.children.contains(currentCollisionItem)) {
+      world.remove(currentCollisionItem!);
     }
   }
 
   void _resetTimer() {
     timer.stop();
     timer = Timer(maxTickCount, onTick: _onTick);
+    timer.start();
   }
 }

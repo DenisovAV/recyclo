@@ -20,7 +20,7 @@ class FinderWorld extends World with HasGameReference, HasCollisionDetection {
     Assets.images.gamepad.path,
   ];
 
-  List<Item> collectedItems = List.empty();
+  List<Item> collectedItems = List.empty(growable: true);
 
   @override
   Future<void> onLoad() async {
@@ -29,28 +29,27 @@ class FinderWorld extends World with HasGameReference, HasCollisionDetection {
     final items = _generateItemsRandomly();
     final camera = game.camera;
 
-    final image = Flame.images.fromCache(Assets.images.fog.path);
-    final sprite = Sprite(
-      image,
-      srcPosition: Vector2(0, kTopGap),
-      srcSize: Vector2(4 * 256, 6 * 256),
-    );
-    final background = SpriteComponent(
-      sprite: sprite,
-    )..decorator = PaintDecorator.tint(const Color.fromARGB(84, 158, 158, 158));
-
-    await add(background); //TODO fix background position
-    await addAll(items);
-
     final playAreaSize = Vector2(4 * 256, 6 * 256 + kTopGap);
 
-    add(OverlayFog()
-      ..priority = 4
-      ..size = playAreaSize);
+    add(
+      SpriteComponent.fromImage(
+        Flame.images.fromCache(Assets.images.fog.path),
+        srcPosition: Vector2(0, -kTopGap),
+        priority: 1,
+      )..decorator =
+          PaintDecorator.tint(const Color.fromARGB(84, 158, 158, 158)),
+    );
+
+    await addAll(items);
+
+    add(
+      OverlayFog()
+        ..priority = 4
+        ..size = playAreaSize,
+    );
 
     final gameMidX = playAreaSize.x / 2;
 
-    //TODO fix camera position
     camera.viewfinder.visibleGameSize = playAreaSize;
     camera.viewfinder.position = Vector2(gameMidX, 0);
     camera.viewfinder.anchor = Anchor.topCenter;

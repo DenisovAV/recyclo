@@ -39,9 +39,8 @@ class OverlayFog extends PositionComponent with DragCallbacks {
     holeSpawnPosition = event.localPosition;
     await add(
       collider
-        ..size = Vector2(200, 200)
-        ..priority = 2
-        ..position = event.localPosition,
+        ..size = Vector2(100, 100)
+        ..priority = 2,
     );
   }
 
