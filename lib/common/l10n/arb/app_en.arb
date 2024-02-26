@@ -116,5 +116,38 @@
   "buttonCraft": "Craft",
   "@buttonCraft": {
     "description": "Text for Craft button"
+  },
+  "gameFinishDialogTitle": "Time Out",
+  "@gameFinishDialogTitle": {
+    "description": "Text for game finish dialog title"
+  },
+  "gameFinishDialogDescription": "Your results",
+  "@gameFinishDialogDescription": {
+    "description": "Text for game finish dialog description"
+  },
+  "gameFinishDialogTryAgainDescription": "Better luck next time!",
+  "@gameFinishDialogTryAgainDescription": {
+    "description": "Text for game finish dialog description to try again"
+  },
+  "gameFinishDialogButtonTitle": "Collect",
+  "@gameFinishDialogButtonTitle": {
+    "description": "Text for game finish dialog button title"
+  },
+  "gameFinishDialogTryAgainButtonTitle": "Go to menu",
+  "@gameFinishDialogTryAgainButtonTitle": {
+    "description": "Text for game finish dialog button title to try again"
+  },
+  "appName": "Recyclo",
+  "@appName": {
+    "description": "Name of application"
+  },
+  "aboutAppRecycle": "About App Recyclo",
+  "@aboutAppRecycle": {
+    "description": "Tittle for 'About app' item in landing page"
+  },
+  "aboutAppRecycleContentText": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n  For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium. \n\nRecycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n  For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "@aboutAppRecycleContentText" : {
+    "description": "Text for content on the About us item page"
   }
+
 }

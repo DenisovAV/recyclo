@@ -1,6 +1,7 @@
 import 'package:flutter_game_challenge/artifact_details/cubit/artifact_details_cubit.dart';
 import 'package:flutter_game_challenge/artifacts/artifacts_repository.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
+import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
 import 'package:get_it/get_it.dart';
@@ -36,6 +37,10 @@ class ServiceProvider {
         GetIt.instance.get(),
         GetIt.instance.get(),
       ),
+    );
+
+    GetIt.instance.registerFactory<TimerCubit>(
+      TimerCubit.new,
     );
   }
 

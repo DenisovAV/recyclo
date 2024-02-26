@@ -17,9 +17,11 @@ class MainScene extends PositionComponent
     with TapCallbacks, HasGameRef<CatcherGame> {
   MainScene({
     required this.onPauseResumeGameCallback,
+    required this.onResetCallback,
   });
 
   final VoidCallback onPauseResumeGameCallback;
+  final VoidCallback onResetCallback;
   final List<Wave> initialWaveList = Levels.levels.first.waves;
   late List<Wave> waveList;
   bool isDestroy = false;
@@ -213,6 +215,7 @@ class MainScene extends PositionComponent
     _omissionsToShowTutorial = 0;
     _dropContainer.removeAll(_dropContainer.children);
     changeWave(0);
+    onResetCallback();
   }
 
   void resumed() {

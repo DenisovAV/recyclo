@@ -1,23 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common/assets.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter_game_challenge/menu/widgets/clouds.dart';
 
 class MainMenuBackground extends StatefulWidget {
   const MainMenuBackground({
     required this.isHighlighted,
     required this.isCompact,
+    this.isShowingEarth = true,
     super.key,
   });
 
+  factory MainMenuBackground.withoutEarth({
+    bool isHighlighted = false,
+    bool isCompact = false,
+  }) =>
+      MainMenuBackground(
+        isHighlighted: isHighlighted,
+        isCompact: isCompact,
+        isShowingEarth: false,
+      );
+
   final bool isHighlighted;
   final bool isCompact;
+  final bool isShowingEarth;
 
   @override
   State<MainMenuBackground> createState() => _MainMenuBackgroundState();
 }
 
-class _MainMenuBackgroundState extends State<MainMenuBackground>
-    with TickerProviderStateMixin {
+
+class _MainMenuBackgroundState extends State<MainMenuBackground> with TickerProviderStateMixin {
   late final AnimationController _highlightController;
   late final AnimationController _compactController;
   late final VideoPlayerController _playerController;
@@ -60,8 +73,7 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
       curve: Curves.easeInOut,
     );
 
-    _scaleAnimation =
-        Tween<double>(begin: 1, end: 1.6).animate(highlightAnimationCurved);
+    _scaleAnimation = Tween<double>(begin: 1, end: 1.6).animate(highlightAnimationCurved);
 
     _offsetAnimation = Tween<Offset>(
       begin: Offset.zero,
@@ -80,9 +92,7 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
     }
 
     if (oldWidget.isCompact != widget.isCompact) {
-      widget.isCompact
-          ? _compactController.animateTo(1)
-          : _compactController.animateBack(0);
+      widget.isCompact ? _compactController.animateTo(1) : _compactController.animateBack(0);
     }
   }
 
@@ -100,7 +110,7 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 100),
-          child: _Clouds(
+          child: Clouds(
             highlightAnimation: _scaleAnimation,
           ),
         ),
@@ -108,11 +118,12 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
           alignment: Alignment.bottomCenter,
           child: Padding(
             padding: const EdgeInsets.only(bottom: 120),
-            child: _Clouds(
+            child: Clouds(
               highlightAnimation: _scaleAnimation,
             ),
           ),
         ),
+        if(widget.isShowingEarth)
         SlideTransition(
           position: _compactAnimation,
           child: Transform.translate(
@@ -153,25 +164,6 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
           ),
         ),
       ],
-    );
-  }
-}
-
-class _Clouds extends StatelessWidget {
-  const _Clouds({
-    required this.highlightAnimation,
-  });
-
-  final Animation<double> highlightAnimation;
-
-  @override
-  Widget build(BuildContext context) {
-    return Transform.scale(
-      scale: 1.4,
-      child: ScaleTransition(
-        scale: highlightAnimation,
-        child: Assets.images.clouds.image(),
-      ),
     );
   }
 }

@@ -19,4 +19,7 @@
     <color name="artifact_orange" type="material">#D4821D</color>
     <color name="details_background" type="material">#EADDE8</color>
     <color name="earth_glow" type="material">#96D4FF</color>
+    <color name="landing_background" type="material">#72A8CD</color>
+    <color name="about_app_background" type="material">#ECDC6E</color>
+    <color name="about_app_background" type="material">#ECDC6E</color>
 </resources>
