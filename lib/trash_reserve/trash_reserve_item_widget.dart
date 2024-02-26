@@ -104,8 +104,8 @@ class _TrashReserveItemWidgetState extends State<TrashReserveItemWidget>
           children: [
             Image.asset(
               widget.imagePath,
-              width: 32,
-              height: 32,
+              width: 24,
+              height: 24,
             ),
             AnimatedBuilder(
                 animation: _animation,
