@@ -75,8 +75,12 @@ class $AssetsImagesGen {
   AssetGenImage get downloadGooglePlayButton =>
       const AssetGenImage('assets/images/download_google_play_button.png');
 
-  /// File path: assets/images/earth.png
-  AssetGenImage get earth => const AssetGenImage('assets/images/earth.png');
+  /// File path: assets/images/earth.mp4
+  String get earth => 'assets/images/earth.mp4';
+
+  /// File path: assets/images/earth_halo.png
+  AssetGenImage get earthHalo =>
+      const AssetGenImage('assets/images/earth_halo.png');
 
   /// File path: assets/images/energy.png
   AssetGenImage get energy => const AssetGenImage('assets/images/energy.png');
@@ -140,7 +144,7 @@ class $AssetsImagesGen {
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [
+  List<dynamic> get values => [
         addToWallet,
         artifactCar,
         artifactHouse,
@@ -154,6 +158,7 @@ class $AssetsImagesGen {
         downloadAppleStoreButton,
         downloadGooglePlayButton,
         earth,
+        earthHalo,
         energy,
         gameModeCathcer,
         gameModeClicker,
