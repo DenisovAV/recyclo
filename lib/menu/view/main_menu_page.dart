@@ -45,25 +45,29 @@ class MainMenuPage extends StatelessWidget {
                     isCompact: state.isBackgroundCompact,
                   ),
                   SafeArea(
+                    bottom: false,
                     child: Column(
                       children: [
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(width: 12),
+                            const SizedBox(width: 20),
                             Visibility(
                               visible: state is! MainPageInitialState,
-                              child: RoundButton(
-                                icon: Icons.keyboard_arrow_left,
-                                onPressed: () {
-                                  if (state is MainPageArtefactDetailsState) {
-                                    BlocProvider.of<MainPageCubit>(context)
-                                        .navigateToArtifacts();
-                                  } else {
-                                    BlocProvider.of<MainPageCubit>(context)
-                                        .navigateToMainPage();
-                                  }
-                                },
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: RoundButton(
+                                  icon: Icons.keyboard_arrow_left,
+                                  onPressed: () {
+                                    if (state is MainPageArtefactDetailsState) {
+                                      BlocProvider.of<MainPageCubit>(context)
+                                          .navigateToArtifacts();
+                                    } else {
+                                      BlocProvider.of<MainPageCubit>(context)
+                                          .navigateToMainPage();
+                                    }
+                                  },
+                                ),
                               ),
                             ),
                             const Expanded(
