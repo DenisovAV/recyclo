@@ -124,6 +124,12 @@ class FlutterGameChallengeColors {
     },
   );
 
+  /// Color: #FF00FF00
+  static const Color boxSuccessfulCatchTint = Color(0xFF00FF00);
+
+  /// Color: #FFFF0000
+  static const Color boxUnsuccessfulCatchTint = Color(0xFFFF0000);
+
   /// MaterialColor:
   ///   50: #FFF5FCF2
   ///   100: #FFE6F7DE
