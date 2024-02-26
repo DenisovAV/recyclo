@@ -57,12 +57,22 @@ class $AssetsImagesGen {
 
   $AssetsImagesCatcherGen get catcher => const $AssetsImagesCatcherGen();
 
+  /// File path: assets/images/cheese.png
+  AssetGenImage get cheese => const AssetGenImage('assets/images/cheese.png');
+
   /// File path: assets/images/clouds.png
   AssetGenImage get clouds => const AssetGenImage('assets/images/clouds.png');
 
   /// File path: assets/images/clouds_background.png
   AssetGenImage get cloudsBackground =>
       const AssetGenImage('assets/images/clouds_background.png');
+
+  /// File path: assets/images/concrete.png
+  AssetGenImage get concrete =>
+      const AssetGenImage('assets/images/concrete.png');
+
+  /// File path: assets/images/cup.png
+  AssetGenImage get cup => const AssetGenImage('assets/images/cup.png');
 
   /// File path: assets/images/down.png
   AssetGenImage get down => const AssetGenImage('assets/images/down.png');
@@ -75,6 +85,9 @@ class $AssetsImagesGen {
   AssetGenImage get downloadGooglePlayButton =>
       const AssetGenImage('assets/images/download_google_play_button.png');
 
+  /// File path: assets/images/duck.png
+  AssetGenImage get duck => const AssetGenImage('assets/images/duck.png');
+
   /// File path: assets/images/earth.mp4
   String get earth => 'assets/images/earth.mp4';
 
@@ -84,6 +97,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/energy.png
   AssetGenImage get energy => const AssetGenImage('assets/images/energy.png');
+
+  /// File path: assets/images/fog.png
+  AssetGenImage get fog => const AssetGenImage('assets/images/fog.png');
 
   /// File path: assets/images/game_mode_cathcer.png
   AssetGenImage get gameModeCathcer =>
@@ -97,8 +113,18 @@ class $AssetsImagesGen {
   AssetGenImage get gameModeFinder =>
       const AssetGenImage('assets/images/game_mode_finder.png');
 
+  /// File path: assets/images/gamepad.png
+  AssetGenImage get gamepad => const AssetGenImage('assets/images/gamepad.png');
+
   /// File path: assets/images/glass.png
   AssetGenImage get glass => const AssetGenImage('assets/images/glass.png');
+
+  /// File path: assets/images/hole.png
+  AssetGenImage get hole => const AssetGenImage('assets/images/hole.png');
+
+  /// File path: assets/images/hole_mask.png
+  AssetGenImage get holeMask =>
+      const AssetGenImage('assets/images/hole_mask.png');
 
   /// File path: assets/images/icon_forbidden.png
   AssetGenImage get iconForbidden =>
@@ -124,6 +150,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/paper.png
   AssetGenImage get paper => const AssetGenImage('assets/images/paper.png');
+
+  /// File path: assets/images/paper_boat.png
+  AssetGenImage get paperBoat =>
+      const AssetGenImage('assets/images/paper_boat.png');
 
   /// File path: assets/images/plastic.png
   AssetGenImage get plastic => const AssetGenImage('assets/images/plastic.png');
@@ -152,18 +182,26 @@ class $AssetsImagesGen {
         artifactNewspaper,
         artifactPlant,
         artifactShampoo,
+        cheese,
         clouds,
         cloudsBackground,
+        concrete,
+        cup,
         down,
         downloadAppleStoreButton,
         downloadGooglePlayButton,
+        duck,
         earth,
         earthHalo,
         energy,
+        fog,
         gameModeCathcer,
         gameModeClicker,
         gameModeFinder,
+        gamepad,
         glass,
+        hole,
+        holeMask,
         iconForbidden,
         iconGeer,
         iconOk,
@@ -171,6 +209,7 @@ class $AssetsImagesGen {
         logoDescription,
         organic,
         paper,
+        paperBoat,
         plastic,
         recycleLogoPng,
         recycleLogoSvg,

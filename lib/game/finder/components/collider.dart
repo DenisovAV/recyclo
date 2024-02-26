@@ -25,6 +25,7 @@ class HoleCollider extends PositionComponent
       ..color = _defaultColor
       ..style = PaintingStyle.stroke;
     hitbox = RectangleHitbox()
+      ..size = size
       ..paint = defaultPaint
       ..renderShape = true;
 

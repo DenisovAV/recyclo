@@ -10,7 +10,7 @@ import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
 import 'package:flutter_game_challenge/game/finder/components/collider.dart';
 
 class OverlayFog extends PositionComponent with DragCallbacks {
-  static const overlayTargetRect = Rect.fromLTRB(0, 200, 1024, 2060);
+  static const overlayTargetRect = Rect.fromLTRB(0, 200, 1024, 2220);
 
   late Image maskImage;
   late Image fogImage;
