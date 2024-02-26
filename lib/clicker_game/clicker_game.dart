@@ -63,7 +63,9 @@ class ClickerGame extends Forge2DGame with TapDetector {
           tappedItem.trashData.classification) {
         tappedItem.removeFromParent();
         gameState.collectTrash(tappedItem);
-      } else {}
+      } else {
+        tappedItem.onMiss();
+      }
     }
   }
 }

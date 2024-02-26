@@ -1,6 +1,7 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter_game_challenge/clicker_game/game_models/trash_item.dart';
@@ -12,12 +13,14 @@ class TrashItemComponent extends BodyComponent {
 
   final Vector2 position;
   final TrashItemData trashData;
+  late final SpriteComponent backgroundSprite;
+  late final SpriteComponent trashSprite;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
-    final backgroundSprite = SpriteComponent(
+    backgroundSprite = SpriteComponent(
       sprite: Sprite(
         await Flame.images.load(Assets.images.clicker.images.cloud.path),
       ),
@@ -27,7 +30,7 @@ class TrashItemComponent extends BodyComponent {
     );
     add(backgroundSprite);
 
-    final trashSprite = SpriteComponent(
+    trashSprite = SpriteComponent(
       sprite: Sprite(await Flame.images.load(trashData.assetPath)),
       size: (baseSize * trashData.sizeMultiplier) - Vector2.all(10),
       anchor: Anchor.center,
@@ -64,5 +67,45 @@ class TrashItemComponent extends BodyComponent {
     final distance = point.distanceTo(bodyPosition);
 
     return distance <= radius;
+  }
+
+  void onMiss() {
+    Effect getShakeEvent() {
+      return SequenceEffect(
+        [
+          MoveEffect.by(
+            Vector2(-5, 0),
+            EffectController(
+              duration: 0.1,
+              alternate: true,
+            ),
+          ),
+          MoveEffect.by(
+            Vector2(5, 0),
+            EffectController(
+              duration: 0.1,
+              alternate: true,
+            ),
+          ),
+        ],
+        infinite: false,
+        alternate: true,
+      );
+    }
+
+    Effect colorChangeEffect() {
+      return ColorEffect(
+        Colors.red.shade400,
+        EffectController(
+          duration: .5,
+          alternate: true,
+        ),
+      );
+    }
+
+    backgroundSprite.add(getShakeEvent());
+    backgroundSprite.add(colorChangeEffect());
+    trashSprite.add(getShakeEvent());
+    trashSprite.add(colorChangeEffect());
   }
 }

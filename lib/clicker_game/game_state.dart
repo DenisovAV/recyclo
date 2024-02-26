@@ -3,25 +3,33 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_game_challenge/clicker_game/components/trash_item_components.dart';
 import 'package:flutter_game_challenge/clicker_game/const/clicker_constraints.dart';
-import 'package:flutter_game_challenge/clicker_game/game_models/trash_item.dart';
 import 'package:flutter_game_challenge/common.dart';
+
+import 'game_models/trash_bin.dart';
+import 'game_models/trash_type.dart';
 
 class ClickerState extends Component {
   ClickerState({required this.gameWidgetSize})
       : currentTargetTypes = ValueNotifier([]),
         trashItems = ValueNotifier([]),
+        _sortedTrash = {},
         _trashBin = TrashBin();
 
   final Vector2 gameWidgetSize;
+
   final ValueNotifier<List<TrashType>> currentTargetTypes;
   final ValueNotifier<List<TrashItemComponent>> trashItems;
   final TrashBin _trashBin;
-  final _sortedTrash = <TrashType, int>{};
+  final Map<TrashType, int> _sortedTrash;
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
     _generateTrashItems();
+  }
+
+  void punishPlayer() {
+
   }
 
   void collectTrash(TrashItemComponent trash) {
