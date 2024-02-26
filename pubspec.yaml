@@ -15,6 +15,7 @@ dependencies:
   flame:  ^1.14.0
   flame_audio: ^2.1.3
   flame_behaviors: ^1.0.0
+  flame_forge2d: ^0.16.0+5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
@@ -25,6 +26,7 @@ dependencies:
   intl: ^0.18.0
   shared_preferences: ^2.2.2
   vector_math: ^2.1.4
+
 
 dev_dependencies:
   bloc_test: ^9.1.5
@@ -55,6 +57,7 @@ flutter:
     - assets/images/catcher/animations/
     - assets/images/catcher/tutorial/
     - assets/images/catcher/button/
+    - assets/images/clicker/images/
 
   fonts:
     - family: Mplus

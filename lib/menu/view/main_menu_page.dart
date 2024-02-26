@@ -15,6 +15,8 @@ import 'package:flutter_game_challenge/service_provider.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_widget.dart';
 
+import '../../clicker_game/clicker_game_page.dart';
+
 class MainMenuPage extends StatelessWidget {
   const MainMenuPage({super.key});
 
@@ -171,9 +173,7 @@ class _ChooseGameContent extends StatelessWidget {
             MenuItem(
               text: context.l10n.gameModeClickerItemTitle,
               assetId: Assets.images.gameModeClicker.path,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
-              },
+              onTap: () => _handleNavigateToClickerGame(context),
             ),
             MenuItem(
               text: context.l10n.gameModeFinderItemTitle,
@@ -190,6 +190,10 @@ class _ChooseGameContent extends StatelessWidget {
 
   void _handleNavigateToCatcherGame(BuildContext context) {
     Navigator.of(context).push<void>(CatcherGamePage.route());
+  }
+
+  void _handleNavigateToClickerGame(BuildContext context) {
+    Navigator.of(context).push<void>(ClickerGamePage.route());
   }
 }
 
