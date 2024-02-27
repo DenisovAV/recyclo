@@ -30,10 +30,10 @@ class FinderWorld extends World with HasGameReference, HasCollisionDetection {
   @override
   Future<void> onLoad() async {
     final playAreaSize = Vector2(_kPlayAreaWidth, _kPlayAreaHeight);
-    _setupCamera(playAreaSize);
+    _setupCamera(game.size);
 
     await _loadImageAssets();
-    final items = _generateItemsRandomly();
+    final items = _generateTrashItems();
 
     addAll(
       [
@@ -50,35 +50,47 @@ class FinderWorld extends World with HasGameReference, HasCollisionDetection {
     );
   }
 
+  List<Item> _generateTrashItems() {
+    final double cellWidth = 50;
+    final double cellHeight = 50;
+    final sidePadding = 5;
+    final topPadding = 5;
+
+    final columns = ((game.size.x - 2 * sidePadding) / cellWidth).floor();
+    final rowsCount = ((game.size.y - topPadding) / cellHeight).floor();
+
+    final random = Random();
+
+    final generatedList = <Item>[];
+
+    for (var row = 0; row < rowsCount; ++row) {
+      for (var col = 0; col < columns; ++col) {
+        final xOffset = (row.isEven) ? 20 : 0;
+
+        final targetPosition = Vector2(
+          col * cellWidth + cellWidth / 2 + sidePadding + xOffset,
+          row < rowsCount
+              ? game.size.y - (row + 1) * cellHeight
+              : game.size.y + (row - rowsCount) * cellHeight,
+        );
+
+        final randomInt = random.nextInt(_itemTypes.length);
+        final itemFromRandom = Item(
+          sprite: Sprite(Flame.images.fromCache(_itemTypes[randomInt])),
+          position: targetPosition,
+        )..size = Vector2(cellWidth, cellWidth);
+        generatedList.add(itemFromRandom);
+      }
+    }
+
+    return generatedList;
+  }
+
   Future<void> _loadImageAssets() async {
     Flame.images.prefix = '';
     await Flame.images.load(Assets.images.fog.path);
     await Flame.images.load(Assets.images.holeMask.path);
     await Flame.images.loadAll(_itemTypes);
-  }
-
-  List<Item> _generateItemsRandomly() {
-    final random = Random();
-    const generatedListLength = 100;
-
-    final generatedList = List.filled(
-      generatedListLength,
-      Item(
-        position: Vector2(0, 0),
-        spritePath: '',
-      ),
-    );
-
-    for (var i = 0; i < generatedListLength; i++) {
-      final randomInt = random.nextInt(_itemTypes.length);
-      final itemFromRandom = Item(
-        position: Vector2(0, kTopGap),
-        spritePath: _itemTypes[randomInt],
-      )..priority = 2;
-      generatedList[i] = itemFromRandom;
-    }
-
-    return generatedList;
   }
 
   void _setupCamera(Vector2 playAreaSize) {

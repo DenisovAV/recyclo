@@ -1,21 +1,17 @@
-import 'dart:async';
-
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
-import 'package:flame/extensions.dart';
-import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 
-class Item extends PositionComponent {
+class Item extends SpriteComponent {
   Item({
+    required super.sprite,
     required super.position,
-    required this.spritePath,
+    super.priority = 2,
   });
 
+  final Paint paint = Paint()..filterQuality = FilterQuality.high;
   final _defaultColor = Colors.red;
-
-  final String spritePath;
 
   late ShapeHitbox hitbox;
   late final SpriteComponent spriteComponent;
@@ -26,30 +22,27 @@ class Item extends PositionComponent {
   );
 
   @override
-  Future<void> onLoad() async {
+  //ignore: must_call_super, intended function override
+  void render(Canvas canvas) {
+    sprite?.render(
+      canvas,
+      position: position,
+      size: size,
+      overridePaint: paint,
+      anchor: anchor,
+    );
+  }
+
+  @override
+  void onLoad() {
     final defaultPaint = Paint()
       ..color = _defaultColor
       ..style = PaintingStyle.stroke;
-    hitbox = RectangleHitbox()
-      ..paint = defaultPaint
-      ..renderShape = true;
-    await add(hitbox);
 
-    final image = Flame.images.fromCache(spritePath);
-    final sprite = Sprite(
-      image,
-      srcPosition: Vector2(0, 0),
-      srcSize: image.size,
+    add(
+      RectangleHitbox()
+        ..paint = defaultPaint
+        ..renderShape = true,
     );
-
-    spriteComponent = SpriteComponent(
-      sprite: sprite,
-      size: sprite.srcSize,
-      position: position,
-      scale: Vector2.all(1.5),
-    );
-
-    size = spriteComponent.size;
-    await add(spriteComponent);
   }
 }
