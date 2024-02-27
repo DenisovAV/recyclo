@@ -44,11 +44,11 @@ extension ItemTypeExtension on ItemType {
 
   Color color() {
     return switch (this) {
-      ItemType.electronic => FlutterGameChallengeColors.categoryPink,
-      ItemType.glass => FlutterGameChallengeColors.categoryOrange,
+      ItemType.electronic => FlutterGameChallengeColors.categoryYellow,
+      ItemType.glass => FlutterGameChallengeColors.categoryViolet,
       ItemType.organic => FlutterGameChallengeColors.categoryGreen,
-      ItemType.paper => FlutterGameChallengeColors.categoryYellow,
-      ItemType.plastic => FlutterGameChallengeColors.categoryViolet,
+      ItemType.paper => FlutterGameChallengeColors.categoryPink,
+      ItemType.plastic => FlutterGameChallengeColors.categoryOrange,
     };
   }
 }
