@@ -33,6 +33,10 @@ class MainPage extends StatelessWidget {
               SizedBox(
                 height: 50,
               ),
+              TeamItem(),
+              SizedBox(
+                height: 50,
+              ),
             ],
           ),
         ],

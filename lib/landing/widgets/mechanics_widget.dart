@@ -15,7 +15,7 @@ class MechanicsWidget extends StatelessWidget {
 
       if (isSmallDevice) {
         return LandingItem(
-          color: FlutterGameChallengeColors.mechanicsBackgorund,
+          color: FlutterGameChallengeColors.mechanicsBackground,
           child: Padding(
             padding: EdgeInsets.symmetric(
               vertical: 15,
@@ -56,7 +56,7 @@ class MechanicsWidget extends StatelessWidget {
       }
 
       return LandingItem(
-        color: FlutterGameChallengeColors.mechanicsBackgorund,
+        color: FlutterGameChallengeColors.mechanicsBackground,
         child: Padding(
           padding: EdgeInsets.all(isSmallDevice ? 10 : 50),
           child: Column(

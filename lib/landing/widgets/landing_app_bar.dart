@@ -33,10 +33,9 @@ class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
                   vertical: 5,
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     LandingLogo(),
-                    DownloadFromStoresWidget(),
                   ],
                 ),
               ),

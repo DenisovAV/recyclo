@@ -153,6 +153,10 @@
   "@gamesTitle": {
     "description": "Tittle for 'Games' item in landing page"
   },
+  "teamTitle": "Team",
+  "@teamTitle": {
+    "description": "Tittle for 'Team' item in landing page"
+  },
   "game1Title": "Game",
   "@game1Title": {
     "description": "Game 1 title"

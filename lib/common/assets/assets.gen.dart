@@ -68,6 +68,10 @@ class $AssetsImagesGen {
   AssetGenImage get craftingScreen =>
       const AssetGenImage('assets/images/crafting_screen.png');
 
+  /// File path: assets/images/dima_photo.png
+  AssetGenImage get dimaPhoto =>
+      const AssetGenImage('assets/images/dima_photo.png');
+
   /// File path: assets/images/down.png
   AssetGenImage get down => const AssetGenImage('assets/images/down.png');
 
@@ -119,6 +123,10 @@ class $AssetsImagesGen {
   AssetGenImage get logoDescription =>
       const AssetGenImage('assets/images/logo_description.png');
 
+  /// File path: assets/images/nikita_photo.png
+  AssetGenImage get nikitaPhoto =>
+      const AssetGenImage('assets/images/nikita_photo.png');
+
   /// File path: assets/images/organic.png
   AssetGenImage get organic => const AssetGenImage('assets/images/organic.png');
 
@@ -135,6 +143,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/recycle_logo.svg
   SvgGenImage get recycleLogoSvg =>
       const SvgGenImage('assets/images/recycle_logo.svg');
+
+  /// File path: assets/images/sasha_photo.png
+  AssetGenImage get sashaPhoto =>
+      const AssetGenImage('assets/images/sasha_photo.png');
 
   /// File path: assets/images/screenshot_game_1.png
   AssetGenImage get screenshotGame1 =>
@@ -155,9 +167,25 @@ class $AssetsImagesGen {
   /// File path: assets/images/up.png
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
 
+  /// File path: assets/images/vitya_photo.png
+  AssetGenImage get vityaPhoto =>
+      const AssetGenImage('assets/images/vitya_photo.png');
+
+  /// File path: assets/images/vova_photo.png
+  AssetGenImage get vovaPhoto =>
+      const AssetGenImage('assets/images/vova_photo.png');
+
   /// File path: assets/images/wallet_screen.png
   AssetGenImage get walletScreen =>
       const AssetGenImage('assets/images/wallet_screen.png');
+
+  /// File path: assets/images/yehor_photo.png
+  AssetGenImage get yehorPhoto =>
+      const AssetGenImage('assets/images/yehor_photo.png');
+
+  /// File path: assets/images/yura_photo.png
+  AssetGenImage get yuraPhoto =>
+      const AssetGenImage('assets/images/yura_photo.png');
 
   /// List of all assets
   List<dynamic> get values => [
@@ -171,6 +199,7 @@ class $AssetsImagesGen {
         clouds,
         cloudsBackground,
         craftingScreen,
+        dimaPhoto,
         down,
         downloadAppleStoreButton,
         downloadGooglePlayButton,
@@ -185,17 +214,23 @@ class $AssetsImagesGen {
         iconOk,
         iconWallet,
         logoDescription,
+        nikitaPhoto,
         organic,
         paper,
         plastic,
         recycleLogoPng,
         recycleLogoSvg,
+        sashaPhoto,
         screenshotGame1,
         screenshotGame2,
         screenshotGame3,
         unicornAnimation,
         up,
-        walletScreen
+        vityaPhoto,
+        vovaPhoto,
+        walletScreen,
+        yehorPhoto,
+        yuraPhoto
       ];
 }
 

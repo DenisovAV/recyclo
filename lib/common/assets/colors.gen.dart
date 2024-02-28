@@ -341,6 +341,33 @@ class FlutterGameChallengeColors {
   );
 
   /// MaterialColor:
+  ///   50: #FFFCF4EF
+  ///   100: #FFF9E5D7
+  ///   200: #FFF5D3BD
+  ///   300: #FFF0C1A2
+  ///   400: #FFEDB48E
+  ///   500: #FFEAA77A
+  ///   600: #FFE79F72
+  ///   700: #FFE49667
+  ///   800: #FFE18C5D
+  ///   900: #FFDB7C4A
+  static const MaterialColor dimaColor = MaterialColor(
+    0xFFEAA77A,
+    <int, Color>{
+      50: Color(0xFFFCF4EF),
+      100: Color(0xFFF9E5D7),
+      200: Color(0xFFF5D3BD),
+      300: Color(0xFFF0C1A2),
+      400: Color(0xFFEDB48E),
+      500: Color(0xFFEAA77A),
+      600: Color(0xFFE79F72),
+      700: Color(0xFFE49667),
+      800: Color(0xFFE18C5D),
+      900: Color(0xFFDB7C4A),
+    },
+  );
+
+  /// MaterialColor:
   ///   50: #FFF6FBF3
   ///   100: #FFE8F5E2
   ///   200: #FFD9EFCF
@@ -411,7 +438,7 @@ class FlutterGameChallengeColors {
   ///   700: #FFE49667
   ///   800: #FFE18C5D
   ///   900: #FFDB7C4A
-  static const MaterialColor mechanicsBackgorund = MaterialColor(
+  static const MaterialColor mechanicsBackground = MaterialColor(
     0xFFEAA77A,
     <int, Color>{
       50: Color(0xFFFCF4EF),
@@ -427,8 +454,89 @@ class FlutterGameChallengeColors {
     },
   );
 
+  /// MaterialColor:
+  ///   50: #FFFDEEEE
+  ///   100: #FFF9D4D4
+  ///   200: #FFF6B7B7
+  ///   300: #FFF29A9A
+  ///   400: #FFEF8484
+  ///   500: #FFEC6E6E
+  ///   600: #FFEA6666
+  ///   700: #FFE75B5B
+  ///   800: #FFE45151
+  ///   900: #FFDF3F3F
+  static const MaterialColor nikitaColor = MaterialColor(
+    0xFFEC6E6E,
+    <int, Color>{
+      50: Color(0xFFFDEEEE),
+      100: Color(0xFFF9D4D4),
+      200: Color(0xFFF6B7B7),
+      300: Color(0xFFF29A9A),
+      400: Color(0xFFEF8484),
+      500: Color(0xFFEC6E6E),
+      600: Color(0xFFEA6666),
+      700: Color(0xFFE75B5B),
+      800: Color(0xFFE45151),
+      900: Color(0xFFDF3F3F),
+    },
+  );
+
   /// Color: #FF042B59
   static const Color primary1 = Color(0xFF042B59);
+
+  /// MaterialColor:
+  ///   50: #FFF6FBF3
+  ///   100: #FFE8F5E2
+  ///   200: #FFD9EFCF
+  ///   300: #FFC9E8BC
+  ///   400: #FFBEE3AD
+  ///   500: #FFB2DE9F
+  ///   600: #FFABDA97
+  ///   700: #FFA2D58D
+  ///   800: #FF99D183
+  ///   900: #FF8AC872
+  static const MaterialColor sashaColor = MaterialColor(
+    0xFFB2DE9F,
+    <int, Color>{
+      50: Color(0xFFF6FBF3),
+      100: Color(0xFFE8F5E2),
+      200: Color(0xFFD9EFCF),
+      300: Color(0xFFC9E8BC),
+      400: Color(0xFFBEE3AD),
+      500: Color(0xFFB2DE9F),
+      600: Color(0xFFABDA97),
+      700: Color(0xFFA2D58D),
+      800: Color(0xFF99D183),
+      900: Color(0xFF8AC872),
+    },
+  );
+
+  /// MaterialColor:
+  ///   50: #FFFCFAFB
+  ///   100: #FFF7F2F5
+  ///   200: #FFF1E9EF
+  ///   300: #FFEBE0E9
+  ///   400: #FFE7DAE4
+  ///   500: #FFE3D3DF
+  ///   600: #FFE0CEDB
+  ///   700: #FFDCC8D7
+  ///   800: #FFD8C2D2
+  ///   900: #FFD0B7CA
+  static const MaterialColor teamBackground = MaterialColor(
+    0xFFE3D3DF,
+    <int, Color>{
+      50: Color(0xFFFCFAFB),
+      100: Color(0xFFF7F2F5),
+      200: Color(0xFFF1E9EF),
+      300: Color(0xFFEBE0E9),
+      400: Color(0xFFE7DAE4),
+      500: Color(0xFFE3D3DF),
+      600: Color(0xFFE0CEDB),
+      700: Color(0xFFDCC8D7),
+      800: Color(0xFFD8C2D2),
+      900: Color(0xFFD0B7CA),
+    },
+  );
 
   /// MaterialColor:
   ///   50: #FFE8E5EA
@@ -457,8 +565,89 @@ class FlutterGameChallengeColors {
     },
   );
 
+  /// MaterialColor:
+  ///   50: #FFFDFBEE
+  ///   100: #FFF9F5D4
+  ///   200: #FFF6EEB7
+  ///   300: #FFF2E79A
+  ///   400: #FFEFE184
+  ///   500: #FFECDC6E
+  ///   600: #FFEAD866
+  ///   700: #FFE7D35B
+  ///   800: #FFE4CE51
+  ///   900: #FFDFC53F
+  static const MaterialColor vityaColor = MaterialColor(
+    0xFFECDC6E,
+    <int, Color>{
+      50: Color(0xFFFDFBEE),
+      100: Color(0xFFF9F5D4),
+      200: Color(0xFFF6EEB7),
+      300: Color(0xFFF2E79A),
+      400: Color(0xFFEFE184),
+      500: Color(0xFFECDC6E),
+      600: Color(0xFFEAD866),
+      700: Color(0xFFE7D35B),
+      800: Color(0xFFE4CE51),
+      900: Color(0xFFDFC53F),
+    },
+  );
+
+  /// MaterialColor:
+  ///   50: #FFEEF3FC
+  ///   100: #FFD4E2F8
+  ///   200: #FFB8CFF3
+  ///   300: #FF9CBCEE
+  ///   400: #FF86ADEA
+  ///   500: #FF719FE6
+  ///   600: #FF6997E3
+  ///   700: #FF5E8DDF
+  ///   800: #FF5483DB
+  ///   900: #FF4272D5
+  static const MaterialColor vovaColor = MaterialColor(
+    0xFF719FE6,
+    <int, Color>{
+      50: Color(0xFFEEF3FC),
+      100: Color(0xFFD4E2F8),
+      200: Color(0xFFB8CFF3),
+      300: Color(0xFF9CBCEE),
+      400: Color(0xFF86ADEA),
+      500: Color(0xFF719FE6),
+      600: Color(0xFF6997E3),
+      700: Color(0xFF5E8DDF),
+      800: Color(0xFF5483DB),
+      900: Color(0xFF4272D5),
+    },
+  );
+
   /// Color: #FFFFFF
   static const Color white = Color(0xFFFFFFFF);
+
+  /// MaterialColor:
+  ///   50: #FFFDEEF5
+  ///   100: #FFF9D4E6
+  ///   200: #FFF6B7D5
+  ///   300: #FFF29AC4
+  ///   400: #FFEF84B7
+  ///   500: #FFEC6EAA
+  ///   600: #FFEA66A3
+  ///   700: #FFE75B99
+  ///   800: #FFE45190
+  ///   900: #FFDF3F7F
+  static const MaterialColor yehorColor = MaterialColor(
+    0xFFEC6EAA,
+    <int, Color>{
+      50: Color(0xFFFDEEF5),
+      100: Color(0xFFF9D4E6),
+      200: Color(0xFFF6B7D5),
+      300: Color(0xFFF29AC4),
+      400: Color(0xFFEF84B7),
+      500: Color(0xFFEC6EAA),
+      600: Color(0xFFEA66A3),
+      700: Color(0xFFE75B99),
+      800: Color(0xFFE45190),
+      900: Color(0xFFDF3F7F),
+    },
+  );
 
   /// MaterialColor:
   ///   50: #FFFBF2E5
@@ -499,6 +688,33 @@ class FlutterGameChallengeColors {
       200: Color(0xFFFFBCA3),
       400: Color(0xFFFFA989),
       700: Color(0xFFFF9E7A),
+    },
+  );
+
+  /// MaterialColor:
+  ///   50: #FFF3EEFD
+  ///   100: #FFE2D4F9
+  ///   200: #FFCFB7F6
+  ///   300: #FFBB9AF2
+  ///   400: #FFAD84EF
+  ///   500: #FF9E6EEC
+  ///   600: #FF9666EA
+  ///   700: #FF8C5BE7
+  ///   800: #FF8251E4
+  ///   900: #FF703FDF
+  static const MaterialColor yuraColor = MaterialColor(
+    0xFF9E6EEC,
+    <int, Color>{
+      50: Color(0xFFF3EEFD),
+      100: Color(0xFFE2D4F9),
+      200: Color(0xFFCFB7F6),
+      300: Color(0xFFBB9AF2),
+      400: Color(0xFFAD84EF),
+      500: Color(0xFF9E6EEC),
+      600: Color(0xFF9666EA),
+      700: Color(0xFF8C5BE7),
+      800: Color(0xFF8251E4),
+      900: Color(0xFF703FDF),
     },
   );
 }
