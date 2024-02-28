@@ -94,6 +94,7 @@ class TutorialContainer extends PositionComponent
 
   void showTutorial() {
     game.status = CatcherGameStatus.tutorial;
+    scene.onPauseResumeGameCallback();
     _buttonComponent.isVisible = true;
     game.overlays.remove(CatcherGame.timerOverlayKey);
   }
@@ -105,9 +106,10 @@ class TutorialContainer extends PositionComponent
   @override
   void onTapDown(TapDownEvent event) {
     if (_buttonComponent.toRect().contains(event.canvasPosition.toOffset())) {
-      game.status = CatcherGameStatus.playing;
       _buttonComponent.isVisible = false;
       game.overlays.add(CatcherGame.timerOverlayKey);
+      game.status = CatcherGameStatus.pause;
+      scene.onPauseResumeGameCallback();
     }
   }
 }
