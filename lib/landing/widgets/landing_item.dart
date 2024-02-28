@@ -8,14 +8,14 @@ class LandingItem extends StatelessWidget {
 
   const LandingItem({
     super.key,
-    required this.child,
     required this.color,
+    required this.child,
   });
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      final isSmallDevice = constraints.maxWidth < 800;
+      final isSmallDevice = constraints.maxWidth < 850;
       if (isSmallDevice) {
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 10),

@@ -340,6 +340,33 @@ class FlutterGameChallengeColors {
     },
   );
 
+  /// MaterialColor:
+  ///   50: #FFF6FBF3
+  ///   100: #FFE8F5E2
+  ///   200: #FFD9EFCF
+  ///   300: #FFC9E8BC
+  ///   400: #FFBEE3AD
+  ///   500: #FFB2DE9F
+  ///   600: #FFABDA97
+  ///   700: #FFA2D58D
+  ///   800: #FF99D183
+  ///   900: #FF8AC872
+  static const MaterialColor gamesBackground = MaterialColor(
+    0xFFB2DE9F,
+    <int, Color>{
+      50: Color(0xFFF6FBF3),
+      100: Color(0xFFE8F5E2),
+      200: Color(0xFFD9EFCF),
+      300: Color(0xFFC9E8BC),
+      400: Color(0xFFBEE3AD),
+      500: Color(0xFFB2DE9F),
+      600: Color(0xFFABDA97),
+      700: Color(0xFFA2D58D),
+      800: Color(0xFF99D183),
+      900: Color(0xFF8AC872),
+    },
+  );
+
   /// Color: #979797
   static const Color gray410 = Color(0xFF979797);
 
@@ -370,6 +397,33 @@ class FlutterGameChallengeColors {
       700: Color(0xFF5F97C1),
       800: Color(0xFF558DBA),
       900: Color(0xFF427DAE),
+    },
+  );
+
+  /// MaterialColor:
+  ///   50: #FFFCF4EF
+  ///   100: #FFF9E5D7
+  ///   200: #FFF5D3BD
+  ///   300: #FFF0C1A2
+  ///   400: #FFEDB48E
+  ///   500: #FFEAA77A
+  ///   600: #FFE79F72
+  ///   700: #FFE49667
+  ///   800: #FFE18C5D
+  ///   900: #FFDB7C4A
+  static const MaterialColor mechanicsBackgorund = MaterialColor(
+    0xFFEAA77A,
+    <int, Color>{
+      50: Color(0xFFFCF4EF),
+      100: Color(0xFFF9E5D7),
+      200: Color(0xFFF5D3BD),
+      300: Color(0xFFF0C1A2),
+      400: Color(0xFFEDB48E),
+      500: Color(0xFFEAA77A),
+      600: Color(0xFFE79F72),
+      700: Color(0xFFE49667),
+      800: Color(0xFFE18C5D),
+      900: Color(0xFFDB7C4A),
     },
   );
 

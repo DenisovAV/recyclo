@@ -20,5 +20,6 @@
     <color name="details_background" type="material">#EADDE8</color>
     <color name="landing_background" type="material">#72A8CD</color>
     <color name="about_app_background" type="material">#ECDC6E</color>
-    <color name="about_app_background" type="material">#ECDC6E</color>
+    <color name="games_background" type="material">#B2DE9F</color>
+    <color name="mechanics_backgorund" type="material">#EAA77A</color>
 </resources>

@@ -64,6 +64,10 @@ class $AssetsImagesGen {
   AssetGenImage get cloudsBackground =>
       const AssetGenImage('assets/images/clouds_background.png');
 
+  /// File path: assets/images/crafting_screen.png
+  AssetGenImage get craftingScreen =>
+      const AssetGenImage('assets/images/crafting_screen.png');
+
   /// File path: assets/images/down.png
   AssetGenImage get down => const AssetGenImage('assets/images/down.png');
 
@@ -132,6 +136,18 @@ class $AssetsImagesGen {
   SvgGenImage get recycleLogoSvg =>
       const SvgGenImage('assets/images/recycle_logo.svg');
 
+  /// File path: assets/images/screenshot_game_1.png
+  AssetGenImage get screenshotGame1 =>
+      const AssetGenImage('assets/images/screenshot_game_1.png');
+
+  /// File path: assets/images/screenshot_game_2.png
+  AssetGenImage get screenshotGame2 =>
+      const AssetGenImage('assets/images/screenshot_game_2.png');
+
+  /// File path: assets/images/screenshot_game_3.png
+  AssetGenImage get screenshotGame3 =>
+      const AssetGenImage('assets/images/screenshot_game_3.png');
+
   /// File path: assets/images/unicorn_animation.png
   AssetGenImage get unicornAnimation =>
       const AssetGenImage('assets/images/unicorn_animation.png');
@@ -139,8 +155,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/up.png
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
 
+  /// File path: assets/images/wallet_screen.png
+  AssetGenImage get walletScreen =>
+      const AssetGenImage('assets/images/wallet_screen.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [
+  List<dynamic> get values => [
         addToWallet,
         artifactCar,
         artifactHouse,
@@ -150,6 +170,7 @@ class $AssetsImagesGen {
         artifactShampoo,
         clouds,
         cloudsBackground,
+        craftingScreen,
         down,
         downloadAppleStoreButton,
         downloadGooglePlayButton,
@@ -169,8 +190,12 @@ class $AssetsImagesGen {
         plastic,
         recycleLogoPng,
         recycleLogoSvg,
+        screenshotGame1,
+        screenshotGame2,
+        screenshotGame3,
         unicornAnimation,
-        up
+        up,
+        walletScreen
       ];
 }
 
