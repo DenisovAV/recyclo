@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_challenge/artifact_details/cubit/artifact_details_cubit.dart';
+import 'package:flutter_game_challenge/artifact_details/widgets/artifact_details.dart';
 import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
-import 'package:flutter_game_challenge/artifact_details/widgets/artifact_details.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dart';
 import 'package:flutter_game_challenge/catcher_game/catcher_game_page.dart';
 import 'package:flutter_game_challenge/common.dart';
@@ -45,24 +45,29 @@ class MainMenuPage extends StatelessWidget {
                     isCompact: state.isBackgroundCompact,
                   ),
                   SafeArea(
+                    bottom: false,
                     child: Column(
                       children: [
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(width: 12),
+                            const SizedBox(width: 20),
                             Visibility(
                               visible: state is! MainPageInitialState,
-                              child: GameBackButton(
-                                onPressed: () {
-                                  if (state is MainPageArtefactDetailsState) {
-                                    BlocProvider.of<MainPageCubit>(context)
-                                        .navigateToArtifacts();
-                                  } else {
-                                    BlocProvider.of<MainPageCubit>(context)
-                                        .navigateToMainPage();
-                                  }
-                                },
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: RoundButton(
+                                  icon: Icons.keyboard_arrow_left,
+                                  onPressed: () {
+                                    if (state is MainPageArtefactDetailsState) {
+                                      BlocProvider.of<MainPageCubit>(context)
+                                          .navigateToArtifacts();
+                                    } else {
+                                      BlocProvider.of<MainPageCubit>(context)
+                                          .navigateToMainPage();
+                                    }
+                                  },
+                                ),
                               ),
                             ),
                             const Expanded(
@@ -240,39 +245,6 @@ class _SettingsContent extends StatelessWidget {
         decoration: BoxDecoration(
           color: FlutterGameChallengeColors.black.withOpacity(0.2),
           borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-    );
-  }
-}
-
-class GameBackButton extends StatelessWidget {
-  const GameBackButton({
-    required this.onPressed,
-    super.key,
-  });
-
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            width: 2,
-            color: FlutterGameChallengeColors.textStroke,
-          ),
-        ),
-        child: const Icon(
-          Icons.keyboard_arrow_left,
-          size: 36,
-          color: FlutterGameChallengeColors.textStroke,
         ),
       ),
     );
