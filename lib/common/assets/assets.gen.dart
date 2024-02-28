@@ -86,6 +86,13 @@ class $AssetsImagesGen {
   /// File path: assets/images/energy.png
   AssetGenImage get energy => const AssetGenImage('assets/images/energy.png');
 
+  /// File path: assets/images/fog.png
+  AssetGenImage get fog => const AssetGenImage('assets/images/fog.png');
+
+  /// File path: assets/images/fog_dark.png
+  AssetGenImage get fogDark =>
+      const AssetGenImage('assets/images/fog_dark.png');
+
   /// File path: assets/images/game_mode_cathcer.png
   AssetGenImage get gameModeCathcer =>
       const AssetGenImage('assets/images/game_mode_cathcer.png');
@@ -100,6 +107,13 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/glass.png
   AssetGenImage get glass => const AssetGenImage('assets/images/glass.png');
+
+  /// File path: assets/images/hole.png
+  AssetGenImage get hole => const AssetGenImage('assets/images/hole.png');
+
+  /// File path: assets/images/hole_mask.png
+  AssetGenImage get holeMask =>
+      const AssetGenImage('assets/images/hole_mask.png');
 
   /// File path: assets/images/icon_forbidden.png
   AssetGenImage get iconForbidden =>
@@ -161,10 +175,14 @@ class $AssetsImagesGen {
         earth,
         earthHalo,
         energy,
+        fog,
+        fogDark,
         gameModeCathcer,
         gameModeClicker,
         gameModeFinder,
         glass,
+        hole,
+        holeMask,
         iconForbidden,
         iconGeer,
         iconOk,
