@@ -85,9 +85,9 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
   void _pauseGame() {
     if (status == CatcherGameStatus.playing) {
       status = CatcherGameStatus.pause;
-      if (isAttached) {
-        BlocProvider.of<TimerCubit>(buildContext!).pause();
-      }
+    }
+    if (isAttached) {
+      BlocProvider.of<TimerCubit>(buildContext!).pause();
     }
   }
 
@@ -114,5 +114,26 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
         ..restart()
         ..start();
     }
+  }
+
+  List<({ItemType type, int score})> getPlayerScore() {
+    if (mainScene == null) {
+      return [];
+    }
+
+    final score = mainScene!.score;
+
+    if (score.isEmpty) {
+      return [];
+    }
+
+    return score.entries
+        .map(
+          (entry) => (
+            type: entry.key,
+            score: entry.value,
+          ),
+        )
+        .toList();
   }
 }

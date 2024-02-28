@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
+import 'package:flame/extensions.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
@@ -15,6 +17,7 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
 
   late List<Box> boxContainerList;
   late RecycleType chosenBoxType;
+  late Box chosenBox;
   late Rect boxContainerClip;
   late List<double> _hooksPosX;
   late ScrollDirection _direction;
@@ -23,6 +26,10 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   late double _chosenBoxWidth;
   late double _swappingBoxWidth;
   late double _distortionDistance;
+  final EffectController effectController = EffectController(
+    duration: 0.5,
+    reverseDuration: 0.5,
+  );
 
   bool isChangeWave = false;
   bool _startAnimationToHook = false;
@@ -379,8 +386,6 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
           ..y = _sizeToPosition(s);
 
         _chosenBoxType(box);
-
-        _boxClip(box);
       }
     }
   }
@@ -389,17 +394,16 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
     if (box.width >= _chosenBoxWidth * BoxContainerConfig.chosenBoxMinSize &&
         chosenBoxType != box.type) {
       chosenBoxType = box.type;
+      chosenBox = box;
     }
   }
 
-  void _boxClip(Box box) {
-    if (box.width >= _chosenBoxWidth * BoxContainerConfig.chosenBoxMinSize) {
-      boxContainerClip = Rect.fromCenter(
-        center: Offset(size.toSize().width / 2, y),
-        width: size.toSize().width,
-        height: box.width * BoxContainerConfig.containerClipSize,
-      );
-    }
+  Rect boxClip() {
+    return Rect.fromCenter(
+      center: chosenBox.center.toOffset(),
+      width: size.toSize().width,
+      height: chosenBox.height / 1.7,
+    );
   }
 
   // TODO(viktor): should come up with the better approach to handle over swipe
@@ -440,6 +444,7 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
     );
 
     chosenBoxType = boxContainerList[0].type;
+    chosenBox = boxContainerList[0];
     boxContainerList[0].isChosen = true;
   }
 
@@ -450,4 +455,10 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
         RecycleType.electric => 'catcher/boxes/electric.png',
         RecycleType.paper => 'catcher/boxes/paper.png',
       };
+
+  void handleCatch({
+    required bool isSuccessful,
+  }) {
+    chosenBox.animateCatch(isSuccessful: isSuccessful);
+  }
 }

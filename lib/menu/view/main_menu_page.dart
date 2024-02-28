@@ -56,7 +56,8 @@ class MainMenuPage extends StatelessWidget {
                               visible: state is! MainPageInitialState,
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 10),
-                                child: GameBackButton(
+                                child: RoundButton(
+                                  icon: Icons.keyboard_arrow_left,
                                   onPressed: () {
                                     if (state is MainPageArtefactDetailsState) {
                                       BlocProvider.of<MainPageCubit>(context)
@@ -244,39 +245,6 @@ class _SettingsContent extends StatelessWidget {
         decoration: BoxDecoration(
           color: FlutterGameChallengeColors.black.withOpacity(0.2),
           borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-    );
-  }
-}
-
-class GameBackButton extends StatelessWidget {
-  const GameBackButton({
-    required this.onPressed,
-    super.key,
-  });
-
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            width: 2,
-            color: FlutterGameChallengeColors.textStroke,
-          ),
-        ),
-        child: const Icon(
-          Icons.keyboard_arrow_left,
-          size: 36,
-          color: FlutterGameChallengeColors.textStroke,
         ),
       ),
     );
