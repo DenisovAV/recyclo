@@ -84,7 +84,7 @@ class OverlayFog extends PositionComponent
 
     await add(
       collider
-        ..position = currentDragPosition
+        ..position = Vector2(currentDragPosition.x, currentDragPosition.y + 50)
         ..size = Vector2(30, 30),
     );
   }
@@ -173,17 +173,32 @@ class OverlayFog extends PositionComponent
 
     final maskFittedSizes = applyBoxFit(BoxFit.cover, maskInputSize, rectSize);
 
-    //set offset here
+    final xmult = currentDragPosition.x / rectSize.width;
+    final ymult = currentDragPosition.y / rectSize.height;
+
+    final xmov = maskFittedSizes.source.width * xmult;
+    final ymov = maskFittedSizes.source.height * ymult;
+
     final maskSourceRect = Alignment.center.inscribe(
       maskFittedSizes.source,
       Offset(
-            (maskFittedSizes.destination.width) / 2 -
-                currentDragPosition.x,
-            (maskFittedSizes.destination.height + 200) / 2 -
-                currentDragPosition.y,
+            maskFittedSizes.source.width / 2 - xmov,
+            maskFittedSizes.source.height / 2 - ymov + 50,
           ) &
           maskInputSize,
     );
+
+    //set offset here
+    // final maskSourceRect = Alignment.center.inscribe(
+    //   maskFittedSizes.source,
+    //   Offset(
+    //         maskFittedSizes.destination.width / 2 -
+    //             currentDragPosition.x,
+    //         maskFittedSizes.destination.height / 2 -
+    //             currentDragPosition.y,
+    //       ) &
+    //       maskInputSize,
+    // );
 
     canvas
       ..saveLayer(overlayTargetRect, paint)
