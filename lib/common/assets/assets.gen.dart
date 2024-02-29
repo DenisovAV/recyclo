@@ -76,8 +76,8 @@ class $AssetsImagesGen {
   AssetGenImage get downloadGooglePlayButton =>
       const AssetGenImage('assets/images/download_google_play_button.png');
 
-  /// File path: assets/images/earth.mp4
-  String get earth => 'assets/images/earth.mp4';
+  /// File path: assets/images/earth.mov
+  String get earth => 'assets/images/earth.mov';
 
   /// File path: assets/images/earth_halo.png
   AssetGenImage get earthHalo =>
