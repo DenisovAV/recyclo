@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/common/dimensions.dart';
@@ -31,10 +33,9 @@ class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
                   vertical: 5,
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     LandingLogo(),
-                    DownloadFromStoresWidget(),
                   ],
                 ),
               ),

@@ -24,4 +24,17 @@
     <color name="about_app_background" type="material">#ECDC6E</color>
     <color name="box_successful_catch_tint">#FF00FF00</color>
     <color name="box_unsuccessful_catch_tint">#FFFF0000</color>
+    <color name="landing_background" type="material">#72A8CD</color>
+    <color name="about_app_background" type="material">#ECDC6E</color>
+    <color name="games_background" type="material">#B2DE9F</color>
+    <color name="mechanics_background" type="material">#EAA77A</color>
+    <color name="team_background" type="material">#E3D3DF</color>
+    <color name="sasha_color" type="material">#B2DE9F</color>
+    <color name="dima_color" type="material">#EAA77A</color>
+    <color name="vitya_color" type="material">#ECDC6E</color>
+    <color name="vova_color" type="material">#719FE6</color>
+    <color name="yehor_color" type="material">#EC6EAA</color>
+    <color name="nikita_color" type="material">#EC6E6E</color>
+    <color name="yura_color" type="material">#9E6EEC</color>
+
 </resources>
