@@ -3,17 +3,23 @@ class ArtifactModel {
     required this.requirements,
     required this.artifactType,
     required this.status,
+    this.uuid,
   });
 
   final ArtifactRequirements requirements;
   final ArtifactStatus status;
   final ArtifactType artifactType;
+  final String? uuid;
 
-  ArtifactModel copyWithStatus(ArtifactStatus status) {
+  ArtifactModel copyWith({
+    ArtifactStatus? status,
+    String? uuid,
+  }) {
     return ArtifactModel(
       requirements: requirements,
       artifactType: artifactType,
-      status: status,
+      status: status ?? this.status,
+      uuid: uuid ?? this.uuid,
     );
   }
 
