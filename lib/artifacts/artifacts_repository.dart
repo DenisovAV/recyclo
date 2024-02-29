@@ -16,6 +16,8 @@ class ArtifactsRepository {
   final StreamController<ArtifactsModel> _streamController =
       StreamController.broadcast();
 
+  final Uuid _uuid;
+
   ArtifactsModel get artifactModel => _artifactsModel;
   Stream<ArtifactsModel> get artifactModelStream => _streamController.stream;
 
@@ -124,10 +126,11 @@ class ArtifactsRepository {
       paper: artifact.requirements.paper,
       electronics: artifact.requirements.electronics,
     );
-    final uuid = Uuid();
+
+    final uuid = _uuid.v1();
     final newArtifact = artifact.copyWith(
       ArtifactStatus.crafted,
-      uuid.v1(),
+      uuid,
     );
 
     switch (artifact.artifactType) {
@@ -137,11 +140,19 @@ class ArtifactsRepository {
           _ArtifactStatusKeys.newspaperIsCrafted,
           true,
         );
+        _sharedPreferences.setString(
+          _ArtifactStatusKeys.newspaperWalletKey,
+          uuid,
+        );
       case ArtifactType.shampoo:
         _artifactsModel = _artifactsModel.copyWith(shampoo: newArtifact);
         _sharedPreferences.setBool(
           _ArtifactStatusKeys.shampooIsCrafted,
           true,
+        );
+        _sharedPreferences.setString(
+          _ArtifactStatusKeys.shampooWalletKey,
+          uuid,
         );
       case ArtifactType.plant:
         _artifactsModel = _artifactsModel.copyWith(plant: newArtifact);
@@ -149,11 +160,19 @@ class ArtifactsRepository {
           _ArtifactStatusKeys.plantIsCrafted,
           true,
         );
+        _sharedPreferences.setString(
+          _ArtifactStatusKeys.plantWalletKey,
+          uuid,
+        );
       case ArtifactType.laptop:
         _artifactsModel = _artifactsModel.copyWith(laptop: newArtifact);
         _sharedPreferences.setBool(
           _ArtifactStatusKeys.laptopIsCrafted,
           true,
+        );
+        _sharedPreferences.setString(
+          _ArtifactStatusKeys.laptopWalletKey,
+          uuid,
         );
       case ArtifactType.car:
         _artifactsModel = _artifactsModel.copyWith(car: newArtifact);
@@ -161,11 +180,19 @@ class ArtifactsRepository {
           _ArtifactStatusKeys.carIsCrafted,
           true,
         );
+        _sharedPreferences.setString(
+          _ArtifactStatusKeys.carWalletKey,
+          uuid,
+        );
       case ArtifactType.house:
         _artifactsModel = _artifactsModel.copyWith(house: newArtifact);
         _sharedPreferences.setBool(
           _ArtifactStatusKeys.houseIsCrafted,
           true,
+        );
+        _sharedPreferences.setString(
+          _ArtifactStatusKeys.houseWalletKey,
+          uuid,
         );
     }
     _streamController.add(artifactModel);
