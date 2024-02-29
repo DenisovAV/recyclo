@@ -8,13 +8,11 @@ import 'package:flutter_game_challenge/clicker_game/game_models/trash_item.dart'
 
 class Item extends PositionComponent with HasWorldReference {
   Item(this.trashData, {required super.position}) : super();
-
+  final _defaultColor = Color.fromARGB(255, 244, 6, 6);
   static final baseSize = Vector2(76, 76);
 
   final TrashItemData trashData;
   late final SpriteComponent trashSprite;
-
-  RectangleHitbox collider = RectangleHitbox();
 
   @override
   Future<void> onLoad() async {
@@ -33,7 +31,19 @@ class Item extends PositionComponent with HasWorldReference {
       anchor: Anchor.center,
     );
     add(trashSprite);
-    add(collider..renderShape = true..size = size,);
+
+    final defaultPaint = Paint()
+      ..color = _defaultColor
+      ..style = PaintingStyle.stroke;
+
+    final collider = RectangleHitbox.relative(
+      Vector2(0.5, 0.5),
+      parentSize: trashSprite.size,
+    )
+      ..paint = defaultPaint
+      ..renderShape = true;
+
+    trashSprite.add(collider);
   }
 
   @override
