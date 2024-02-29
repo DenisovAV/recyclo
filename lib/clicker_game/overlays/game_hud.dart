@@ -5,8 +5,6 @@ import 'package:flutter_game_challenge/clicker_game/clicker_game.dart';
 import 'package:flutter_game_challenge/clicker_game/overlays/widgets/target_category.dart';
 import 'package:flutter_game_challenge/common.dart';
 
-import 'package:flutter_game_challenge/menu/view/main_menu_page.dart';
-
 import '../game_models/trash_type.dart';
 
 class GameHUD extends StatelessWidget {
@@ -32,22 +30,23 @@ class GameHUD extends StatelessWidget {
             Flexible(
               child: Padding(
                 padding: const EdgeInsets.only(left: 12),
-                child: GameBackButton(
+                child: RoundButton(
+                  icon: Icons.keyboard_arrow_left,
                   onPressed: handleRightButton,
                 ),
               ),
             ),
-             Flexible(
+            Flexible(
               flex: 4,
               child: Center(
                 child: BlocBuilder<TimerCubit, TimerState>(
                   builder: (context, state) {
                     return switch (state) {
                       TimerStateWithValue() => Text(
-                        state.value.toString(),
-                        textAlign: TextAlign.center,
-                        style: context.textStyle(),
-                      ),
+                          state.value.toString(),
+                          textAlign: TextAlign.center,
+                          style: context.textStyle(),
+                        ),
                       _ => const SizedBox.shrink(),
                     };
                   },

@@ -212,7 +212,8 @@ class _ChooseGameContent extends StatelessWidget {
   }
 
   void _handleNavigateToClickerGame(BuildContext context) {
-    Navigator.of(context).push<void>(ClickerGamePage.route());
+    Navigator.of(kRootNavigatorKey.currentContext!)
+        .push<void>(ClickerGamePage.route());
   }
 }
 

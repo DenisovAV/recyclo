@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:collection/collection.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +10,8 @@ import 'package:flutter_game_challenge/clicker_game/overlays/game_hud.dart';
 import 'package:flutter_game_challenge/clicker_game/overlays/game_start_overlay.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/service_provider.dart';
+
+import '../trash_reserve/trash_reserve_repository.dart';
 
 class ClickerGamePage extends StatefulWidget {
   const ClickerGamePage({super.key});
@@ -81,11 +86,25 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
     ClickerState clickerState,
   ) {
     if (state == TimerFinishedState()) {
+      final items = _game.gameState.generateCollectedResources();
+
+      int _getTrashCountFor(ItemType type) {
+        return items.firstWhereOrNull((trash) => trash.type == type)?.score ??
+            0;
+      }
+
       _game.pauseEngine();
       showGameFinishDialog(
         context: context,
-        items: _game.gameState.generateCollectedResources(),
+        items: items,
         onDismiss: () {
+          unawaited(ServiceProvider.get<TrashReserveRepository>().addResource(
+            plastic: _getTrashCountFor(ItemType.plastic),
+            paper: _getTrashCountFor(ItemType.paper),
+            glass: _getTrashCountFor(ItemType.glass),
+            organic: _getTrashCountFor(ItemType.organic),
+            electronics: _getTrashCountFor(ItemType.electronic),
+          ));
           Navigator.of(context).maybePop();
         },
       );
