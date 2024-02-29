@@ -61,7 +61,7 @@
   "@gameModeFinderItemTitle": {
     "description": "Text shown in the finder game mode button"
   },
-  "artifactCarTitle": "WW (Waste Wanderer)",
+  "artifactCarTitle": "Waste Wanderer",
   "@artifactCarTitle": {
     "description": "Title of car made from trash"
   },
