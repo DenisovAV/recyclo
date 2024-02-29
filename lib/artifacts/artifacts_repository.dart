@@ -4,6 +4,7 @@ import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
 import 'package:flutter_game_challenge/artifacts/requirements.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 class ArtifactsRepository {
   ArtifactsRepository(this._trashReserveRepository);
@@ -25,37 +26,37 @@ class ArtifactsRepository {
       newspaper: _getArtifact(
         requirements: Requirements.newspaper,
         isCraftedKey: _ArtifactStatusKeys.newspaperIsCrafted,
-        isInWalletKey: _ArtifactStatusKeys.newspaperInWallet,
+        walletKey: _ArtifactStatusKeys.newspaperWalletKey,
         artifactType: ArtifactType.newspaper,
       ),
       shampoo: _getArtifact(
         requirements: Requirements.shampoo,
         isCraftedKey: _ArtifactStatusKeys.shampooIsCrafted,
-        isInWalletKey: _ArtifactStatusKeys.shampooInWallet,
+        walletKey: _ArtifactStatusKeys.shampooWalletKey,
         artifactType: ArtifactType.shampoo,
       ),
       plant: _getArtifact(
         requirements: Requirements.plant,
         isCraftedKey: _ArtifactStatusKeys.plantIsCrafted,
-        isInWalletKey: _ArtifactStatusKeys.plantInWallet,
+        walletKey: _ArtifactStatusKeys.plantWalletKey,
         artifactType: ArtifactType.plant,
       ),
       laptop: _getArtifact(
         requirements: Requirements.laptop,
         isCraftedKey: _ArtifactStatusKeys.laptopIsCrafted,
-        isInWalletKey: _ArtifactStatusKeys.laptopInWallet,
+        walletKey: _ArtifactStatusKeys.laptopWalletKey,
         artifactType: ArtifactType.laptop,
       ),
       car: _getArtifact(
         requirements: Requirements.car,
         isCraftedKey: _ArtifactStatusKeys.carIsCrafted,
-        isInWalletKey: _ArtifactStatusKeys.carInWallet,
+        walletKey: _ArtifactStatusKeys.carWalletKey,
         artifactType: ArtifactType.car,
       ),
       house: _getArtifact(
         requirements: Requirements.house,
         isCraftedKey: _ArtifactStatusKeys.houseIsCrafted,
-        isInWalletKey: _ArtifactStatusKeys.houseInWallet,
+        walletKey: _ArtifactStatusKeys.houseWalletKey,
         artifactType: ArtifactType.house,
       ),
     );
@@ -67,25 +68,26 @@ class ArtifactsRepository {
     required ArtifactRequirements requirements,
     required ArtifactType artifactType,
     required String isCraftedKey,
-    required String isInWalletKey,
+    required String walletKey,
   }) {
     return ArtifactModel(
       requirements: requirements,
       artifactType: artifactType,
       status: _getArtifactStatus(
         isCraftedKey: isCraftedKey,
-        isInWalletKey: isInWalletKey,
+        walletKey: walletKey,
         requirements: requirements,
       ),
+      uuid: _sharedPreferences.getString(walletKey),
     );
   }
 
   ArtifactStatus _getArtifactStatus({
     required String isCraftedKey,
-    required String isInWalletKey,
+    required String walletKey,
     required ArtifactRequirements requirements,
   }) {
-    if (_sharedPreferences.getBool(isInWalletKey) ?? false) {
+    if (_sharedPreferences.getString(walletKey)?.isNotEmpty == true) {
       return ArtifactStatus.addedToWallet;
     }
 
@@ -122,8 +124,11 @@ class ArtifactsRepository {
       paper: artifact.requirements.paper,
       electronics: artifact.requirements.electronics,
     );
-
-    final newArtifact = artifact.copyWithStatus(ArtifactStatus.crafted);
+    final uuid = Uuid();
+    final newArtifact = artifact.copyWith(
+      ArtifactStatus.crafted,
+      uuid.v1(),
+    );
 
     switch (artifact.artifactType) {
       case ArtifactType.newspaper:
@@ -170,22 +175,23 @@ class ArtifactsRepository {
 }
 
 class _ArtifactStatusKeys {
-  static const shampooInWallet = 'artifactsRepositoryStatusShampooInWallet';
+  static const shampooWalletKey = 'artifactsRepositoryStatusShampooInWallet';
   static const shampooIsCrafted = 'artifactsRepositoryStatusShampooIsCrafted';
 
-  static const carInWallet = 'artifactsRepositoryStatusCarInWallet';
+  static const carWalletKey = 'artifactsRepositoryStatusCarInWallet';
   static const carIsCrafted = 'artifactsRepositoryStatusCarIsCrafted';
 
-  static const plantInWallet = 'artifactsRepositoryStatusPlantInWallet';
+  static const plantWalletKey = 'artifactsRepositoryStatusPlantInWallet';
   static const plantIsCrafted = 'artifactsRepositoryStatusPlantIsCrafted';
 
-  static const laptopInWallet = 'artifactsRepositoryStatusLaptopInWallet';
+  static const laptopWalletKey = 'artifactsRepositoryStatusLaptopInWallet';
   static const laptopIsCrafted = 'artifactsRepositoryStatusLaptopIsCrafted';
 
-  static const houseInWallet = 'artifactsRepositoryStatusHouseInWallet';
+  static const houseWalletKey = 'artifactsRepositoryStatusHouseInWallet';
   static const houseIsCrafted = 'artifactsRepositoryStatusHouseIsCrafted';
 
-  static const newspaperInWallet = 'artifactsRepositoryStatusNewsPaperInWallet';
+  static const newspaperWalletKey =
+      'artifactsRepositoryStatusNewsPaperInWallet';
   static const newspaperIsCrafted =
       'artifactsRepositoryStatusNewsPaperIsCrafted';
 }
