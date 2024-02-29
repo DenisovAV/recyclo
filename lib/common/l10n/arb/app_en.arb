@@ -145,20 +145,64 @@
   "@aboutAppRecycle": {
     "description": "Tittle for 'About app' item in landing page"
   },
-  "aboutAppRecycleContentText": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium. \n\nRecycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
-  "@aboutAppRecycleContentText" : {
+  "aboutAppRecycleContentText": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n  For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium. \n\nRecycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n  For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "@aboutAppRecycleContentText": {
     "description": "Text for content on the About us item page"
   },
   "buttonOk": "Ok",
-  "@buttonOk" : {
+  "@buttonOk": {
     "description": "Text for Ok button"
   },
   "artifactCraftedDialogTitle": "Congradulations!",
-  "@artifactCraftedDialogTitle" : {
+  "@artifactCraftedDialogTitle": {
     "description": "Artifact crafted dialog header"
   },
   "artifactCraftedDialogBody": "You successfully have crafted an artifact and now you can add it to a wallet.",
-  "@artifactCraftedDialogBody" : {
+  "@artifactCraftedDialogBody": {
     "description": "Artifact crafted dialog body"
+  },
+  "gamesTitle": "Games",
+  "@gamesTitle": {
+    "description": "Tittle for 'Games' item in landing page"
+  },
+  "teamTitle": "Team",
+  "@teamTitle": {
+    "description": "Tittle for 'Team' item in landing page"
+  },
+  "game1Title": "Game",
+  "@game1Title": {
+    "description": "Game 1 title"
+  },
+  "game1Description": "Catch The Trash is a fun and informative game built into the trashly app that will test your recycling materials knowledge.\n\nItems will fly from the windows, and it's up to you to sort them into the correct bins.\n\nGet them right, and show you are wise. Don't worry if you get some wrong - after each round, you'll get a glimpse at the recycling cheat-sheet. Can you catch all the trash?",
+  "@game1Description": {
+    "description": "Game 1 description"
+  },
+  "game2Title": "Game",
+  "@game2Title": {
+    "description": "Game 2 title"
+  },
+  "game2Description": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year.\n\u2028For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "@game2Description": {
+    "description": "Game 2 description"
+  },
+  "game3Title": "Game",
+  "@game3Title": {
+    "description": "Game 3 title"
+  },
+  "game3Description": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year.\n\u2028For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "@game3Description": {
+    "description": "Game 1 description"
+  },
+  "mechanicsTittle": "Crafting & Google Wallet",
+  "@mechanicsTittle": {
+    "description": "Title mechanics item"
+  },
+  "craftingContent": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year.\n\u2028For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "@craftingContent": {
+    "description": "Content mechanics item"
+  },
+  "walletContent": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year.\n\u2028For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "@walletContent": {
+    "description": "Wallet mechanics item"
   }
 }
