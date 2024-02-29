@@ -73,6 +73,7 @@ class MainScene extends PositionComponent
       scene: this,
       catchCallback: _onCatch,
       boxContainer: _boxContainer,
+      checkForWaveReset: _handleDropReset,
     );
 
     _tutorialContainer = TutorialContainer(scene: this);
@@ -173,7 +174,6 @@ class MainScene extends PositionComponent
       ..ceilingTimeLimit = waveList[currentWave].maxDroppingInterval
       ..floorTimeLimit = waveList[currentWave].minDroppingInterval;
     _waveDelay.reset(waveList[currentWave].delay);
-    _boxContainer.isChangeWave = true;
     _spawned = waveList[currentWave].itemsInWave;
   }
 
@@ -240,5 +240,11 @@ class MainScene extends PositionComponent
 
   void resumed() {
     _buttonsContainer.showPauseOverlay();
+  }
+
+  void _handleDropReset() {
+    if (_dropSpawner.repeatNumber == 0) {
+      _nextWave();
+    }
   }
 }

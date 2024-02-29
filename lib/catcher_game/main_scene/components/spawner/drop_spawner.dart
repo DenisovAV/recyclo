@@ -24,8 +24,9 @@ class DropSpawner extends Component
 
   double get progress => _current / _currentLimit;
 
-  // ignore: avoid_setters_without_getters
   set repeatNumber(int n) => _repeatNumberInitial = n - 1;
+
+  int get repeatNumber => _repeatNumber;
 
   // ignore: avoid_setters_without_getters
   set ceilingTimeLimit(double ceiling) => _ceilingTimeLimit = ceiling;
