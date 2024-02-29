@@ -41,10 +41,10 @@ class ClickerState extends Component {
     _sortedTrash[trash.trashData.classification] = currentValue + 1;
   }
 
-  List<(ItemType, int)> generateCollectedResources() {
-    final result = <(ItemType, int)>[];
+  List<({ItemType type, int score})> generateCollectedResources() {
+    final result = <({ItemType type, int score})>[];
     _sortedTrash.forEach((key, value) {
-      result.add((key.asItemType, value));
+      result.add((score: value, type: key.asItemType));
     });
 
     return result;

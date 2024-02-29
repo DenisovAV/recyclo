@@ -10,6 +10,6 @@
 class FontFamily {
   FontFamily._();
 
-  /// Font family: Mplus
-  static const String mplus = 'Mplus';
+  /// Font family: Sniglet
+  static const String sniglet = 'Sniglet';
 }

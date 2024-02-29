@@ -17,7 +17,7 @@ class MenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     const style = TextStyle(
       fontSize: 46,
-      fontFamily: 'Mplus',
+      fontFamily: 'Sniglet',
       height: 2,
       color: FlutterGameChallengeColors.white,
       shadows: [

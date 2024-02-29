@@ -22,4 +22,6 @@
     <color name="landing_background" type="material">#72A8CD</color>
     <color name="about_app_background" type="material">#ECDC6E</color>
     <color name="about_app_background" type="material">#ECDC6E</color>
+    <color name="box_successful_catch_tint">#FF00FF00</color>
+    <color name="box_unsuccessful_catch_tint">#FFFF0000</color>
 </resources>
