@@ -56,6 +56,7 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/artifact_shampoo.png');
 
   $AssetsImagesCatcherGen get catcher => const $AssetsImagesCatcherGen();
+  $AssetsImagesClickerGen get clicker => const $AssetsImagesClickerGen();
 
   /// File path: assets/images/clouds.png
   AssetGenImage get clouds => const AssetGenImage('assets/images/clouds.png');
@@ -201,6 +202,13 @@ class $AssetsImagesCatcherGen {
       const $AssetsImagesCatcherTutorialGen();
 }
 
+class $AssetsImagesClickerGen {
+  const $AssetsImagesClickerGen();
+
+  $AssetsImagesClickerImagesGen get images =>
+      const $AssetsImagesClickerImagesGen();
+}
+
 class $AssetsLicensesPoppinsGen {
   const $AssetsLicensesPoppinsGen();
 
@@ -303,6 +311,17 @@ class $AssetsImagesCatcherTutorialGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [play, tutorial];
+}
+
+class $AssetsImagesClickerImagesGen {
+  const $AssetsImagesClickerImagesGen();
+
+  /// File path: assets/images/clicker/images/cloud.png
+  AssetGenImage get cloud =>
+      const AssetGenImage('assets/images/clicker/images/cloud.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [cloud];
 }
 
 class $AssetsImagesCatcherDropsElectricGen {

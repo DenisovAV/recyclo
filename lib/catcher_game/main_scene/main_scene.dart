@@ -4,12 +4,14 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_game_challenge/catcher_game/background/background.dart';
 import 'package:flutter_game_challenge/catcher_game/background/config.dart';
 import 'package:flutter_game_challenge/catcher_game/common/config.dart';
 import 'package:flutter_game_challenge/catcher_game/common/levels_config.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
 import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
+import 'package:flutter_game_challenge/common/entities/item_type.dart';
 
 typedef CatchCallback = void Function(RecycleType dropType);
 
@@ -22,7 +24,7 @@ class MainScene extends PositionComponent
 
   final VoidCallback onPauseResumeGameCallback;
   final VoidCallback onResetCallback;
-  final List<Wave> initialWaveList = Levels.levels.first.waves;
+  final Map<ItemType, int> score = {};
   late List<Wave> waveList;
   bool isDestroy = false;
   bool isChangeWave = false;
@@ -41,7 +43,7 @@ class MainScene extends PositionComponent
 
   @override
   FutureOr<void> onLoad() async {
-    waveList = initialWaveList;
+    waveList = Levels.levels().first.waves;
 
     _background = Background(
       sprite: Sprite(game.images.fromCache(BackgroundConfig.sceneAsset)),
@@ -97,7 +99,7 @@ class MainScene extends PositionComponent
     canvas
       ..save()
       ..clipRect(
-        _boxContainer.boxContainerClip,
+        _boxContainer.boxClip(),
         clipOp: ClipOp.difference,
       );
     _dropContainer.render(canvas);
@@ -116,6 +118,19 @@ class MainScene extends PositionComponent
       _buttonsContainer.update(dt);
     } else if (game.status == CatcherGameStatus.tutorial) {
       _tutorialContainer.update(dt);
+    }
+  }
+
+  @override
+  void updateTree(double dt) {
+    if (game.status == CatcherGameStatus.playing) {
+      super.updateTree(dt);
+    } else if (game.status == CatcherGameStatus.pause) {
+      _buttonsContainer.updateTree(dt);
+    } else if (game.status == CatcherGameStatus.result) {
+      _buttonsContainer.updateTree(dt);
+    } else if (game.status == CatcherGameStatus.tutorial) {
+      _tutorialContainer.updateTree(dt);
     }
   }
 
@@ -151,6 +166,7 @@ class MainScene extends PositionComponent
 
   void changeWave(int wave) {
     currentWave = wave;
+    waveList = Levels.levels().first.waves;
     _dropSpawner
       ..stop()
       ..repeatNumber = waveList[currentWave].itemsInWave
@@ -171,9 +187,13 @@ class MainScene extends PositionComponent
 
   void _onCatch(RecycleType dropType) {
     if (_boxContainer.chosenBoxType == dropType) {
-      // TODO(viktor): here we could added caught type to a user score.
+      _boxContainer.handleCatch(isSuccessful: true);
+      final currentScore = score[dropType.toItemType()] ?? 0;
+      score[dropType.toItemType()] = currentScore + 1;
     } else {
       _omissionsToShowTutorial++;
+      HapticFeedback.mediumImpact();
+      _boxContainer.handleCatch(isSuccessful: false);
     }
 
     if (_omissionsToShowTutorial >=

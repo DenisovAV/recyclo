@@ -4,6 +4,7 @@ import 'package:flutter_game_challenge/app/view/app.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dart';
 import 'package:flutter_game_challenge/catcher_game/catcher_game_page.dart';
+import 'package:flutter_game_challenge/clicker_game/clicker_game_page.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';
@@ -69,7 +70,8 @@ class _MainMenuPageState extends State<MainMenuPage> {
                               visible: state is! MainPageInitialState,
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 10),
-                                child: GameBackButton(
+                                child: RoundButton(
+                                  icon: Icons.keyboard_arrow_left,
                                   onPressed: () {
                                     if (state is MainPageArtifactDetailsState) {
                                       BlocProvider.of<MainPageCubit>(context)
@@ -189,9 +191,7 @@ class _ChooseGameContent extends StatelessWidget {
             MenuItem(
               text: context.l10n.gameModeClickerItemTitle,
               assetId: Assets.images.gameModeClicker.path,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
-              },
+              onTap: () => _handleNavigateToClickerGame(context),
             ),
             MenuItem(
               text: context.l10n.gameModeFinderItemTitle,
@@ -209,6 +209,10 @@ class _ChooseGameContent extends StatelessWidget {
   void _handleNavigateToCatcherGame(BuildContext context) {
     Navigator.of(kRootNavigatorKey.currentContext!)
         .push<void>(CatcherGamePage.route());
+  }
+
+  void _handleNavigateToClickerGame(BuildContext context) {
+    Navigator.of(context).push<void>(ClickerGamePage.route());
   }
 }
 
@@ -231,39 +235,6 @@ class _SettingsContent extends StatelessWidget {
         decoration: BoxDecoration(
           color: FlutterGameChallengeColors.black.withOpacity(0.2),
           borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-    );
-  }
-}
-
-class GameBackButton extends StatelessWidget {
-  const GameBackButton({
-    required this.onPressed,
-    super.key,
-  });
-
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            width: 2,
-            color: FlutterGameChallengeColors.textStroke,
-          ),
-        ),
-        child: const Icon(
-          Icons.keyboard_arrow_left,
-          size: 36,
-          color: FlutterGameChallengeColors.textStroke,
         ),
       ),
     );
