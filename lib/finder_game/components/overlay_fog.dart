@@ -21,7 +21,8 @@ class OverlayFog extends PositionComponent
 
   Item? currentCollisionItem;
 
-  Vector2 currentDragPosition = Vector2(0, 0);
+  Vector2 get holeHitboxPosition => dragPosition + Vector2(-14, -12);
+  Vector2 dragPosition = Vector2(0, 0);
   bool isDragInProgress = false;
   int numberOfTicks = 0;
 
@@ -80,19 +81,19 @@ class OverlayFog extends PositionComponent
   Future<void> onDragStart(DragStartEvent event) async {
     super.onDragStart(event);
     isDragInProgress = true;
-    currentDragPosition = event.localPosition;
+    dragPosition = event.localPosition;
 
     await add(
       collider
-        ..position = Vector2(currentDragPosition.x, currentDragPosition.y + 50)
+        ..position = holeHitboxPosition
         ..size = Vector2(30, 30),
     );
   }
 
   @override
   void onDragUpdate(DragUpdateEvent event) {
-    currentDragPosition = event.localEndPosition;
-    collider.position = currentDragPosition;
+    dragPosition = event.localEndPosition;
+    collider.position = holeHitboxPosition;
   }
 
   @override
@@ -129,14 +130,15 @@ class OverlayFog extends PositionComponent
   void _onTick() {
     numberOfTicks++;
 
-    //add shake effect for ticks
-    if (timerTicksLimit > numberOfTicks || currentCollisionItem == null) return;
-
-    //collect if criteria met
     if (game.gameState.currentTargetTypes.value.lastOrNull !=
         currentCollisionItem?.trashData.classification) return;
 
     final itemToCollect = currentCollisionItem!;
+    itemToCollect.onCorrectItem();
+
+    //add shake effect for ticks
+    if (timerTicksLimit > numberOfTicks || currentCollisionItem == null) return;
+
     itemToCollect.onCollected();
     game.gameState.collectTrash(itemToCollect);
   }
@@ -173,8 +175,8 @@ class OverlayFog extends PositionComponent
 
     final maskFittedSizes = applyBoxFit(BoxFit.cover, maskInputSize, rectSize);
 
-    final xmult = currentDragPosition.x / rectSize.width;
-    final ymult = currentDragPosition.y / rectSize.height;
+    final xmult = dragPosition.x / rectSize.width;
+    final ymult = dragPosition.y / rectSize.height;
 
     final xmov = maskFittedSizes.source.width * xmult;
     final ymov = maskFittedSizes.source.height * ymult;
@@ -187,18 +189,6 @@ class OverlayFog extends PositionComponent
           ) &
           maskInputSize,
     );
-
-    //set offset here
-    // final maskSourceRect = Alignment.center.inscribe(
-    //   maskFittedSizes.source,
-    //   Offset(
-    //         maskFittedSizes.destination.width / 2 -
-    //             currentDragPosition.x,
-    //         maskFittedSizes.destination.height / 2 -
-    //             currentDragPosition.y,
-    //       ) &
-    //       maskInputSize,
-    // );
 
     canvas
       ..saveLayer(overlayTargetRect, paint)

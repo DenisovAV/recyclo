@@ -78,19 +78,19 @@ class Item extends PositionComponent with HasWorldReference {
       });
   }
 
-  void onMiss() {
+  void onCorrectItem() {
     Effect getShakeEffect() {
       return SequenceEffect(
         [
           MoveEffect.by(
-            Vector2(-5, 0),
+            Vector2(-4, 0),
             EffectController(
               duration: 0.1,
               alternate: true,
             ),
           ),
           MoveEffect.by(
-            Vector2(5, 0),
+            Vector2(4, 0),
             EffectController(
               duration: 0.1,
               alternate: true,
@@ -104,7 +104,7 @@ class Item extends PositionComponent with HasWorldReference {
 
     Effect getColorEffect() {
       return ColorEffect(
-        Colors.red.shade400,
+        Colors.green,
         EffectController(
           duration: .5,
           alternate: true,

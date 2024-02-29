@@ -60,24 +60,4 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
 
     return super.onLoad();
   }
-
-  @override
-  void onTapDown(TapDownInfo info) {
-    super.onTapDown(info);
-    return;
-    final worldPosition = info.eventPosition.widget;
-
-    final tappedItem = gameState.trashItems.value
-        .firstWhereOrNull((item) => item.containsPoint(worldPosition));
-
-    if (tappedItem != null) {
-      if (gameState.currentTargetTypes.value.lastOrNull ==
-          tappedItem.trashData.classification) {
-        tappedItem.onCollected();
-        gameState.collectTrash(tappedItem);
-      } else {
-        tappedItem.onMiss();
-      }
-    }
-  }
 }
