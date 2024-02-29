@@ -140,7 +140,7 @@ class $AssetsImagesGen {
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [
+  List<dynamic> get values => [
         addToWallet,
         artifactCar,
         artifactHouse,
