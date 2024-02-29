@@ -16,7 +16,7 @@ class ArtifactsRepository {
   final StreamController<ArtifactsModel> _streamController =
       StreamController.broadcast();
 
-  final Uuid _uuid;
+  final Uuid _uuid = Uuid();
 
   ArtifactsModel get artifactModel => _artifactsModel;
   Stream<ArtifactsModel> get artifactModelStream => _streamController.stream;
@@ -127,10 +127,8 @@ class ArtifactsRepository {
       electronics: artifact.requirements.electronics,
     );
 
-    final uuid = _uuid.v1();
     final newArtifact = artifact.copyWith(
-      ArtifactStatus.crafted,
-      uuid,
+      status: ArtifactStatus.crafted,
     );
 
     switch (artifact.artifactType) {
@@ -140,19 +138,11 @@ class ArtifactsRepository {
           _ArtifactStatusKeys.newspaperIsCrafted,
           true,
         );
-        _sharedPreferences.setString(
-          _ArtifactStatusKeys.newspaperWalletKey,
-          uuid,
-        );
       case ArtifactType.shampoo:
         _artifactsModel = _artifactsModel.copyWith(shampoo: newArtifact);
         _sharedPreferences.setBool(
           _ArtifactStatusKeys.shampooIsCrafted,
           true,
-        );
-        _sharedPreferences.setString(
-          _ArtifactStatusKeys.shampooWalletKey,
-          uuid,
         );
       case ArtifactType.plant:
         _artifactsModel = _artifactsModel.copyWith(plant: newArtifact);
@@ -160,19 +150,11 @@ class ArtifactsRepository {
           _ArtifactStatusKeys.plantIsCrafted,
           true,
         );
-        _sharedPreferences.setString(
-          _ArtifactStatusKeys.plantWalletKey,
-          uuid,
-        );
       case ArtifactType.laptop:
         _artifactsModel = _artifactsModel.copyWith(laptop: newArtifact);
         _sharedPreferences.setBool(
           _ArtifactStatusKeys.laptopIsCrafted,
           true,
-        );
-        _sharedPreferences.setString(
-          _ArtifactStatusKeys.laptopWalletKey,
-          uuid,
         );
       case ArtifactType.car:
         _artifactsModel = _artifactsModel.copyWith(car: newArtifact);
@@ -180,21 +162,64 @@ class ArtifactsRepository {
           _ArtifactStatusKeys.carIsCrafted,
           true,
         );
-        _sharedPreferences.setString(
-          _ArtifactStatusKeys.carWalletKey,
-          uuid,
-        );
       case ArtifactType.house:
         _artifactsModel = _artifactsModel.copyWith(house: newArtifact);
         _sharedPreferences.setBool(
           _ArtifactStatusKeys.houseIsCrafted,
           true,
         );
+    }
+    _streamController.add(artifactModel);
+    _artifactsModel = artifactModel;
+    return newArtifact;
+  }
+
+  ArtifactModel addToGoogleWallet(ArtifactModel artifact) {
+    final uuid = _uuid.v1();
+    final newArtifact = artifact.copyWith(
+      status: ArtifactStatus.addedToWallet,
+      uuid: uuid,
+    );
+
+    switch (artifact.artifactType) {
+      case ArtifactType.newspaper:
+        _artifactsModel = _artifactsModel.copyWith(newspaper: newArtifact);
+        _sharedPreferences.setString(
+          _ArtifactStatusKeys.newspaperWalletKey,
+          uuid,
+        );
+      case ArtifactType.shampoo:
+        _artifactsModel = _artifactsModel.copyWith(shampoo: newArtifact);
+        _sharedPreferences.setString(
+          _ArtifactStatusKeys.shampooWalletKey,
+          uuid,
+        );
+      case ArtifactType.plant:
+        _artifactsModel = _artifactsModel.copyWith(plant: newArtifact);
+        _sharedPreferences.setString(
+          _ArtifactStatusKeys.plantWalletKey,
+          uuid,
+        );
+      case ArtifactType.laptop:
+        _artifactsModel = _artifactsModel.copyWith(laptop: newArtifact);
+        _sharedPreferences.setString(
+          _ArtifactStatusKeys.laptopWalletKey,
+          uuid,
+        );
+      case ArtifactType.car:
+        _artifactsModel = _artifactsModel.copyWith(car: newArtifact);
+        _sharedPreferences.setString(
+          _ArtifactStatusKeys.carWalletKey,
+          uuid,
+        );
+      case ArtifactType.house:
+        _artifactsModel = _artifactsModel.copyWith(house: newArtifact);
         _sharedPreferences.setString(
           _ArtifactStatusKeys.houseWalletKey,
           uuid,
         );
     }
+
     _streamController.add(artifactModel);
     _artifactsModel = artifactModel;
     return newArtifact;

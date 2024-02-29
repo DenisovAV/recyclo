@@ -11,15 +11,15 @@ class ArtifactModel {
   final ArtifactType artifactType;
   final String? uuid;
 
-  ArtifactModel copyWith(
-    ArtifactStatus status,
-    String uuid,
-  ) {
+  ArtifactModel copyWith({
+    ArtifactStatus? status,
+    String? uuid,
+  }) {
     return ArtifactModel(
       requirements: requirements,
       artifactType: artifactType,
-      status: status,
-      uuid: uuid,
+      status: status ?? this.status,
+      uuid: uuid ?? this.uuid,
     );
   }
 
