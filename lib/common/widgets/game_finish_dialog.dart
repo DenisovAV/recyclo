@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/common/widgets/item_container.dart';
 
+const _itemsInnerPadding = 4.0;
+
 Future<void> showGameFinishDialog({
   required BuildContext context,
-  required List<(ItemType type, int score)> items,
+  required List<({ItemType type, int score})> items,
   required VoidCallback onDismiss,
 }) async {
   await showDialog<Dialog>(
@@ -58,26 +60,40 @@ Future<void> showGameFinishDialog({
               if (items.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(top: 24),
-                  child: SizedBox(
-                    height: ItemContainer.containerSize,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: items.length,
-                      itemBuilder: (context, index) {
-                        final item = ItemContainer(
-                          type: items[index].$1,
-                          count: items[index].$2,
-                        );
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final desirableItemScale = constraints.maxWidth /
+                          ((ItemContainer.containerSize +
+                                  _itemsInnerPadding * 2) *
+                              ItemType.values.length);
 
-                        return index > items.length - 1
-                            ? item
-                            : Padding(
-                                padding: const EdgeInsets.only(right: 4),
-                                child: item,
-                              );
-                      },
-                    ),
+                      final itemScale =
+                          desirableItemScale > 1.0 ? 1.0 : desirableItemScale;
+
+                      return SizedBox(
+                        height: ItemContainer.containerSize * itemScale,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: items
+                              .map(
+                                (e) => Padding(
+                                  padding: EdgeInsets.only(
+                                    right: items.indexOf(e) < items.length - 1
+                                        ? _itemsInnerPadding
+                                        : 0.0,
+                                  ),
+                                  child: ItemContainer(
+                                    type: e.type,
+                                    count: e.score,
+                                    scale: itemScale,
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               const SizedBox(

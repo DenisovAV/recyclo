@@ -61,11 +61,11 @@
   "@gameModeFinderItemTitle": {
     "description": "Text shown in the finder game mode button"
   },
-  "artifactCarTitle": "Trashmobile",
+  "artifactCarTitle": "WW (Waste Wanderer)",
   "@artifactCarTitle": {
     "description": "Title of car made from trash"
   },
-  "artifactCarDescripton": "The car looks lile a futuristic city SUV, but what makes is special is that every part of this made from recycled materials. The body is made up of metal sheets assembled from old tin cans and car parts, giving it a unique and varied appearance.",
+  "artifactCarDescripton": "The car body is assembled from metallic sheets sourced from old cans and car parts, alongside textures from assorted recycled plastics on the doors and hood. Recycled tires form the wheels, while solar panels atop the roof underscore its eco-friendly design.",
   "@artifactCarDescripton": {
     "description": "Description of car made from trash"
   },
@@ -73,23 +73,23 @@
   "@artifactShampooTitle": {
     "description": "Title of shampoo made from trash"
   },
-  "artifactShampooDescripton": "The car looks lile a futuristic city SUV, but what makes is special is that every part of this made from recycled materials. The body is made up of metal sheets assembled from old tin cans and car parts, giving it a unique and varied appearance.",
+  "artifactShampooDescripton": "The shampoo itself is a concoction of natural ingredients, including purified water infused with essential oils from organic lavender and chamomile, known for their soothing and hair-nourishing properties. The light blue hue of the shampoo is achieved through the addition of a natural, mineral-based colorant that safely decomposes without harming aquatic ecosystems.",
   "@artifactShampooDescripton": {
     "description": "Description of shampoo made from trash"
   },
-  "artifactHouseTitle": "Trashome",
+  "artifactHouseTitle": "Ecorefuge",
   "@artifactHouseTitle": {
     "description": "Title of house made from trash"
   },
-  "artifactHouseDescripton": "The car looks lile a futuristic city SUV, but what makes is special is that every part of this made from recycled materials. The body is made up of metal sheets assembled from old tin cans and car parts, giving it a unique and varied appearance.",
+  "artifactHouseDescripton": "The facade of this eco-friendly house features recycled glass and composite materials, while the roof boasts integrated solar panels, providing clean energy. Inside, natural materials such as bamboo and recycled wood dominate, complemented by furniture made from repurposed materials. The house incorporates energy-efficient technologies, including insulated windows and a solar-powered water heater, to minimize its ecological footprint. Surrounding the house, a drought-resistant landscape promotes biodiversity, embodying a commitment to environmental conservation in every detail.",
   "@artifactHouseDescripton": {
     "description": "Description of house made from trash"
   },
-  "artifactNewspaperTitle": "Trashpaper",
+  "artifactNewspaperTitle": "Flutter EcoPress",
   "@artifactNewspaperTitle": {
     "description": "Title of newspaper made from trash"
   },
-  "artifactNewspaperDescripton": "The car looks lile a futuristic city SUV, but what makes is special is that every part of this made from recycled materials. The body is made up of metal sheets assembled from old tin cans and car parts, giving it a unique and varied appearance.",
+  "artifactNewspaperDescripton": "Sourced from high-quality recycled materials, it showcases varying shades and textures, a characteristic that highlights its eco-friendly origin. Despite these variations, the paper maintains an excellent quality suitable for the clear and vibrant printing of texts and images.",
   "@artifactNewspaperDescripton": {
     "description": "Description of newspaper made from trash"
   },
@@ -97,15 +97,15 @@
   "@artifactLaptopTitle": {
     "description": "Title of laptop made from trash"
   },
-  "artifactLaptopDescripton": "The car looks lile a futuristic city SUV, but what makes is special is that every part of this made from recycled materials. The body is made up of metal sheets assembled from old tin cans and car parts, giving it a unique and varied appearance.",
+  "artifactLaptopDescripton": "Trashputer body is constructed from old plastic bottles, demonstrating a textured and creative design. The keyboard stands out, made from recycled plastic caps, each key a testament to resourceful re-use. The screen, fashioned from recycled glass, adds to its eco-friendly credentials, while the internal components are sourced from secondary metal materials, further reducing waste. With connectors and ports also derived from recycled materials, this laptop is not just a piece of technology; it's a statement on the importance of recycling and the potential for technological advancements to harmonize with environmental conservation efforts.",
   "@artifactLaptopDescripton": {
     "description": "Description of laptop made from trash"
   },
-  "artifactPlantTitle": "Pnaltrash",
+  "artifactPlantTitle": "EcoSpawn Monstera",
   "@artifactPlantTitle": {
     "description": "Title of plant made from trash"
   },
-  "artifactPlantDescripton": "The car looks lile a futuristic city SUV, but what makes is special is that every part of this made from recycled materials. The body is made up of metal sheets assembled from old tin cans and car parts, giving it a unique and varied appearance.",
+  "artifactPlantDescripton": "The inclusion of bags of organic compost or manure as part of the scene not only highlights the practical aspects of nurturing such a plant but also emphasizes the importance of repurposing and recycling for environmental care. This setting, with its attention to detail in the interior space, reflects a harmonious blend of aesthetics and eco-friendly practices, illustrating how sustainability can be integrated into everyday living spaces.",
   "@artifactPlantDescripton": {
     "description": "Description of plant made from trash"
   },
@@ -141,9 +141,20 @@
   "@aboutAppRecycle": {
     "description": "Tittle for 'About app' item in landing page"
   },
-  "aboutAppRecycleContentText": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n  For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium. \n\nRecycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n  For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "aboutAppRecycleContentText": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium. \n\nRecycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
   "@aboutAppRecycleContentText" : {
     "description": "Text for content on the About us item page"
+  },
+  "buttonOk": "Ok",
+  "@buttonOk" : {
+    "description": "Text for Ok button"
+  },
+  "artifactCraftedDialogTitle": "Congradulations!",
+  "@artifactCraftedDialogTitle" : {
+    "description": "Artifact crafted dialog header"
+  },
+  "artifactCraftedDialogBody": "You successfully have crafted an artifact and now you can add it to a wallet.",
+  "@artifactCraftedDialogBody" : {
+    "description": "Artifact crafted dialog body"
   }
-
 }

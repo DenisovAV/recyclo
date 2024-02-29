@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/common/dimensions.dart';
 import 'package:flutter_game_challenge/landing/widgets/landing_item.dart';
 
 class AboutUsItem extends StatelessWidget {

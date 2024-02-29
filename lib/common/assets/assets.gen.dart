@@ -56,6 +56,7 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/artifact_shampoo.png');
 
   $AssetsImagesCatcherGen get catcher => const $AssetsImagesCatcherGen();
+  $AssetsImagesClickerGen get clicker => const $AssetsImagesClickerGen();
 
   /// File path: assets/images/clouds.png
   AssetGenImage get clouds => const AssetGenImage('assets/images/clouds.png');
@@ -75,8 +76,12 @@ class $AssetsImagesGen {
   AssetGenImage get downloadGooglePlayButton =>
       const AssetGenImage('assets/images/download_google_play_button.png');
 
-  /// File path: assets/images/earth.png
-  AssetGenImage get earth => const AssetGenImage('assets/images/earth.png');
+  /// File path: assets/images/earth.mov
+  String get earth => 'assets/images/earth.mov';
+
+  /// File path: assets/images/earth_halo.png
+  AssetGenImage get earthHalo =>
+      const AssetGenImage('assets/images/earth_halo.png');
 
   /// File path: assets/images/energy.png
   AssetGenImage get energy => const AssetGenImage('assets/images/energy.png');
@@ -154,6 +159,7 @@ class $AssetsImagesGen {
         downloadAppleStoreButton,
         downloadGooglePlayButton,
         earth,
+        earthHalo,
         energy,
         gameModeCathcer,
         gameModeClicker,
@@ -194,6 +200,13 @@ class $AssetsImagesCatcherGen {
       const $AssetsImagesCatcherDropsGen();
   $AssetsImagesCatcherTutorialGen get tutorial =>
       const $AssetsImagesCatcherTutorialGen();
+}
+
+class $AssetsImagesClickerGen {
+  const $AssetsImagesClickerGen();
+
+  $AssetsImagesClickerImagesGen get images =>
+      const $AssetsImagesClickerImagesGen();
 }
 
 class $AssetsLicensesPoppinsGen {
@@ -298,6 +311,17 @@ class $AssetsImagesCatcherTutorialGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [play, tutorial];
+}
+
+class $AssetsImagesClickerImagesGen {
+  const $AssetsImagesClickerImagesGen();
+
+  /// File path: assets/images/clicker/images/cloud.png
+  AssetGenImage get cloud =>
+      const AssetGenImage('assets/images/clicker/images/cloud.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [cloud];
 }
 
 class $AssetsImagesCatcherDropsElectricGen {

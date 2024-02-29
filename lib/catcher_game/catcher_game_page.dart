@@ -1,10 +1,13 @@
+import 'dart:async';
+
+import 'package:collection/collection.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
 import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/menu/view/main_menu_page.dart';
 import 'package:flutter_game_challenge/service_provider.dart';
+import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
 
 class CatcherGamePage extends StatefulWidget {
   const CatcherGamePage({super.key});
@@ -20,7 +23,7 @@ class CatcherGamePage extends StatefulWidget {
 }
 
 class _CatcherGamePageState extends State<CatcherGamePage> {
-  FlameGame? _game;
+  CatcherGame? _game;
 
   @override
   Widget build(BuildContext context) {
@@ -40,16 +43,18 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
                 },
               ),
               SafeArea(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 12),
-                      child: GameBackButton(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      RoundButton(
+                        icon: Icons.keyboard_arrow_left,
                         onPressed: _handleBackButton,
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -66,17 +71,34 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
   void _handleTimerState(BuildContext context, TimerState state) {
     if (state == TimerFinishedState()) {
       _game?.pauseEngine();
+
+      final playerScore = _game!.getPlayerScore();
+
       showGameFinishDialog(
         context: context,
-        items: [
-          (ItemType.plastic, 1),
-          (ItemType.paper, 1),
-          (ItemType.glass, 1),
-        ],
+        items: playerScore,
         onDismiss: () {
+          unawaited(ServiceProvider.get<TrashReserveRepository>().addResource(
+            plastic: playerScore.getPlayerScore(ItemType.plastic),
+            paper: playerScore.getPlayerScore(ItemType.paper),
+            glass: playerScore.getPlayerScore(ItemType.glass),
+            organic: playerScore.getPlayerScore(ItemType.organic),
+            electronics: playerScore.getPlayerScore(ItemType.electronic),
+          ));
           Navigator.of(context).maybePop();
         },
       );
     }
+  }
+}
+
+extension on List<({ItemType type, int score})> {
+  int getPlayerScore(ItemType type) {
+    if (isEmpty) {
+      return 0;
+    }
+
+    return firstWhereOrNull((scoreRecord) => scoreRecord.type == type)?.score ??
+        0;
   }
 }

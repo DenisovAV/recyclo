@@ -15,7 +15,7 @@ class ArtifactRequirementsStatus extends StatelessWidget {
   final bool isEnough;
   final Color color;
 
-  static const _width = 66.0;
+  static const _width = 56.0;
 
   @override
   Widget build(BuildContext context) {
@@ -53,14 +53,14 @@ class ArtifactRequirementsStatus extends StatelessWidget {
             children: [
               Image.asset(
                 imagePath,
-                width: 32,
-                height: 32,
+                width: 28,
+                height: 28,
               ),
               Text(
                 count.toString(),
                 style: const TextStyle(
                   color: FlutterGameChallengeColors.textStroke,
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
