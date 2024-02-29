@@ -1,4 +1,4 @@
-package com.example.verygoodcore.flutter_game_challenge
+package com.recyclo.game
 
 import io.flutter.embedding.android.FlutterActivity
 
