@@ -36,7 +36,6 @@ class AppView extends StatelessWidget {
       navigatorKey: kRootNavigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Sniglet',
         primaryColor: FlutterGameChallengeColors.primary1,
         appBarTheme: const AppBarTheme(
           color: FlutterGameChallengeColors.primary1,
