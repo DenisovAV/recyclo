@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_game_challenge/clicker_game/game_models/trash_type.dart';
+
 import 'package:flutter_game_challenge/clicker_game/overlays/widgets/target_category.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/finder_game/finder_game.dart';
 
-import 'package:flutter_game_challenge/menu/view/main_menu_page.dart';
 
 class FinderHUD extends StatelessWidget {
   const FinderHUD({
@@ -31,7 +30,8 @@ class FinderHUD extends StatelessWidget {
             Flexible(
               child: Padding(
                 padding: const EdgeInsets.only(left: 12),
-                child: GameBackButton(
+                child: RoundButton(
+                  icon: Icons.keyboard_arrow_left,
                   onPressed: handleRightButton,
                 ),
               ),

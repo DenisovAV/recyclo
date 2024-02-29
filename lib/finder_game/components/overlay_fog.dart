@@ -16,12 +16,10 @@ class OverlayFog extends PositionComponent
   static const double timerPeriod = 0.5;
   static const int timerTicksLimit = 4;
 
-  final _collisionStartColor = const Color.fromARGB(255, 7, 255, 15);
-  final _defaultColor = Color.fromARGB(255, 244, 6, 6);
-
   Item? currentCollisionItem;
 
-  Vector2 get holeHitboxPosition => dragPosition + Vector2(-14, -12);
+  Vector2 get holeHitboxPosition => dragPosition + Vector2(-12, -34);
+
   Vector2 dragPosition = Vector2(0, 0);
   bool isDragInProgress = false;
   int numberOfTicks = 0;
@@ -66,15 +64,9 @@ class OverlayFog extends PositionComponent
     );
     await add(timerComponent);
 
-    final defaultPaint = Paint()
-      ..color = _defaultColor
-      ..style = PaintingStyle.stroke;
-
     collider = RectangleHitbox(
       position: position,
-    )
-      ..paint = defaultPaint
-      ..renderShape = true;
+    );
   }
 
   @override
@@ -86,7 +78,7 @@ class OverlayFog extends PositionComponent
     await add(
       collider
         ..position = holeHitboxPosition
-        ..size = Vector2(30, 30),
+        ..size = Vector2(20, 34),
     );
   }
 
@@ -113,7 +105,7 @@ class OverlayFog extends PositionComponent
 
     if (other.parent is Item) {
       currentCollisionItem = other.parent as Item?;
-      collider.paint.color = _collisionStartColor;
+
       _resetTimer();
     }
   }
@@ -123,7 +115,7 @@ class OverlayFog extends PositionComponent
     super.onCollisionEnd(other);
     numberOfTicks = 0;
     currentCollisionItem = null;
-    collider.paint.color = _defaultColor;
+
     timerComponent.timer.stop();
   }
 
@@ -136,7 +128,6 @@ class OverlayFog extends PositionComponent
     final itemToCollect = currentCollisionItem!;
     itemToCollect.onCorrectItem();
 
-    //add shake effect for ticks
     if (timerTicksLimit > numberOfTicks || currentCollisionItem == null) return;
 
     itemToCollect.onCollected();

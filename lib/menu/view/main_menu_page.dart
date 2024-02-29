@@ -216,7 +216,8 @@ class _ChooseGameContent extends StatelessWidget {
   }
 
   void _handleNavigateToFinderGame(BuildContext context) {
-    Navigator.of(context).push<void>(FinderGamePage.route());
+   Navigator.of(kRootNavigatorKey.currentContext!)
+        .push<void>(FinderGamePage.route());
   }
 }
 
