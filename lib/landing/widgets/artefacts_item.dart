@@ -57,14 +57,14 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                     _ImagePageView(
                       controller: _imagesController,
                       images: artefacts.map((e) => e.image).toList(),
-                      onPageChange: _onImagesPageViewChange,
+                      onPageChange: _handleImagesPageViewChange,
                     ),
                     SizedBox(
                       width: 50,
                     ),
                     _TextPageView(
                       controller: _descriptionsController,
-                      onPageChange: _onDescriptionsPageViewChange,
+                      onPageChange: _handleDescriptionPageViewChange,
                       items: artefacts,
                     )
                   ],
@@ -100,14 +100,14 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                   _ImagePageView(
                     controller: _imagesController,
                     images: artefacts.map((e) => e.image).toList(),
-                    onPageChange: _onImagesPageViewChange,
+                    onPageChange: _handleImagesPageViewChange,
                   ),
                   SizedBox(
                     width: 50,
                   ),
                   _TextPageView(
                     controller: _descriptionsController,
-                    onPageChange: _onDescriptionsPageViewChange,
+                    onPageChange: _handleDescriptionPageViewChange,
                     items: artefacts,
                   )
                 ],
@@ -119,7 +119,7 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
     });
   }
 
-  void _onImagesPageViewChange(int index) {
+  void _handleImagesPageViewChange(int index) {
     _descriptionsController.animateToPage(
       index,
       duration: Duration(milliseconds: 500),
@@ -127,7 +127,7 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
     );
   }
 
-  void _onDescriptionsPageViewChange(int index) {
+  void _handleDescriptionPageViewChange(int index) {
     _imagesController.animateToPage(
       index,
       duration: Duration(milliseconds: 500),

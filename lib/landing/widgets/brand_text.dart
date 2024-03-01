@@ -7,9 +7,11 @@ class BrandText extends StatelessWidget {
   final TextStyle? style;
   final TextAlign? textAlign;
 
-  const BrandText(this.text, {
+  const BrandText(
+    this.text, {
     super.key,
-    this.style, this.textAlign,
+    this.style,
+    this.textAlign,
   });
 
   @override
