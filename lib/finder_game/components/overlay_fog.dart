@@ -102,7 +102,6 @@ class OverlayFog extends PositionComponent
     PositionComponent other,
   ) {
     super.onCollisionStart(intersectionPoints, other);
-
     if (other.parent is Item) {
       currentCollisionItem = other.parent as Item?;
 
@@ -114,8 +113,12 @@ class OverlayFog extends PositionComponent
   void onCollisionEnd(PositionComponent other) {
     super.onCollisionEnd(other);
     numberOfTicks = 0;
-    currentCollisionItem = null;
 
+    if (other.parent is Item && currentCollisionItem != other.parent) {
+      return;
+    }
+
+    currentCollisionItem = null;
     timerComponent.timer.stop();
   }
 
@@ -161,8 +164,8 @@ class OverlayFog extends PositionComponent
       return;
     }
 
-    final maskInputSize =
-        Size(maskImage.width.toDouble(), maskImage.height.toDouble());
+    final maskInputSize = Size(
+        maskImage.width.toDouble() - 800, maskImage.height.toDouble() - 800);
 
     final maskFittedSizes = applyBoxFit(BoxFit.cover, maskInputSize, rectSize);
 
@@ -172,13 +175,16 @@ class OverlayFog extends PositionComponent
     final xmov = maskFittedSizes.source.width * xmult;
     final ymov = maskFittedSizes.source.height * ymult;
 
+    final maskInputSize1 =
+        Size(maskImage.width.toDouble(), maskImage.height.toDouble());
+
     final maskSourceRect = Alignment.center.inscribe(
       maskFittedSizes.source,
       Offset(
             maskFittedSizes.source.width / 2 - xmov,
             maskFittedSizes.source.height / 2 - ymov + 50,
           ) &
-          maskInputSize,
+          maskInputSize1,
     );
 
     canvas
