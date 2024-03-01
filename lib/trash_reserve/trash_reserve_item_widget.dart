@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/clicker_game/game_models/trash_type.dart';
-import 'package:flutter_game_challenge/common/assets/colors.gen.dart';
+import 'package:flutter_game_challenge/common.dart';
 
 class TrashReserveItemWidget extends StatefulWidget {
   const TrashReserveItemWidget({
@@ -9,7 +8,7 @@ class TrashReserveItemWidget extends StatefulWidget {
     this.isRounded = false,
   });
 
-  final TrashType type;
+  final ItemType type;
   final bool isRounded;
   final int count;
 

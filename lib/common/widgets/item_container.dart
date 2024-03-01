@@ -22,7 +22,7 @@ class ItemContainer extends StatelessWidget {
       height: containerSize * scale,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: type.color(),
+        color: type.color,
         border: Border.all(
           color: FlutterGameChallengeColors.textStroke,
           width: 2 * scale,
