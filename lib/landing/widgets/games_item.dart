@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/landing/index.dart';
+import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
 import 'package:flutter_game_challenge/landing/widgets/landing_item.dart';
 import 'package:flutter_game_challenge/landing/widgets/mobile_vertical_widget.dart';
 
@@ -25,13 +26,26 @@ class GamesItem extends StatelessWidget {
           child: Column(
             children: [
               Center(
-                child: Text(
+                child: BrandText(
                   l10n.gamesTitle,
                   style: TextStyle(
                     fontSize: 48,
                     color: FlutterGameChallengeColors.textStroke,
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              BrandText(
+                l10n.gamesDescription,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: FlutterGameChallengeColors.textStroke,
+                ),
+              ),
+              SizedBox(
+                height: 30,
               ),
               _Game1(),
               _Game2(),
@@ -169,7 +183,7 @@ class GameDescription extends StatelessWidget {
         child: Column(
           crossAxisAlignment: isLeft ? CrossAxisAlignment.start : CrossAxisAlignment.end,
           children: [
-            Text(
+            BrandText(
               title,
               style: TextStyle(
                 fontSize: 32,
@@ -179,7 +193,7 @@ class GameDescription extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Text(
+            BrandText(
               description,
               textAlign: isLeft ? TextAlign.start : TextAlign.right,
               style: TextStyle(

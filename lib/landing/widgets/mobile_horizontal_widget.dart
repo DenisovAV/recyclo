@@ -1,6 +1,7 @@
 import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
 
 class MobileHorizontalWidget extends StatelessWidget {
   final bool isStart;
@@ -32,7 +33,7 @@ class MobileHorizontalWidget extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          Text(
+          BrandText(
             title!,
             style: TextStyle(
               color: FlutterGameChallengeColors.textStroke,
@@ -58,7 +59,7 @@ class MobileHorizontalWidget extends StatelessWidget {
                     width: 30,
                   ),
                   Expanded(
-                    child: Text(
+                    child: BrandText(
                       text,
                       style: TextStyle(
                         fontSize: 20,
@@ -75,7 +76,7 @@ class MobileHorizontalWidget extends StatelessWidget {
                     width: 30,
                   ),
                   Expanded(
-                    child: Text(
+                    child: BrandText(
                       text,
                       style: TextStyle(
                         fontSize: 20,

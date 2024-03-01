@@ -141,7 +141,7 @@
   "@aboutAppRecycle": {
     "description": "Tittle for 'About app' item in landing page"
   },
-  "aboutAppRecycleContentText": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n  For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium. \n\nRecycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year. \n  For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "aboutAppRecycleContentText": "In many countries, sorting waste is a common practice, yet not everyone follows it, often due to a lack of understanding of its importance. This is even more pronounced in countries where such practices are not endorsed at a governmental level. Recognizing this gap, we decided to create a game that highlights the significance of waste sorting. Our Mobile People team (all teammates are members of [Mobile People community](\nhttps://wearecommunity.io/communities/mobilepeople))\ndecided to create a game that aims to **educate players about how sorting waste not only conserves resources but also facilitates the production of new goods from recycled materials**. By engaging with this interactive experience, we hope to inspire those who have never considered sorting their waste to start doing so, thereby making a small yet meaningful contribution to sustainability. Ultimately, this could lead to a significant impact, demonstrating how individual small actions can collectively make a difference in our world's health and longevity.",
   "@aboutAppRecycleContentText": {
     "description": "Text for content on the About us item page"
   },
@@ -161,15 +161,19 @@
   "@gamesTitle": {
     "description": "Tittle for 'Games' item in landing page"
   },
+  "gamesDescription": "All games are fun and informative, with the purpose to test your recycling materials knowledge, and of course, learn you to recoginze difference between them",
+  "@gamesDescription": {
+    "description": "Description after 'Games' item in landing page"
+  },
   "teamTitle": "Team",
   "@teamTitle": {
     "description": "Tittle for 'Team' item in landing page"
   },
-  "game1Title": "Game",
+  "game1Title": "Catcher",
   "@game1Title": {
     "description": "Game 1 title"
   },
-  "game1Description": "Catch The Trash is a fun and informative game built into the trashly app that will test your recycling materials knowledge.\n\nItems will fly from the windows, and it's up to you to sort them into the correct bins.\n\nGet them right, and show you are wise. Don't worry if you get some wrong - after each round, you'll get a glimpse at the recycling cheat-sheet. Can you catch all the trash?",
+  "game1Description": "Items will fly from the windows, and it's up to you to sort them into the correct bins.\\n\\nGet them right, and show you are wise. Don't worry if you get some wrong - after each round, you'll get a glimpse at the recycling cheat-sheet. Can you catch all the trash?",
   "@game1Description": {
     "description": "Game 1 description"
   },
@@ -181,24 +185,36 @@
   "@game2Description": {
     "description": "Game 2 description"
   },
-  "game3Title": "Game",
+  "game3Title": "Finder",
   "@game3Title": {
     "description": "Game 3 title"
   },
-  "game3Description": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year.\n\u2028For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "game3Description": "Trash hidden under the thick layer of greenery. Drag your way through the bushes and find target trash category. Hurry up, you need to sort it before time runs out!",
   "@game3Description": {
-    "description": "Game 1 description"
+    "description": "Game 3 description"
   },
   "mechanicsTittle": "Crafting & Google Wallet",
   "@mechanicsTittle": {
     "description": "Title mechanics item"
   },
-  "craftingContent": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year.\n\u2028For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "craftingContent": "In our mini-games, every resource you gather is stored away for you to use later. You can take these resources and craft useful items, or 'artifacts.' This process isn't just part of the game; it's a lesson in how recycling works and how different materials can be reused to make new products.",
   "@craftingContent": {
     "description": "Content mechanics item"
   },
-  "walletContent": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year.\n\u2028For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "walletContent": "Once you've crafted these artifacts, you can add them to your Google Wallet. While the crafting teaches you about recycling, adding artifacts to your Wallet could, in the future, unlock discounts on real-world products. We're still in the early stages of finding partners for this feature, so it's not available yet. But we're excited about the potential to reward your in-game recycling efforts with real-life benefits. Stay tuned for future updates!",
   "@walletContent": {
     "description": "Wallet mechanics item"
+  },
+  "artefacts": "Artifacts",
+  "@artefacts": {
+    "description": "Artefacts item title"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Description title on the artefacts"
+  },
+  "reality": "Reality",
+  "@reality": {
+    "description": "Reality title on the artefacts"
   }
 }
