@@ -36,6 +36,10 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
         'assets/images/',
         '',
       ),
+      Assets.images.hole.path.replaceFirst(
+        'assets/images/',
+        '',
+      ),
     ]);
     gameState = FinderState(gameWidgetSize: size);
     await add(gameState);

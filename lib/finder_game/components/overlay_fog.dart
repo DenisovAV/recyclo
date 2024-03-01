@@ -13,6 +13,11 @@ import 'package:flutter_game_challenge/finder_game/finder_game.dart';
 
 class OverlayFog extends PositionComponent
     with DragCallbacks, CollisionCallbacks, HasGameReference<FinderGame> {
+  static const int _kVerticalHolePositionOffset = 50;
+  static const int _kVerticalDecorationOffset = 10;
+  static const double _kHoleZoomFactorSizeInPixels = 800;
+  static const double _kHoleDecorationSize = 146;
+
   static const double timerPeriod = 0.5;
   static const int timerTicksLimit = 4;
 
@@ -24,11 +29,17 @@ class OverlayFog extends PositionComponent
   bool isDragInProgress = false;
   int numberOfTicks = 0;
 
-  late Image maskImage;
-  late Image fogImage;
-  late Rect overlayTargetRect;
-  late RectangleHitbox collider;
-  late TimerComponent timerComponent;
+  late final Size fogImageSize;
+  late final Size maskScaledSize;
+  late final Size maskSize;
+
+  late final Image maskImage;
+  late final Image fogImage;
+  late final Image holeDecoration;
+  late final Rect overlayTargetRect;
+  late final RectangleHitbox collider;
+  late final TimerComponent timerComponent;
+  late final SpriteComponent holeDecorationComponent;
 
   OverlayFog({
     required super.size,
@@ -43,18 +54,9 @@ class OverlayFog extends PositionComponent
       game.size.x,
       game.size.y,
     );
-    fogImage = Flame.images.fromCache(
-      Assets.images.fog.path.replaceFirst(
-        'assets/images/',
-        '',
-      ),
-    );
-    maskImage = Flame.images.fromCache(
-      Assets.images.holeMask.path.replaceFirst(
-        'assets/images/',
-        '',
-      ),
-    );
+
+    _loadImages();
+    _getImageSizes();
 
     timerComponent = TimerComponent(
       period: timerPeriod,
@@ -64,62 +66,12 @@ class OverlayFog extends PositionComponent
     );
     await add(timerComponent);
 
+    holeDecorationComponent = SpriteComponent.fromImage(holeDecoration)
+      ..size = Vector2(_kHoleDecorationSize, _kHoleDecorationSize);
+
     collider = RectangleHitbox(
       position: position,
     );
-  }
-
-  @override
-  Future<void> onDragStart(DragStartEvent event) async {
-    super.onDragStart(event);
-    isDragInProgress = true;
-    dragPosition = event.localPosition;
-
-    await add(
-      collider
-        ..position = holeHitboxPosition
-        ..size = Vector2(20, 34),
-    );
-  }
-
-  @override
-  void onDragUpdate(DragUpdateEvent event) {
-    dragPosition = event.localEndPosition;
-    collider.position = holeHitboxPosition;
-  }
-
-  @override
-  void onDragEnd(DragEndEvent event) {
-    super.onDragEnd(event);
-
-    isDragInProgress = false;
-    remove(collider);
-  }
-
-  @override
-  void onCollisionStart(
-    Set<Vector2> intersectionPoints,
-    PositionComponent other,
-  ) {
-    super.onCollisionStart(intersectionPoints, other);
-    if (other.parent is Item) {
-      currentCollisionItem = other.parent as Item?;
-
-      _resetTimer();
-    }
-  }
-
-  @override
-  void onCollisionEnd(PositionComponent other) {
-    super.onCollisionEnd(other);
-    numberOfTicks = 0;
-
-    if (other.parent is Item && currentCollisionItem != other.parent) {
-      return;
-    }
-
-    currentCollisionItem = null;
-    timerComponent.timer.stop();
   }
 
   void _onTick() {
@@ -137,8 +89,97 @@ class OverlayFog extends PositionComponent
     game.gameState.collectTrash(itemToCollect);
   }
 
+  @override
+  Future<void> onDragStart(DragStartEvent event) async {
+    super.onDragStart(event);
+    isDragInProgress = true;
+    dragPosition = event.localPosition;
+
+    await add(
+      collider
+        ..position = holeHitboxPosition
+        ..size = Vector2(20, 34),
+    );
+    await add(holeDecorationComponent);
+  }
+
+  @override
+  void onDragUpdate(DragUpdateEvent event) {
+    dragPosition = event.localEndPosition;
+    collider.position = holeHitboxPosition;
+  }
+
+  @override
+  void onDragEnd(DragEndEvent event) {
+    super.onDragEnd(event);
+
+    isDragInProgress = false;
+    remove(collider);
+    remove(holeDecorationComponent);
+  }
+
+  @override
+  void onCollisionStart(
+    Set<Vector2> intersectionPoints,
+    PositionComponent other,
+  ) {
+    super.onCollisionStart(intersectionPoints, other);
+    if (other.parent is Item) {
+      currentCollisionItem = other.parent as Item?;
+
+      _resetTimer();
+    }
+  }
+
   void _resetTimer() {
     timerComponent.timer.start();
+  }
+
+  @override
+  void onCollisionEnd(PositionComponent other) {
+    super.onCollisionEnd(other);
+    numberOfTicks = 0;
+
+    if (other.parent is Item && currentCollisionItem != other.parent) {
+      return;
+    }
+
+    currentCollisionItem = null;
+    timerComponent.timer.stop();
+  }
+
+  void _loadImages() {
+    fogImage = Flame.images.fromCache(
+      Assets.images.fog.path.replaceFirst(
+        'assets/images/',
+        '',
+      ),
+    );
+    maskImage = Flame.images.fromCache(
+      Assets.images.holeMask.path.replaceFirst(
+        'assets/images/',
+        '',
+      ),
+    );
+    holeDecoration = Flame.images.fromCache(
+      Assets.images.hole.path.replaceFirst(
+        'assets/images/',
+        '',
+      ),
+    );
+  }
+
+  void _getImageSizes() {
+    fogImageSize = Size(fogImage.width.toDouble(), fogImage.height.toDouble());
+
+    final maskWidth = maskImage.width.toDouble();
+    final maskHeight = maskImage.height.toDouble();
+
+    maskSize = Size(maskWidth, maskHeight);
+    maskScaledSize = Size(
+      maskWidth - _kHoleZoomFactorSizeInPixels,
+      maskHeight - _kHoleZoomFactorSizeInPixels,
+    );
   }
 
   @override
@@ -147,11 +188,9 @@ class OverlayFog extends PositionComponent
     final rectSize = size.toSize();
 
     if (!isDragInProgress) {
-      final inputSize =
-          Size(fogImage.width.toDouble(), fogImage.height.toDouble());
-      final fittedSizes = applyBoxFit(BoxFit.fill, inputSize, rectSize);
+      final fittedSizes = applyBoxFit(BoxFit.fill, fogImageSize, rectSize);
       final sourceRect = Alignment.center
-          .inscribe(fittedSizes.source, Offset.zero & inputSize);
+          .inscribe(fittedSizes.source, Offset.zero & fogImageSize);
 
       canvas
         ..drawImageRect(
@@ -164,38 +203,43 @@ class OverlayFog extends PositionComponent
       return;
     }
 
-    final maskInputSize = Size(
-        maskImage.width.toDouble() - 800, maskImage.height.toDouble() - 800);
+    holeDecorationComponent.position = Vector2(
+        dragPosition.x - _kHoleDecorationSize / 2,
+        dragPosition.y +
+            _kVerticalHolePositionOffset / 2 -
+            _kHoleDecorationSize +
+            _kVerticalDecorationOffset);
 
-    final maskFittedSizes = applyBoxFit(BoxFit.cover, maskInputSize, rectSize);
+    final maskFittedSizes = applyBoxFit(BoxFit.cover, maskScaledSize, rectSize);
 
-    final xmult = dragPosition.x / rectSize.width;
-    final ymult = dragPosition.y / rectSize.height;
-
-    final xmov = maskFittedSizes.source.width * xmult;
-    final ymov = maskFittedSizes.source.height * ymult;
-
-    final maskInputSize1 =
-        Size(maskImage.width.toDouble(), maskImage.height.toDouble());
-
+    final fittedSourceSize = maskFittedSizes.source;
     final maskSourceRect = Alignment.center.inscribe(
-      maskFittedSizes.source,
+      fittedSourceSize,
       Offset(
-            maskFittedSizes.source.width / 2 - xmov,
-            maskFittedSizes.source.height / 2 - ymov + 50,
+            fittedSourceSize.width / 2 -
+                _getAxisOffset(
+                  fittedMeasurement: maskFittedSizes.source.width,
+                  axisDragPosition: dragPosition.x,
+                  rectMeasurement: rectSize.width,
+                ),
+            fittedSourceSize.height / 2 -
+                _getAxisOffset(
+                  fittedMeasurement: maskFittedSizes.source.height,
+                  axisDragPosition: dragPosition.y,
+                  rectMeasurement: rectSize.height,
+                ) +
+                _kVerticalHolePositionOffset,
           ) &
-          maskInputSize1,
+          maskSize,
     );
 
     canvas
       ..saveLayer(overlayTargetRect, paint)
       ..drawImageRect(maskImage, maskSourceRect, overlayTargetRect, paint);
 
-    final inputSize =
-        Size(fogImage.width.toDouble(), fogImage.height.toDouble());
-    final fittedSizes = applyBoxFit(BoxFit.fill, inputSize, rectSize);
-    final sourceRect =
-        Alignment.center.inscribe(fittedSizes.source, Offset.zero & inputSize);
+    final fittedSizes = applyBoxFit(BoxFit.fill, fogImageSize, rectSize);
+    final sourceRect = Alignment.center
+        .inscribe(fittedSizes.source, Offset.zero & fogImageSize);
 
     canvas
       ..drawImageRect(
@@ -205,5 +249,13 @@ class OverlayFog extends PositionComponent
         paint..blendMode = BlendMode.srcIn,
       )
       ..restore();
+  }
+
+  double _getAxisOffset({
+    required double fittedMeasurement,
+    required double axisDragPosition,
+    required double rectMeasurement,
+  }) {
+    return fittedMeasurement * axisDragPosition / rectMeasurement;
   }
 }
