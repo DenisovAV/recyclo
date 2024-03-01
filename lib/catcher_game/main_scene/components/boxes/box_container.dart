@@ -31,7 +31,6 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
     reverseDuration: 0.5,
   );
 
-  bool isChangeWave = false;
   bool _startAnimationToHook = false;
   bool _finishAnimation = false;
   bool _resizeInProgress = false;
@@ -39,60 +38,56 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   void resize(Size size) {
     _resizeInProgress = true;
 
-    if (!isChangeWave) {
-      final tile = game.sizeConfig.tileSize;
-      final screenSize = game.canvasSize.toSize();
+    final tile = game.sizeConfig.tileSize;
+    final screenSize = game.canvasSize.toSize();
 
-      _chosenBoxWidth = initialBoxList.length == 7
-          ? (tile * (BoxContainerConfig.bigSevenBoxSize))
-          : (tile * (BoxContainerConfig.bigBoxSize));
-      _swappingBoxWidth = initialBoxList.length == 7
-          ? (tile * (BoxContainerConfig.smallSevenBoxSize))
-          : (tile * (BoxContainerConfig.smallBoxSize));
+    _chosenBoxWidth = initialBoxList.length == 7
+        ? (tile * (BoxContainerConfig.bigSevenBoxSize))
+        : (tile * (BoxContainerConfig.bigBoxSize));
+    _swappingBoxWidth = initialBoxList.length == 7
+        ? (tile * (BoxContainerConfig.smallSevenBoxSize))
+        : (tile * (BoxContainerConfig.smallBoxSize));
 
-      _distortionDistance = initialBoxList.length == 7
-          ? BoxContainerConfig.distortionSevenDistance
-          : BoxContainerConfig.distortionDistance;
+    _distortionDistance = initialBoxList.length == 7
+        ? BoxContainerConfig.distortionSevenDistance
+        : BoxContainerConfig.distortionDistance;
 
-      width = screenSize.width - (tile * BoxContainerConfig.containerTouchArea);
-      height = _chosenBoxWidth + _swappingBoxWidth;
+    width = screenSize.width - (tile * BoxContainerConfig.containerTouchArea);
+    height = _chosenBoxWidth + _swappingBoxWidth;
 
-      x = 0;
-      y = initialBoxList.length == 7
-          ? screenSize.height -
-              (tile * BoxContainerConfig.containerSevenPositionY)
-          : screenSize.height - (tile * BoxContainerConfig.containerPositionY);
+    x = 0;
+    y = initialBoxList.length == 7
+        ? screenSize.height -
+            (tile * BoxContainerConfig.containerSevenPositionY)
+        : screenSize.height - (tile * BoxContainerConfig.containerPositionY);
 
-      _chosenPositionY =
-          y - (_chosenBoxWidth - _swappingBoxWidth) / initialBoxList.length;
+    _chosenPositionY =
+        y - (_chosenBoxWidth - _swappingBoxWidth) / initialBoxList.length;
 
-      _containerClip = Rect.fromLTRB(
-        x,
-        height,
-        screenSize.width,
-        screenSize.height,
-      );
-      boxContainerClip = Rect.fromCenter(
-        center: Offset(screenSize.width / 2, y),
-        width: screenSize.width,
-        height: _chosenBoxWidth * BoxContainerConfig.containerClipSize,
-      );
+    _containerClip = Rect.fromLTRB(
+      x,
+      height,
+      screenSize.width,
+      screenSize.height,
+    );
+    boxContainerClip = Rect.fromCenter(
+      center: Offset(screenSize.width / 2, y),
+      width: screenSize.width,
+      height: _chosenBoxWidth * BoxContainerConfig.containerClipSize,
+    );
 
-      final spacing = initialBoxList.length == 7
-          ? (tile * BoxContainerConfig.gapSevenSize)
-          : (tile * BoxContainerConfig.gapSize);
+    final spacing = initialBoxList.length == 7
+        ? (tile * BoxContainerConfig.gapSevenSize)
+        : (tile * BoxContainerConfig.gapSize);
 
-      _resizeEachBox(
-        spacing: spacing,
-        bigWidth: _chosenBoxWidth,
-        smallWidth: _swappingBoxWidth,
-        width: size.width,
-      );
+    _resizeEachBox(
+      spacing: spacing,
+      bigWidth: _chosenBoxWidth,
+      smallWidth: _swappingBoxWidth,
+      width: size.width,
+    );
 
-      _distributeAssetsBoxesOnScreen();
-    } else {
-      isChangeWave = false;
-    }
+    _distributeAssetsBoxesOnScreen();
 
     _resizeInProgress = false;
   }

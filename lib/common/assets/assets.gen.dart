@@ -65,6 +65,14 @@ class $AssetsImagesGen {
   AssetGenImage get cloudsBackground =>
       const AssetGenImage('assets/images/clouds_background.png');
 
+  /// File path: assets/images/crafting_screen.png
+  AssetGenImage get craftingScreen =>
+      const AssetGenImage('assets/images/crafting_screen.png');
+
+  /// File path: assets/images/dima_photo.png
+  AssetGenImage get dimaPhoto =>
+      const AssetGenImage('assets/images/dima_photo.png');
+
   /// File path: assets/images/down.png
   AssetGenImage get down => const AssetGenImage('assets/images/down.png');
 
@@ -86,6 +94,13 @@ class $AssetsImagesGen {
   /// File path: assets/images/energy.png
   AssetGenImage get energy => const AssetGenImage('assets/images/energy.png');
 
+  /// File path: assets/images/fog.png
+  AssetGenImage get fog => const AssetGenImage('assets/images/fog.png');
+
+  /// File path: assets/images/fog_dark.png
+  AssetGenImage get fogDark =>
+      const AssetGenImage('assets/images/fog_dark.png');
+
   /// File path: assets/images/game_mode_cathcer.png
   AssetGenImage get gameModeCathcer =>
       const AssetGenImage('assets/images/game_mode_cathcer.png');
@@ -100,6 +115,13 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/glass.png
   AssetGenImage get glass => const AssetGenImage('assets/images/glass.png');
+
+  /// File path: assets/images/hole.png
+  AssetGenImage get hole => const AssetGenImage('assets/images/hole.png');
+
+  /// File path: assets/images/hole_mask.png
+  AssetGenImage get holeMask =>
+      const AssetGenImage('assets/images/hole_mask.png');
 
   /// File path: assets/images/icon_forbidden.png
   AssetGenImage get iconForbidden =>
@@ -120,6 +142,10 @@ class $AssetsImagesGen {
   AssetGenImage get logoDescription =>
       const AssetGenImage('assets/images/logo_description.png');
 
+  /// File path: assets/images/nikita_photo.png
+  AssetGenImage get nikitaPhoto =>
+      const AssetGenImage('assets/images/nikita_photo.png');
+
   /// File path: assets/images/organic.png
   AssetGenImage get organic => const AssetGenImage('assets/images/organic.png');
 
@@ -137,12 +163,48 @@ class $AssetsImagesGen {
   SvgGenImage get recycleLogoSvg =>
       const SvgGenImage('assets/images/recycle_logo.svg');
 
+  /// File path: assets/images/sasha_photo.png
+  AssetGenImage get sashaPhoto =>
+      const AssetGenImage('assets/images/sasha_photo.png');
+
+  /// File path: assets/images/screenshot_game_1.png
+  AssetGenImage get screenshotGame1 =>
+      const AssetGenImage('assets/images/screenshot_game_1.png');
+
+  /// File path: assets/images/screenshot_game_2.png
+  AssetGenImage get screenshotGame2 =>
+      const AssetGenImage('assets/images/screenshot_game_2.png');
+
+  /// File path: assets/images/screenshot_game_3.png
+  AssetGenImage get screenshotGame3 =>
+      const AssetGenImage('assets/images/screenshot_game_3.png');
+
   /// File path: assets/images/unicorn_animation.png
   AssetGenImage get unicornAnimation =>
       const AssetGenImage('assets/images/unicorn_animation.png');
 
   /// File path: assets/images/up.png
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
+
+  /// File path: assets/images/vitya_photo.png
+  AssetGenImage get vityaPhoto =>
+      const AssetGenImage('assets/images/vitya_photo.png');
+
+  /// File path: assets/images/vova_photo.png
+  AssetGenImage get vovaPhoto =>
+      const AssetGenImage('assets/images/vova_photo.png');
+
+  /// File path: assets/images/wallet_screen.png
+  AssetGenImage get walletScreen =>
+      const AssetGenImage('assets/images/wallet_screen.png');
+
+  /// File path: assets/images/yehor_photo.png
+  AssetGenImage get yehorPhoto =>
+      const AssetGenImage('assets/images/yehor_photo.png');
+
+  /// File path: assets/images/yura_photo.png
+  AssetGenImage get yuraPhoto =>
+      const AssetGenImage('assets/images/yura_photo.png');
 
   /// List of all assets
   List<dynamic> get values => [
@@ -155,28 +217,44 @@ class $AssetsImagesGen {
         artifactShampoo,
         clouds,
         cloudsBackground,
+        craftingScreen,
+        dimaPhoto,
         down,
         downloadAppleStoreButton,
         downloadGooglePlayButton,
         earth,
         earthHalo,
         energy,
+        fog,
+        fogDark,
         gameModeCathcer,
         gameModeClicker,
         gameModeFinder,
         glass,
+        hole,
+        holeMask,
         iconForbidden,
         iconGeer,
         iconOk,
         iconWallet,
         logoDescription,
+        nikitaPhoto,
         organic,
         paper,
         plastic,
         recycleLogoPng,
         recycleLogoSvg,
+        sashaPhoto,
+        screenshotGame1,
+        screenshotGame2,
+        screenshotGame3,
         unicornAnimation,
-        up
+        up,
+        vityaPhoto,
+        vovaPhoto,
+        walletScreen,
+        yehorPhoto,
+        yuraPhoto
       ];
 }
 

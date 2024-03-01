@@ -50,7 +50,7 @@ class ButtonAnimated extends SpriteAnimationComponent {
   void onGameResize(Vector2 size) {
     super.onGameResize(size);
     tappingArea = Rect.fromCenter(
-      center: Offset(x, y + (height / 3)),
+      center: Offset(position.x, position.y + (height / 3)),
       width: width * ButtonsContainerConfig.buttonTapAreaWidth,
       height: height * ButtonsContainerConfig.buttonTapAreaHeight,
     );

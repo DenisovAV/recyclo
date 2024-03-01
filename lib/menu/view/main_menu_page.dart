@@ -6,6 +6,7 @@ import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dar
 import 'package:flutter_game_challenge/catcher_game/catcher_game_page.dart';
 import 'package:flutter_game_challenge/clicker_game/clicker_game_page.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/finder_game/finder_game_page.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';
 import 'package:flutter_game_challenge/menu/view/menu_item.dart';
@@ -196,9 +197,7 @@ class _ChooseGameContent extends StatelessWidget {
             MenuItem(
               text: context.l10n.gameModeFinderItemTitle,
               assetId: Assets.images.gameModeFinder.path,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToSettings();
-              },
+              onTap: () => _handleNavigateToFinderGame(context),
             ),
           ],
         ),
@@ -214,6 +213,11 @@ class _ChooseGameContent extends StatelessWidget {
   void _handleNavigateToClickerGame(BuildContext context) {
     Navigator.of(kRootNavigatorKey.currentContext!)
         .push<void>(ClickerGamePage.route());
+  }
+
+  void _handleNavigateToFinderGame(BuildContext context) {
+   Navigator.of(kRootNavigatorKey.currentContext!)
+        .push<void>(FinderGamePage.route());
   }
 }
 
