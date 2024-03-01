@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
 import 'package:flutter_game_challenge/common.dart';
@@ -25,40 +26,87 @@ class CatcherGamePage extends StatefulWidget {
 class _CatcherGamePageState extends State<CatcherGamePage> {
   CatcherGame? _game;
 
+  static const _maxGameWidth = 500.0;
+  static const _maxGameHeight = 1100.0;
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+
+  @override
+  dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     _game ??= CatcherGame();
 
     return Scaffold(
+      backgroundColor: FlutterGameChallengeColors.landingBackground,
       body: BlocProvider<TimerCubit>(
         create: (_) => ServiceProvider.get<TimerCubit>(),
         child: BlocListener<TimerCubit, TimerState>(
           listener: _handleTimerState,
-          child: Stack(
-            children: [
-              GameWidget(
-                game: _game!,
-                overlayBuilderMap: {
-                  CatcherGame.timerOverlayKey: (_, __) => const TimerOverlay(),
-                },
-              ),
-              SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      RoundButton(
-                        icon: Icons.keyboard_arrow_left,
-                        onPressed: _handleBackButton,
+          child: LayoutBuilder(builder: (context, constraints) {
+            return Stack(
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Assets.images.cloudsBackground.image(fit: BoxFit.fill),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: constraints.maxWidth > _maxGameWidth
+                          ? _maxGameWidth
+                          : constraints.maxWidth,
+                      maxHeight: constraints.maxHeight > _maxGameHeight
+                          ? _maxGameHeight
+                          : constraints.maxHeight,
+                    ),
+                    child: Material(
+                      elevation: 9,
+                      child: GameWidget(
+                        game: _game!,
+                        overlayBuilderMap: {
+                          CatcherGame.timerOverlayKey: (_, __) =>
+                              const TimerOverlay(),
+                        },
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        RoundButton(
+                          icon: Icons.keyboard_arrow_left,
+                          onPressed: _handleBackButton,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }),
         ),
       ),
     );
