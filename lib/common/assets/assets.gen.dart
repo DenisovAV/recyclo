@@ -84,20 +84,6 @@ class $AssetsImagesGen {
   AssetGenImage get downloadGooglePlayButton =>
       const AssetGenImage('assets/images/download_google_play_button.png');
 
-  /// File path: assets/images/earth.png
-  AssetGenImage get earth => const AssetGenImage('assets/images/earth.png');
-
-  /// File path: assets/images/down.png
-  AssetGenImage get down => const AssetGenImage('assets/images/down.png');
-
-  /// File path: assets/images/download_apple_store_button.png
-  AssetGenImage get downloadAppleStoreButton =>
-      const AssetGenImage('assets/images/download_apple_store_button.png');
-
-  /// File path: assets/images/download_google_play_button.png
-  AssetGenImage get downloadGooglePlayButton =>
-      const AssetGenImage('assets/images/download_google_play_button.png');
-
   /// File path: assets/images/earth.mov
   String get earth => 'assets/images/earth.mov';
 
@@ -142,10 +128,6 @@ class $AssetsImagesGen {
   AssetGenImage get logoDescription =>
       const AssetGenImage('assets/images/logo_description.png');
 
-  /// File path: assets/images/logo_description.png
-  AssetGenImage get logoDescription =>
-      const AssetGenImage('assets/images/logo_description.png');
-
   /// File path: assets/images/nikita_photo.png
   AssetGenImage get nikitaPhoto =>
       const AssetGenImage('assets/images/nikita_photo.png');
@@ -158,14 +140,6 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/plastic.png
   AssetGenImage get plastic => const AssetGenImage('assets/images/plastic.png');
-
-  /// File path: assets/images/recycle_logo.png
-  AssetGenImage get recycleLogoPng =>
-      const AssetGenImage('assets/images/recycle_logo.png');
-
-  /// File path: assets/images/recycle_logo.svg
-  SvgGenImage get recycleLogoSvg =>
-      const SvgGenImage('assets/images/recycle_logo.svg');
 
   /// File path: assets/images/recycle_logo.png
   AssetGenImage get recycleLogoPng =>
@@ -194,9 +168,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/unicorn_animation.png
   AssetGenImage get unicornAnimation =>
       const AssetGenImage('assets/images/unicorn_animation.png');
-
-  /// File path: assets/images/up.png
-  AssetGenImage get up => const AssetGenImage('assets/images/up.png');
 
   /// File path: assets/images/up.png
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
@@ -232,10 +203,6 @@ class $AssetsImagesGen {
         artifactShampoo,
         clouds,
         cloudsBackground,
-        down,
-        downloadAppleStoreButton,
-        downloadGooglePlayButton,
-        cloudsBackground,
         craftingScreen,
         dimaPhoto,
         down,
@@ -253,15 +220,10 @@ class $AssetsImagesGen {
         iconOk,
         iconWallet,
         logoDescription,
-        logoDescription,
         nikitaPhoto,
         organic,
         paper,
         plastic,
-        recycleLogoPng,
-        recycleLogoSvg,
-        unicornAnimation,
-        up
         recycleLogoPng,
         recycleLogoSvg,
         sashaPhoto,
