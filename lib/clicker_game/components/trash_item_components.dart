@@ -1,3 +1,4 @@
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flame/components.dart';
@@ -8,9 +9,13 @@ import 'package:flutter_game_challenge/clicker_game/game_models/trash_item.dart'
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
 
 class TrashItemComponent extends BodyComponent {
-  TrashItemComponent(this.trashData, this.position) : super();
-  static final baseSize = Vector2(50, 50);
+  TrashItemComponent(
+    this.trashData,
+    this.position,
+    this.baseSize,
+  ) : super();
 
+  final Vector2 baseSize;
   final Vector2 position;
   final TrashItemData trashData;
   late final SpriteComponent backgroundSprite;

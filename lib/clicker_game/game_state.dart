@@ -51,8 +51,12 @@ class ClickerState extends Component {
   }
 
   void _generateTrashItems() {
-    final cellWidth = TrashItemComponent.baseSize.x;
-    final cellHeight = TrashItemComponent.baseSize.y;
+    final dimension = gameWidgetSize.x < gameWidgetSize.y
+        ? gameWidgetSize.x / 6
+        : gameWidgetSize.y / 6;
+    final itemSize = Vector2(dimension, dimension);
+    final cellWidth = itemSize.x;
+    final cellHeight = itemSize.y;
 
     final columns =
         ((gameWidgetSize.x - 2 * ClickerConstraints.sidePadding) / cellWidth)
@@ -77,7 +81,11 @@ class ClickerState extends Component {
               : gameWidgetSize.y + (row - rowsVisible) * cellHeight,
         );
 
-        final trashItem = TrashItemComponent(_trashBin.randomTrash, position);
+        final trashItem = TrashItemComponent(
+          _trashBin.randomTrash,
+          position,
+          itemSize,
+        );
         trashItems.value.add(trashItem);
 
         if (row < rowsVisible) {
