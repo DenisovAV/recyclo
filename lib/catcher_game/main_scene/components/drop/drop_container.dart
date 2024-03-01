@@ -17,12 +17,14 @@ class DropContainer extends PositionComponent
     required this.scene,
     required this.catchCallback,
     required this.boxContainer,
+    required this.checkForWaveReset,
   });
 
   final MainScene scene;
 
   final BoxContainer boxContainer;
   final CatchCallback catchCallback;
+  final VoidCallback checkForWaveReset;
 
   final Map<RecycleType, List<Sprite>> _dropAssets =
       <RecycleType, List<Sprite>>{};
@@ -55,6 +57,13 @@ class DropContainer extends PositionComponent
 
   void resize(Size size) {
     final tile = game.sizeConfig.tileSize;
+    trajectory.clear();
+    leftTrajectory.clear();
+
+    if (children.isNotEmpty) {
+      removeAll(children);
+      checkForWaveReset();
+    }
 
     _dropWidth = tile * DropContainerConfig.dropSize;
 

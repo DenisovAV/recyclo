@@ -106,6 +106,8 @@ class ButtonsContainer extends PositionComponent
         ..x = overlayHook.x
         ..y = overlayHook.y +
             buttonsSize / ButtonsContainerConfig.buttonPauseOverlayPositionY;
+
+      super.onGameResize(size);
     }
   }
 
@@ -118,7 +120,7 @@ class ButtonsContainer extends PositionComponent
   @override
   void onTapDown(TapDownEvent event) {
     for (final button in buttonList) {
-      if (button.tappingArea.contains(event.devicePosition.toOffset()) &&
+      if (button.tappingArea.contains(event.canvasPosition.toOffset()) &&
           button.isVisible) {
         if (button.buttonType == ButtonType.pausePlay) {
           if (game.status != CatcherGameStatus.result) {
