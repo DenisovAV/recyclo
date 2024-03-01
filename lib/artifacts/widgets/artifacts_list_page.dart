@@ -18,6 +18,7 @@ class ArtifactsListPage extends StatelessWidget {
     return BlocBuilder<ArtifactsCubit, ArtifactsListState>(
       builder: (context, state) {
         return GridView.count(
+          padding: EdgeInsets.only(bottom: 20),
           crossAxisCount: 2,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
@@ -126,14 +127,18 @@ class _ArtifactItem extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          height: 40,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 4,
+                          ),
                           width: double.infinity,
                           alignment: Alignment.center,
                           color: FlutterGameChallengeColors.textStroke,
                           child: Text(
                             name,
+                            textAlign: TextAlign.center,
                             style: context.generalTextStyle(
-                              fontSize: 18,
+                              fontSize: 14,
                               color: FlutterGameChallengeColors.white,
                             ),
                           ),
