@@ -42,7 +42,7 @@ class TeamConstants {
     TeamMember(
       fullName: 'Yurii Hurtovyi',
       role: 'Designer',
-      photo: Assets.images.nikitaPhoto,
+      photo: Assets.images.yuraPhoto,
       color: FlutterGameChallengeColors.yuraColor,
     ),
   ];
