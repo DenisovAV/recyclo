@@ -77,11 +77,15 @@ class OverlayFog extends PositionComponent
   void _onTick() {
     numberOfTicks++;
 
-    if (game.gameState.currentTargetTypes.value.lastOrNull !=
-        currentCollisionItem?.trashData.classification) return;
-
     final itemToCollect = currentCollisionItem!;
-    itemToCollect.onCorrectItem();
+
+    if (game.gameState.currentTargetTypes.value.lastOrNull !=
+        itemToCollect.trashData.classification) {
+      itemToCollect.onTryCollectItem(Color.fromARGB(255, 240, 30, 30));
+      return;
+    }
+
+    itemToCollect.onTryCollectItem(Color.fromARGB(255, 76, 255, 48));
 
     if (timerTicksLimit > numberOfTicks || currentCollisionItem == null) return;
 
