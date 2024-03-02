@@ -65,8 +65,8 @@ class ArtifactDetails extends StatelessWidget {
                             ArtifactRequirementsStatus(
                               imagePath: Assets.images.organic.path,
                               count: state.model.requirements.organic,
-                              isEnough: state.trashReserve.organic >=
-                                  state.model.requirements.organic,
+                              isEnough:
+                                  state.trashReserve.organic >= state.model.requirements.organic,
                               color: FlutterGameChallengeColors.categoryGreen,
                             ),
                           if (state.model.requirements.plastic > 0) ...[
@@ -74,8 +74,8 @@ class ArtifactDetails extends StatelessWidget {
                             ArtifactRequirementsStatus(
                               imagePath: Assets.images.plastic.path,
                               count: state.model.requirements.plastic,
-                              isEnough: state.trashReserve.plastic >=
-                                  state.model.requirements.plastic,
+                              isEnough:
+                                  state.trashReserve.plastic >= state.model.requirements.plastic,
                               color: FlutterGameChallengeColors.categoryViolet,
                             ),
                           ],
@@ -84,8 +84,7 @@ class ArtifactDetails extends StatelessWidget {
                             ArtifactRequirementsStatus(
                               imagePath: Assets.images.glass.path,
                               count: state.model.requirements.glass,
-                              isEnough: state.trashReserve.glass >=
-                                  state.model.requirements.glass,
+                              isEnough: state.trashReserve.glass >= state.model.requirements.glass,
                               color: FlutterGameChallengeColors.categoryOrange,
                             ),
                           ],
@@ -94,8 +93,7 @@ class ArtifactDetails extends StatelessWidget {
                             ArtifactRequirementsStatus(
                               imagePath: Assets.images.paper.path,
                               count: state.model.requirements.paper,
-                              isEnough: state.trashReserve.paper >=
-                                  state.model.requirements.paper,
+                              isEnough: state.trashReserve.paper >= state.model.requirements.paper,
                               color: FlutterGameChallengeColors.categoryYellow,
                             ),
                           ],
@@ -133,8 +131,7 @@ class ArtifactDetails extends StatelessWidget {
                               ),
                             ));
                           },
-                          isActive: state.model.status ==
-                              ArtifactStatus.readyForCraft,
+                          isActive: state.model.status == ArtifactStatus.readyForCraft,
                           text: context.l10n.buttonCraft,
                         ),
                       ),
@@ -145,10 +142,14 @@ class ArtifactDetails extends StatelessWidget {
                           right: 20,
                           bottom: 20,
                         ),
-                        child: Assets.images.addToWallet.image(
-                          height: 52,
+                        child: InkWell(
+                          child: Assets.images.addToWallet.image(
+                            height: 52,
+                          ),
+                          onTap: () => BlocProvider.of<ArtifactDetailsCubit>(context)
+                              .showWallet(state.model),
                         ),
-                      ),
+                      )
                   ],
                 );
               },
@@ -266,8 +267,7 @@ class _ScrollableTextState extends State<_ScrollableText> {
                                   _imageMinHeight,
                             ),
                             ColoredBox(
-                              color:
-                                  FlutterGameChallengeColors.detailsBackground,
+                              color: FlutterGameChallengeColors.detailsBackground,
                               child: Column(
                                 children: [
                                   const SizedBox(height: 8),
@@ -294,9 +294,7 @@ class _ScrollableTextState extends State<_ScrollableText> {
                     Container(
                       height: 2,
                       decoration: BoxDecoration(
-                        color: _showUnderline
-                            ? FlutterGameChallengeColors.textStroke
-                            : null,
+                        color: _showUnderline ? FlutterGameChallengeColors.textStroke : null,
                       ),
                     ),
                   ],
