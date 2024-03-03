@@ -13,10 +13,8 @@ import 'package:flutter_game_challenge/finder_game/finder_game.dart';
 
 class OverlayFog extends PositionComponent
     with DragCallbacks, CollisionCallbacks, HasGameReference<FinderGame> {
-  static const int _kVerticalHolePositionOffset = 50;
-  static const int _kVerticalDecorationOffset = 10;
+  static const int _kVerticalHolePositionOffset = 56;
   static const double _kHoleZoomFactorSizeInPixels = 800;
-  static const double _kHoleDecorationSize = 146;
 
   static const double timerPeriod = 0.5;
   static const int timerTicksLimit = 4;
@@ -35,11 +33,9 @@ class OverlayFog extends PositionComponent
 
   late final Image maskImage;
   late final Image fogImage;
-  late final Image holeDecoration;
   late final Rect overlayTargetRect;
   late final RectangleHitbox collider;
   late final TimerComponent timerComponent;
-  late final SpriteComponent holeDecorationComponent;
 
   OverlayFog({
     required super.size,
@@ -65,9 +61,6 @@ class OverlayFog extends PositionComponent
       repeat: true,
     );
     await add(timerComponent);
-
-    holeDecorationComponent = SpriteComponent.fromImage(holeDecoration)
-      ..size = Vector2(_kHoleDecorationSize, _kHoleDecorationSize);
 
     collider = RectangleHitbox(
       position: position,
@@ -104,7 +97,6 @@ class OverlayFog extends PositionComponent
         ..position = holeHitboxPosition
         ..size = Vector2(20, 34),
     );
-    await add(holeDecorationComponent);
   }
 
   @override
@@ -119,7 +111,6 @@ class OverlayFog extends PositionComponent
 
     isDragInProgress = false;
     remove(collider);
-    remove(holeDecorationComponent);
   }
 
   @override
@@ -165,12 +156,6 @@ class OverlayFog extends PositionComponent
         '',
       ),
     );
-    holeDecoration = Flame.images.fromCache(
-      Assets.images.hole.path.replaceFirst(
-        'assets/images/',
-        '',
-      ),
-    );
   }
 
   void _getImageSizes() {
@@ -206,13 +191,6 @@ class OverlayFog extends PositionComponent
         ..restore();
       return;
     }
-
-    holeDecorationComponent.position = Vector2(
-        dragPosition.x - _kHoleDecorationSize / 2,
-        dragPosition.y +
-            _kVerticalHolePositionOffset / 2 -
-            _kHoleDecorationSize +
-            _kVerticalDecorationOffset);
 
     final maskFittedSizes = applyBoxFit(BoxFit.cover, maskScaledSize, rectSize);
 
