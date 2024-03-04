@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
 import 'package:flutter_game_challenge/common.dart';
@@ -28,26 +27,6 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
 
   static const _maxGameWidth = 500.0;
   static const _maxGameHeight = 1100.0;
-
-  @override
-  void initState() {
-    super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-  }
-
-  @override
-  dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
