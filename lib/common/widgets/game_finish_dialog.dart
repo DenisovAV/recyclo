@@ -23,6 +23,7 @@ Future<void> showGameFinishDialog({
             maxHeight: 600,
           ),
           child: Container(
+            padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(40),
               border: Border.all(
@@ -31,95 +32,88 @@ Future<void> showGameFinishDialog({
               ),
               color: FlutterGameChallengeColors.detailsBackground,
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 12),
-                  Flexible(
-                    child: Text(
-                      context.l10n.gameFinishDialogTitle,
-                      style: const TextStyle(
-                        color: FlutterGameChallengeColors.textStroke,
-                        fontSize: 36,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 12),
+                Flexible(
+                  child: Text(
+                    context.l10n.gameFinishDialogTitle,
+                    style: const TextStyle(
+                      color: FlutterGameChallengeColors.textStroke,
+                      fontSize: 36,
                     ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Flexible(
-                    child: Text(
-                      sortedItems.isEmpty
-                          ? context.l10n.gameFinishDialogTryAgainDescription
-                          : context.l10n.gameFinishDialogDescription,
-                      style: const TextStyle(
-                        color: FlutterGameChallengeColors.textStroke,
-                        fontSize: 18,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
+                ),
+                const SizedBox(height: 12),
+                Flexible(
+                  child: Text(
+                    sortedItems.isEmpty
+                        ? context.l10n.gameFinishDialogTryAgainDescription
+                        : context.l10n.gameFinishDialogDescription,
+                    style: const TextStyle(
+                      color: FlutterGameChallengeColors.textStroke,
+                      fontSize: 18,
                     ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
-                  if (sortedItems.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 24),
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          final desirableItemScale = constraints.maxWidth /
-                              ((ItemContainer.containerSize +
-                                      _itemsInnerPadding * 2) *
-                                  ItemType.values.length);
+                ),
+                if (sortedItems.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final desirableItemScale = constraints.maxWidth /
+                            ((ItemContainer.containerSize +
+                                    _itemsInnerPadding * 2) *
+                                ItemType.values.length);
 
-                          final itemScale = desirableItemScale > 1.0
-                              ? 1.0
-                              : desirableItemScale;
+                        final itemScale =
+                            desirableItemScale > 1.0 ? 1.0 : desirableItemScale;
 
-                          return SizedBox(
-                            height: ItemContainer.containerSize * itemScale,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: sortedItems
-                                  .map(
-                                    (e) => Padding(
-                                      padding: EdgeInsets.only(
-                                        right:
-                                            items.indexOf(e) < items.length - 1
-                                                ? _itemsInnerPadding
-                                                : 0.0,
-                                      ),
-                                      child: ItemContainer(
-                                        type: e.type,
-                                        count: e.score,
-                                        scale: itemScale,
-                                      ),
+                        return SizedBox(
+                          height: ItemContainer.containerSize * itemScale,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: sortedItems
+                                .map(
+                                  (e) => Padding(
+                                    padding: EdgeInsets.only(
+                                      right: items.indexOf(e) < items.length - 1
+                                          ? _itemsInnerPadding
+                                          : 0.0,
                                     ),
-                                  )
-                                  .toList(),
-                            ),
-                          );
-                        },
-                      ),
+                                    child: ItemContainer(
+                                      type: e.type,
+                                      count: e.score,
+                                      scale: itemScale,
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        );
+                      },
                     ),
-                  const SizedBox(
-                    height: 24,
                   ),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      onDismiss();
-                    },
-                    text: items.isEmpty
-                        ? context.l10n.gameFinishDialogTryAgainButtonTitle
-                        : context.l10n.gameFinishDialogButtonTitle,
-                  ),
-                ],
-              ),
+                const SizedBox(
+                  height: 24,
+                ),
+                FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    onDismiss();
+                  },
+                  text: items.isEmpty
+                      ? context.l10n.gameFinishDialogTryAgainButtonTitle
+                      : context.l10n.gameFinishDialogButtonTitle,
+                ),
+              ],
             ),
           ),
         );
