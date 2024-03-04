@@ -7,6 +7,8 @@ import 'package:flutter_game_challenge/clicker_game/components/bound_component.d
 import 'package:flutter_game_challenge/clicker_game/const/clicker_constraints.dart';
 import 'package:flutter_game_challenge/clicker_game/game_state.dart';
 
+import 'overlays/timer_reduction_effect.dart';
+
 class ClickerGame extends Forge2DGame with TapDetector {
   ClickerGame({
     required this.context,
@@ -62,6 +64,7 @@ class ClickerGame extends Forge2DGame with TapDetector {
         gameState.collectTrash(tappedItem);
       } else {
         tappedItem.onMiss();
+        overlays.add(TimerReductionEffect.id);
       }
     }
   }
