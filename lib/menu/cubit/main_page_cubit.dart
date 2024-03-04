@@ -19,4 +19,8 @@ class MainPageCubit extends Cubit<MainPageState> {
    void navigateToArtifactDetails() {
     emit(MainPageArtifactDetailsState());
   }
+
+  void navigateToTutorial() {
+    emit(MainPageTutorialState());
+  }
 }

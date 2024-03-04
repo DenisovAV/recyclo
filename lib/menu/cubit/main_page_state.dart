@@ -39,3 +39,11 @@ class MainPageArtifactDetailsState extends MainPageState {
           isBackgroundHighlighted: false,
         );
 }
+
+class MainPageTutorialState extends MainPageState {
+  MainPageTutorialState()
+      : super(
+          isBackgroundCompact: true,
+          isBackgroundHighlighted: false,
+        );
+}

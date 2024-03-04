@@ -95,6 +95,7 @@ class MainMenuPage extends StatelessWidget {
                                 MainPageArtifactDetailsState() =>
                                   _ArtifactsContent(),
                                 MainPageArtifactsState() => _ArtifactsContent(),
+                                MainPageTutorialState() => _TutorialContent(),
                               },
                             ),
                           ),
@@ -131,6 +132,12 @@ class _MainMenuContent extends StatelessWidget {
               text: context.l10n.mainMenuArtifactsItemTitle,
               onTap: () {
                 BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
+              },
+            ),
+            MenuItem(
+              text: context.l10n.mainMenuTutorialItemTitle,
+              onTap: () {
+                BlocProvider.of<MainPageCubit>(context).navigateToTutorial();
               },
             ),
           ],
@@ -192,6 +199,40 @@ class _ArtifactsContent extends StatelessWidget {
     return BlocProvider<ArtifactsCubit>(
       create: (_) => ServiceProvider.get<ArtifactsCubit>(),
       child: const ArtifactsListPage(),
+    );
+  }
+}
+
+class _TutorialContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: double.infinity,
+      decoration: BoxDecoration(
+        color: FlutterGameChallengeColors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+        ),
+        border: Border(
+          top: BorderSide(
+            width: 2,
+            color: FlutterGameChallengeColors.primary1,
+          ),
+          left: BorderSide(
+            width: 2,
+            color: FlutterGameChallengeColors.primary1,
+          ),
+          right: BorderSide(
+            width: 2,
+            color: FlutterGameChallengeColors.primary1,
+          ),
+        ),
+      ),
+      padding: EdgeInsets.all(28),
+      child: Assets.images.howToPlayWithoutSpaces.image(
+        fit: BoxFit.cover,
+      ),
     );
   }
 }

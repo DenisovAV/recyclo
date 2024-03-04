@@ -11,11 +11,16 @@ class TrashReserveRepository {
   final StreamController<TrashReserveModel> _reservedTrashController =
       StreamController<TrashReserveModel>();
   TrashReserveModel _reservedTrash = const TrashReserveModel.empty();
+  static int _defaultReservedTrash = 0;
 
   Stream<TrashReserveModel> get reservedTrashStream =>
       _reservedTrashController.stream;
 
   TrashReserveModel get reservedTrash => _reservedTrash;
+
+  static set setDefaultReservedTrash(int value) {
+    _defaultReservedTrash = value;
+  }
 
   Future<void> initialize() async {
     if (_isInitialized) {
@@ -27,11 +32,17 @@ class TrashReserveRepository {
     _sharedPreferences = await SharedPreferences.getInstance();
 
     final reservedTrash = TrashReserveModel(
-      plastic: _sharedPreferences.getInt(_StorageKeys.plasticCountKey) ?? 0,
-      organic: _sharedPreferences.getInt(_StorageKeys.organicCountKey) ?? 0,
-      glass: _sharedPreferences.getInt(_StorageKeys.glassCountKey) ?? 0,
-      paper: _sharedPreferences.getInt(_StorageKeys.paperCountKey) ?? 0,
-      electronics: _sharedPreferences.getInt(_StorageKeys.electronicsCountKey) ?? 0,
+      plastic: _sharedPreferences.getInt(_StorageKeys.plasticCountKey) ??
+          _defaultReservedTrash,
+      organic: _sharedPreferences.getInt(_StorageKeys.organicCountKey) ??
+          _defaultReservedTrash,
+      glass: _sharedPreferences.getInt(_StorageKeys.glassCountKey) ??
+          _defaultReservedTrash,
+      paper: _sharedPreferences.getInt(_StorageKeys.paperCountKey) ??
+          _defaultReservedTrash,
+      electronics:
+          _sharedPreferences.getInt(_StorageKeys.electronicsCountKey) ??
+              _defaultReservedTrash,
     );
 
     _reservedTrash = reservedTrash;
