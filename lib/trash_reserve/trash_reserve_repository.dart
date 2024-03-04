@@ -27,17 +27,11 @@ class TrashReserveRepository {
     _sharedPreferences = await SharedPreferences.getInstance();
 
     final reservedTrash = TrashReserveModel(
-      // plastic: _sharedPreferences.getInt(_StorageKeys.plasticCountKey) ?? 0,
-      // organic: _sharedPreferences.getInt(_StorageKeys.organicCountKey) ?? 0,
-      // glass: _sharedPreferences.getInt(_StorageKeys.glassCountKey) ?? 0,
-      // paper: _sharedPreferences.getInt(_StorageKeys.paperCountKey) ?? 0,
-      // electronics: _sharedPreferences.getInt(_StorageKeys.electronicsCountKey) ?? 0,
-      //TODO Remove it later. Just for test
-      plastic: _sharedPreferences.getInt(_StorageKeys.plasticCountKey) ?? 130,
-      organic: _sharedPreferences.getInt(_StorageKeys.organicCountKey) ?? 200,
-      glass: _sharedPreferences.getInt(_StorageKeys.glassCountKey) ?? 323,
-      paper: _sharedPreferences.getInt(_StorageKeys.paperCountKey) ?? 465,
-      electronics: _sharedPreferences.getInt(_StorageKeys.electronicsCountKey) ?? 990,
+      plastic: _sharedPreferences.getInt(_StorageKeys.plasticCountKey) ?? 0,
+      organic: _sharedPreferences.getInt(_StorageKeys.organicCountKey) ?? 0,
+      glass: _sharedPreferences.getInt(_StorageKeys.glassCountKey) ?? 0,
+      paper: _sharedPreferences.getInt(_StorageKeys.paperCountKey) ?? 0,
+      electronics: _sharedPreferences.getInt(_StorageKeys.electronicsCountKey) ?? 0,
     );
 
     _reservedTrash = reservedTrash;

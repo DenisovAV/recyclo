@@ -15,9 +15,7 @@ import 'package:flutter_game_challenge/service_provider.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_widget.dart';
 
-final GlobalKey _nestedNavigatorKey = GlobalKey();
-
-class MainMenuPage extends StatefulWidget {
+class MainMenuPage extends StatelessWidget {
   const MainMenuPage({super.key});
 
   static Route<void> route() {
@@ -30,19 +28,6 @@ class MainMenuPage extends StatefulWidget {
         child: const MainMenuPage(),
       ),
     );
-  }
-
-  @override
-  State<MainMenuPage> createState() => _MainMenuPageState();
-}
-
-class _MainMenuPageState extends State<MainMenuPage> {
-  final _heroController = HeroController();
-
-  @override
-  void dispose() {
-    _heroController.dispose();
-    super.dispose();
   }
 
   @override
@@ -75,16 +60,13 @@ class _MainMenuPageState extends State<MainMenuPage> {
                                   icon: Icons.keyboard_arrow_left,
                                   onPressed: () {
                                     if (state is MainPageArtifactDetailsState) {
+                                      kNestedNavigatorKey.currentState?.pop();
                                       BlocProvider.of<MainPageCubit>(context)
                                           .navigateToArtifacts();
                                     } else {
                                       BlocProvider.of<MainPageCubit>(context)
                                           .navigateToMainPage();
                                     }
-
-                                    Navigator.of(
-                                            _nestedNavigatorKey.currentContext!)
-                                        .pop();
                                   },
                                 ),
                               ),
@@ -104,12 +86,16 @@ class _MainMenuPageState extends State<MainMenuPage> {
                               left: 20,
                               right: 20,
                             ),
-                            child: Navigator(
-                              key: _nestedNavigatorKey,
-                              observers: [_heroController],
-                              onGenerateRoute: (_) => MaterialPageRoute(
-                                builder: (_) => _MainMenuContent(),
-                              ),
+                            child: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 200),
+                              child: switch (state) {
+                                MainPageInitialState() => _MainMenuContent(),
+                                MainPageChooseGameState() =>
+                                  _ChooseGameContent(),
+                                MainPageArtifactDetailsState() =>
+                                  _ArtifactsContent(),
+                                MainPageArtifactsState() => _ArtifactsContent(),
+                              },
                             ),
                           ),
                         ),
@@ -139,33 +125,12 @@ class _MainMenuContent extends StatelessWidget {
               text: context.l10n.mainMenuGamesItemTitle,
               onTap: () {
                 BlocProvider.of<MainPageCubit>(context).navigateToChooseGame();
-                Navigator.of(_nestedNavigatorKey.currentContext!).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => _ChooseGameContent(),
-                  ),
-                );
               },
             ),
             MenuItem(
               text: context.l10n.mainMenuArtifactsItemTitle,
               onTap: () {
                 BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
-                Navigator.of(_nestedNavigatorKey.currentContext!).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => _ArtifactsContent(),
-                  ),
-                );
-              },
-            ),
-            MenuItem(
-              text: context.l10n.mainMenuSettingsItemTitle,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToSettings();
-                Navigator.of(_nestedNavigatorKey.currentContext!).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => _SettingsContent(),
-                  ),
-                );
               },
             ),
           ],
@@ -216,7 +181,7 @@ class _ChooseGameContent extends StatelessWidget {
   }
 
   void _handleNavigateToFinderGame(BuildContext context) {
-   Navigator.of(kRootNavigatorKey.currentContext!)
+    Navigator.of(kRootNavigatorKey.currentContext!)
         .push<void>(FinderGamePage.route());
   }
 }
@@ -227,21 +192,6 @@ class _ArtifactsContent extends StatelessWidget {
     return BlocProvider<ArtifactsCubit>(
       create: (_) => ServiceProvider.get<ArtifactsCubit>(),
       child: const ArtifactsListPage(),
-    );
-  }
-}
-
-class _SettingsContent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Container(
-        decoration: BoxDecoration(
-          color: FlutterGameChallengeColors.black.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
     );
   }
 }
