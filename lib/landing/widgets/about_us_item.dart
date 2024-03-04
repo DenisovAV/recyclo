@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
 import 'package:flutter_game_challenge/landing/widgets/landing_item.dart';
 
 class AboutUsItem extends StatelessWidget {
@@ -19,7 +20,7 @@ class AboutUsItem extends StatelessWidget {
           child: Column(
             children: [
               Center(
-                child: Text(
+                child: BrandText(
                   l10n.aboutAppRecycle,
                   style: TextStyle(
                     fontSize: 48,
@@ -34,7 +35,7 @@ class AboutUsItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: Text(
+                    child: BrandText(
                       l10n.aboutAppRecycleContentText,
                       style: TextStyle(
                         fontSize: 20,
