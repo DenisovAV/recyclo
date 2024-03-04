@@ -3,6 +3,7 @@ import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/landing/common/team_constants.dart';
 import 'package:flutter_game_challenge/landing/models/team_member.dart';
+import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
 import 'package:flutter_game_challenge/landing/widgets/landing_item.dart';
 
 class TeamItem extends StatelessWidget {
@@ -13,7 +14,7 @@ class TeamItem extends StatelessWidget {
     final l10n = context.l10n;
 
     return LandingItem(
-        color: FlutterGameChallengeColors.teamBackground,
+        color: FlutterGameChallengeColors.aboutAppBackground,
         child: LayoutBuilder(builder: (context, constraints) {
           final isSmallDevice = constraints.maxWidth < 800;
 
@@ -22,7 +23,7 @@ class TeamItem extends StatelessWidget {
             child: Column(
               children: [
                 Center(
-                  child: Text(
+                  child: BrandText(
                     l10n.teamTitle,
                     style: TextStyle(
                       fontSize: 48,
@@ -89,14 +90,14 @@ class _TeamMemberWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              BrandText(
                 member.fullName,
                 style: TextStyle(
                   fontSize: 20,
                   color: FlutterGameChallengeColors.textStroke,
                 ),
               ),
-              Text(
+              BrandText(
                 member.role,
                 style: TextStyle(
                   fontSize: 16,

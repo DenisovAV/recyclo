@@ -514,8 +514,8 @@ class FlutterGameChallengeColors {
     },
   );
 
-  /// Color: #FF042B59
-  static const Color primary1 = Color(0xFF042B59);
+  /// Color: #FF4D3356
+  static const Color primary1 = Color(0xFF4D3356);
 
   /// MaterialColor:
   ///   50: #FFF6FBF3
