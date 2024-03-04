@@ -8,6 +8,7 @@ import 'package:flutter_game_challenge/loading/loading.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final kRootNavigatorKey = GlobalKey<NavigatorState>();
+final kNestedNavigatorKey = GlobalKey<NavigatorState>();
 
 class App extends StatelessWidget {
   const App({super.key});
