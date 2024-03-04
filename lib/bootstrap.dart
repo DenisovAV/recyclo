@@ -9,6 +9,8 @@ import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/service_provider.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
+import 'common/extensions/extensoins.dart';
+
 class AppBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
@@ -26,7 +28,7 @@ class AppBlocObserver extends BlocObserver {
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (!kIsWeb) {
+  if (ExtendedPlatform.isMobile) {
     await FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
   }
 

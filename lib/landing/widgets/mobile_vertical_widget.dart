@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
 
 class MobileVerticalWidget extends StatelessWidget {
   final String text;
@@ -22,7 +23,7 @@ class MobileVerticalWidget extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          Text(
+          BrandText(
             title!,
             style: TextStyle(
               color: FlutterGameChallengeColors.textStroke,
@@ -50,7 +51,7 @@ class MobileVerticalWidget extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),
-          child: Text(
+          child: BrandText(
             text,
             style: TextStyle(
               fontSize: 20,

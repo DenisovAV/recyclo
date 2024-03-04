@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/landing/index.dart';
+import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
 import 'package:flutter_game_challenge/landing/widgets/landing_item.dart';
 
 class MechanicsWidget extends StatelessWidget {
@@ -23,7 +24,7 @@ class MechanicsWidget extends StatelessWidget {
             child: Column(
               children: [
                 Center(
-                  child: Text(
+                  child: BrandText(
                     l10n.mechanicsTittle,
                     style: TextStyle(
                       fontSize: 36,
@@ -62,7 +63,7 @@ class MechanicsWidget extends StatelessWidget {
           child: Column(
             children: [
               Center(
-                child: Text(
+                child: BrandText(
                   l10n.mechanicsTittle,
                   style: TextStyle(
                     fontSize: 36,
@@ -81,7 +82,7 @@ class MechanicsWidget extends StatelessWidget {
                   Expanded(
                     child: Column(
                       children: [
-                        Text(
+                        BrandText(
                           l10n.craftingContent,
                           style: TextStyle(
                             color: FlutterGameChallengeColors.textStroke,
@@ -91,7 +92,7 @@ class MechanicsWidget extends StatelessWidget {
                         SizedBox(
                           height: 15,
                         ),
-                        Text(
+                        BrandText(
                           l10n.walletContent,
                           style: TextStyle(
                             color: FlutterGameChallengeColors.textStroke,
