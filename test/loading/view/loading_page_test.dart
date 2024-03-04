@@ -3,10 +3,8 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/cache.dart';
 import 'package:flutter/widgets.dart' hide Image;
-import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/loading/loading.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockingjay/mockingjay.dart';
@@ -15,28 +13,17 @@ import '../../helpers/helpers.dart';
 
 class _MockImages extends Mock implements Images {}
 
-class _MockAudioCache extends Mock implements AudioCache {}
-
 void main() {
   group('LoadingPage', () {
     late PreloadCubit preloadCubit;
     late _MockImages images;
-    late _MockAudioCache audio;
 
     setUp(() {
       preloadCubit = PreloadCubit(
         images = _MockImages(),
-        audio = _MockAudioCache(),
       );
 
       when(() => images.loadAll(any())).thenAnswer((_) async => <Image>[]);
-
-      when(() => audio.loadAll([Assets.audio.background, Assets.audio.effect])).thenAnswer(
-        (_) async => [
-          Uri.parse(Assets.audio.background),
-          Uri.parse(Assets.audio.effect),
-        ],
-      );
     });
 
     testWidgets('basic layout', (tester) async {
@@ -80,7 +67,8 @@ void main() {
     testWidgets('redirects after loading', (tester) async {
       final navigator = MockNavigator();
       when(navigator.canPop).thenReturn(true);
-      when(() => navigator.pushReplacement<void, void>(any())).thenAnswer((_) async {});
+      when(() => navigator.pushReplacement<void, void>(any()))
+          .thenAnswer((_) async {});
 
       await tester.pumpApp(
         LoadingPage(),
