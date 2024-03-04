@@ -118,6 +118,7 @@ class MainScene extends PositionComponent
     } else if (game.status == CatcherGameStatus.result) {
       _buttonsContainer.update(dt);
     } else if (game.status == CatcherGameStatus.tutorial) {
+      _boxContainer.update(dt);
       _tutorialContainer.update(dt);
     }
   }
@@ -196,10 +197,14 @@ class MainScene extends PositionComponent
       _boxContainer.handleCatch(isSuccessful: false);
     }
 
+    if (_omissionsToShowTutorial == 0) {
+      _omissionsToShowTutorial = 1;
+      _tutorialContainer.showTutorial();
+    }
+
     if (_omissionsToShowTutorial >=
-            DebugBalancingTableConfig.maxOmissionsToShowTutorial &&
-        !_buttonsContainer.isAnimationStarted) {
-      _omissionsToShowTutorial = 0;
+        DebugBalancingTableConfig.maxOmissionsToShowTutorial) {
+      _omissionsToShowTutorial = 1;
       _tutorialContainer.showTutorial();
     }
 
