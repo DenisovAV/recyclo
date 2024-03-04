@@ -24,9 +24,11 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<PreloadCubit, PreloadState>(
-      listenWhen: (prevState, state) => !prevState.isComplete && state.isComplete,
+      listenWhen: (prevState, state) =>
+          !prevState.isComplete && state.isComplete,
       listener: (context, state) => onPreloadComplete(context),
       child: const Scaffold(
+        backgroundColor: FlutterGameChallengeColors.primary1,
         body: Center(
           child: _LoadingInternal(),
         ),
@@ -54,8 +56,8 @@ class _LoadingInternal extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: AnimatedProgressBar(
                 progress: state.progress,
-                backgroundColor: FlutterGameChallengeColors.primary1,
-                foregroundColor: FlutterGameChallengeColors.white,
+                backgroundColor: FlutterGameChallengeColors.white,
+                foregroundColor: FlutterGameChallengeColors.detailsBackground,
               ),
             ),
             Text(
