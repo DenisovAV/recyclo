@@ -2,6 +2,7 @@ import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/landing/models/team_member.dart';
 
 class TeamConstants {
+  static const mobileCommunityLink = 'https://wearecommunity.io/communities/mobilepeople';
   static List<TeamMember> teams = <TeamMember>[
     TeamMember(
       fullName: 'Sasha Denisov',

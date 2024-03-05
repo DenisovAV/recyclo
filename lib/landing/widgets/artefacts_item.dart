@@ -193,7 +193,13 @@ class _ImagePageView extends StatelessWidget {
               onPageChanged: onPageChange,
               controller: controller,
               itemBuilder: (context, index) {
-                return Image.network(images[index]);
+                return ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  child: Image.network(
+                    images[index],
+                    fit: BoxFit.fill,
+                  ),
+                );
               },
             ),
           ),
