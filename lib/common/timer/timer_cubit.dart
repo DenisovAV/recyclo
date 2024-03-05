@@ -15,6 +15,13 @@ class TimerCubit extends Cubit<TimerState> {
   Timer? _timer;
   int _duration = 0;
 
+  /// additional param to timer for additional ticks
+  int _penalty = 0;
+
+  void set penalty(int ticks) {
+    _penalty += ticks;
+  }
+
   void start() {
     _duration = _defaultDuration;
     _stopwatch
@@ -43,6 +50,7 @@ class TimerCubit extends Cubit<TimerState> {
   }
 
   void restart() {
+    _penalty = 0;
     _stopwatch
       ..reset()
       ..start();
@@ -57,13 +65,14 @@ class TimerCubit extends Cubit<TimerState> {
   }
 
   void _startTimer() {
+    _penalty = 0;
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (_) => _tickTimer());
   }
 
   void _tickTimer() {
-    _duration = _defaultDuration - _stopwatch.elapsed.inSeconds;
-    if (_duration == 0) {
+    _duration = _defaultDuration - _stopwatch.elapsed.inSeconds - _penalty;
+    if (_duration <= 0) {
       _timer?.cancel();
       _safeEmit(TimerFinishedState());
     } else {

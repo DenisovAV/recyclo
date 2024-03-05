@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common/assets/colors.gen.dart';
+import 'package:flutter_game_challenge/common.dart';
 
 class TrashReserveItemWidget extends StatefulWidget {
   const TrashReserveItemWidget({
-    required this.color,
-    required this.imagePath,
+    required this.type,
     required this.count,
     this.isRounded = false,
   });
 
+  final ItemType type;
   final bool isRounded;
-  final Color color;
-  final String imagePath;
   final int count;
 
   @override
@@ -76,7 +74,7 @@ class _TrashReserveItemWidgetState extends State<TrashReserveItemWidget>
       width: 56,
       height: 64,
       decoration: BoxDecoration(
-        color: widget.color,
+        color: widget.type.color,
         border: const Border(
           left: BorderSide(
             color: FlutterGameChallengeColors.textStroke,
@@ -103,7 +101,7 @@ class _TrashReserveItemWidgetState extends State<TrashReserveItemWidget>
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
-              widget.imagePath,
+              widget.type.iconPath,
               width: 24,
               height: 24,
             ),

@@ -14,22 +14,24 @@ Future<void> showGameFinishDialog({
     barrierDismissible: false,
     builder: (context) => Dialog(
       backgroundColor: Colors.transparent,
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth: 600,
-          maxHeight: 600,
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40),
-            border: Border.all(
-              width: 2,
-              color: FlutterGameChallengeColors.textStroke,
-            ),
-            color: FlutterGameChallengeColors.detailsBackground,
+      child: Builder(builder: (context) {
+        final sortedItems = items.sortedByType();
+
+        return ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 600,
+            maxHeight: 600,
           ),
-          child: Padding(
+          child: Container(
             padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+              border: Border.all(
+                width: 2,
+                color: FlutterGameChallengeColors.textStroke,
+              ),
+              color: FlutterGameChallengeColors.detailsBackground,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -46,12 +48,10 @@ Future<void> showGameFinishDialog({
                     maxLines: 1,
                   ),
                 ),
-                const SizedBox(
-                  height: 12,
-                ),
+                const SizedBox(height: 12),
                 Flexible(
                   child: Text(
-                    items.isEmpty
+                    sortedItems.isEmpty
                         ? context.l10n.gameFinishDialogTryAgainDescription
                         : context.l10n.gameFinishDialogDescription,
                     style: const TextStyle(
@@ -62,7 +62,7 @@ Future<void> showGameFinishDialog({
                     maxLines: 1,
                   ),
                 ),
-                if (items.isNotEmpty)
+                if (sortedItems.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 24),
                     child: LayoutBuilder(
@@ -80,7 +80,7 @@ Future<void> showGameFinishDialog({
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
-                            children: items
+                            children: sortedItems
                                 .map(
                                   (e) => Padding(
                                     padding: EdgeInsets.only(
@@ -116,8 +116,8 @@ Future<void> showGameFinishDialog({
               ],
             ),
           ),
-        ),
-      ),
+        );
+      }),
     ),
   );
 }

@@ -10,8 +10,6 @@ import 'package:mocktail/mocktail.dart';
 
 class _MockImages extends Mock implements Images {}
 
-class _MockAudioCache extends Mock implements AudioCache {}
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -27,18 +25,8 @@ void main() {
           when(
             () => images.loadAll([Assets.images.unicornAnimation.path]),
           ).thenAnswer((invocation) => Future.value(<Image>[]));
-
-          audio = _MockAudioCache();
-          when(
-            () => audio.loadAll([Assets.audio.background, Assets.audio.effect]),
-          ).thenAnswer(
-            (invocation) async => [
-              Uri.parse(Assets.audio.background),
-              Uri.parse(Assets.audio.effect),
-            ],
-          );
         },
-        build: () => PreloadCubit(images, audio),
+        build: () => PreloadCubit(images),
         act: (bloc) => bloc.loadSequentially(),
         expect: () => [
           isA<PreloadState>()
@@ -62,9 +50,6 @@ void main() {
               .having((s) => s.loadedCount, 'loadedCount', equals(2)),
         ],
         verify: (bloc) {
-          verify(
-            () => audio.loadAll([Assets.audio.background, Assets.audio.effect]),
-          ).called(1);
           verify(
             () => images.loadAll([Assets.images.unicornAnimation.path]),
           ).called(1);

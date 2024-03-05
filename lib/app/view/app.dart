@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/cache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +23,6 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (_) => PreloadCubit(
             Images(prefix: ''),
-            AudioCache(prefix: ''),
           )..loadSequentially(),
         ),
       ],
