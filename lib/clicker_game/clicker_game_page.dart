@@ -19,7 +19,14 @@ class ClickerGamePage extends StatefulWidget {
 
   static MaterialPageRoute<void> route() {
     return MaterialPageRoute<void>(
-      builder: (_) => const ClickerGamePage(),
+      builder: (_) => MultiBlocProvider(providers: [
+        BlocProvider<TimerCubit>(
+          create: (_) => ServiceProvider.get<TimerCubit>(),
+        ),
+        BlocProvider<TutorialCubit>(
+          create: (_) => ServiceProvider.get<TutorialCubit>(),
+        ),
+      ], child: const ClickerGamePage()),
     );
   }
 
@@ -39,41 +46,48 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider<TimerCubit>(
-        create: (_) => ServiceProvider.get<TimerCubit>(),
-        child: BlocListener<TimerCubit, TimerState>(
-          listener: (context, state) => _handleTimerState(
-            context,
-            state,
-            _game.gameState,
+      body: BlocListener<TimerCubit, TimerState>(
+        listener: (context, state) => _handleTimerState(
+          context,
+          state,
+          _game.gameState,
+        ),
+        child: GameWidget(
+          game: _game,
+          overlayBuilderMap: {
+            GameHUD.id: (_, ClickerGame game) => GameHUD(
+                  game: game,
+                  handleRightButton: _handleBackButton,
+                ),
+            GameStartOverlay.id: (context, __) => GameStartOverlay(
+                  onPressed: () => _handleGameStart(context),
+                ),
+            TimerReductionEffect.id: (context, __) => TimerReductionEffect(
+                  text: '-5',
+                  onAnimationEnded: () {
+                    context.read<TimerCubit>().penalty = 5;
+                    _game.overlays.remove(TimerReductionEffect.id);
+                  },
+                ),
+            TutorialOverlay.id: (context, __) => TutorialOverlay(
+                  onBackButtonPressed: _handleBackButton,
+                  onGameStart: () => _handleTutorialCompleted(context),
+                ),
+          },
+          backgroundBuilder: (context) => Container(
+            // color: FlutterGameChallengeColors.blueSky,
+            color: const Color(0xFF72A8CD),
           ),
-          child: GameWidget(
-            game: _game,
-            overlayBuilderMap: {
-              GameHUD.id: (_, ClickerGame game) => GameHUD(
-                    game: game,
-                    handleRightButton: _handleBackButton,
-                  ),
-              GameStartOverlay.id: (context, __) => GameStartOverlay(
-                    onPressed: () => _handleGameStart(context),
-                  ),
-              TimerReductionEffect.id: (context, __) => TimerReductionEffect(
-                    text: '-5',
-                    onAnimationEnded: () {
-                      context.read<TimerCubit>().penalty = 5;
-                      _game.overlays.remove(TimerReductionEffect.id);
-                    },
-                  ),
-            },
-            backgroundBuilder: (context) => Container(
-              // color: FlutterGameChallengeColors.blueSky,
-              color: const Color(0xFF72A8CD),
-            ),
-            initialActiveOverlays: const [
-              GameHUD.id,
-              GameStartOverlay.id,
-            ],
-          ),
+          initialActiveOverlays:
+              context.read<TutorialCubit>().state.isTutorialShownBefore
+                  ? [
+                      GameHUD.id,
+                      GameStartOverlay.id,
+                    ]
+                  : [
+                      GameHUD.id,
+                      TutorialOverlay.id,
+                    ],
         ),
       ),
     );
@@ -86,6 +100,12 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
   void _handleGameStart(BuildContext context) {
     _game.overlays.remove(GameStartOverlay.id);
     context.read<TimerCubit>().play();
+  }
+
+  void _handleTutorialCompleted(BuildContext context) {
+    _game.overlays.remove(TutorialOverlay.id);
+    context.read<TimerCubit>().play();
+    context.read<TutorialCubit>().tutorialIsShown();
   }
 
   void _handleTimerState(

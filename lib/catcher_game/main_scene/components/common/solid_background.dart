@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flutter_game_challenge/catcher_game/common/config.dart';
+import 'package:flutter_game_challenge/common.dart';
 
 class SolidBackground extends PositionComponent {
   SolidBackground() {
@@ -16,7 +17,8 @@ class SolidBackground extends PositionComponent {
 
   late Rect rect;
   final Paint paint = Paint();
-  static const _defaultSolidBackgroundColor = Color(0xFFE0EBF1);
+  static const _defaultSolidBackgroundColor =
+      FlutterGameChallengeColors.tutorialBackground;
 
   @override
   void render(Canvas canvas) {

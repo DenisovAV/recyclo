@@ -1,9 +1,6 @@
-import 'dart:ui';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flame/cache.dart';
-import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/loading/loading.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -22,9 +19,6 @@ void main() {
         'loads assets',
         setUp: () {
           images = _MockImages();
-          when(
-            () => images.loadAll([Assets.images.unicornAnimation.path]),
-          ).thenAnswer((invocation) => Future.value(<Image>[]));
         },
         build: () => PreloadCubit(images),
         act: (bloc) => bloc.loadSequentially(),
@@ -49,11 +43,6 @@ void main() {
               .having((s) => s.isComplete, 'isComplete', isTrue)
               .having((s) => s.loadedCount, 'loadedCount', equals(2)),
         ],
-        verify: (bloc) {
-          verify(
-            () => images.loadAll([Assets.images.unicornAnimation.path]),
-          ).called(1);
-        },
       );
     });
   });

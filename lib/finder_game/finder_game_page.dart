@@ -4,14 +4,12 @@ import 'package:collection/collection.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/clicker_game/clicker_game.dart';
-import 'package:flutter_game_challenge/clicker_game/game_state.dart';
 import 'package:flutter_game_challenge/clicker_game/overlays/game_hud.dart';
-import 'package:flutter_game_challenge/clicker_game/overlays/game_start_overlay.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/finder_game/finder_game.dart';
 import 'package:flutter_game_challenge/finder_game/finder_state.dart';
 import 'package:flutter_game_challenge/finder_game/overlays/finder_hud.dart';
+import 'package:flutter_game_challenge/finder_game/overlays/game_start_overlay.dart';
 import 'package:flutter_game_challenge/service_provider.dart';
 
 import '../trash_reserve/trash_reserve_repository.dart';
@@ -21,7 +19,14 @@ class FinderGamePage extends StatefulWidget {
 
   static MaterialPageRoute<void> route() {
     return MaterialPageRoute<void>(
-      builder: (_) => const FinderGamePage(),
+      builder: (_) => MultiBlocProvider(providers: [
+        BlocProvider<TimerCubit>(
+          create: (_) => ServiceProvider.get<TimerCubit>(),
+        ),
+        BlocProvider<TutorialCubit>(
+          create: (_) => ServiceProvider.get<TutorialCubit>(),
+        ),
+      ], child: const FinderGamePage()),
     );
   }
 
@@ -35,7 +40,7 @@ class _FinderGamePageState extends State<FinderGamePage> {
   @override
   void initState() {
     super.initState();
-    _game = FinderGame(context: context);
+    _game = FinderGame();
   }
 
   @override
@@ -59,15 +64,24 @@ class _FinderGamePageState extends State<FinderGamePage> {
               GameStartOverlay.id: (context, __) => GameStartOverlay(
                     onPressed: () => _handleGameStart(context),
                   ),
+              TutorialOverlay.id: (context, __) => TutorialOverlay(
+                    onBackButtonPressed: _handleBackButton,
+                    onGameStart: () => _handleTutorialCompleted(context),
+                  ),
             },
             backgroundBuilder: (context) => Container(
-              // color: FlutterGameChallengeColors.blueSky,
-              color: const Color(0xFF72A8CD),
+              color: FlutterGameChallengeColors.finderBackground,
             ),
-            initialActiveOverlays: const [
-              GameHUD.id,
-              GameStartOverlay.id,
-            ],
+            initialActiveOverlays:
+                context.read<TutorialCubit>().state.isTutorialShownBefore
+                    ? [
+                        GameHUD.id,
+                        GameStartOverlay.id,
+                      ]
+                    : [
+                        GameHUD.id,
+                        TutorialOverlay.id,
+                      ],
           ),
         ),
       ),
@@ -112,5 +126,11 @@ class _FinderGamePageState extends State<FinderGamePage> {
         },
       );
     }
+  }
+
+  void _handleTutorialCompleted(BuildContext context) {
+    _game.overlays.remove(TutorialOverlay.id);
+    context.read<TimerCubit>().play();
+    context.read<TutorialCubit>().tutorialIsShown();
   }
 }
