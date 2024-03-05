@@ -2,42 +2,42 @@ import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
 
 class Requirements {
   static const newspaper = ArtifactRequirements(
-    paper: 42,
-    plastic: 8,
+    paper: 9,
+    plastic: 6,
   );
 
   static const shampoo = ArtifactRequirements(
-    paper: 4,
-    plastic: 48,
-    organic: 82,
+    paper: 14,
+    plastic: 12,
+    organic: 18,
   );
 
   static const plant = ArtifactRequirements(
-    paper: 12,
-    plastic: 80,
-    organic: 144,
+    paper: 20,
+    plastic: 22,
+    organic: 28,
   );
 
   static const laptop = ArtifactRequirements(
-    paper: 40,
-    plastic: 240,
-    glass: 212,
-    electronics: 550,
+    paper: 32,
+    plastic: 34,
+    glass: 12,
+    electronics: 24,
   );
 
   static const car = ArtifactRequirements(
-    paper: 80,
-    plastic: 440,
-    organic: 92,
-    glass: 212,
-    electronics: 338,
+    paper: 8,
+    plastic: 32,
+    organic: 4,
+    glass: 40,
+    electronics: 22,
   );
 
   static const house = ArtifactRequirements(
-    paper: 520,
-    plastic: 682,
-    organic: 244,
-    glass: 350,
-    electronics: 420,
+    paper: 22,
+    plastic: 34,
+    organic: 12,
+    glass: 40,
+    electronics: 52,
   );
 }
