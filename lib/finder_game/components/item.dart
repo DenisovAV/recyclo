@@ -71,7 +71,7 @@ class Item extends PositionComponent with HasWorldReference {
       });
   }
 
-  void onCorrectItem() {
+  void onTryCollectItem(Color color) {
     Effect getShakeEffect() {
       return SequenceEffect(
         [
@@ -95,9 +95,9 @@ class Item extends PositionComponent with HasWorldReference {
       );
     }
 
-    Effect getColorEffect() {
+    Effect getColorEffect(Color color) {
       return ColorEffect(
-        Colors.green,
+        color,
         EffectController(
           duration: .5,
           alternate: true,
@@ -106,6 +106,6 @@ class Item extends PositionComponent with HasWorldReference {
     }
 
     trashSprite.add(getShakeEffect());
-    trashSprite.add(getColorEffect());
+    trashSprite.add(getColorEffect(color));
   }
 }

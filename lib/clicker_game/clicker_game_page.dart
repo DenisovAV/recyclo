@@ -12,6 +12,7 @@ import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/service_provider.dart';
 
 import '../trash_reserve/trash_reserve_repository.dart';
+import 'overlays/timer_reduction_effect.dart';
 
 class ClickerGamePage extends StatefulWidget {
   const ClickerGamePage({super.key});
@@ -55,6 +56,13 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
                   ),
               GameStartOverlay.id: (context, __) => GameStartOverlay(
                     onPressed: () => _handleGameStart(context),
+                  ),
+              TimerReductionEffect.id: (context, __) => TimerReductionEffect(
+                    text: '-5',
+                    onAnimationEnded: () {
+                      context.read<TimerCubit>().penalty = 5;
+                      _game.overlays.remove(TimerReductionEffect.id);
+                    },
                   ),
             },
             backgroundBuilder: (context) => Container(

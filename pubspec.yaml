@@ -54,7 +54,6 @@ flutter:
   generate: true
 
   assets:
-    - assets/audio/
     - assets/images/
     - assets/licenses/poppins/
     - assets/images/catcher/boxes/
