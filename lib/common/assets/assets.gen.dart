@@ -27,9 +27,13 @@ class $AssetsAudioGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/add_to_wallet.png
-  AssetGenImage get addToWallet =>
-      const AssetGenImage('assets/images/add_to_wallet.png');
+  /// File path: assets/images/add_to_wallet_android.png
+  AssetGenImage get addToWalletAndroid =>
+      const AssetGenImage('assets/images/add_to_wallet_android.png');
+
+  /// File path: assets/images/add_to_wallet_ios.png
+  AssetGenImage get addToWalletIos =>
+      const AssetGenImage('assets/images/add_to_wallet_ios.png');
 
   /// File path: assets/images/artifact_car.png
   AssetGenImage get artifactCar =>
@@ -123,6 +127,10 @@ class $AssetsImagesGen {
   AssetGenImage get holeMask =>
       const AssetGenImage('assets/images/hole_mask.png');
 
+  /// File path: assets/images/how_to_play_without_spaces.png
+  AssetGenImage get howToPlayWithoutSpaces =>
+      const AssetGenImage('assets/images/how_to_play_without_spaces.png');
+
   /// File path: assets/images/icon_forbidden.png
   AssetGenImage get iconForbidden =>
       const AssetGenImage('assets/images/icon_forbidden.png');
@@ -186,6 +194,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/up.png
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
 
+  /// File path: assets/images/view_in_google_wallet_android.png
+  AssetGenImage get viewInGoogleWalletAndroid =>
+      const AssetGenImage('assets/images/view_in_google_wallet_android.png');
+
   /// File path: assets/images/vitya_photo.png
   AssetGenImage get vityaPhoto =>
       const AssetGenImage('assets/images/vitya_photo.png');
@@ -208,7 +220,8 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
-        addToWallet,
+        addToWalletAndroid,
+        addToWalletIos,
         artifactCar,
         artifactHouse,
         artifactLaptop,
@@ -233,6 +246,7 @@ class $AssetsImagesGen {
         glass,
         hole,
         holeMask,
+        howToPlayWithoutSpaces,
         iconForbidden,
         iconGeer,
         iconOk,
@@ -250,6 +264,7 @@ class $AssetsImagesGen {
         screenshotGame3,
         unicornAnimation,
         up,
+        viewInGoogleWalletAndroid,
         vityaPhoto,
         vovaPhoto,
         walletScreen,
