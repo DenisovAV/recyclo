@@ -32,16 +32,16 @@ class MainPageArtifactsState extends MainPageState {
         );
 }
 
-class MainPageSettingsState extends MainPageState {
-  MainPageSettingsState()
+class MainPageArtifactDetailsState extends MainPageState {
+  MainPageArtifactDetailsState()
       : super(
           isBackgroundCompact: true,
           isBackgroundHighlighted: false,
         );
 }
 
-class MainPageArtifactDetailsState extends MainPageState {
-  MainPageArtifactDetailsState()
+class MainPageTutorialState extends MainPageState {
+  MainPageTutorialState()
       : super(
           isBackgroundCompact: true,
           isBackgroundHighlighted: false,

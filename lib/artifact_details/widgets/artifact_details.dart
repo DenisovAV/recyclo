@@ -11,6 +11,7 @@ import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifact_requirements_status.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifact_status_icon.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/common/extensions/extensoins.dart';
 
 class ArtifactDetails extends StatelessWidget {
   const ArtifactDetails({
@@ -138,23 +139,106 @@ class ArtifactDetails extends StatelessWidget {
                           text: context.l10n.buttonCraft,
                         ),
                       ),
-                    if (state.model.status == ArtifactStatus.crafted)
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          bottom: 20,
-                        ),
-                        child: Assets.images.addToWallet.image(
-                          height: 52,
-                        ),
-                      ),
+                    _AddToGoogleWallet(
+                      artifactStatus: state.model.status,
+                      artifactModel: state.model,
+                    ),
                   ],
                 );
               },
             ),
           ),
       },
+    );
+  }
+}
+
+class _AddToGoogleWallet extends StatelessWidget {
+  final ArtifactStatus artifactStatus;
+  final ArtifactModel artifactModel;
+
+  const _AddToGoogleWallet({
+    required this.artifactStatus,
+    required this.artifactModel,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 200),
+      child: Builder(
+        key: ValueKey(artifactStatus),
+        builder: (_) {
+          if (artifactStatus == ArtifactStatus.crafted) {
+            return InkWell(
+              onTap: () {
+                if (ExtendedPlatform.isIos) {
+                  return;
+                }
+
+                BlocProvider.of<ArtifactDetailsCubit>(context)
+                    .addToWallet(artifactModel);
+              },
+              child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                    bottom: 20,
+                  ),
+                  child: Builder(
+                    builder: (_) {
+                      if (ExtendedPlatform.isAndroid) {
+                        return Assets.images.addToWalletAndroid.image(
+                          height: 52,
+                        );
+                      }
+
+                      if (ExtendedPlatform.isIos) {
+                        return Opacity(
+                          opacity: 0.4,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Assets.images.addToWalletIos.image(
+                                height: 52,
+                              ),
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: Text(
+                                  context.l10n.featureInProgress,
+                                  style: context.generalTextStyle(
+                                    fontSize: 14,
+                                    color: FlutterGameChallengeColors.black,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+
+                      return const SizedBox();
+                    },
+                  )),
+            );
+          }
+
+          if (artifactStatus == ArtifactStatus.addedToWallet) {
+            return Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                bottom: 20,
+              ),
+              child: Assets.images.viewInGoogleWalletAndroid.image(
+                height: 52,
+              ),
+            );
+          }
+
+          return const SizedBox();
+        },
+      ),
     );
   }
 }

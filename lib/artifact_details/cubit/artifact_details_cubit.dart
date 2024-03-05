@@ -37,4 +37,10 @@ class ArtifactDetailsCubit extends Cubit<ArtifactDetailsState> {
 
     emit((state as ArtifactDetailsLoadedState).copyWithModel(updatedArtifact));
   }
+
+  void addToWallet(ArtifactModel artifact) {
+    final updatedArtifact = _artifactsRepository.addToGoogleWallet(artifact);
+
+    emit((state as ArtifactDetailsLoadedState).copyWithModel(updatedArtifact));
+  }
 }

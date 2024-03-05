@@ -41,6 +41,10 @@
   "@mainMenuGamesItemTitle": {
     "description": "Text shown in the first item of the main menu"
   },
+  "mainMenuTutorialItemTitle": "Tutorial",
+  "@mainMenuTutorialItemTitle": {
+    "description": "Text shown in the tutorial item of the main menu"
+  },
   "mainMenuArtifactsItemTitle": "Artifacts",
   "@mainMenuArtifactsItemTitle": {
     "description": "Text shown in the second item of the main menu"
@@ -224,5 +228,9 @@
   "reality": "Reality",
   "@reality": {
     "description": "Reality title on the artefacts"
+  },
+  "featureInProgress": "Feature in progress",
+  "@featureInProgress": {
+    "description": "Feature in progress text"
   }
 }
