@@ -137,13 +137,21 @@
   "@appName": {
     "description": "Name of application"
   },
-  "aboutAppRecycle": "About App Recyclo",
+  "aboutAppRecycle": "Game Recyclo",
   "@aboutAppRecycle": {
     "description": "Tittle for 'About app' item in landing page"
   },
-  "aboutAppRecycleContentText": "In many countries, sorting waste is a common practice, yet not everyone follows it, often due to a lack of understanding of its importance. This is even more pronounced in countries where such practices are not endorsed at a governmental level. Recognizing this gap, we decided to create a game that highlights the significance of waste sorting. Our Mobile People team (all teammates are members of [Mobile People community](\nhttps://wearecommunity.io/communities/mobilepeople))\ndecided to create a game that aims to **educate players about how sorting waste not only conserves resources but also facilitates the production of new goods from recycled materials**. By engaging with this interactive experience, we hope to inspire those who have never considered sorting their waste to start doing so, thereby making a small yet meaningful contribution to sustainability. Ultimately, this could lead to a significant impact, demonstrating how individual small actions can collectively make a difference in our world's health and longevity.",
-  "@aboutAppRecycleContentText": {
+  "aboutAppRecycleContentTextColumnLeft": "In many countries, sorting waste is a common practice, yet not everyone follows it, often due to a lack of understanding of its importance. \n\nEducate players about how sorting waste not only conserves resources but also facilitates the production of new goods from recycled materials. ",
+  "@aboutAppRecycleContentTextColumnLeft": {
     "description": "Text for content on the About us item page"
+  },
+  "aboutAppRecycleContentTextColumnRight": "By engaging with this interactive experience, we hope to inspire those who have never considered sorting their waste to start doing so, thereby making a small yet meaningful contribution to sustainability.",
+  "@aboutAppRecycleContentTextColumnRight": {
+    "description": "Text for content on the About us item page"
+  },
+  "aboutAppRecycleLink": "Our Mobile People team   >",
+  "@aboutAppRecycleLink": {
+    "description": "Link for content on the About us item page"
   },
   "buttonOk": "Ok",
   "@buttonOk": {
@@ -173,15 +181,15 @@
   "@game1Title": {
     "description": "Game 1 title"
   },
-  "game1Description": "Items will fly from the windows, and it's up to you to sort them into the correct bins.\\n\\nGet them right, and show you are wise. Don't worry if you get some wrong - after each round, you'll get a glimpse at the recycling cheat-sheet. Can you catch all the trash?",
+  "game1Description": "Items will fly from the windows, and it's up to you to sort them into the correct bins. \n\n Get them right, and show you are wise. Don't worry if you get some wrong - after each round, you'll get a glimpse at the recycling cheat-sheet. Can you catch all the trash?",
   "@game1Description": {
     "description": "Game 1 description"
   },
-  "game2Title": "Game",
+  "game2Title": "Clicker",
   "@game2Title": {
     "description": "Game 2 title"
   },
-  "game2Description": "Recycling 1 million laptops saves the same amount of energy required to power approximately 3,500 US homes for one full year.\n\u2028For every million cell phones we recycle we recover: 35,000 lbs. of copper, 772 lbs. of silver, 75 lbs. of gold and 33 lbs. of palladium.",
+  "game2Description": "Navigate a whirlwind of clicks in a game that blends chaos with strategy. Find, click, and collect amidst a jumble – precision is your key to triumph.\nEmbark on a click-driven quest through a sea of items, where identifying and gathering the right resources is the challenge. Each click is a step towards victory or misstep into chaos.",
   "@game2Description": {
     "description": "Game 2 description"
   },

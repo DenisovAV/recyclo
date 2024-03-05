@@ -11,19 +11,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
-class $AssetsAudioGen {
-  const $AssetsAudioGen();
-
-  /// File path: assets/audio/background.mp3
-  String get background => 'assets/audio/background.mp3';
-
-  /// File path: assets/audio/effect.mp3
-  String get effect => 'assets/audio/effect.mp3';
-
-  /// List of all assets
-  List<String> get values => [background, effect];
-}
-
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -179,10 +166,6 @@ class $AssetsImagesGen {
   AssetGenImage get screenshotGame3 =>
       const AssetGenImage('assets/images/screenshot_game_3.png');
 
-  /// File path: assets/images/unicorn_animation.png
-  AssetGenImage get unicornAnimation =>
-      const AssetGenImage('assets/images/unicorn_animation.png');
-
   /// File path: assets/images/up.png
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
 
@@ -248,7 +231,6 @@ class $AssetsImagesGen {
         screenshotGame1,
         screenshotGame2,
         screenshotGame3,
-        unicornAnimation,
         up,
         vityaPhoto,
         vovaPhoto,
@@ -573,7 +555,6 @@ class $AssetsImagesCatcherDropsPlasticGen {
 class Assets {
   Assets._();
 
-  static const $AssetsAudioGen audio = $AssetsAudioGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLicensesGen licenses = $AssetsLicensesGen();
 }
