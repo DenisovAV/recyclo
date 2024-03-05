@@ -11,25 +11,16 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
-class $AssetsAudioGen {
-  const $AssetsAudioGen();
-
-  /// File path: assets/audio/background.mp3
-  String get background => 'assets/audio/background.mp3';
-
-  /// File path: assets/audio/effect.mp3
-  String get effect => 'assets/audio/effect.mp3';
-
-  /// List of all assets
-  List<String> get values => [background, effect];
-}
-
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/add_to_wallet.png
-  AssetGenImage get addToWallet =>
-      const AssetGenImage('assets/images/add_to_wallet.png');
+  /// File path: assets/images/add_to_wallet_android.png
+  AssetGenImage get addToWalletAndroid =>
+      const AssetGenImage('assets/images/add_to_wallet_android.png');
+
+  /// File path: assets/images/add_to_wallet_ios.png
+  AssetGenImage get addToWalletIos =>
+      const AssetGenImage('assets/images/add_to_wallet_ios.png');
 
   /// File path: assets/images/artifact_car.png
   AssetGenImage get artifactCar =>
@@ -123,6 +114,10 @@ class $AssetsImagesGen {
   AssetGenImage get holeMask =>
       const AssetGenImage('assets/images/hole_mask.png');
 
+  /// File path: assets/images/how_to_play_without_spaces.png
+  AssetGenImage get howToPlayWithoutSpaces =>
+      const AssetGenImage('assets/images/how_to_play_without_spaces.png');
+
   /// File path: assets/images/icon_forbidden.png
   AssetGenImage get iconForbidden =>
       const AssetGenImage('assets/images/icon_forbidden.png');
@@ -179,12 +174,12 @@ class $AssetsImagesGen {
   AssetGenImage get screenshotGame3 =>
       const AssetGenImage('assets/images/screenshot_game_3.png');
 
-  /// File path: assets/images/unicorn_animation.png
-  AssetGenImage get unicornAnimation =>
-      const AssetGenImage('assets/images/unicorn_animation.png');
-
   /// File path: assets/images/up.png
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
+
+  /// File path: assets/images/view_in_google_wallet_android.png
+  AssetGenImage get viewInGoogleWalletAndroid =>
+      const AssetGenImage('assets/images/view_in_google_wallet_android.png');
 
   /// File path: assets/images/vitya_photo.png
   AssetGenImage get vityaPhoto =>
@@ -208,7 +203,8 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
-        addToWallet,
+        addToWalletAndroid,
+        addToWalletIos,
         artifactCar,
         artifactHouse,
         artifactLaptop,
@@ -233,6 +229,7 @@ class $AssetsImagesGen {
         glass,
         hole,
         holeMask,
+        howToPlayWithoutSpaces,
         iconForbidden,
         iconGeer,
         iconOk,
@@ -248,8 +245,8 @@ class $AssetsImagesGen {
         screenshotGame1,
         screenshotGame2,
         screenshotGame3,
-        unicornAnimation,
         up,
+        viewInGoogleWalletAndroid,
         vityaPhoto,
         vovaPhoto,
         walletScreen,
@@ -573,7 +570,6 @@ class $AssetsImagesCatcherDropsPlasticGen {
 class Assets {
   Assets._();
 
-  static const $AssetsAudioGen audio = $AssetsAudioGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLicensesGen licenses = $AssetsLicensesGen();
 }

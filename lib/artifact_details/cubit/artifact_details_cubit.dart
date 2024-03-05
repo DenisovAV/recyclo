@@ -41,15 +41,13 @@ class ArtifactDetailsCubit extends Cubit<ArtifactDetailsState> {
     emit((state as ArtifactDetailsLoadedState).copyWithModel(updatedArtifact));
   }
 
-  void showWallet(ArtifactModel model) {
-    if (model.status == ArtifactStatus.addedToWallet && model.uuid != null) {
-      _walletService.viewInWallet(model.uuid!);
-    } else {
-      final updatedArtifact = _artifactsRepository.addToGoogleWallet(model);
-      if (updatedArtifact.uuid != null) {
-        _walletService.addToWallet(updatedArtifact.artifactType, updatedArtifact.uuid!);
-      }
+  void addToWallet(ArtifactModel artifact) {
+    final updatedArtifact = _artifactsRepository.addToGoogleWallet(artifact);
+    try {
+      _walletService.addToWallet(updatedArtifact.artifactType, updatedArtifact.uuid!);
       emit((state as ArtifactDetailsLoadedState).copyWithModel(updatedArtifact));
+    } catch (e) {
+      print("Failed to add to wallet: '${e}'.");
     }
   }
 }

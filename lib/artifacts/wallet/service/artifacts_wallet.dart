@@ -87,7 +87,7 @@ const Map<ArtifactType, WalletPass> wallet = {
       reality:
       'Recycled materials offer a sustainable and innovative approach to gardening, transforming waste into valuable resources for plant cultivation. Plastic bottles, containers, and cans can be repurposed into pots and planters, while organic waste from kitchens and yards can be composted into nutrient-rich soil, serving as a natural fertilizer. Shredded paper, cardboard, and wood chips make excellent mulch, helping to retain soil moisture and suppress weeds. Additionally, recycled plastic bottles can be ingeniously converted into efficient drip irrigation systems, ensuring water conservation and direct root hydration.\n These eco-friendly practices not only reduce waste but also enhance the health and growth of plants. By utilizing recycled materials for compost, mulching, watering systems, and even as decorative elements, gardeners can create productive and aesthetically pleasing spaces. This approach promotes environmental sustainability, encouraging a harmonious relationship between human activities and nature, and demonstrates the practical benefits of recycling and resource conservation in gardening.',
       image:
-      'https://firebasestorage.googleapis.com/v0/b/recyclo-game.appspot.com/o/images%2Frpaper.png?alt=media&token=d6cde522-063e-47a8-8106-029c62a45b3c',
+      'https://firebasestorage.googleapis.com/v0/b/recyclo-game.appspot.com/o/images%2Frplant.png?alt=media&token=1611a458-05d6-45e3-9005-a251e3690af2',
       imageText: 'Recycled Plant Banner',
       heroImage:
       'https://firebasestorage.googleapis.com/v0/b/recyclo-game.appspot.com/o/wallet%2Fplant.png?alt=media&token=39e7ce59-1f72-464f-8514-aa1aeca0f8d5',
