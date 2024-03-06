@@ -237,26 +237,26 @@ packages:
     dependency: "direct main"
     description:
       name: cloud_functions
-      sha256: "44a88d02b1b1291bb291b8de756ff3f02d3a0c5c68dfc1c42c83c1529ba0416b"
+      sha256: "6c93bdee693d514693576bf66a5d56645482412b6230dc87669951aa60ec3d4b"
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.6"
+    version: "4.6.7"
   cloud_functions_platform_interface:
     dependency: transitive
     description:
       name: cloud_functions_platform_interface
-      sha256: "9b02f827013f37824de5ec02bd2a1838e47c899edd39df642d1437c68b6f1c3c"
+      sha256: "5e4c444c691ee134ba561029847c29b8082a7b33f442c3c52bc3c8416ca888a9"
       url: "https://pub.dev"
     source: hosted
-    version: "5.5.17"
+    version: "5.5.18"
   cloud_functions_web:
     dependency: transitive
     description:
       name: cloud_functions_web
-      sha256: "9ccd76057f2f5e20b8c2dc19e785993dd83edef1a9f49472cf0e12268da6781b"
+      sha256: "10b3c2cd559f2c5d801c2294462c55324db8523b071a5d7ca8a326b7aa795bbd"
       url: "https://pub.dev"
     source: hosted
-    version: "4.7.0"
+    version: "4.7.1"
   code_builder:
     dependency: transitive
     description:
@@ -373,10 +373,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "797379ea206eaeeb62499775de812761493d0692890fdc7f90b6183a3369176d"
+      sha256: a746f861618eef57a11d8b658a2db1fa5a336fc82ba65b7763d7e2292687de2b
       url: "https://pub.dev"
     source: hosted
-    version: "2.25.5"
+    version: "2.26.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -553,10 +553,10 @@ packages:
     dependency: "direct main"
     description:
       name: google_fonts
-      sha256: "5b1726fee554d1cc9db1baef8061b126567ff0a1140a03ed7de936e62f2ab98b"
+      sha256: b1ac0fe2832c9cc95e5e88b57d627c5e68c223b9657f4b96e1487aa9098c7b82
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.0"
+    version: "6.2.1"
   graphs:
     dependency: transitive
     description:
@@ -1222,10 +1222,10 @@ packages:
     dependency: "direct main"
     description:
       name: video_player
-      sha256: fbf28ce8bcfe709ad91b5789166c832cb7a684d14f571a81891858fefb5bb1c2
+      sha256: afc65f4b8bcb2c188f64a591f84fb471f4f2e19fc607c65fd8d2f8fedb3dec23
       url: "https://pub.dev"
     source: hosted
-    version: "2.8.2"
+    version: "2.8.3"
   video_player_android:
     dependency: transitive
     description:
@@ -1332,4 +1332,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.3.0 <4.0.0"
-  flutter: ">=3.19.0"
+  flutter: ">=3.19.2"

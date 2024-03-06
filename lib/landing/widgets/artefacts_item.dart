@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_game_challenge/artifacts/wallet/service/artifacts_wallet.dart';
+import 'package:flutter_game_challenge/artifacts/wallet/wallet_pass.dart';
 import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/common/artefact_constance.dart';
 import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
 import 'package:flutter_game_challenge/landing/widgets/landing_item.dart';
+
+final _artefacts = wallet.values.toList();
 
 class ArtefactsItem extends StatefulWidget {
   const ArtefactsItem({super.key});
@@ -56,7 +59,7 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                   children: [
                     _ImagePageView(
                       controller: _imagesController,
-                      images: artefacts.map((e) => e.image).toList(),
+                      images: _artefacts.map((e) => e.image).toList(),
                       onPageChange: _handleImagesPageViewChange,
                     ),
                     SizedBox(
@@ -65,7 +68,7 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                     _TextPageView(
                       controller: _descriptionsController,
                       onPageChange: _handleDescriptionPageViewChange,
-                      items: artefacts,
+                      items: _artefacts,
                     )
                   ],
                 )
@@ -99,7 +102,7 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                 children: [
                   _ImagePageView(
                     controller: _imagesController,
-                    images: artefacts.map((e) => e.image).toList(),
+                    images: _artefacts.map((e) => e.image).toList(),
                     onPageChange: _handleImagesPageViewChange,
                   ),
                   SizedBox(
@@ -108,7 +111,7 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                   _TextPageView(
                     controller: _descriptionsController,
                     onPageChange: _handleDescriptionPageViewChange,
-                    items: artefacts,
+                    items: _artefacts,
                   )
                 ],
               )
@@ -236,7 +239,7 @@ class _ImagePageView extends StatelessWidget {
 class _TextPageView extends StatelessWidget {
   final PageController controller;
   final ValueChanged<int> onPageChange;
-  final List<ArtefactDescriptions> items;
+  final List<WalletPass> items;
 
   const _TextPageView({
     required this.controller,
@@ -256,7 +259,7 @@ class _TextPageView extends StatelessWidget {
             maxHeight: 1000,
           ),
           child: PageView.builder(
-            itemCount: artefacts.length,
+            itemCount: items.length,
             controller: controller,
             onPageChanged: onPageChange,
             itemBuilder: (context, index) {
@@ -278,7 +281,7 @@ class _TextPageView extends StatelessWidget {
                       height: 5,
                     ),
                     BrandText(
-                      artefacts[index].details,
+                      item.details,
                       style: TextStyle(
                         fontSize: 20,
                         color: FlutterGameChallengeColors.textStroke,
