@@ -18,10 +18,13 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
   late final PageController _imagesController;
   late final PageController _descriptionsController;
 
+  late int activeIndex;
+
   @override
   void initState() {
-    _imagesController = PageController();
-    _descriptionsController = PageController();
+    activeIndex = 0;
+    _imagesController = PageController(initialPage: activeIndex);
+    _descriptionsController = PageController(initialPage: activeIndex);
     super.initState();
   }
 
@@ -100,10 +103,22 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _ImagePageView(
-                    controller: _imagesController,
-                    images: _artefacts.map((e) => e.image).toList(),
-                    onPageChange: _handleImagesPageViewChange,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _ImagePageView(
+                        controller: _imagesController,
+                        images: _artefacts.map((e) => e.image).toList(),
+                        onPageChange: _handleImagesPageViewChange,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      _DottedWidget(
+                        activeIndex: activeIndex,
+                        itemCount: _artefacts.length,
+                      ),
+                    ],
                   ),
                   SizedBox(
                     width: 50,
@@ -123,16 +138,22 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
   }
 
   void _handleImagesPageViewChange(int index) {
+    setState(() {
+      activeIndex = index;
+    });
     _descriptionsController.animateToPage(
-      index,
+      activeIndex,
       duration: Duration(milliseconds: 500),
       curve: Curves.ease,
     );
   }
 
   void _handleDescriptionPageViewChange(int index) {
+    setState(() {
+      activeIndex = index;
+    });
     _imagesController.animateToPage(
-      index,
+      activeIndex,
       duration: Duration(milliseconds: 500),
       curve: Curves.ease,
     );
@@ -181,26 +202,32 @@ class _ImagePageView extends StatelessWidget {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             height: isSmallDevice ? 300 : 350,
             width: isSmallDevice ? 300 : 350,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              border: Border.all(
-                width: 4,
-                color: FlutterGameChallengeColors.textStroke,
-              ),
-            ),
             child: PageView.builder(
               itemCount: images.length,
               onPageChanged: onPageChange,
               controller: controller,
               itemBuilder: (context, index) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  child: Image.network(
-                    images[index],
-                    fit: BoxFit.fill,
+                final image = images[index];
+
+                return Container(
+                  height: isSmallDevice ? 300 : 350,
+                  width: isSmallDevice ? 300 : 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                    border: Border.all(
+                      width: 4,
+                      color: FlutterGameChallengeColors.textStroke,
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(14)),
+                    child: Image.network(
+                      image,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 );
               },
@@ -233,6 +260,60 @@ class _ImagePageView extends StatelessWidget {
         ],
       );
     });
+  }
+}
+
+class _DottedWidget extends StatelessWidget {
+  final int activeIndex;
+  final int itemCount;
+
+  const _DottedWidget({
+    required this.activeIndex,
+    required this.itemCount,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 350,
+      height: 10,
+      child: Center(
+        child: SizedBox(
+          width: 120,
+          child: ListView.builder(
+              itemCount: itemCount,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: _Dot(isActive: index == activeIndex),
+                );
+              }),
+        ),
+      ),
+    );
+  }
+}
+
+class _Dot extends StatelessWidget {
+  final bool isActive;
+
+  const _Dot({required this.isActive});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 10,
+      height: 10,
+      decoration: BoxDecoration(
+        color: isActive ? FlutterGameChallengeColors.textStroke : Colors.transparent,
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        border: Border.all(
+          width: 2,
+          color: FlutterGameChallengeColors.textStroke,
+        ),
+      ),
+    );
   }
 }
 
