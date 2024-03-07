@@ -32,103 +32,86 @@ class MainMenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-        builder: (context) {
-          return Scaffold(
-            backgroundColor: FlutterGameChallengeColors.blueSky,
-            body: BlocBuilder<MainPageCubit, MainPageState>(
-              builder: (context, state) {
-                return PopScope(
-                  canPop: false,
-                  onPopInvoked: (_) async {
-                    if (state is MainPageInitialState) {
-                    } else {
-                      if (state is MainPageArtifactDetailsState) {
-                        kNestedNavigatorKey.currentState?.pop();
-                        BlocProvider.of<MainPageCubit>(context)
-                            .navigateToArtifacts();
-                      } else {
-                        BlocProvider.of<MainPageCubit>(context)
-                            .navigateToMainPage();
-                      }
-                    }
-                    return Future.value(false);
-                  },
-                  child: Stack(
+    return Scaffold(
+      backgroundColor: FlutterGameChallengeColors.blueSky,
+      body: BlocBuilder<MainPageCubit, MainPageState>(
+        builder: (context, state) {
+          return PopScope(
+            canPop: false,
+            onPopInvoked: (_) async {
+              _onBackBtn(state, context);
+              return Future.value(false);
+            },
+            child: Stack(
+              children: [
+                MainMenuBackground(
+                  isHighlighted: state.isBackgroundHighlighted,
+                  isCompact: state.isBackgroundCompact,
+                ),
+                SafeArea(
+                  bottom: false,
+                  child: Column(
                     children: [
-                      MainMenuBackground(
-                        isHighlighted: state.isBackgroundHighlighted,
-                        isCompact: state.isBackgroundCompact,
-                      ),
-                      SafeArea(
-                        bottom: false,
-                        child: Column(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(width: 20),
-                                Visibility(
-                                  visible: state is! MainPageInitialState,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 10),
-                                    child: RoundButton(
-                                      icon: Icons.keyboard_arrow_left,
-                                      onPressed: () {
-                                        if (state
-                                            is MainPageArtifactDetailsState) {
-                                          kNestedNavigatorKey.currentState?.pop();
-                                          BlocProvider.of<MainPageCubit>(context)
-                                              .navigateToArtifacts();
-                                        } else {
-                                          BlocProvider.of<MainPageCubit>(context)
-                                              .navigateToMainPage();
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                const Expanded(
-                                  child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: TrashReserveWidget(),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 40),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 20,
-                                  right: 20,
-                                ),
-                                child: AnimatedSwitcher(
-                                  duration: const Duration(milliseconds: 200),
-                                  child: switch (state) {
-                                    MainPageInitialState() => _MainMenuContent(),
-                                    MainPageChooseGameState() =>
-                                      _ChooseGameContent(),
-                                    MainPageArtifactDetailsState() =>
-                                      _ArtifactsContent(),
-                                    MainPageArtifactsState() =>
-                                      _ArtifactsContent(),
-                                    MainPageTutorialState() => _TutorialContent(),
-                                  },
-                                ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(width: 20),
+                          Visibility(
+                            visible: state is! MainPageInitialState,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: RoundButton(
+                                icon: Icons.keyboard_arrow_left,
+                                onPressed: () => _onBackBtn(state, context),
                               ),
                             ),
-                          ],
+                          ),
+                          const Expanded(
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: TrashReserveWidget(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 40),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            right: 20,
+                          ),
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 200),
+                            child: switch (state) {
+                              MainPageInitialState() => _MainMenuContent(),
+                              MainPageChooseGameState() => _ChooseGameContent(),
+                              MainPageArtifactDetailsState() =>
+                                _ArtifactsContent(),
+                              MainPageArtifactsState() => _ArtifactsContent(),
+                              MainPageTutorialState() => _TutorialContent(),
+                            },
+                          ),
                         ),
                       ),
                     ],
                   ),
-                );
-              },
+                ),
+              ],
             ),
           );
         },
-      );
+      ),
+    );
+  }
+
+  void _onBackBtn(MainPageState state, BuildContext context) {
+    if (state is MainPageArtifactDetailsState) {
+      kNestedNavigatorKey.currentState?.pop();
+      BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
+    } else {
+      BlocProvider.of<MainPageCubit>(context).navigateToMainPage();
+    }
   }
 }
 
