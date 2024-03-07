@@ -56,8 +56,8 @@ class _LoadingInternal extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: AnimatedProgressBar(
                 progress: state.progress,
-                backgroundColor: FlutterGameChallengeColors.white,
-                foregroundColor: FlutterGameChallengeColors.detailsBackground,
+                backgroundColor: FlutterGameChallengeColors.aboutAppBackground,
+                foregroundColor: FlutterGameChallengeColors.gamesBackground,
               ),
             ),
             Text(
