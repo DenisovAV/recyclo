@@ -54,7 +54,7 @@ class MobileVerticalWidget extends StatelessWidget {
           child: BrandText(
             text,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 16,
               color: FlutterGameChallengeColors.textStroke,
             ),
           ),

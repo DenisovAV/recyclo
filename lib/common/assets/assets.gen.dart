@@ -85,6 +85,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/energy.png
   AssetGenImage get energy => const AssetGenImage('assets/images/energy.png');
 
+  /// File path: assets/images/example_screen.png
+  AssetGenImage get exampleScreen =>
+      const AssetGenImage('assets/images/example_screen.png');
+
+  /// File path: assets/images/example_screen_mobile.png
+  AssetGenImage get exampleScreenMobile =>
+      const AssetGenImage('assets/images/example_screen_mobile.png');
+
   /// File path: assets/images/fog.png
   AssetGenImage get fog => const AssetGenImage('assets/images/fog.png');
 
@@ -221,6 +229,8 @@ class $AssetsImagesGen {
         earth,
         earthHalo,
         energy,
+        exampleScreen,
+        exampleScreenMobile,
         fog,
         fogDark,
         gameModeCathcer,

@@ -4,7 +4,12 @@ import 'package:flutter_game_challenge/landing/common/team_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LinkWidget extends StatelessWidget {
-  const LinkWidget({super.key});
+  final Color linkColor;
+
+  const LinkWidget({
+    super.key,
+    required this.linkColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +26,14 @@ class LinkWidget extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             border: Border.all(
               width: 1,
-              color: FlutterGameChallengeColors.aboutAppBackground,
+              color: linkColor,
             ),
           ),
           child: Text(
             l10n.aboutAppRecycleLink,
             style: TextStyle(
               fontSize: 14,
-              color: FlutterGameChallengeColors.aboutAppBackground,
+              color: linkColor,
             ),
           ),
         ),
