@@ -40,7 +40,7 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
     final l10n = context.l10n;
 
     return LayoutBuilder(builder: (context, constraints) {
-      final isSmallDevice = constraints.maxWidth < 850;
+      final isSmallDevice = constraints.maxWidth < 1150;
 
       if (isSmallDevice) {
         return LandingItem(
@@ -64,6 +64,13 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                       controller: _imagesController,
                       images: _artefacts.map((e) => e.image).toList(),
                       onPageChange: _handleImagesPageViewChange,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    _DottedWidget(
+                      activeIndex: activeIndex,
+                      itemCount: _artefacts.length,
                     ),
                     SizedBox(
                       width: 50,
@@ -111,12 +118,15 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                         images: _artefacts.map((e) => e.image).toList(),
                         onPageChange: _handleImagesPageViewChange,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       _DottedWidget(
                         activeIndex: activeIndex,
                         itemCount: _artefacts.length,
+                      ),
+                      const SizedBox(
+                        height: 15,
                       ),
                     ],
                   ),
@@ -176,90 +186,195 @@ class _ImagePageView extends StatelessWidget {
     return LayoutBuilder(builder: (context, constraints) {
       final isSmallDevice = constraints.maxWidth < 850;
 
-      return Row(
-        children: [
-          SizedBox(
-            height: 250,
-            width: isSmallDevice ? 25 : 40,
-            child: Material(
-              color: FlutterGameChallengeColors.textStroke,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16),
-                bottomLeft: Radius.circular(16),
-              ),
-              child: InkWell(
-                onTap: () => controller.previousPage(
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.ease,
+      if (isSmallDevice) {
+        return Row(
+          children: [
+            SizedBox(
+              width: 50,
+              height: 180,
+              child: Material(
+                color: FlutterGameChallengeColors.textStroke,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  bottomLeft: Radius.circular(16),
                 ),
-                child: Center(
-                  child: Icon(
-                    Icons.keyboard_arrow_left_rounded,
-                    size: 32,
-                    color: FlutterGameChallengeColors.teamBackground,
+                child: InkWell(
+                  onTap: _onPreviousPage,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    bottomLeft: Radius.circular(16),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.keyboard_arrow_left_rounded,
+                      size: 32,
+                      color: FlutterGameChallengeColors.teamBackground,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: isSmallDevice ? 300 : 350,
-            width: isSmallDevice ? 300 : 350,
-            child: PageView.builder(
-              itemCount: images.length,
-              onPageChanged: onPageChange,
-              controller: controller,
-              itemBuilder: (context, index) {
-                final image = images[index];
+            Expanded(
+              child: SizedBox(
+                width: double.maxFinite,
+                height: 250,
+                child: PageView.builder(
+                  itemCount: images.length,
+                  onPageChanged: onPageChange,
+                  controller: controller,
+                  itemBuilder: (context, index) {
+                    final image = images[index];
 
-                return Container(
-                  height: isSmallDevice ? 300 : 350,
-                  width: isSmallDevice ? 300 : 350,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    border: Border.all(
-                      width: 4,
-                      color: FlutterGameChallengeColors.textStroke,
-                    ),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(14)),
-                    child: Image.network(
-                      image,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          SizedBox(
-            height: 250,
-            width: isSmallDevice ? 25 : 40,
-            child: Material(
-              color: FlutterGameChallengeColors.textStroke,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(16),
-                bottomRight: Radius.circular(16),
-              ),
-              child: InkWell(
-                onTap: () => controller.nextPage(
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.ease,
-                ),
-                child: Center(
-                  child: Icon(
-                    Icons.keyboard_arrow_right_rounded,
-                    size: 32,
-                    color: FlutterGameChallengeColors.teamBackground,
-                  ),
+                    return Container(
+                      height: 350,
+                      width: 350,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                        border: Border.all(
+                          width: 4,
+                          color: FlutterGameChallengeColors.textStroke,
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(14)),
+                        child: Image.network(
+                          image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
+            SizedBox(
+              width: 50,
+              height: 180,
+              child: Material(
+                color: FlutterGameChallengeColors.textStroke,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
+                ),
+                child: InkWell(
+                  onTap: _onNextPage,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(16),
+                    bottomRight: Radius.circular(16),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.keyboard_arrow_right_rounded,
+                      size: 32,
+                      color: FlutterGameChallengeColors.teamBackground,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      }
+
+      return Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: 430,
           ),
-        ],
+          child: Row(
+            children: [
+              SizedBox(
+                height: 250,
+                width: 40,
+                child: Material(
+                  color: FlutterGameChallengeColors.textStroke,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    bottomLeft: Radius.circular(16),
+                  ),
+                  child: InkWell(
+                    onTap: _onPreviousPage,
+                    child: Center(
+                      child: Icon(
+                        Icons.keyboard_arrow_left_rounded,
+                        size: 32,
+                        color: FlutterGameChallengeColors.teamBackground,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 350,
+                width: 350,
+                child: PageView.builder(
+                  itemCount: images.length,
+                  onPageChanged: onPageChange,
+                  controller: controller,
+                  itemBuilder: (context, index) {
+                    final image = images[index];
+
+                    return Container(
+                      height: 350,
+                      width: 350,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                        border: Border.all(
+                          width: 4,
+                          color: FlutterGameChallengeColors.textStroke,
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(14)),
+                        child: Image.network(
+                          image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 250,
+                width: 40,
+                child: Material(
+                  color: FlutterGameChallengeColors.textStroke,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(16),
+                    bottomRight: Radius.circular(16),
+                  ),
+                  child: InkWell(
+                    onTap: _onNextPage,
+                    child: Center(
+                      child: Icon(
+                        Icons.keyboard_arrow_right_rounded,
+                        size: 32,
+                        color: FlutterGameChallengeColors.teamBackground,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       );
     });
+  }
+
+  void _onNextPage() {
+    controller.nextPage(
+      duration: Duration(milliseconds: 500),
+      curve: Curves.ease,
+    );
+  }
+
+  void _onPreviousPage() {
+    controller.previousPage(
+      duration: Duration(milliseconds: 500),
+      curve: Curves.ease,
+    );
   }
 }
 

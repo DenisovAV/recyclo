@@ -13,7 +13,7 @@ class GamesItem extends StatelessWidget {
     final l10n = context.l10n;
 
     return LayoutBuilder(builder: (context, constraints) {
-      final isSmallDevice = constraints.maxWidth < 800;
+      final isSmallDevice = constraints.maxWidth < 850;
 
       return LandingItem(
         color: FlutterGameChallengeColors.gamesBackground,
