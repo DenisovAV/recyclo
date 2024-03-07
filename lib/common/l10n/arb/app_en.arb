@@ -232,5 +232,9 @@
   "featureInProgress": "Feature in progress",
   "@featureInProgress": {
     "description": "Feature in progress text"
+  },
+  "downloadApp": "Download App ",
+  "@downloadApp": {
+    "description": "Title scrolling to bottom button"
   }
 }
