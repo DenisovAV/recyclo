@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/landing/index.dart';
 import 'package:flutter_game_challenge/landing/widgets/artefacts_item.dart';
@@ -10,7 +11,6 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: FlutterGameChallengeColors.landingBackground,
-      appBar: LandingAppBar(),
       body: Stack(
         children: [
           SizedBox(
@@ -20,7 +20,7 @@ class MainPage extends StatelessWidget {
           ListView(
             children: [
               SizedBox(
-                height: 50,
+                height: 150,
               ),
               AboutUsItem(),
               SizedBox(
@@ -43,6 +43,13 @@ class MainPage extends StatelessWidget {
                 height: 50,
               ),
             ],
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 100,
+            child: LandingAppBar(),
           ),
         ],
       ),

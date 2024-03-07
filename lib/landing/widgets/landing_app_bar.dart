@@ -14,40 +14,9 @@ class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
         final isSmallDevice = constraints.maxWidth < 800;
 
         if (isSmallDevice) {
-          return DecoratedBox(
-            decoration: BoxDecoration(
-              color: FlutterGameChallengeColors.textStroke,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-              ),
-            ),
-            child: SizedBox(
-              width: double.maxFinite,
-              height: double.maxFinite,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    LandingLogo(),
-                  ],
-                ),
-              ),
-            ),
-          );
-        }
-
-        final desktopConstrains = constraints.maxWidth > 1500
-            ? Dimensions.defaultLandingDesktopConstraints
-            : Dimensions.landingSmallDesktopConstraints(constraints.maxWidth);
-
-        return Center(
-          child: ConstrainedBox(
-            constraints: desktopConstrains,
+          return Material(
+            elevation: 5,
+            color: Colors.transparent,
             child: DecoratedBox(
               decoration: BoxDecoration(
                 color: FlutterGameChallengeColors.textStroke,
@@ -61,15 +30,58 @@ class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
                 height: double.maxFinite,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 50,
-                    vertical: 15,
+                    horizontal: 10,
+                    vertical: 5,
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       LandingLogo(),
-                      DownloadFromStoresWidget(),
                     ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+
+        final desktopConstrains = constraints.maxWidth > 1500
+            ? Dimensions.defaultLandingDesktopConstraints
+            : Dimensions.landingSmallDesktopConstraints(constraints.maxWidth);
+
+        return Center(
+          child: ConstrainedBox(
+            constraints: desktopConstrains,
+            child: Material(
+              elevation: 5,
+              color: Colors.transparent,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: FlutterGameChallengeColors.textStroke,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                ),
+                child: SizedBox(
+                  width: double.maxFinite,
+                  height: double.maxFinite,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 50,
+                      vertical: 15,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        LandingLogo(),
+                        DownloadFromStoresWidget(),
+                      ],
+                    ),
                   ),
                 ),
               ),
