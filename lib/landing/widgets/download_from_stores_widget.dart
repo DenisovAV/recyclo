@@ -8,6 +8,7 @@ class DownloadFromStoresWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _DownloadButton(
           image: Assets.images.downloadGooglePlayButton.image(),

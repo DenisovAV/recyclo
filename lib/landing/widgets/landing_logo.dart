@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
 
 class LandingLogo extends StatelessWidget {
-  const LandingLogo({super.key});
+  final double fontSize;
+
+  const LandingLogo({super.key, this.fontSize = 36});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class LandingLogo extends StatelessWidget {
           l10n.appName,
           style: TextStyle(
             color: FlutterGameChallengeColors.white,
-            fontSize: 36,
+            fontSize: fontSize,
           ),
         )
       ],

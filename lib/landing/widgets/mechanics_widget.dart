@@ -24,12 +24,15 @@ class MechanicsWidget extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Center(
-                  child: BrandText(
-                    l10n.mechanicsTittle,
-                    style: TextStyle(
-                      fontSize: 32,
-                      color: FlutterGameChallengeColors.textStroke,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Center(
+                    child: BrandText(
+                      l10n.mechanicsTittle,
+                      style: TextStyle(
+                        fontSize: 32,
+                        color: FlutterGameChallengeColors.textStroke,
+                      ),
                     ),
                   ),
                 ),
