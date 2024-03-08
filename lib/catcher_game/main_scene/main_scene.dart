@@ -197,11 +197,6 @@ class MainScene extends PositionComponent
       _boxContainer.handleCatch(isSuccessful: false);
     }
 
-    if (_omissionsToShowTutorial == 0) {
-      _omissionsToShowTutorial = 1;
-      _tutorialContainer.showTutorial();
-    }
-
     if (_omissionsToShowTutorial >=
         DebugBalancingTableConfig.maxOmissionsToShowTutorial) {
       _omissionsToShowTutorial = 1;
