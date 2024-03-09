@@ -19,7 +19,7 @@ class ArtifactsRepository {
   final Uuid _uuid = Uuid();
 
   ArtifactsModel get artifactModel {
-    //_updateArtifactStatuses();
+    _updateArtifactStatuses();
     return _artifactsModel;
   }
 
@@ -205,6 +205,7 @@ class ArtifactsRepository {
           true,
         );
     }
+    _updateArtifactStatuses();
     _streamController.add(artifactModel);
     _artifactsModel = artifactModel;
     return newArtifact;
