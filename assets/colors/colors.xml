@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary1">#FF042B59</color>
+    <color name="primary1">#FF4D3356</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="gray_70">#EEEEEE</color>
     <color name="gray_410">#979797</color>
     <color name="crimson_red" type="material">#CF2A2A</color>
     <color name="yellow_ocher" type="material material-accent">#DF9527</color>
+    <color name="blue_sky" type="material">#7B94C7</color>
+    <color name="text_stroke" type="material">#43244D</color>
+    <color name="category_green" type="material">#ABE492</color>
+    <color name="category_violet" type="material">#7E7EE3</color>
+    <color name="category_orange" type="material">#D7A66F</color>
+    <color name="category_yellow" type="material">#DCE85F</color>
+    <color name="category_pink" type="material">#DDCADB</color>
+    <color name="artifact_green" type="material">#36BC00</color>
+    <color name="artifact_red" type="material">#9A271E</color>
+    <color name="artifact_orange" type="material">#D4821D</color>
+    <color name="details_background" type="material">#EADDE8</color>
+    <color name="earth_glow" type="material">#96D4FF</color>
+    <color name="landing_background" type="material">#72A8CD</color>
+    <color name="about_app_background" type="material">#ECDC6E</color>
+    <color name="box_successful_catch_tint">#FF00FF00</color>
+    <color name="box_unsuccessful_catch_tint">#FFFF0000</color>
+    <color name="landing_background" type="material">#72A8CD</color>
+    <color name="games_background" type="material">#B2DE9F</color>
+    <color name="mechanics_background" type="material">#EAA77A</color>
+    <color name="team_background" type="material">#E3D3DF</color>
+    <color name="sasha_color" type="material">#B2DE9F</color>
+    <color name="dima_color" type="material">#EAA77A</color>
+    <color name="vitya_color" type="material">#ECDC6E</color>
+    <color name="vova_color" type="material">#719FE6</color>
+    <color name="yehor_color" type="material">#EC6EAA</color>
+    <color name="nikita_color" type="material">#EC6E6E</color>
+    <color name="yura_color" type="material">#9E6EEC</color>
+
 </resources>

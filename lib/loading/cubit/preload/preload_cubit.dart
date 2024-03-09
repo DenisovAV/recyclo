@@ -1,29 +1,20 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flame/cache.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/catcher_game/common/assets_loader.dart';
 
 part 'preload_state.dart';
 
 class PreloadCubit extends Cubit<PreloadState> {
-  PreloadCubit(this.images, this.audio) : super(const PreloadState.initial());
+  PreloadCubit(this.images) : super(const PreloadState.initial());
 
   final Images images;
-  final AudioCache audio;
 
   /// Load items sequentially allows display of what is being loaded
   Future<void> loadSequentially() async {
     final phases = [
-      PreloadPhase(
-        'audio',
-        () => audio.loadAll([Assets.audio.background, Assets.audio.effect]),
-      ),
-      PreloadPhase(
-        'images',
-        () => images.loadAll([Assets.images.unicornAnimation.path]),
-      ),
+      PreloadPhase('Loading assets', () => AssetsLoader().loadAssets()),
     ];
 
     emit(state.copyWith(totalCount: phases.length));

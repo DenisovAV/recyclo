@@ -1,10 +1,6 @@
 {
-  "@@locale": "en",
-  "startVeryGoodGame": "Start the Very Good Game",
-  "@startVeryGoodGame": {
-    "description": "The initial start button of the game application"
-  },
-  "titleAppBarTitle": "Flutter Game Challenge",
+  
+  "titleAppBarTitle": "Recyclo",
   "@titleAppBarTitle": {
     "description": "Text shown in the AppBar of the Title Page"
   },
@@ -40,5 +36,205 @@
         "description": "The current count"
       }
     }
+  },
+  "mainMenuGamesItemTitle": "Games",
+  "@mainMenuGamesItemTitle": {
+    "description": "Text shown in the first item of the main menu"
+  },
+  "mainMenuTutorialItemTitle": "Tutorial",
+  "@mainMenuTutorialItemTitle": {
+    "description": "Text shown in the tutorial item of the main menu"
+  },
+  "mainMenuArtifactsItemTitle": "Artifacts",
+  "@mainMenuArtifactsItemTitle": {
+    "description": "Text shown in the second item of the main menu"
+  },
+  "mainMenuSettingsItemTitle": "Settings",
+  "@mainMenuSettingsItemTitle": {
+    "description": "Text shown in the third item of the main menu"
+  },
+  "gameModeCatcherItemTitle": "Catcher",
+  "@gameModeCatcherItemTitle": {
+    "description": "Text shown in the catcher game mode button"
+  },
+  "gameModeClickerItemTitle": "Clicker",
+  "@gameModeClickerItemTitle": {
+    "description": "Text shown in the clicker game mode button"
+  },
+  "gameModeFinderItemTitle": "Finder",
+  "@gameModeFinderItemTitle": {
+    "description": "Text shown in the finder game mode button"
+  },
+  "artifactCarTitle": "Waste Wanderer",
+  "@artifactCarTitle": {
+    "description": "Title of car made from trash"
+  },
+  "artifactCarDescripton": "The car body is assembled from metallic sheets sourced from old cans and car parts, alongside textures from assorted recycled plastics on the doors and hood. Recycled tires form the wheels, while solar panels atop the roof underscore its eco-friendly design.",
+  "@artifactCarDescripton": {
+    "description": "Description of car made from trash"
+  },
+  "artifactShampooTitle": "Scrub-Scrap",
+  "@artifactShampooTitle": {
+    "description": "Title of shampoo made from trash"
+  },
+  "artifactShampooDescripton": "The shampoo itself is a concoction of natural ingredients, including purified water infused with essential oils from organic lavender and chamomile, known for their soothing and hair-nourishing properties. The light blue hue of the shampoo is achieved through the addition of a natural, mineral-based colorant that safely decomposes without harming aquatic ecosystems.",
+  "@artifactShampooDescripton": {
+    "description": "Description of shampoo made from trash"
+  },
+  "artifactHouseTitle": "Ecorefuge",
+  "@artifactHouseTitle": {
+    "description": "Title of house made from trash"
+  },
+  "artifactHouseDescripton": "The facade of this eco-friendly house features recycled glass and composite materials, while the roof boasts integrated solar panels, providing clean energy. Inside, natural materials such as bamboo and recycled wood dominate, complemented by furniture made from repurposed materials. The house incorporates energy-efficient technologies, including insulated windows and a solar-powered water heater, to minimize its ecological footprint. Surrounding the house, a drought-resistant landscape promotes biodiversity, embodying a commitment to environmental conservation in every detail.",
+  "@artifactHouseDescripton": {
+    "description": "Description of house made from trash"
+  },
+  "artifactNewspaperTitle": "Flutter EcoPress",
+  "@artifactNewspaperTitle": {
+    "description": "Title of newspaper made from trash"
+  },
+  "artifactNewspaperDescripton": "Sourced from high-quality recycled materials, it showcases varying shades and textures, a characteristic that highlights its eco-friendly origin. Despite these variations, the paper maintains an excellent quality suitable for the clear and vibrant printing of texts and images.",
+  "@artifactNewspaperDescripton": {
+    "description": "Description of newspaper made from trash"
+  },
+  "artifactLaptopTitle": "Trashputer",
+  "@artifactLaptopTitle": {
+    "description": "Title of laptop made from trash"
+  },
+  "artifactLaptopDescripton": "Trashputer body is constructed from old plastic bottles, demonstrating a textured and creative design. The keyboard stands out, made from recycled plastic caps, each key a testament to resourceful re-use. The screen, fashioned from recycled glass, adds to its eco-friendly credentials, while the internal components are sourced from secondary metal materials, further reducing waste. With connectors and ports also derived from recycled materials, this laptop is not just a piece of technology; it's a statement on the importance of recycling and the potential for technological advancements to harmonize with environmental conservation efforts.",
+  "@artifactLaptopDescripton": {
+    "description": "Description of laptop made from trash"
+  },
+  "artifactPlantTitle": "EcoSpawn Monstera",
+  "@artifactPlantTitle": {
+    "description": "Title of plant made from trash"
+  },
+  "artifactPlantDescripton": "The inclusion of bags of organic compost or manure as part of the scene not only highlights the practical aspects of nurturing such a plant but also emphasizes the importance of repurposing and recycling for environmental care. This setting, with its attention to detail in the interior space, reflects a harmonious blend of aesthetics and eco-friendly practices, illustrating how sustainability can be integrated into everyday living spaces.",
+  "@artifactPlantDescripton": {
+    "description": "Description of plant made from trash"
+  },
+  "buttonCraft": "Craft",
+  "@buttonCraft": {
+    "description": "Text for Craft button"
+  },
+  "gameFinishDialogTitle": "Time Out",
+  "@gameFinishDialogTitle": {
+    "description": "Text for game finish dialog title"
+  },
+  "gameFinishDialogDescription": "Your results",
+  "@gameFinishDialogDescription": {
+    "description": "Text for game finish dialog description"
+  },
+  "gameFinishDialogTryAgainDescription": "Better luck next time!",
+  "@gameFinishDialogTryAgainDescription": {
+    "description": "Text for game finish dialog description to try again"
+  },
+  "gameFinishDialogButtonTitle": "Collect",
+  "@gameFinishDialogButtonTitle": {
+    "description": "Text for game finish dialog button title"
+  },
+  "gameFinishDialogTryAgainButtonTitle": "Go to menu",
+  "@gameFinishDialogTryAgainButtonTitle": {
+    "description": "Text for game finish dialog button title to try again"
+  },
+  "appName": "Recyclo",
+  "@appName": {
+    "description": "Name of application"
+  },
+  "aboutAppRecycle": "Game Recyclo",
+  "@aboutAppRecycle": {
+    "description": "Tittle for 'About app' item in landing page"
+  },
+  "aboutAppRecycleContentTextColumnLeft": "In many countries, sorting waste is a common practice, yet not everyone follows it, often due to a lack of understanding of its importance. Recognizing this gap, we decided to create a game that highlights the significance of waste sorting. \n\nEducate players about how sorting waste not only conserves resources but also facilitates the production of new goods from recycled materials.",
+  "@aboutAppRecycleContentTextColumnLeft": {
+    "description": "Text for content on the About us item page"
+  },
+  "aboutAppRecycleContentTextColumnRight": "Our Mobile People team (all teammates are members of Mobile People community) decided to create a game that aims to educate players about how sorting waste not only conserves resources but also facilitates the production of new goods from recycled materials. Find out more about our community:",
+  "@aboutAppRecycleContentTextColumnRight": {
+    "description": "Text for content on the About us item page"
+  },
+  "aboutAppRecycleLink": "Mobile People Community   >",
+  "@aboutAppRecycleLink": {
+    "description": "Link for content on the About us item page"
+  },
+  "buttonOk": "Ok",
+  "@buttonOk": {
+    "description": "Text for Ok button"
+  },
+  "artifactCraftedDialogTitle": "Congradulations!",
+  "@artifactCraftedDialogTitle": {
+    "description": "Artifact crafted dialog header"
+  },
+  "artifactCraftedDialogBody": "You successfully have crafted an artifact and now you can add it to a wallet.",
+  "@artifactCraftedDialogBody": {
+    "description": "Artifact crafted dialog body"
+  },
+  "gamesTitle": "Play & Collect",
+  "@gamesTitle": {
+    "description": "Tittle for 'Games' item in landing page"
+  },
+  "gamesDescription": "All games are fun and informative, with the purpose to test your recycling materials knowledge, and of course, learn you to recoginze difference between them",
+  "@gamesDescription": {
+    "description": "Description after 'Games' item in landing page"
+  },
+  "teamTitle": "Team",
+  "@teamTitle": {
+    "description": "Tittle for 'Team' item in landing page"
+  },
+  "game1Title": "Catcher",
+  "@game1Title": {
+    "description": "Game 1 title"
+  },
+  "game1Description": "Items will fly from the windows, and it's up to you to sort them into the correct bins. \n\n Get them right, and show you are wise. Don't worry if you get some wrong - after each round, you'll get a glimpse at the recycling cheat-sheet. Can you catch all the trash?",
+  "@game1Description": {
+    "description": "Game 1 description"
+  },
+  "game2Title": "Clicker",
+  "@game2Title": {
+    "description": "Game 2 title"
+  },
+  "game2Description": "Navigate a whirlwind of clicks in a game that blends chaos with strategy. Find, click, and collect amidst a jumble – precision is your key to triumph.\nEmbark on a click-driven quest through a sea of items, where identifying and gathering the right resources is the challenge. Each click is a step towards victory or misstep into chaos.",
+  "@game2Description": {
+    "description": "Game 2 description"
+  },
+  "game3Title": "Finder",
+  "@game3Title": {
+    "description": "Game 3 title"
+  },
+  "game3Description": "Trash hidden under the thick layer of greenery. Drag your way through the bushes and find target trash category. Hurry up, you need to sort it before time runs out!",
+  "@game3Description": {
+    "description": "Game 3 description"
+  },
+  "mechanicsTittle": "Craft & Use Google Wallet",
+  "@mechanicsTittle": {
+    "description": "Title mechanics item"
+  },
+  "craftingContent": "In our mini-games, every resource you gather is stored away for you to use later. You can take these resources and craft useful items, or 'artifacts.' This process isn't just part of the game; it's a lesson in how recycling works and how different materials can be reused to make new products.",
+  "@craftingContent": {
+    "description": "Content mechanics item"
+  },
+  "walletContent": "Once you've crafted these artifacts, you can add them to your Google Wallet. While the crafting teaches you about recycling, adding artifacts to your Wallet could, in the future, unlock discounts on real-world products. We're still in the early stages of finding partners for this feature, so it's not available yet. But we're excited about the potential to reward your in-game recycling efforts with real-life benefits. Stay tuned for future updates!",
+  "@walletContent": {
+    "description": "Wallet mechanics item"
+  },
+  "artefacts": "Artifacts",
+  "@artefacts": {
+    "description": "Artefacts item title"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Description title on the artefacts"
+  },
+  "reality": "Reality",
+  "@reality": {
+    "description": "Reality title on the artefacts"
+  },
+  "featureInProgress": "Feature in progress",
+  "@featureInProgress": {
+    "description": "Feature in progress text"
+  },
+  "downloadApp": "Download App ",
+  "@downloadApp": {
+    "description": "Title scrolling to bottom button"
   }
 }
