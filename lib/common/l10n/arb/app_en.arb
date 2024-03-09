@@ -149,11 +149,11 @@
   "@aboutAppRecycleContentTextColumnLeft": {
     "description": "Text for content on the About us item page"
   },
-  "aboutAppRecycleContentTextColumnRight": "Our Mobile People team decided to create a game that aims to educate players about how sorting waste not only conserves resources but also facilitates the production of new goods from recycled materials. Find out more about our community:",
+  "aboutAppRecycleContentTextColumnRight": "Our Mobile People team (all teammates are members of Mobile People community) decided to create a game that aims to educate players about how sorting waste not only conserves resources but also facilitates the production of new goods from recycled materials. Find out more about our community:",
   "@aboutAppRecycleContentTextColumnRight": {
     "description": "Text for content on the About us item page"
   },
-  "aboutAppRecycleLink": "Our Mobile People team   >",
+  "aboutAppRecycleLink": "Mobile People Community   >",
   "@aboutAppRecycleLink": {
     "description": "Link for content on the About us item page"
   },

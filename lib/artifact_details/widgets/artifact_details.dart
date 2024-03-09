@@ -223,7 +223,7 @@ class _AddToGoogleWallet extends StatelessWidget {
             );
           }
 
-          if (artifactStatus == ArtifactStatus.addedToWallet) {
+         /* if (artifactStatus == ArtifactStatus.addedToWallet) {
             return Padding(
               padding: const EdgeInsets.only(
                 left: 20,
@@ -234,7 +234,7 @@ class _AddToGoogleWallet extends StatelessWidget {
                 height: 52,
               ),
             );
-          }
+          }*/
 
           return const SizedBox();
         },
