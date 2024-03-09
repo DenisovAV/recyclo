@@ -6,7 +6,7 @@ class TeamConstants {
   static List<TeamMember> teams = <TeamMember>[
     TeamMember(
       fullName: 'Sasha Denisov',
-      role: 'Developer',
+      role: 'Team Lead',
       photo: Assets.images.sashaPhoto,
       color: FlutterGameChallengeColors.sashaColor,
     ),
