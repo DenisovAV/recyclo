@@ -77,7 +77,7 @@ class ArtifactDetails extends StatelessWidget {
                               count: state.model.requirements.plastic,
                               isEnough: state.trashReserve.plastic >=
                                   state.model.requirements.plastic,
-                              color: FlutterGameChallengeColors.categoryViolet,
+                              color: FlutterGameChallengeColors.categoryOrange,
                             ),
                           ],
                           if (state.model.requirements.glass > 0) ...[
@@ -87,7 +87,7 @@ class ArtifactDetails extends StatelessWidget {
                               count: state.model.requirements.glass,
                               isEnough: state.trashReserve.glass >=
                                   state.model.requirements.glass,
-                              color: FlutterGameChallengeColors.categoryOrange,
+                              color: FlutterGameChallengeColors.categoryViolet,
                             ),
                           ],
                           if (state.model.requirements.paper > 0) ...[
@@ -97,7 +97,7 @@ class ArtifactDetails extends StatelessWidget {
                               count: state.model.requirements.paper,
                               isEnough: state.trashReserve.paper >=
                                   state.model.requirements.paper,
-                              color: FlutterGameChallengeColors.categoryYellow,
+                              color: FlutterGameChallengeColors.categoryPink,
                             ),
                           ],
                           if (state.model.requirements.electronics > 0) ...[
@@ -107,7 +107,7 @@ class ArtifactDetails extends StatelessWidget {
                               count: state.model.requirements.electronics,
                               isEnough: state.trashReserve.electronics >=
                                   state.model.requirements.electronics,
-                              color: FlutterGameChallengeColors.categoryPink,
+                              color: FlutterGameChallengeColors.categoryYellow,
                             ),
                           ],
                         ],

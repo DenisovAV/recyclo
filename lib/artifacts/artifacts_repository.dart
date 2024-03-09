@@ -18,8 +18,49 @@ class ArtifactsRepository {
 
   final Uuid _uuid = Uuid();
 
-  ArtifactsModel get artifactModel => _artifactsModel;
+  ArtifactsModel get artifactModel {
+    _updateArtifactStatuses();
+    return _artifactsModel;
+  }
+
   Stream<ArtifactsModel> get artifactModelStream => _streamController.stream;
+
+  void _updateArtifactStatuses() {
+    _artifactsModel = _artifactsModel.copyWith(
+      newspaper: _artifactsModel.newspaper.copyWith(
+        status: _getUpdatedArtifactStatus(_artifactsModel.newspaper),
+      ),
+      shampoo: _artifactsModel.shampoo.copyWith(
+        status: _getUpdatedArtifactStatus(_artifactsModel.shampoo),
+      ),
+      plant: _artifactsModel.plant.copyWith(
+        status: _getUpdatedArtifactStatus(_artifactsModel.plant),
+      ),
+      laptop: _artifactsModel.laptop.copyWith(
+        status: _getUpdatedArtifactStatus(_artifactsModel.laptop),
+      ),
+      car: _artifactsModel.car.copyWith(
+        status: _getUpdatedArtifactStatus(_artifactsModel.car),
+      ),
+      house: _artifactsModel.house.copyWith(
+        status: _getUpdatedArtifactStatus(_artifactsModel.house),
+      ),
+    );
+  }
+
+  ArtifactStatus _getUpdatedArtifactStatus(ArtifactModel model) {
+    if (model.status == ArtifactStatus.notEnoughResources &&
+        _isEnoughResources(model.requirements)) {
+      return ArtifactStatus.readyForCraft;
+    }
+
+    if (model.status == ArtifactStatus.readyForCraft &&
+        !_isEnoughResources(model.requirements)) {
+      return ArtifactStatus.notEnoughResources;
+    }
+
+    return model.status;
+  }
 
   Future<void> initialize() async {
     _sharedPreferences = await SharedPreferences.getInstance();
@@ -169,6 +210,7 @@ class ArtifactsRepository {
           true,
         );
     }
+    _updateArtifactStatuses();
     _streamController.add(artifactModel);
     _artifactsModel = artifactModel;
     return newArtifact;
