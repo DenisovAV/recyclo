@@ -54,6 +54,11 @@ class ArtifactsRepository {
       return ArtifactStatus.readyForCraft;
     }
 
+    if (model.status == ArtifactStatus.readyForCraft &&
+        !_isEnoughResources(model.requirements)) {
+      return ArtifactStatus.notEnoughResources;
+    }
+
     return model.status;
   }
 
