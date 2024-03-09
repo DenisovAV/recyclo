@@ -58,19 +58,12 @@ class TrashReserveRepository {
     int electronics = 0,
   }) async {
     _reservedTrash = _reservedTrash.copyWith(
-      plastic: 18,
-      organic: 18,
-      glass: 18,
-      paper: 18,
-      electronics: 18,
+      plastic: _reservedTrash.plastic + plastic,
+      organic: _reservedTrash.organic + organic,
+      glass: _reservedTrash.glass + glass,
+      paper: _reservedTrash.paper + paper,
+      electronics: _reservedTrash.electronics + electronics,
     );
-    // _reservedTrash = _reservedTrash.copyWith(
-    //   plastic: _reservedTrash.plastic + plastic,
-    //   organic: _reservedTrash.organic + organic,
-    //   glass: _reservedTrash.glass + glass,
-    //   paper: _reservedTrash.paper + paper,
-    //   electronics: _reservedTrash.electronics + electronics,
-    // );
 
     _reservedTrashController.add(_reservedTrash);
 
