@@ -14,7 +14,7 @@ class ArtifactsRepository {
 
   final TrashReserveRepository _trashReserveRepository;
   final StreamController<ArtifactsModel> _streamController =
-      StreamController.broadcast();
+  StreamController.broadcast();
 
   final Uuid _uuid = Uuid();
 
