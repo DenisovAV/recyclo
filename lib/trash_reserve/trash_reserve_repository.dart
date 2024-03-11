@@ -9,7 +9,8 @@ class TrashReserveRepository {
   bool _isInitialized = false;
 
   final StreamController<TrashReserveModel> _reservedTrashController =
-      StreamController<TrashReserveModel>();
+      StreamController<TrashReserveModel>.broadcast();
+
   TrashReserveModel _reservedTrash = const TrashReserveModel.empty();
   static int _defaultReservedTrash = 0;
 

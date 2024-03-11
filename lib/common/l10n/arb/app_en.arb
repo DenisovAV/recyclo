@@ -233,8 +233,9 @@
   "@featureInProgress": {
     "description": "Feature in progress text"
   },
-  "downloadApp": "Download App ",
+  "downloadApp": "Play App",
   "@downloadApp": {
     "description": "Title scrolling to bottom button"
-  }
+  },
+  "playOnlineButtonTitle": "Play in Browser"
 }
