@@ -8,6 +8,7 @@ import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
+import 'package:flutter_game_challenge/finder_game/asset_extensions.dart';
 import 'package:flutter_game_challenge/finder_game/components/item.dart';
 import 'package:flutter_game_challenge/finder_game/finder_game.dart';
 
@@ -167,22 +168,13 @@ class OverlayFog extends PositionComponent
 
   void _loadImages() {
     fogImage = Flame.images.fromCache(
-      Assets.images.fog.path.replaceFirst(
-        'assets/images/',
-        '',
-      ),
+      Assets.images.fog.path.trimAssetPath(),
     );
     maskImage = Flame.images.fromCache(
-      Assets.images.holeMask.path.replaceFirst(
-        'assets/images/',
-        '',
-      ),
+      Assets.images.holeMask.path.trimAssetPath(),
     );
     holeDecoration = Flame.images.fromCache(
-      Assets.images.hole.path.replaceFirst(
-        'assets/images/',
-        '',
-      ),
+      Assets.images.hole.path.trimAssetPath(),
     );
   }
 
