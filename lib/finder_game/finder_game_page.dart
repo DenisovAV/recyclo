@@ -4,8 +4,6 @@ import 'package:collection/collection.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/clicker_game/clicker_game.dart';
-import 'package:flutter_game_challenge/clicker_game/game_state.dart';
 import 'package:flutter_game_challenge/clicker_game/overlays/game_hud.dart';
 import 'package:flutter_game_challenge/clicker_game/overlays/game_start_overlay.dart';
 import 'package:flutter_game_challenge/common.dart';
@@ -30,6 +28,8 @@ class FinderGamePage extends StatefulWidget {
 }
 
 class _FinderGamePageState extends State<FinderGamePage> {
+  static const _maxGameWidth = 500.0;
+
   late final FinderGame _game;
 
   @override
@@ -41,6 +41,7 @@ class _FinderGamePageState extends State<FinderGamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: FlutterGameChallengeColors.landingBackground,
       body: BlocProvider<TimerCubit>(
         create: (_) => ServiceProvider.get<TimerCubit>(),
         child: BlocListener<TimerCubit, TimerState>(
@@ -49,24 +50,39 @@ class _FinderGamePageState extends State<FinderGamePage> {
             state,
             _game.gameState,
           ),
-          child: GameWidget(
-            game: _game,
-            overlayBuilderMap: {
-              GameHUD.id: (_, FinderGame game) => FinderHUD(
-                    game: game,
-                    handleRightButton: _handleBackButton,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Assets.images.cloudsBackground.image(fit: BoxFit.fill),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: _maxGameWidth,
                   ),
-              GameStartOverlay.id: (context, __) => GameStartOverlay(
-                    onPressed: () => _handleGameStart(context),
+                  child: GameWidget(
+                    game: _game,
+                    overlayBuilderMap: {
+                      GameHUD.id: (_, FinderGame game) => FinderHUD(
+                            game: game,
+                            handleRightButton: _handleBackButton,
+                          ),
+                      GameStartOverlay.id: (context, __) => GameStartOverlay(
+                            onPressed: () => _handleGameStart(context),
+                          ),
+                    },
+                    backgroundBuilder: (context) => Container(
+                      color: const Color(0xFF72A8CD),
+                    ),
+                    initialActiveOverlays: const [
+                      GameHUD.id,
+                      GameStartOverlay.id,
+                    ],
                   ),
-            },
-            backgroundBuilder: (context) => Container(
-              // color: FlutterGameChallengeColors.blueSky,
-              color: const Color(0xFF72A8CD),
-            ),
-            initialActiveOverlays: const [
-              GameHUD.id,
-              GameStartOverlay.id,
+                ),
+              ),
             ],
           ),
         ),
