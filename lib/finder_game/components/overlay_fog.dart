@@ -45,6 +45,7 @@ class OverlayFog extends PositionComponent
 
   late final Image maskImage;
   late final Image fogImage;
+  late final Image holeDecoration;
   late final RectangleHitbox collider;
   late final TimerComponent timerComponent;
 
@@ -177,6 +178,12 @@ class OverlayFog extends PositionComponent
         '',
       ),
     );
+    holeDecoration = Flame.images.fromCache(
+      Assets.images.hole.path.replaceFirst(
+        'assets/images/',
+        '',
+      ),
+    );
   }
 
   void _setImageSizes() {
@@ -243,6 +250,8 @@ class OverlayFog extends PositionComponent
       ..saveLayer(overlayTargetRect, paint)
       ..drawImageRect(maskImage, maskSourceRect, overlayTargetRect, paint);
 
+    
+
     final fittedSizes = applyBoxFit(BoxFit.fill, fogImageSize, rectSize);
     final sourceRect = Alignment.center
         .inscribe(fittedSizes.source, Offset.zero & fogImageSize);
@@ -255,6 +264,10 @@ class OverlayFog extends PositionComponent
         paint..blendMode = BlendMode.srcIn,
       )
       ..restore();
+
+      canvas
+      ..drawImageRect(
+          holeDecoration, maskSourceRect, overlayTargetRect, paint..blendMode = BlendMode.srcOver);
   }
 
   double _getAxisOffset({
