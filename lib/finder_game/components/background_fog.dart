@@ -8,4 +8,10 @@ class BackgroundFog extends SpriteComponent {
     required super.position,
     required super.size,
   }) : super();
+
+  @override
+  void onGameResize(Vector2 size) {
+    super.size = size;
+    super.onGameResize(size);
+  }
 }

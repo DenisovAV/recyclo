@@ -22,25 +22,30 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
   @override
   Future<void> onLoad() async {
     camera.moveTo(size / 2);
-    await Flame.images.loadAll([
-      Assets.images.fog.path.replaceFirst(
-        'assets/images/',
-        '',
-      ),
-      Assets.images.fogDark.path.replaceFirst(
-        'assets/images/',
-        '',
-      ),
-      Assets.images.holeMask.path.replaceFirst(
-        'assets/images/',
-        '',
-      ),
-      Assets.images.hole.path.replaceFirst(
-        'assets/images/',
-        '',
-      ),
-    ]);
-    gameState = FinderState(gameWidgetSize: size);
+    await Flame.images.loadAll(
+      [
+        Assets.images.fog.path.replaceFirst(
+          'assets/images/',
+          '',
+        ),
+        Assets.images.fogDark.path.replaceFirst(
+          'assets/images/',
+          '',
+        ),
+        Assets.images.holeMask.path.replaceFirst(
+          'assets/images/',
+          '',
+        ),
+        Assets.images.hole.path.replaceFirst(
+          'assets/images/',
+          '',
+        ),
+      ],
+    );
+
+    final topPadding = size.y * FinderConstraints.topPaddingPercentage;
+
+    gameState = FinderState(gameWidgetSize: size, topPadding: topPadding);
     await add(gameState);
     await add(
       BackgroundFog(
@@ -49,7 +54,7 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
             Assets.images.fogDark.path.replaceFirst('assets/images/', ''),
           ),
         ),
-        position: Vector2(0, FinderConstraints.topPadding),
+        position: Vector2(0, topPadding),
         size: size,
       ),
     );
@@ -57,7 +62,8 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
     await add(
       OverlayFog(
         size: Vector2(size.x, size.y),
-        position: Vector2(0, FinderConstraints.topPadding),
+        position: Vector2(0, topPadding),
+        topPadding: topPadding,
       ),
     );
 
