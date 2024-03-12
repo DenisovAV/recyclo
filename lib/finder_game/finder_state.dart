@@ -7,13 +7,16 @@ import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart
 import 'package:flutter_game_challenge/common.dart';
 
 class FinderState extends Component {
-  FinderState({required this.gameWidgetSize})
-      : currentTargetTypes = ValueNotifier([]),
+  FinderState({
+    required this.gameWidgetSize,
+    required this.topPadding,
+  })  : currentTargetTypes = ValueNotifier([]),
         trashItems = ValueNotifier([]),
         _sortedTrash = {},
         _trashBin = TrashBin();
 
   final Vector2 gameWidgetSize;
+  final double topPadding;
 
   final ValueNotifier<List<TrashType>> currentTargetTypes;
   final ValueNotifier<List<Item>> trashItems;
@@ -52,12 +55,15 @@ class FinderState extends Component {
     final cellWidth = Item.baseSize.x;
     final cellHeight = Item.baseSize.y;
 
+    final topTrashPadding = topPadding +
+        gameWidgetSize.y *
+            FinderConstraints.trashAdditionalTopPaddingPercentage;
+
     final columns =
         ((gameWidgetSize.x - 2 * FinderConstraints.sidePadding) / cellWidth)
             .floor();
     final rowsVisible =
-        ((gameWidgetSize.y - FinderConstraints.topTrashPadding) / cellHeight)
-            .floor();
+        ((gameWidgetSize.y - topTrashPadding) / cellHeight).floor();
 
     for (var row = 0;
         row < rowsVisible + FinderConstraints.extraRowsGenerated;
