@@ -23,129 +23,135 @@ class ArtifactDetails extends StatelessWidget {
     return BlocBuilder<ArtifactDetailsCubit, ArtifactDetailsState>(
       builder: (context, state) => switch (state) {
         ArtifactDetailsEmptyState() => const SizedBox(),
-        ArtifactDetailsLoadedState() => Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40),
-              topRight: Radius.circular(40),
+        ArtifactDetailsLoadedState() => Center(
+          child: Container(
+            width: 480,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40),
+                topRight: Radius.circular(40),
+              ),
+              border: Border(
+                top: BorderSide(
+                  width: 2,
+                  color: FlutterGameChallengeColors.textStroke,
+                ),
+                left: BorderSide(
+                  width: 2,
+                  color: FlutterGameChallengeColors.textStroke,
+                ),
+                right: BorderSide(
+                  width: 2,
+                  color: FlutterGameChallengeColors.textStroke,
+                ),
+              ),
+              color: FlutterGameChallengeColors.detailsBackground,
             ),
-            border: Border(
-              top: BorderSide(
-                width: 2,
-                color: FlutterGameChallengeColors.textStroke,
-              ),
-              left: BorderSide(
-                width: 2,
-                color: FlutterGameChallengeColors.textStroke,
-              ),
-              right: BorderSide(
-                width: 2,
-                color: FlutterGameChallengeColors.textStroke,
-              ),
+            child: LayoutBuilder(
+              builder: (context, constr) {
+                return ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 800),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: _ScrollableText(
+                          title: state.name,
+                          description: state.description,
+                          imagePath: state.imagePath,
+                          status: state.model.status,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (state.model.requirements.organic > 0)
+                              ArtifactRequirementsStatus(
+                                imagePath: Assets.images.organic.path,
+                                count: state.model.requirements.organic,
+                                isEnough: state.trashReserve.organic >=
+                                    state.model.requirements.organic,
+                                color: FlutterGameChallengeColors.categoryGreen,
+                              ),
+                            if (state.model.requirements.plastic > 0) ...[
+                              const SizedBox(width: 4),
+                              ArtifactRequirementsStatus(
+                                imagePath: Assets.images.plastic.path,
+                                count: state.model.requirements.plastic,
+                                isEnough: state.trashReserve.plastic >=
+                                    state.model.requirements.plastic,
+                                color: FlutterGameChallengeColors.categoryOrange,
+                              ),
+                            ],
+                            if (state.model.requirements.glass > 0) ...[
+                              const SizedBox(width: 4),
+                              ArtifactRequirementsStatus(
+                                imagePath: Assets.images.glass.path,
+                                count: state.model.requirements.glass,
+                                isEnough: state.trashReserve.glass >=
+                                    state.model.requirements.glass,
+                                color: FlutterGameChallengeColors.categoryViolet,
+                              ),
+                            ],
+                            if (state.model.requirements.paper > 0) ...[
+                              const SizedBox(width: 4),
+                              ArtifactRequirementsStatus(
+                                imagePath: Assets.images.paper.path,
+                                count: state.model.requirements.paper,
+                                isEnough: state.trashReserve.paper >=
+                                    state.model.requirements.paper,
+                                color: FlutterGameChallengeColors.categoryPink,
+                              ),
+                            ],
+                            if (state.model.requirements.electronics > 0) ...[
+                              const SizedBox(width: 4),
+                              ArtifactRequirementsStatus(
+                                imagePath: Assets.images.energy.path,
+                                count: state.model.requirements.electronics,
+                                isEnough: state.trashReserve.electronics >=
+                                    state.model.requirements.electronics,
+                                color: FlutterGameChallengeColors.categoryYellow,
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                      if (state.model.status == ArtifactStatus.readyForCraft ||
+                          state.model.status == ArtifactStatus.notEnoughResources)
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            right: 20,
+                            bottom: 20,
+                          ),
+                          child: FlatButton(
+                            onPressed: () {
+                              BlocProvider.of<ArtifactDetailsCubit>(context)
+                                  .craftArtifact(state.model);
+                  
+                              unawaited(showDialog(
+                                context: context,
+                                builder: (_) => GameMessageDialog(
+                                  title: context.l10n.artifactCraftedDialogTitle,
+                                  body: context.l10n.artifactCraftedDialogBody,
+                                ),
+                              ));
+                            },
+                            isActive: state.model.status ==
+                                ArtifactStatus.readyForCraft,
+                            text: context.l10n.buttonCraft,
+                          ),
+                        ),
+                      _AddToGoogleWallet(
+                        artifactStatus: state.model.status,
+                        artifactModel: state.model,
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
-            color: FlutterGameChallengeColors.detailsBackground,
-          ),
-          child: LayoutBuilder(
-            builder: (context, constr) {
-              return Column(
-                children: [
-                  Expanded(
-                    child: _ScrollableText(
-                      title: state.name,
-                      description: state.description,
-                      imagePath: state.imagePath,
-                      status: state.model.status,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (state.model.requirements.organic > 0)
-                          ArtifactRequirementsStatus(
-                            imagePath: Assets.images.organic.path,
-                            count: state.model.requirements.organic,
-                            isEnough: state.trashReserve.organic >=
-                                state.model.requirements.organic,
-                            color: FlutterGameChallengeColors.categoryGreen,
-                          ),
-                        if (state.model.requirements.plastic > 0) ...[
-                          const SizedBox(width: 4),
-                          ArtifactRequirementsStatus(
-                            imagePath: Assets.images.plastic.path,
-                            count: state.model.requirements.plastic,
-                            isEnough: state.trashReserve.plastic >=
-                                state.model.requirements.plastic,
-                            color: FlutterGameChallengeColors.categoryOrange,
-                          ),
-                        ],
-                        if (state.model.requirements.glass > 0) ...[
-                          const SizedBox(width: 4),
-                          ArtifactRequirementsStatus(
-                            imagePath: Assets.images.glass.path,
-                            count: state.model.requirements.glass,
-                            isEnough: state.trashReserve.glass >=
-                                state.model.requirements.glass,
-                            color: FlutterGameChallengeColors.categoryViolet,
-                          ),
-                        ],
-                        if (state.model.requirements.paper > 0) ...[
-                          const SizedBox(width: 4),
-                          ArtifactRequirementsStatus(
-                            imagePath: Assets.images.paper.path,
-                            count: state.model.requirements.paper,
-                            isEnough: state.trashReserve.paper >=
-                                state.model.requirements.paper,
-                            color: FlutterGameChallengeColors.categoryPink,
-                          ),
-                        ],
-                        if (state.model.requirements.electronics > 0) ...[
-                          const SizedBox(width: 4),
-                          ArtifactRequirementsStatus(
-                            imagePath: Assets.images.energy.path,
-                            count: state.model.requirements.electronics,
-                            isEnough: state.trashReserve.electronics >=
-                                state.model.requirements.electronics,
-                            color: FlutterGameChallengeColors.categoryYellow,
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                  if (state.model.status == ArtifactStatus.readyForCraft ||
-                      state.model.status == ArtifactStatus.notEnoughResources)
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                        right: 20,
-                        bottom: 20,
-                      ),
-                      child: FlatButton(
-                        onPressed: () {
-                          BlocProvider.of<ArtifactDetailsCubit>(context)
-                              .craftArtifact(state.model);
-
-                          unawaited(showDialog(
-                            context: context,
-                            builder: (_) => GameMessageDialog(
-                              title: context.l10n.artifactCraftedDialogTitle,
-                              body: context.l10n.artifactCraftedDialogBody,
-                            ),
-                          ));
-                        },
-                        isActive: state.model.status ==
-                            ArtifactStatus.readyForCraft,
-                        text: context.l10n.buttonCraft,
-                      ),
-                    ),
-                  _AddToGoogleWallet(
-                    artifactStatus: state.model.status,
-                    artifactModel: state.model,
-                  ),
-                ],
-              );
-            },
           ),
         ),
       },
