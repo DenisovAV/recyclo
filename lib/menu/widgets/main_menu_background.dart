@@ -29,8 +29,8 @@ class MainMenuBackground extends StatefulWidget {
   State<MainMenuBackground> createState() => _MainMenuBackgroundState();
 }
 
-
-class _MainMenuBackgroundState extends State<MainMenuBackground> with TickerProviderStateMixin {
+class _MainMenuBackgroundState extends State<MainMenuBackground>
+    with TickerProviderStateMixin {
   late final AnimationController _highlightController;
   late final AnimationController _compactController;
   late final VideoPlayerController _playerController;
@@ -73,7 +73,8 @@ class _MainMenuBackgroundState extends State<MainMenuBackground> with TickerProv
       curve: Curves.easeInOut,
     );
 
-    _scaleAnimation = Tween<double>(begin: 1, end: 1.6).animate(highlightAnimationCurved);
+    _scaleAnimation =
+        Tween<double>(begin: 1, end: 1.4).animate(highlightAnimationCurved);
 
     _offsetAnimation = Tween<Offset>(
       begin: Offset.zero,
@@ -92,7 +93,9 @@ class _MainMenuBackgroundState extends State<MainMenuBackground> with TickerProv
     }
 
     if (oldWidget.isCompact != widget.isCompact) {
-      widget.isCompact ? _compactController.animateTo(1) : _compactController.animateBack(0);
+      widget.isCompact
+          ? _compactController.animateTo(1)
+          : _compactController.animateBack(0);
     }
   }
 
@@ -108,61 +111,63 @@ class _MainMenuBackgroundState extends State<MainMenuBackground> with TickerProv
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 100),
-          child: Clouds(
-            highlightAnimation: _scaleAnimation,
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 120),
-            child: Clouds(
-              highlightAnimation: _scaleAnimation,
+        Column(
+          children: [
+            Expanded(
+              child: Clouds(
+                highlightAnimation: _scaleAnimation,
+                alignment: Alignment.bottomCenter,
+              ),
             ),
-          ),
+            const SizedBox(height: 320),
+            Expanded(
+              child: Clouds(
+                highlightAnimation: _scaleAnimation,
+                alignment: Alignment.topCenter,
+              ),
+            ),
+          ],
         ),
-        if(widget.isShowingEarth)
-        SlideTransition(
-          position: _compactAnimation,
-          child: Transform.translate(
-            offset: const Offset(0, 100),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                width: 340,
-                height: 340,
-                child: SlideTransition(
-                  position: _offsetAnimation,
-                  child: ScaleTransition(
-                    scale: _scaleAnimation,
-                    child: _playerController.value.isInitialized
-                        ? Stack(
-                            children: [
-                              Assets.images.earthHalo.image(
-                                color: FlutterGameChallengeColors.earthGlow,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(18),
-                                child: AspectRatio(
-                                  aspectRatio:
-                                      _playerController.value.aspectRatio,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(170),
-                                    child: VideoPlayer(_playerController),
+        if (widget.isShowingEarth)
+          SlideTransition(
+            position: _compactAnimation,
+            child: Transform.translate(
+              offset: const Offset(0, 100),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                  width: 340,
+                  height: 340,
+                  child: SlideTransition(
+                    position: _offsetAnimation,
+                    child: ScaleTransition(
+                      scale: _scaleAnimation,
+                      child: _playerController.value.isInitialized
+                          ? Stack(
+                              children: [
+                                Assets.images.earthHalo.image(
+                                  color: FlutterGameChallengeColors.earthGlow,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(18),
+                                  child: AspectRatio(
+                                    aspectRatio:
+                                        _playerController.value.aspectRatio,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(170),
+                                      child: VideoPlayer(_playerController),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          )
-                        : const SizedBox(),
+                              ],
+                            )
+                          : const SizedBox(),
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
       ],
     );
   }
