@@ -30,6 +30,9 @@ class ClickerGamePage extends StatefulWidget {
 class _ClickerGamePageState extends State<ClickerGamePage> {
   late final ClickerGame _game;
 
+  static const _maxGameWidth = 500.0;
+  static const _maxGameHeight = 1100.0;
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +42,7 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF72A8CD),
       body: BlocProvider<TimerCubit>(
         create: (_) => ServiceProvider.get<TimerCubit>(),
         child: BlocListener<TimerCubit, TimerState>(
@@ -47,33 +51,63 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
             state,
             _game.gameState,
           ),
-          child: GameWidget(
-            game: _game,
-            overlayBuilderMap: {
-              GameHUD.id: (_, ClickerGame game) => GameHUD(
-                    game: game,
-                    handleRightButton: _handleBackButton,
+          child: LayoutBuilder(builder: (context, constraints) {
+            return Stack(
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Assets.images.cloudsBackground.image(fit: BoxFit.fill),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: constraints.maxWidth > _maxGameWidth
+                          ? _maxGameWidth
+                          : constraints.maxWidth,
+                      maxHeight: constraints.maxHeight > _maxGameHeight
+                          ? _maxGameHeight
+                          : constraints.maxHeight,
+                    ),
+                    child: Material(
+                      elevation: 9,
+                      clipBehavior: Clip.hardEdge,
+                      child: GameWidget(
+                        game: _game,
+                        overlayBuilderMap: {
+                          GameHUD.id: (_, ClickerGame game) => GameHUD(
+                                game: game,
+                                handleRightButton: _handleBackButton,
+                              ),
+                          GameStartOverlay.id: (context, __) =>
+                              GameStartOverlay(
+                                onPressed: () => _handleGameStart(context),
+                              ),
+                          TimerReductionEffect.id: (context, __) =>
+                              TimerReductionEffect(
+                                text: '-5',
+                                onAnimationEnded: () {
+                                  context.read<TimerCubit>().penalty = 5;
+                                  _game.overlays
+                                      .remove(TimerReductionEffect.id);
+                                },
+                              ),
+                        },
+                        backgroundBuilder: (context) => Container(
+                          // color: FlutterGameChallengeColors.blueSky,
+                          color: const Color(0xFF72A8CD),
+                        ),
+                        initialActiveOverlays: const [
+                          GameHUD.id,
+                          GameStartOverlay.id,
+                        ],
+                      ),
+                    ),
                   ),
-              GameStartOverlay.id: (context, __) => GameStartOverlay(
-                    onPressed: () => _handleGameStart(context),
-                  ),
-              TimerReductionEffect.id: (context, __) => TimerReductionEffect(
-                    text: '-5',
-                    onAnimationEnded: () {
-                      context.read<TimerCubit>().penalty = 5;
-                      _game.overlays.remove(TimerReductionEffect.id);
-                    },
-                  ),
-            },
-            backgroundBuilder: (context) => Container(
-              // color: FlutterGameChallengeColors.blueSky,
-              color: const Color(0xFF72A8CD),
-            ),
-            initialActiveOverlays: const [
-              GameHUD.id,
-              GameStartOverlay.id,
-            ],
-          ),
+                ),
+              ],
+            );
+          }),
         ),
       ),
     );
