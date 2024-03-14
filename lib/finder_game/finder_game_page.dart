@@ -29,6 +29,7 @@ class FinderGamePage extends StatefulWidget {
 
 class _FinderGamePageState extends State<FinderGamePage> {
   static const _maxGameWidth = 500.0;
+  static const _maxGameHeight = 1100.0;
 
   late final FinderGame _game;
 
@@ -61,6 +62,7 @@ class _FinderGamePageState extends State<FinderGamePage> {
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     maxWidth: _maxGameWidth,
+                    maxHeight: _maxGameHeight,
                   ),
                   child: GameWidget(
                     game: _game,
