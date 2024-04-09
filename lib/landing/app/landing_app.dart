@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_game_challenge/app/view/app.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/landing/index.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,9 +7,14 @@ import 'package:google_fonts/google_fonts.dart';
 class LandingApp extends StatelessWidget {
   const LandingApp({super.key});
 
+  static Route<void> route() {
+    return MaterialPageRoute<void>(builder: (_) => const LandingApp());
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // navigatorKey: kRootNavigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: FlutterGameChallengeColors.primary1,

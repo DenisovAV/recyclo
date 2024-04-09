@@ -13,7 +13,7 @@ class GamesItem extends StatelessWidget {
     final l10n = context.l10n;
 
     return LayoutBuilder(builder: (context, constraints) {
-      final isSmallDevice = constraints.maxWidth < 800;
+      final isSmallDevice = constraints.maxWidth < 850;
 
       return LandingItem(
         color: FlutterGameChallengeColors.gamesBackground,
@@ -29,7 +29,7 @@ class GamesItem extends StatelessWidget {
                 child: BrandText(
                   l10n.gamesTitle,
                   style: TextStyle(
-                    fontSize: 48,
+                    fontSize: isSmallDevice ? 32 : 48,
                     color: FlutterGameChallengeColors.textStroke,
                   ),
                 ),
@@ -37,11 +37,14 @@ class GamesItem extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              BrandText(
-                l10n.gamesDescription,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: FlutterGameChallengeColors.textStroke,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: isSmallDevice ? 10 : 0),
+                child: BrandText(
+                  l10n.gamesDescription,
+                  style: TextStyle(
+                    fontSize: isSmallDevice ? 16 : 20,
+                    color: FlutterGameChallengeColors.textStroke,
+                  ),
                 ),
               ),
               SizedBox(

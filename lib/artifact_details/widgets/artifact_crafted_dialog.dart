@@ -17,6 +17,7 @@ class GameMessageDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
+        width: 720,
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.all(20),
         decoration: BoxDecoration(

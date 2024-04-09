@@ -145,15 +145,15 @@
   "@aboutAppRecycle": {
     "description": "Tittle for 'About app' item in landing page"
   },
-  "aboutAppRecycleContentTextColumnLeft": "In many countries, sorting waste is a common practice, yet not everyone follows it, often due to a lack of understanding of its importance. \n\nEducate players about how sorting waste not only conserves resources but also facilitates the production of new goods from recycled materials. ",
+  "aboutAppRecycleContentTextColumnLeft": "In many countries, sorting waste is a common practice, yet not everyone follows it, often due to a lack of understanding of its importance. Recognizing this gap, we decided to create a game that highlights the significance of waste sorting. \n\nEducate players about how sorting waste not only conserves resources but also facilitates the production of new goods from recycled materials.",
   "@aboutAppRecycleContentTextColumnLeft": {
     "description": "Text for content on the About us item page"
   },
-  "aboutAppRecycleContentTextColumnRight": "By engaging with this interactive experience, we hope to inspire those who have never considered sorting their waste to start doing so, thereby making a small yet meaningful contribution to sustainability.",
+  "aboutAppRecycleContentTextColumnRight": "Our Mobile People team (all teammates are members of Mobile People community) decided to create a game that aims to educate players about how sorting waste not only conserves resources but also facilitates the production of new goods from recycled materials. Find out more about our community:",
   "@aboutAppRecycleContentTextColumnRight": {
     "description": "Text for content on the About us item page"
   },
-  "aboutAppRecycleLink": "Our Mobile People team   >",
+  "aboutAppRecycleLink": "Mobile People Community   >",
   "@aboutAppRecycleLink": {
     "description": "Link for content on the About us item page"
   },
@@ -169,7 +169,7 @@
   "@artifactCraftedDialogBody": {
     "description": "Artifact crafted dialog body"
   },
-  "gamesTitle": "Games",
+  "gamesTitle": "Play & Collect",
   "@gamesTitle": {
     "description": "Tittle for 'Games' item in landing page"
   },
@@ -205,7 +205,7 @@
   "@game3Description": {
     "description": "Game 3 description"
   },
-  "mechanicsTittle": "Crafting & Google Wallet",
+  "mechanicsTittle": "Craft & Use Google Wallet",
   "@mechanicsTittle": {
     "description": "Title mechanics item"
   },
@@ -232,5 +232,10 @@
   "featureInProgress": "Feature in progress",
   "@featureInProgress": {
     "description": "Feature in progress text"
-  }
+  },
+  "downloadApp": "Play App",
+  "@downloadApp": {
+    "description": "Title scrolling to bottom button"
+  },
+  "playOnlineButtonTitle": "Play in Browser"
 }

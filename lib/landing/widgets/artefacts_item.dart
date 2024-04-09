@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_game_challenge/artifacts/wallet/service/artifacts_wallet.dart';
+import 'package:flutter_game_challenge/artifacts/wallet/wallet_pass.dart';
 import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/common/artefact_constance.dart';
 import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
 import 'package:flutter_game_challenge/landing/widgets/landing_item.dart';
+
+final _artefacts = wallet.values.toList();
 
 class ArtefactsItem extends StatefulWidget {
   const ArtefactsItem({super.key});
@@ -15,10 +18,13 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
   late final PageController _imagesController;
   late final PageController _descriptionsController;
 
+  late int activeIndex;
+
   @override
   void initState() {
-    _imagesController = PageController();
-    _descriptionsController = PageController();
+    activeIndex = 0;
+    _imagesController = PageController(initialPage: activeIndex);
+    _descriptionsController = PageController(initialPage: activeIndex);
     super.initState();
   }
 
@@ -34,7 +40,7 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
     final l10n = context.l10n;
 
     return LayoutBuilder(builder: (context, constraints) {
-      final isSmallDevice = constraints.maxWidth < 850;
+      final isSmallDevice = constraints.maxWidth < 1150;
 
       if (isSmallDevice) {
         return LandingItem(
@@ -56,8 +62,15 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                   children: [
                     _ImagePageView(
                       controller: _imagesController,
-                      images: artefacts.map((e) => e.image).toList(),
+                      images: _artefacts.map((e) => e.image).toList(),
                       onPageChange: _handleImagesPageViewChange,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    _DottedWidget(
+                      activeIndex: activeIndex,
+                      itemCount: _artefacts.length,
                     ),
                     SizedBox(
                       width: 50,
@@ -65,7 +78,7 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                     _TextPageView(
                       controller: _descriptionsController,
                       onPageChange: _handleDescriptionPageViewChange,
-                      items: artefacts,
+                      items: _artefacts,
                     )
                   ],
                 )
@@ -97,10 +110,25 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _ImagePageView(
-                    controller: _imagesController,
-                    images: artefacts.map((e) => e.image).toList(),
-                    onPageChange: _handleImagesPageViewChange,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _ImagePageView(
+                        controller: _imagesController,
+                        images: _artefacts.map((e) => e.image).toList(),
+                        onPageChange: _handleImagesPageViewChange,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      _DottedWidget(
+                        activeIndex: activeIndex,
+                        itemCount: _artefacts.length,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                    ],
                   ),
                   SizedBox(
                     width: 50,
@@ -108,7 +136,7 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                   _TextPageView(
                     controller: _descriptionsController,
                     onPageChange: _handleDescriptionPageViewChange,
-                    items: artefacts,
+                    items: _artefacts,
                   )
                 ],
               )
@@ -120,16 +148,22 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
   }
 
   void _handleImagesPageViewChange(int index) {
+    setState(() {
+      activeIndex = index;
+    });
     _descriptionsController.animateToPage(
-      index,
+      activeIndex,
       duration: Duration(milliseconds: 500),
       curve: Curves.ease,
     );
   }
 
   void _handleDescriptionPageViewChange(int index) {
+    setState(() {
+      activeIndex = index;
+    });
     _imagesController.animateToPage(
-      index,
+      activeIndex,
       duration: Duration(milliseconds: 500),
       curve: Curves.ease,
     );
@@ -152,91 +186,256 @@ class _ImagePageView extends StatelessWidget {
     return LayoutBuilder(builder: (context, constraints) {
       final isSmallDevice = constraints.maxWidth < 850;
 
-      return Row(
-        children: [
-          SizedBox(
-            height: 250,
-            width: isSmallDevice ? 25 : 40,
-            child: Material(
-              color: FlutterGameChallengeColors.textStroke,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16),
-                bottomLeft: Radius.circular(16),
-              ),
-              child: InkWell(
-                onTap: () => controller.previousPage(
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.ease,
-                ),
-                child: Center(
-                  child: Icon(
-                    Icons.keyboard_arrow_left_rounded,
-                    size: 32,
-                    color: FlutterGameChallengeColors.teamBackground,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: isSmallDevice ? 300 : 350,
-            width: isSmallDevice ? 300 : 350,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              border: Border.all(
-                width: 4,
+      if (isSmallDevice) {
+        return Row(
+          children: [
+            SizedBox(
+              width: 50,
+              height: 180,
+              child: Material(
                 color: FlutterGameChallengeColors.textStroke,
-              ),
-            ),
-            child: PageView.builder(
-              itemCount: images.length,
-              onPageChanged: onPageChange,
-              controller: controller,
-              itemBuilder: (context, index) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  child: Image.network(
-                    images[index],
-                    fit: BoxFit.fill,
-                  ),
-                );
-              },
-            ),
-          ),
-          SizedBox(
-            height: 250,
-            width: isSmallDevice ? 25 : 40,
-            child: Material(
-              color: FlutterGameChallengeColors.textStroke,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(16),
-                bottomRight: Radius.circular(16),
-              ),
-              child: InkWell(
-                onTap: () => controller.nextPage(
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.ease,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  bottomLeft: Radius.circular(16),
                 ),
-                child: Center(
-                  child: Icon(
-                    Icons.keyboard_arrow_right_rounded,
-                    size: 32,
-                    color: FlutterGameChallengeColors.teamBackground,
+                child: InkWell(
+                  onTap: _onPreviousPage,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    bottomLeft: Radius.circular(16),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.keyboard_arrow_left_rounded,
+                      size: 32,
+                      color: FlutterGameChallengeColors.teamBackground,
+                    ),
                   ),
                 ),
               ),
             ),
+            Expanded(
+              child: SizedBox(
+                width: double.maxFinite,
+                height: 250,
+                child: PageView.builder(
+                  itemCount: images.length,
+                  onPageChanged: onPageChange,
+                  controller: controller,
+                  itemBuilder: (context, index) {
+                    final image = images[index];
+
+                    return Container(
+                      height: 350,
+                      width: 350,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                        border: Border.all(
+                          width: 4,
+                          color: FlutterGameChallengeColors.textStroke,
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(14)),
+                        child: Image.network(
+                          image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 50,
+              height: 180,
+              child: Material(
+                color: FlutterGameChallengeColors.textStroke,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
+                ),
+                child: InkWell(
+                  onTap: _onNextPage,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(16),
+                    bottomRight: Radius.circular(16),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.keyboard_arrow_right_rounded,
+                      size: 32,
+                      color: FlutterGameChallengeColors.teamBackground,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      }
+
+      return Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: 430,
           ),
-        ],
+          child: Row(
+            children: [
+              SizedBox(
+                height: 250,
+                width: 40,
+                child: Material(
+                  color: FlutterGameChallengeColors.textStroke,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    bottomLeft: Radius.circular(16),
+                  ),
+                  child: InkWell(
+                    onTap: _onPreviousPage,
+                    child: Center(
+                      child: Icon(
+                        Icons.keyboard_arrow_left_rounded,
+                        size: 32,
+                        color: FlutterGameChallengeColors.teamBackground,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 350,
+                width: 350,
+                child: PageView.builder(
+                  itemCount: images.length,
+                  onPageChanged: onPageChange,
+                  controller: controller,
+                  itemBuilder: (context, index) {
+                    final image = images[index];
+
+                    return Container(
+                      height: 350,
+                      width: 350,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                        border: Border.all(
+                          width: 4,
+                          color: FlutterGameChallengeColors.textStroke,
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(14)),
+                        child: Image.network(
+                          image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 250,
+                width: 40,
+                child: Material(
+                  color: FlutterGameChallengeColors.textStroke,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(16),
+                    bottomRight: Radius.circular(16),
+                  ),
+                  child: InkWell(
+                    onTap: _onNextPage,
+                    child: Center(
+                      child: Icon(
+                        Icons.keyboard_arrow_right_rounded,
+                        size: 32,
+                        color: FlutterGameChallengeColors.teamBackground,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       );
     });
+  }
+
+  void _onNextPage() {
+    controller.nextPage(
+      duration: Duration(milliseconds: 500),
+      curve: Curves.ease,
+    );
+  }
+
+  void _onPreviousPage() {
+    controller.previousPage(
+      duration: Duration(milliseconds: 500),
+      curve: Curves.ease,
+    );
+  }
+}
+
+class _DottedWidget extends StatelessWidget {
+  final int activeIndex;
+  final int itemCount;
+
+  const _DottedWidget({
+    required this.activeIndex,
+    required this.itemCount,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 350,
+      height: 10,
+      child: Center(
+        child: SizedBox(
+          width: 120,
+          child: ListView.builder(
+              itemCount: itemCount,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: _Dot(isActive: index == activeIndex),
+                );
+              }),
+        ),
+      ),
+    );
+  }
+}
+
+class _Dot extends StatelessWidget {
+  final bool isActive;
+
+  const _Dot({required this.isActive});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 10,
+      height: 10,
+      decoration: BoxDecoration(
+        color: isActive ? FlutterGameChallengeColors.textStroke : Colors.transparent,
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        border: Border.all(
+          width: 2,
+          color: FlutterGameChallengeColors.textStroke,
+        ),
+      ),
+    );
   }
 }
 
 class _TextPageView extends StatelessWidget {
   final PageController controller;
   final ValueChanged<int> onPageChange;
-  final List<ArtefactDescriptions> items;
+  final List<WalletPass> items;
 
   const _TextPageView({
     required this.controller,
@@ -256,7 +455,7 @@ class _TextPageView extends StatelessWidget {
             maxHeight: 1000,
           ),
           child: PageView.builder(
-            itemCount: artefacts.length,
+            itemCount: items.length,
             controller: controller,
             onPageChanged: onPageChange,
             itemBuilder: (context, index) {
@@ -278,7 +477,7 @@ class _TextPageView extends StatelessWidget {
                       height: 5,
                     ),
                     BrandText(
-                      artefacts[index].details,
+                      item.details,
                       style: TextStyle(
                         fontSize: 20,
                         color: FlutterGameChallengeColors.textStroke,

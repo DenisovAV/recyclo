@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/landing/index.dart';
@@ -23,12 +24,15 @@ class MechanicsWidget extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Center(
-                  child: BrandText(
-                    l10n.mechanicsTittle,
-                    style: TextStyle(
-                      fontSize: 36,
-                      color: FlutterGameChallengeColors.textStroke,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Center(
+                    child: BrandText(
+                      l10n.mechanicsTittle,
+                      style: TextStyle(
+                        fontSize: 32,
+                        color: FlutterGameChallengeColors.textStroke,
+                      ),
                     ),
                   ),
                 ),
@@ -66,18 +70,16 @@ class MechanicsWidget extends StatelessWidget {
                 child: BrandText(
                   l10n.mechanicsTittle,
                   style: TextStyle(
-                    fontSize: 36,
+                    fontSize: 48,
                     color: FlutterGameChallengeColors.textStroke,
                   ),
                 ),
               ),
               Row(
                 children: [
-                  Expanded(
-                    child: Assets.images.craftingScreen.image(),
-                  ),
+                  Assets.images.craftingScreen.image(),
                   SizedBox(
-                    width: 10,
+                    width: 50,
                   ),
                   Expanded(
                     child: Column(
@@ -103,11 +105,9 @@ class MechanicsWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: 50,
                   ),
-                  Expanded(
-                    child: Assets.images.walletScreen.image(),
-                  ),
+                  Assets.images.walletScreen.image(),
                 ],
               )
             ],

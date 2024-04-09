@@ -35,6 +35,9 @@ class FinderGamePage extends StatefulWidget {
 }
 
 class _FinderGamePageState extends State<FinderGamePage> {
+  static const _maxGameWidth = 500.0;
+  static const _maxGameHeight = 1100.0;
+
   late final FinderGame _game;
 
   @override
@@ -46,6 +49,7 @@ class _FinderGamePageState extends State<FinderGamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: FlutterGameChallengeColors.landingBackground,
       body: BlocProvider<TimerCubit>(
         create: (_) => ServiceProvider.get<TimerCubit>(),
         child: BlocListener<TimerCubit, TimerState>(
@@ -54,34 +58,54 @@ class _FinderGamePageState extends State<FinderGamePage> {
             state,
             _game.gameState,
           ),
-          child: GameWidget(
-            game: _game,
-            overlayBuilderMap: {
-              GameHUD.id: (_, FinderGame game) => FinderHUD(
-                    game: game,
-                    handleRightButton: _handleBackButton,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Assets.images.cloudsBackground.image(fit: BoxFit.fill),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: _maxGameWidth,
+                    maxHeight: _maxGameHeight,
                   ),
-              GameStartOverlay.id: (context, __) => GameStartOverlay(
-                    onPressed: () => _handleGameStart(context),
+                  child: GameWidget(
+                    game: _game,
+                    overlayBuilderMap: {
+                      GameHUD.id: (_, FinderGame game) => FinderHUD(
+                            game: game,
+                            handleRightButton: _handleBackButton,
+                          ),
+                      GameStartOverlay.id: (context, __) => GameStartOverlay(
+                            onPressed: () => _handleGameStart(context),
+                          ),
+                      TutorialOverlay.id: (context, __) => TutorialOverlay(
+                            onBackButtonPressed: _handleBackButton,
+                            onGameStart: () =>
+                                _handleTutorialCompleted(context),
+                          ),
+                    },
+                    backgroundBuilder: (context) => Container(
+                      color: const Color(0xFF72A8CD),
+                    ),
+                    initialActiveOverlays: context
+                            .read<TutorialCubit>()
+                            .state
+                            .isTutorialShownBefore
+                        ? [
+                            GameHUD.id,
+                            GameStartOverlay.id,
+                          ]
+                        : [
+                            GameHUD.id,
+                            TutorialOverlay.id,
+                          ],
                   ),
-              TutorialOverlay.id: (context, __) => TutorialOverlay(
-                    onBackButtonPressed: _handleBackButton,
-                    onGameStart: () => _handleTutorialCompleted(context),
-                  ),
-            },
-            backgroundBuilder: (context) => Container(
-              color: FlutterGameChallengeColors.finderBackground,
-            ),
-            initialActiveOverlays:
-                context.read<TutorialCubit>().state.isTutorialShownBefore
-                    ? [
-                        GameHUD.id,
-                        GameStartOverlay.id,
-                      ]
-                    : [
-                        GameHUD.id,
-                        TutorialOverlay.id,
-                      ],
+                ),
+              ),
+            ],
           ),
         ),
       ),

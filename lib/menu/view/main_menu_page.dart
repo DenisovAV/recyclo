@@ -6,13 +6,17 @@ import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dar
 import 'package:flutter_game_challenge/catcher_game/catcher_game_page.dart';
 import 'package:flutter_game_challenge/clicker_game/clicker_game_page.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/common/extensions/extensoins.dart';
 import 'package:flutter_game_challenge/finder_game/finder_game_page.dart';
+import 'package:flutter_game_challenge/landing/index.dart';
+import 'package:flutter_game_challenge/loading/cubit/cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';
 import 'package:flutter_game_challenge/menu/view/menu_item.dart';
 import 'package:flutter_game_challenge/menu/widgets/main_menu_background.dart';
 import 'package:flutter_game_challenge/service_provider.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
+import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_widget.dart';
 
 class MainMenuPage extends StatelessWidget {
@@ -32,84 +36,88 @@ class MainMenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        return Scaffold(
-          backgroundColor: FlutterGameChallengeColors.blueSky,
-          body: BlocBuilder<MainPageCubit, MainPageState>(
-            builder: (context, state) {
-              return Stack(
-                children: [
-                  MainMenuBackground(
-                    isHighlighted: state.isBackgroundHighlighted,
-                    isCompact: state.isBackgroundCompact,
-                  ),
-                  SafeArea(
-                    bottom: false,
-                    child: Column(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(width: 20),
-                            Visibility(
-                              visible: state is! MainPageInitialState,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: RoundButton(
-                                  icon: Icons.keyboard_arrow_left,
-                                  onPressed: () {
-                                    if (state is MainPageArtifactDetailsState) {
-                                      kNestedNavigatorKey.currentState?.pop();
-                                      BlocProvider.of<MainPageCubit>(context)
-                                          .navigateToArtifacts();
-                                    } else {
-                                      BlocProvider.of<MainPageCubit>(context)
-                                          .navigateToMainPage();
-                                    }
-                                  },
-                                ),
+    return Scaffold(
+      backgroundColor: FlutterGameChallengeColors.blueSky,
+      body: BlocBuilder<MainPageCubit, MainPageState>(
+        builder: (context, state) {
+          return PopScope(
+            canPop: false,
+            onPopInvoked: (_) async {
+              _onBackBtn(state, context);
+              return Future.value(false);
+            },
+            child: Stack(
+              children: [
+                MainMenuBackground(
+                  isHighlighted: state.isBackgroundHighlighted,
+                  isCompact: state.isBackgroundCompact,
+                ),
+                SafeArea(
+                  bottom: false,
+                  child: Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(width: 20),
+                          Visibility(
+                            visible:
+                                state is! MainPageInitialState || Navigator.of(context).canPop(),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: RoundButton(
+                                icon: Icons.keyboard_arrow_left,
+                                onPressed: () => _onBackBtn(state, context),
                               ),
-                            ),
-                            const Expanded(
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: TrashReserveWidget(),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 40),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 20,
-                              right: 20,
-                            ),
-                            child: AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 200),
-                              child: switch (state) {
-                                MainPageInitialState() => _MainMenuContent(),
-                                MainPageChooseGameState() =>
-                                  _ChooseGameContent(),
-                                MainPageArtifactDetailsState() =>
-                                  _ArtifactsContent(),
-                                MainPageArtifactsState() => _ArtifactsContent(),
-                                MainPageTutorialState() => _TutorialContent(),
-                              },
                             ),
                           ),
+                          const Expanded(
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: TrashReserveWidget(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 40),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            right: 20,
+                          ),
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 200),
+                            child: switch (state) {
+                              MainPageInitialState() => _MainMenuContent(),
+                              MainPageChooseGameState() => _ChooseGameContent(),
+                              MainPageArtifactDetailsState() => _ArtifactsContent(),
+                              MainPageArtifactsState() => _ArtifactsContent(),
+                              MainPageTutorialState() => _TutorialContent(),
+                            },
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              );
-            },
-          ),
-        );
-      },
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
+  }
+
+  void _onBackBtn(MainPageState state, BuildContext context) {
+    if (ExtendedPlatform.isWeb && state is MainPageInitialState) {
+      Navigator.of(context).pushReplacement(LandingApp.route());
+    } else if (state is MainPageArtifactDetailsState) {
+      kNestedNavigatorKey.currentState?.pop();
+      BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
+    } else {
+      BlocProvider.of<MainPageCubit>(context).navigateToMainPage();
+    }
   }
 }
 
@@ -178,18 +186,15 @@ class _ChooseGameContent extends StatelessWidget {
   }
 
   void _handleNavigateToCatcherGame(BuildContext context) {
-    Navigator.of(kRootNavigatorKey.currentContext!)
-        .push<void>(CatcherGamePage.route());
+    Navigator.of(context).push<void>(CatcherGamePage.route());
   }
 
   void _handleNavigateToClickerGame(BuildContext context) {
-    Navigator.of(kRootNavigatorKey.currentContext!)
-        .push<void>(ClickerGamePage.route());
+    Navigator.of(context).push<void>(ClickerGamePage.route());
   }
 
   void _handleNavigateToFinderGame(BuildContext context) {
-    Navigator.of(kRootNavigatorKey.currentContext!)
-        .push<void>(FinderGamePage.route());
+    Navigator.of(context).push<void>(FinderGamePage.route());
   }
 }
 

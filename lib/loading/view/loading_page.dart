@@ -1,3 +1,4 @@
+import 'package:flame/cache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_challenge/common.dart';
@@ -6,6 +7,21 @@ import 'package:flutter_game_challenge/menu/view/main_menu_page.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({super.key});
+
+  static Route<void> route() {
+    return MaterialPageRoute<void>(
+      builder: (_) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => PreloadCubit(
+              Images(prefix: ''),
+            )..loadSequentially(),
+          ),
+        ],
+        child: const LoadingPage(),
+      ),
+    );
+  }
 
   @override
   State<LoadingPage> createState() => _LoadingPageState();
@@ -24,8 +40,7 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<PreloadCubit, PreloadState>(
-      listenWhen: (prevState, state) =>
-          !prevState.isComplete && state.isComplete,
+      listenWhen: (prevState, state) => !prevState.isComplete && state.isComplete,
       listener: (context, state) => onPreloadComplete(context),
       child: const Scaffold(
         backgroundColor: FlutterGameChallengeColors.primary1,
@@ -56,8 +71,8 @@ class _LoadingInternal extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: AnimatedProgressBar(
                 progress: state.progress,
-                backgroundColor: FlutterGameChallengeColors.white,
-                foregroundColor: FlutterGameChallengeColors.detailsBackground,
+                backgroundColor: FlutterGameChallengeColors.aboutAppBackground,
+                foregroundColor: FlutterGameChallengeColors.gamesBackground,
               ),
             ),
             Text(

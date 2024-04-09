@@ -6,7 +6,6 @@ import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/loading/loading.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final kRootNavigatorKey = GlobalKey<NavigatorState>();
 final kNestedNavigatorKey = GlobalKey<NavigatorState>();
 
 class App extends StatelessWidget {
@@ -37,7 +36,6 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: kRootNavigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: FlutterGameChallengeColors.primary1,
