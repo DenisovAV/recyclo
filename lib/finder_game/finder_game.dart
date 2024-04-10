@@ -2,7 +2,6 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
 import 'package:flutter_game_challenge/finder_game/asset_extensions.dart';
 import 'package:flutter_game_challenge/finder_game/components/background_fog.dart';
@@ -11,14 +10,9 @@ import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart
 import 'package:flutter_game_challenge/finder_game/finder_state.dart';
 
 class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
-  FinderGame({
-    required this.context,
-  }) : super(
-          zoom: 1,
-        );
+  FinderGame() : super(zoom: 1);
 
   late final FinderState gameState;
-  final BuildContext context;
 
   @override
   Future<void> onLoad() async {
