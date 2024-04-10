@@ -26,8 +26,6 @@ class SpriteSheetUtil {
 
   late final List<List<Sprite>> _sprites;
 
-  Sprite getSprite(int row, int column) => _sprites[row][column];
-
   SpriteAnimation createAnimation({
     required double stepTime,
     bool loop = false,

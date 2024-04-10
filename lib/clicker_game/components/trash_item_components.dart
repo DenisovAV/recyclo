@@ -1,10 +1,8 @@
-import 'package:flame/game.dart';
-import 'package:flutter/material.dart';
-
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/clicker_game/game_models/trash_item.dart';
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
 
@@ -28,10 +26,7 @@ class TrashItemComponent extends BodyComponent {
     backgroundSprite = SpriteComponent(
       sprite: Sprite(
         await Flame.images.load(
-          Assets.images.clicker.images.cloud.path.replaceFirst(
-            'assets/images/',
-            '',
-          ),
+          Assets.images.clicker.images.cloud.path,
         ),
       ),
       size: baseSize * trashData.sizeMultiplier,
@@ -42,12 +37,7 @@ class TrashItemComponent extends BodyComponent {
 
     trashSprite = SpriteComponent(
       sprite: Sprite(
-        await Flame.images.load(
-          trashData.assetPath.replaceFirst(
-            'assets/images/',
-            '',
-          ),
-        ),
+        await Flame.images.load(trashData.assetPath),
       ),
       size: (baseSize * trashData.sizeMultiplier) - Vector2.all(10),
       anchor: Anchor.center,

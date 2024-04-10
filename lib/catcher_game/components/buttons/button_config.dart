@@ -1,7 +1,4 @@
 abstract class ButtonsContainerConfig {
-  static const String buttonPauseAnimatedAsset = 'catcher/animations/pause.png';
-  static const String buttonResetAnimatedAsset = 'catcher/animations/reset.png';
-  static const String buttonPauseAsset = 'catcher/button/play.png';
   static const double buttonsContainerPositionY = 0.96;
   static const double buttonSize = 2;
   static const double buttonPauseOverlayPositionY = 1.55;

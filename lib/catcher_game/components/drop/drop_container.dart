@@ -4,12 +4,14 @@ import 'dart:ui';
 
 import 'package:bezier/bezier.dart';
 import 'package:flame/components.dart';
-import 'package:flutter_game_challenge/catcher_game/common/assets_loader.dart';
 import 'package:flutter_game_challenge/catcher_game/common/random_generator.dart';
+import 'package:flutter_game_challenge/catcher_game/components.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/main_scene.dart';
+import 'package:flutter_game_challenge/catcher_game/main_scene.dart';
+import 'package:flutter_game_challenge/common/entities/item_type.dart';
 import 'package:vector_math/vector_math.dart' as vector_math;
+
+typedef AssetsByItemTypeCallback = List<String> Function(ItemType dropType);
 
 class DropContainer extends PositionComponent
     with RandomGenerator, HasGameRef<CatcherGame> {
@@ -18,6 +20,7 @@ class DropContainer extends PositionComponent
     required this.catchCallback,
     required this.boxContainer,
     required this.checkForWaveReset,
+    required this.assetsByItemTypeCallback,
   });
 
   final MainScene scene;
@@ -25,15 +28,15 @@ class DropContainer extends PositionComponent
   final BoxContainer boxContainer;
   final CatchCallback catchCallback;
   final VoidCallback checkForWaveReset;
+  final AssetsByItemTypeCallback assetsByItemTypeCallback;
 
-  final Map<RecycleType, List<Sprite>> _dropAssets =
-      <RecycleType, List<Sprite>>{};
-  final Map<RecycleType, int> _dropReiteration = <RecycleType, int>{};
+  final Map<ItemType, List<Sprite>> _dropAssets = <ItemType, List<Sprite>>{};
+  final Map<ItemType, int> _dropReiteration = <ItemType, int>{};
   final List<QuadraticBezier> trajectory = List.empty(growable: true);
   final List<QuadraticBezier> leftTrajectory = List.empty(growable: true);
   final Paint paint = Paint()..filterQuality = FilterQuality.high;
 
-  RecycleType? _reiterationTyped;
+  ItemType? _reiterationTyped;
   late double _leftDropInitialPositionX;
   late double _dropInitialPositionX;
   late double _commonDropInitialPositionY;
@@ -145,12 +148,12 @@ class DropContainer extends PositionComponent
   }) {
     final t = _getDiversityIndex(dropDiversityList);
 
-    final n = RecycleType.values.indexOf(dropDiversityList[t].type);
+    final n = ItemType.values.indexOf(dropDiversityList[t].type);
 
     final s = (dropDiversityList[t].varietyBounder - 1) <= 0
         ? 0
         : _getTypedDiversity(
-            RecycleType.values[t],
+            ItemType.values[t],
             dropDiversityList[t].varietyBounder,
           );
 
@@ -159,10 +162,10 @@ class DropContainer extends PositionComponent
     final isLeft = Random().nextBool();
 
     final fallen = DropComponent(
-      sprite: s <= (_dropAssets[RecycleType.values[n]]!.length - 1)
-          ? _dropAssets[RecycleType.values[n]]![s]
-          : _dropAssets[RecycleType.values[n]]![0],
-      type: RecycleType.values[n],
+      sprite: s <= (_dropAssets[ItemType.values[n]]!.length - 1)
+          ? _dropAssets[ItemType.values[n]]![s]
+          : _dropAssets[ItemType.values[n]]![0],
+      type: ItemType.values[n],
       catchCallback: catchCallback,
       wave: scene.currentWave,
       paint: paint,
@@ -186,9 +189,9 @@ class DropContainer extends PositionComponent
   }
 
   void _fillAssetsContainer() {
-    for (final dropType in RecycleType.values) {
+    for (final dropType in ItemType.values) {
       final list = <Sprite>[];
-      for (final index in AssetsLoader().getAssets(dropType)) {
+      for (final index in assetsByItemTypeCallback(dropType)) {
         list.add(Sprite(game.images.fromCache(index)));
       }
       _dropAssets[dropType] = list;
@@ -196,12 +199,12 @@ class DropContainer extends PositionComponent
   }
 
   void _fillReiterationContainer() {
-    for (final index in RecycleType.values) {
+    for (final index in ItemType.values) {
       _dropReiteration[index] = 0;
     }
   }
 
-  int _getTypedDiversity(RecycleType type, int diversityBounder) {
+  int _getTypedDiversity(ItemType type, int diversityBounder) {
     var i = 0;
     do {
       i = Random().nextInt(diversityBounder);

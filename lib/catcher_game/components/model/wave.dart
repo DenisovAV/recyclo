@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_game_challenge/catcher_game/common/config.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
+import 'package:flutter_game_challenge/catcher_game/components.dart';
+import 'package:flutter_game_challenge/common/entities/item_type.dart';
 
 @immutable
 class Wave {
@@ -14,7 +15,7 @@ class Wave {
     double? delay,
   })  : itemsInWave = itemsInWave ?? DebugBalancingTableConfig.defaultItems,
         dropDiversityList =
-            dropDiversityList ?? const [Drop(type: RecycleType.organic)],
+            dropDiversityList ?? const [Drop(type: ItemType.organic)],
         minDroppingInterval =
             minDroppingInterval ?? DebugBalancingTableConfig.minInterval,
         maxDroppingInterval =
