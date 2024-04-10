@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'dart:io';
+
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';

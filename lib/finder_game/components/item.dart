@@ -4,10 +4,13 @@ import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/clicker_game/game_models/trash_item.dart';
+import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart';
 
-class Item extends PositionComponent with HasWorldReference {
-  Item(this.trashData, {required super.position}) : super();
-  static final baseSize = Vector2(76, 76);
+class Item extends PositionComponent with HasGameRef {
+  Item(
+    this.trashData, {
+    required super.position,
+  }) : super();
 
   final TrashItemData trashData;
   late final SpriteComponent trashSprite;
@@ -16,11 +19,12 @@ class Item extends PositionComponent with HasWorldReference {
   Future<void> onLoad() async {
     await super.onLoad();
 
+    final itemSize = FinderConstraints.getTrashItemSize(game.size.x);
     trashSprite = SpriteComponent(
       sprite: Sprite(
         await Flame.images.load(trashData.assetPath),
       ),
-      size: (baseSize * trashData.sizeMultiplier) - Vector2.all(10),
+      size: (itemSize * trashData.sizeMultiplier) - Vector2.all(10),
       anchor: Anchor.center,
     );
     add(trashSprite);

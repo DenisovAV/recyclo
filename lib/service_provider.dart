@@ -12,49 +12,58 @@ import 'package:get_it/get_it.dart';
 
 class ServiceProvider {
   static Future<void> initialize() async {
-    ///Services
-    GetIt.I.registerFactory<WalletService>(
+    final getIt = GetIt.instance;
+
+    //Services
+    getIt.registerFactory<WalletService>(
       getWalletService,
     );
 
     ///Repositories
-    await GetIt.instance
+    await getIt
         .registerSingleton<TrashReserveRepository>(TrashReserveRepository())
         .initialize();
 
-    await GetIt.instance
+    await getIt
         .registerSingleton<ArtifactsRepository>(
-          ArtifactsRepository(GetIt.instance.get()),
+          ArtifactsRepository(getIt.get()),
+        )
+        .initialize();
+
+    await getIt
+        .registerSingleton<LocalDataRepository>(
+          LocalDataRepository(),
         )
         .initialize();
 
     ///Cubits
-    GetIt.instance.registerFactory<TrashReserveCubit>(
-      () => TrashReserveCubit(
-        GetIt.instance.get(),
-      ),
-    );
-
-    GetIt.instance.registerFactory<ArtifactsCubit>(
-      () => ArtifactsCubit(
-        GetIt.instance.get(),
-      ),
-    );
-
-    GetIt.instance.registerFactory<ArtifactDetailsCubit>(
-      () => ArtifactDetailsCubit(
-        GetIt.instance.get(),
-        GetIt.instance.get(),
-        GetIt.instance.get(),
-      ),
-    );
-
-    GetIt.instance.registerFactory<TimerCubit>(
-      TimerCubit.new,
-    );
+    getIt
+      ..registerFactory<TrashReserveCubit>(
+        () => TrashReserveCubit(
+          getIt.get(),
+        ),
+      )
+      ..registerFactory<ArtifactsCubit>(
+        () => ArtifactsCubit(
+          getIt.get(),
+        ),
+      )
+      ..registerFactory<ArtifactDetailsCubit>(
+        () => ArtifactDetailsCubit(
+          getIt.get(),
+          getIt.get(),
+          getIt.get(),
+        ),
+      )
+      ..registerFactory<TimerCubit>(
+        TimerCubit.new,
+      )
+      ..registerFactory<TutorialCubit>(() => TutorialCubit(
+            localDataRepository: getIt.get(),
+          ));
 
     ///Game Resources
-    GetIt.instance.registerSingleton<AssetsLoader>(
+    getIt.registerSingleton<AssetsLoader>(
       AssetsLoader(images: Flame.images..prefix = ''),
     );
   }

@@ -58,7 +58,8 @@ class MainMenuPage extends StatelessWidget {
                         children: [
                           const SizedBox(width: 20),
                           Visibility(
-                            visible: Navigator.of(context).canPop(),
+                            visible:
+                                state is! MainPageInitialState || Navigator.of(context).canPop(),
                             child: Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: RoundButton(

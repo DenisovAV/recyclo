@@ -5,3 +5,4 @@ export 'common/l10n.dart';
 export 'common/timer.dart';
 export 'common/utils.dart';
 export 'common/widgets.dart';
+export 'common/tutorial.dart';
