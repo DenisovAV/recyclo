@@ -2,7 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flame/cache.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_game_challenge/catcher_game/common/assets_loader.dart';
+import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/service_provider.dart';
 
 part 'preload_state.dart';
 
@@ -14,7 +15,8 @@ class PreloadCubit extends Cubit<PreloadState> {
   /// Load items sequentially allows display of what is being loaded
   Future<void> loadSequentially() async {
     final phases = [
-      PreloadPhase('Loading assets', () => AssetsLoader().loadAssets()),
+      PreloadPhase('Loading assets',
+          () => ServiceProvider.get<AssetsLoader>().loadAssets()),
     ];
 
     emit(state.copyWith(totalCount: phases.length));

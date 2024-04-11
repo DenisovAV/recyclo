@@ -5,9 +5,10 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter_game_challenge/catcher_game/common/sprite_sheet_util.dart';
 import 'package:flutter_game_challenge/catcher_game/common/visible_component.dart';
+import 'package:flutter_game_challenge/catcher_game/components.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/main_scene.dart';
+import 'package:flutter_game_challenge/catcher_game/main_scene.dart';
+import 'package:flutter_game_challenge/common.dart';
 
 enum ButtonType {
   reset,
@@ -64,7 +65,7 @@ class ButtonsContainer extends PositionComponent
     _pauseOverlay = VisibleComponent(
       sprite: Sprite(
         game.images.fromCache(
-          ButtonsContainerConfig.buttonPauseAsset,
+          Assets.images.catcher.button.play.path,
         ),
       ),
     );
@@ -160,7 +161,7 @@ class ButtonsContainer extends PositionComponent
         case ButtonType.reset:
           _buttonsAssets[type] = SpriteSheetUtil(
             image: game.images
-                .fromCache(ButtonsContainerConfig.buttonResetAnimatedAsset),
+                .fromCache(Assets.images.catcher.animations.reset.path),
             textureWidth: ButtonsContainerConfig.animationFrameSize,
             textureHeight: ButtonsContainerConfig.animationFrameSize,
             columns: ButtonsContainerConfig.buttonAnimationRowsAndColumns,
@@ -169,7 +170,7 @@ class ButtonsContainer extends PositionComponent
         case ButtonType.pausePlay:
           _buttonsAssets[type] = SpriteSheetUtil(
             image: game.images
-                .fromCache(ButtonsContainerConfig.buttonPauseAnimatedAsset),
+                .fromCache(Assets.images.catcher.animations.pause.path),
             textureWidth: ButtonsContainerConfig.animationFrameSize,
             textureHeight: ButtonsContainerConfig.animationFrameSize,
             columns: ButtonsContainerConfig.buttonAnimationRowsAndColumns,

@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
+import 'package:flutter_game_challenge/common.dart';
 
 @immutable
 class Drop {
@@ -8,7 +8,7 @@ class Drop {
     int? varietyBounder,
   }) : varietyBounder = varietyBounder ?? 1;
 
-  final RecycleType type;
+  final ItemType type;
   final int varietyBounder;
 
   @override

@@ -5,18 +5,19 @@ import 'package:flame/effects.dart';
 import 'package:flame/extensions.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_game_challenge/catcher_game/components.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
+import 'package:flutter_game_challenge/common.dart';
 
 class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   BoxContainer() {
     super.anchor = Anchor.centerLeft;
   }
 
-  final List<RecycleType> initialBoxList = List.from(RecycleType.values);
+  final List<ItemType> initialBoxList = List.from(ItemType.values);
 
   late List<Box> boxContainerList;
-  late RecycleType chosenBoxType;
+  late ItemType chosenBoxType;
   late Box chosenBox;
   late Rect boxContainerClip;
   late List<double> _hooksPosX;
@@ -444,11 +445,11 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   }
 
   String _getAssetPath(int index) => switch (initialBoxList[index]) {
-        RecycleType.organic => 'catcher/boxes/organic.png',
-        RecycleType.glass => 'catcher/boxes/glass.png',
-        RecycleType.plastic => 'catcher/boxes/plastic.png',
-        RecycleType.electric => 'catcher/boxes/electric.png',
-        RecycleType.paper => 'catcher/boxes/paper.png',
+        ItemType.organic => Assets.images.catcher.boxes.organic.path,
+        ItemType.glass => Assets.images.catcher.boxes.glass.path,
+        ItemType.plastic => Assets.images.catcher.boxes.plastic.path,
+        ItemType.electronic => Assets.images.catcher.boxes.electric.path,
+        ItemType.paper => Assets.images.catcher.boxes.paper.path,
       };
 
   void handleCatch({
