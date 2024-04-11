@@ -7,7 +7,6 @@ import 'package:flame/events.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
-import 'package:flutter_game_challenge/finder_game/util/asset_extensions.dart';
 import 'package:flutter_game_challenge/finder_game/components/item.dart';
 import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart';
 import 'package:flutter_game_challenge/finder_game/finder_game.dart';
@@ -21,9 +20,6 @@ class OverlayFog extends PositionComponent
     required super.position,
     required this.topPadding,
   }) : super(priority: 5);
-
-  final _collisionStartColor = Color.fromARGB(255, 255, 0, 0);
-  final _defaultColor = Color.fromARGB(255, 100, 228, 31);
 
   final double topPadding;
 
@@ -73,15 +69,9 @@ class OverlayFog extends PositionComponent
     );
     await add(timerComponent);
 
-    final defaultPaint = Paint()
-      ..color = _defaultColor
-      ..style = PaintingStyle.stroke;
-
     collider = RectangleHitbox(
       position: position,
-    )
-      ..paint = defaultPaint
-      ..renderShape = true;
+    );
   }
 
   void _onTick() {
@@ -137,7 +127,7 @@ class OverlayFog extends PositionComponent
     super.onCollisionStart(intersectionPoints, other);
     if (other.parent is Item) {
       currentCollisionItem = other.parent as Item?;
-      collider.paint.color = _collisionStartColor;
+
       _resetTimer();
     }
   }
@@ -154,20 +144,20 @@ class OverlayFog extends PositionComponent
     if (other.parent is Item && currentCollisionItem != other.parent) {
       return;
     }
-    collider.paint.color = _defaultColor;
+
     currentCollisionItem = null;
     timerComponent.timer.stop();
   }
 
   void _loadImages() {
     fogImage = Flame.images.fromCache(
-      Assets.images.fog.path.trimAssetPath(),
+      Assets.images.fog.path,
     );
     maskImage = Flame.images.fromCache(
-      Assets.images.holeMask.path.trimAssetPath(),
+      Assets.images.holeMask.path,
     );
     holeDecoration = Flame.images.fromCache(
-      Assets.images.hole.path.trimAssetPath(),
+      Assets.images.hole.path,
     );
   }
 
