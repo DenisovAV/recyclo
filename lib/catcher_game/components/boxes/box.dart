@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
 import 'package:flutter_game_challenge/common.dart';
 
 class Box extends SpriteComponent {
@@ -16,7 +15,7 @@ class Box extends SpriteComponent {
   }
 
   int order;
-  RecycleType type;
+  ItemType type;
   bool isChosen = false;
   EffectController? _effectController;
 

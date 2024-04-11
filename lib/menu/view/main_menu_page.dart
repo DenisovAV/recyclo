@@ -6,17 +6,14 @@ import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dar
 import 'package:flutter_game_challenge/catcher_game/catcher_game_page.dart';
 import 'package:flutter_game_challenge/clicker_game/clicker_game_page.dart';
 import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/common/extensions/extensoins.dart';
 import 'package:flutter_game_challenge/finder_game/finder_game_page.dart';
 import 'package:flutter_game_challenge/landing/index.dart';
-import 'package:flutter_game_challenge/loading/cubit/cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';
 import 'package:flutter_game_challenge/menu/view/menu_item.dart';
 import 'package:flutter_game_challenge/menu/widgets/main_menu_background.dart';
 import 'package:flutter_game_challenge/service_provider.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
-import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_widget.dart';
 
 class MainMenuPage extends StatelessWidget {
@@ -91,7 +88,8 @@ class MainMenuPage extends StatelessWidget {
                             child: switch (state) {
                               MainPageInitialState() => _MainMenuContent(),
                               MainPageChooseGameState() => _ChooseGameContent(),
-                              MainPageArtifactDetailsState() => _ArtifactsContent(),
+                              MainPageArtifactDetailsState() =>
+                                _ArtifactsContent(),
                               MainPageArtifactsState() => _ArtifactsContent(),
                               MainPageTutorialState() => _TutorialContent(),
                             },

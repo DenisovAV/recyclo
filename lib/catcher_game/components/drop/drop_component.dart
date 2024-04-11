@@ -4,8 +4,8 @@ import 'dart:ui';
 import 'package:bezier/bezier.dart';
 import 'package:flame/components.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/main_scene.dart';
+import 'package:flutter_game_challenge/catcher_game/main_scene.dart';
+import 'package:flutter_game_challenge/common.dart';
 
 class DropComponent extends SpriteComponent
     with HasVisibility, HasGameRef<CatcherGame> {
@@ -21,7 +21,7 @@ class DropComponent extends SpriteComponent
     super.anchor = Anchor.center,
   });
 
-  final RecycleType type;
+  final ItemType type;
   final int wave;
   final CatchCallback catchCallback;
   final QuadraticBezier cubicCurve;

@@ -1,3 +1,4 @@
+export 'components/background/background.dart';
 export 'components/boxes/boxes.dart';
 export 'components/buttons/buttons.dart';
 export 'components/common/common.dart';

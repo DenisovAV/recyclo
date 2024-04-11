@@ -5,25 +5,25 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_game_challenge/catcher_game/background/background.dart';
-import 'package:flutter_game_challenge/catcher_game/background/config.dart';
 import 'package:flutter_game_challenge/catcher_game/common/config.dart';
 import 'package:flutter_game_challenge/catcher_game/common/levels_config.dart';
+import 'package:flutter_game_challenge/catcher_game/components.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
-import 'package:flutter_game_challenge/common/entities/item_type.dart';
+import 'package:flutter_game_challenge/common.dart';
 
-typedef CatchCallback = void Function(RecycleType dropType);
+typedef CatchCallback = void Function(ItemType dropType);
 
 class MainScene extends PositionComponent
     with TapCallbacks, HasGameRef<CatcherGame> {
   MainScene({
     required this.onPauseResumeGameCallback,
     required this.onResetCallback,
+    required this.assetsByItemTypeCallback,
   });
 
   final VoidCallback onPauseResumeGameCallback;
   final VoidCallback onResetCallback;
+  final AssetsByItemTypeCallback assetsByItemTypeCallback;
   final Map<ItemType, int> score = {};
   late List<Wave> waveList;
   bool isDestroy = false;
@@ -46,7 +46,7 @@ class MainScene extends PositionComponent
     waveList = Levels.levels().first.waves;
 
     _background = Background(
-      sprite: Sprite(game.images.fromCache(BackgroundConfig.sceneAsset)),
+      sprite: Sprite(game.images.fromCache(Assets.images.catcher.bg.bg.path)),
     );
     _boxContainer = BoxContainer();
     _buttonsContainer = ButtonsContainer(
@@ -74,6 +74,7 @@ class MainScene extends PositionComponent
       catchCallback: _onCatch,
       boxContainer: _boxContainer,
       checkForWaveReset: _handleDropReset,
+      assetsByItemTypeCallback: assetsByItemTypeCallback,
     );
 
     _tutorialContainer = TutorialContainer(scene: this);
@@ -186,11 +187,11 @@ class MainScene extends PositionComponent
     );
   }
 
-  void _onCatch(RecycleType dropType) {
+  void _onCatch(ItemType dropType) {
     if (_boxContainer.chosenBoxType == dropType) {
       _boxContainer.handleCatch(isSuccessful: true);
-      final currentScore = score[dropType.toItemType()] ?? 0;
-      score[dropType.toItemType()] = currentScore + 1;
+      final currentScore = score[dropType] ?? 0;
+      score[dropType] = currentScore + 1;
     } else {
       _omissionsToShowTutorial++;
       HapticFeedback.mediumImpact();

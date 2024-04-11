@@ -3,12 +3,13 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_game_challenge/catcher_game/background/background.dart';
 import 'package:flutter_game_challenge/catcher_game/common/visible_component.dart';
+import 'package:flutter_game_challenge/catcher_game/components/background/background.dart';
+import 'package:flutter_game_challenge/catcher_game/components/common/common.dart';
+import 'package:flutter_game_challenge/catcher_game/components/tutorial/tutorial.dart';
 import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/common/common.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components/tutorial/tutorial.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/main_scene.dart';
+import 'package:flutter_game_challenge/catcher_game/main_scene.dart';
+import 'package:flutter_game_challenge/common.dart';
 
 class TutorialContainer extends PositionComponent
     with HasGameRef<CatcherGame>, TapCallbacks {
@@ -30,12 +31,17 @@ class TutorialContainer extends PositionComponent
 
     _buttonComponent = VisibleComponent(
       sprite: Sprite(
-        game.images.fromCache(TutorialContainerConfig.tutorialButtonPlayAsset),
+        game.images.fromCache(
+          Assets.images.catcher.tutorial.play.path,
+        ),
       ),
     );
 
-    _tutorialBackground =
-        Sprite(game.images.fromCache(TutorialContainerConfig.tutorialAsset));
+    _tutorialBackground = Sprite(
+      game.images.fromCache(
+        Assets.images.catcher.tutorial.tutorial.path,
+      ),
+    );
     _backgroundComponent = Background(sprite: _tutorialBackground);
 
     await addAll([

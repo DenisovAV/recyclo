@@ -1,3 +1,4 @@
+import 'package:flame/flame.dart';
 import 'package:flutter_game_challenge/artifact_details/cubit/artifact_details_cubit.dart';
 import 'package:flutter_game_challenge/artifacts/artifacts_repository.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
@@ -60,6 +61,11 @@ class ServiceProvider {
       ..registerFactory<TutorialCubit>(() => TutorialCubit(
             localDataRepository: getIt.get(),
           ));
+
+    ///Game Resources
+    getIt.registerSingleton<AssetsLoader>(
+      AssetsLoader(images: Flame.images..prefix = ''),
+    );
   }
 
   static T get<T extends Object>() => GetIt.instance.get<T>();

@@ -1,9 +1,8 @@
 import 'package:flame/collisions.dart';
-import 'package:flutter/material.dart';
-
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/clicker_game/game_models/trash_item.dart';
 import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart';
 
@@ -23,12 +22,7 @@ class Item extends PositionComponent with HasGameRef {
     final itemSize = FinderConstraints.getTrashItemSize(game.size.x);
     trashSprite = SpriteComponent(
       sprite: Sprite(
-        await Flame.images.load(
-          trashData.assetPath.replaceFirst(
-            'assets/images/',
-            '',
-          ),
-        ),
+        await Flame.images.load(trashData.assetPath),
       ),
       size: (itemSize * trashData.sizeMultiplier) - Vector2.all(10),
       anchor: Anchor.center,
