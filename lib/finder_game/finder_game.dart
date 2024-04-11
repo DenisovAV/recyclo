@@ -3,7 +3,7 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
-import 'package:flutter_game_challenge/finder_game/asset_extensions.dart';
+import 'package:flutter_game_challenge/finder_game/util/asset_extensions.dart';
 import 'package:flutter_game_challenge/finder_game/components/background_fog.dart';
 import 'package:flutter_game_challenge/finder_game/components/overlay_fog.dart';
 import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart';

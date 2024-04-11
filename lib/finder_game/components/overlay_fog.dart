@@ -6,11 +6,13 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
-import 'package:flutter_game_challenge/finder_game/asset_extensions.dart';
+import 'package:flutter_game_challenge/finder_game/util/asset_extensions.dart';
 import 'package:flutter_game_challenge/finder_game/components/item.dart';
+import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart';
 import 'package:flutter_game_challenge/finder_game/finder_game.dart';
+import 'package:flutter_game_challenge/finder_game/util/overlay_render_mode.dart';
+import 'package:flutter_game_challenge/finder_game/util/overlay_renderer.dart';
 
 class OverlayFog extends PositionComponent
     with DragCallbacks, CollisionCallbacks, HasGameReference<FinderGame> {
@@ -20,83 +22,66 @@ class OverlayFog extends PositionComponent
     required this.topPadding,
   }) : super(priority: 5);
 
-  static const int _kVerticalHolePositionOffset = 56;
-  static const double _kHoleZoomFactor = 8;
-
-  static const int timerTicksLimit = 3;
-
-  Item? currentCollisionItem;
-
-  Vector2 get holeHitboxPosition => dragPosition + Vector2(-12, -34);
-
-  Vector2 dragPosition = Vector2(0, 0);
-  bool isDragInProgress = false;
-  int numberOfTicks = 0;
-  double zoomFactorInPixels = 0;
-  double maskWidth = 0;
-  double maskHeight = 0;
+  final _collisionStartColor = Color.fromARGB(255, 255, 0, 0);
+  final _defaultColor = Color.fromARGB(255, 100, 228, 31);
 
   final double topPadding;
 
-  Rect overlayTargetRect = Rect.fromLTWH(0, 0, 0, 0);
-  Rect fogSourceRect = Rect.fromLTWH(0, 0, 0, 0);
+  Vector2 get colliderSize => Vector2(
+        size.x * FinderConstraints.colliderWidthFactor,
+        size.y * FinderConstraints.colliderHeightFactor,
+      );
 
-  late Size maskSize;
-  late Size maskScaledSize;
-  late Size fogImageSize;
+  Vector2 get colliderPosition =>
+      dragPosition - Vector2(colliderSize.x / 2, colliderSize.y);
 
-  late FittedSizes maskFittedSizes;
-  late FittedSizes fogFittedSizes;
+  Item? currentCollisionItem;
+  Vector2 dragPosition = Vector2(0, 0);
+  OverlayRenderMode renderMode = OverlayRenderMode.bushes;
+  int numberOfTicks = 0;
 
   late final Image maskImage;
   late final Image fogImage;
   late final Image holeDecoration;
   late final RectangleHitbox collider;
   late final TimerComponent timerComponent;
+  late final OverlayRenderer renderer;
 
   @override
   void onGameResize(Vector2 size) {
     super.size = size;
-    zoomFactorInPixels = _kHoleZoomFactor * size.x;
-
-    _setTargetRectSize(size);
-    _setMaskSizes(maskWidth, maskHeight);
-    _setFittedSizes();
-    _setSourceRectangles();
-
+    renderer.resize(size);
     super.onGameResize(size);
   }
 
   @override
   Future<void> onLoad() async {
-    _setTargetRectSize(size);
-
     _loadImages();
-    _setImageSizes();
-    _setMaskSizes(maskWidth, maskHeight);
-    _setFittedSizes();
-    _setSourceRectangles();
+
+    renderer = OverlayRenderer(
+      image: fogImage,
+      maskImage: maskImage,
+      decorationImage: holeDecoration,
+      gameSize: size,
+    );
 
     timerComponent = TimerComponent(
-      period: .5,
+      period: .2,
       onTick: _onTick,
       autoStart: false,
       repeat: true,
     );
     await add(timerComponent);
 
+    final defaultPaint = Paint()
+      ..color = _defaultColor
+      ..style = PaintingStyle.stroke;
+
     collider = RectangleHitbox(
       position: position,
-    );
-  }
-
-  void _setTargetRectSize(Vector2 size) {
-    overlayTargetRect = Rect.fromLTRB(
-      0,
-      0,
-      size.x,
-      size.y,
-    );
+    )
+      ..paint = defaultPaint
+      ..renderShape = true;
   }
 
   void _onTick() {
@@ -112,7 +97,8 @@ class OverlayFog extends PositionComponent
 
     itemToCollect.onTryCollectItem(Color.fromARGB(255, 76, 255, 48));
 
-    if (timerTicksLimit > numberOfTicks || currentCollisionItem == null) return;
+    if (FinderConstraints.timerTicksLimit > numberOfTicks ||
+        currentCollisionItem == null) return;
 
     itemToCollect.onCollected();
     game.gameState.collectTrash(itemToCollect);
@@ -121,27 +107,25 @@ class OverlayFog extends PositionComponent
   @override
   Future<void> onDragStart(DragStartEvent event) async {
     super.onDragStart(event);
-    isDragInProgress = true;
+    renderMode = OverlayRenderMode.hole;
     dragPosition = event.localPosition;
 
-    await add(
-      collider
-        ..position = holeHitboxPosition
-        ..size = Vector2(20, 34),
-    );
+    await add(collider
+      ..position = colliderPosition
+      ..size = colliderSize);
   }
 
   @override
   void onDragUpdate(DragUpdateEvent event) {
     dragPosition = event.localEndPosition;
-    collider.position = holeHitboxPosition;
+    collider.position = colliderPosition;
   }
 
   @override
   void onDragEnd(DragEndEvent event) {
     super.onDragEnd(event);
 
-    isDragInProgress = false;
+    renderMode = OverlayRenderMode.bushes;
     remove(collider);
   }
 
@@ -153,7 +137,7 @@ class OverlayFog extends PositionComponent
     super.onCollisionStart(intersectionPoints, other);
     if (other.parent is Item) {
       currentCollisionItem = other.parent as Item?;
-
+      collider.paint.color = _collisionStartColor;
       _resetTimer();
     }
   }
@@ -170,7 +154,7 @@ class OverlayFog extends PositionComponent
     if (other.parent is Item && currentCollisionItem != other.parent) {
       return;
     }
-
+    collider.paint.color = _defaultColor;
     currentCollisionItem = null;
     timerComponent.timer.stop();
   }
@@ -187,117 +171,13 @@ class OverlayFog extends PositionComponent
     );
   }
 
-  void _setImageSizes() {
-    fogImageSize = Size(fogImage.width.toDouble(), fogImage.height.toDouble());
-    maskWidth = maskImage.width.toDouble();
-    maskHeight = maskImage.height.toDouble();
-  }
-
-  void _setMaskSizes(double maskWidth, double maskHeight) {
-    maskSize = Size(maskWidth, maskHeight);
-
-    zoomFactorInPixels = _kHoleZoomFactor * size.x;
-    if (zoomFactorInPixels.toInt().isOdd) ++zoomFactorInPixels;
-    maskScaledSize = Size(
-      maskWidth - zoomFactorInPixels,
-      maskHeight - zoomFactorInPixels,
-    );
-  }
-
-  void _setFittedSizes() {
-    final rectSize = overlayTargetRect.size;
-    fogFittedSizes = applyBoxFit(BoxFit.fill, fogImageSize, rectSize);
-    maskFittedSizes = applyBoxFit(BoxFit.cover, maskScaledSize, rectSize);
-  }
-
-  void _setSourceRectangles() {
-    fogSourceRect = Alignment.topCenter
-        .inscribe(fogFittedSizes.source, Offset.zero & fogImageSize);
-  }
-
   @override
   void render(Canvas canvas) {
-    final paint = Paint();
-
-    if (!isDragInProgress) {
-      _drawFog(canvas, paint);
-      return;
-    }
-
-    _drawFogWithHole(canvas, paint);
-  }
-
-  void _drawFog(Canvas canvas, Paint paint) {
-    canvas
-      ..drawImageRect(
-        fogImage,
-        fogSourceRect,
-        overlayTargetRect,
-        paint,
-      )
-      ..restore();
-  }
-
-  void _drawFogWithHole(Canvas canvas, Paint paint) {
-    final maskSourceRect = _calculateMaskSourceRect();
-
-    canvas
-      ..saveLayer(overlayTargetRect, paint)
-      ..drawImageRect(
-        maskImage,
-        maskSourceRect,
-        overlayTargetRect,
-        paint..blendMode = BlendMode.src,
-      );
-
-    canvas
-      ..drawImageRect(
-        fogImage,
-        fogSourceRect,
-        overlayTargetRect,
-        paint..blendMode = BlendMode.srcIn,
-      )
-      ..restore();
-
-    canvas
-      ..drawImageRect(
-        holeDecoration,
-        maskSourceRect,
-        overlayTargetRect,
-        paint..blendMode = BlendMode.srcOver,
-      );
-  }
-
-  Rect _calculateMaskSourceRect() {
-    final rectSize = overlayTargetRect.size;
-    final fittedSourceSize = maskFittedSizes.source;
-
-    return Alignment.center.inscribe(
-      fittedSourceSize,
-      Offset(
-            fittedSourceSize.width / 2 -
-                _getAxisOffset(
-                  fittedMeasurement: maskFittedSizes.source.width,
-                  axisDragPosition: dragPosition.x,
-                  rectMeasurement: rectSize.width,
-                ),
-            fittedSourceSize.height / 2 -
-                _getAxisOffset(
-                  fittedMeasurement: maskFittedSizes.source.height,
-                  axisDragPosition: dragPosition.y,
-                  rectMeasurement: rectSize.height,
-                ) +
-                _kVerticalHolePositionOffset,
-          ) &
-          maskSize,
+    renderer.render(
+      mode: renderMode,
+      canvas: canvas,
+      paint: Paint(),
+      dragPosition: dragPosition,
     );
-  }
-
-  double _getAxisOffset({
-    required double fittedMeasurement,
-    required double axisDragPosition,
-    required double rectMeasurement,
-  }) {
-    return fittedMeasurement * axisDragPosition / rectMeasurement;
   }
 }
