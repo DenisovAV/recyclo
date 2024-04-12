@@ -14,7 +14,14 @@ class CatcherGamePage extends StatefulWidget {
 
   static MaterialPageRoute<void> route() {
     return MaterialPageRoute<void>(
-      builder: (_) => const CatcherGamePage(),
+      builder: (_) => MultiBlocProvider(providers: [
+        BlocProvider<TimerCubit>(
+          create: (_) => ServiceProvider.get<TimerCubit>(),
+        ),
+        BlocProvider<TutorialCubit>(
+          create: (_) => ServiceProvider.get<TutorialCubit>(),
+        ),
+      ], child: const CatcherGamePage()),
     );
   }
 
@@ -34,59 +41,71 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
 
     return Scaffold(
       backgroundColor: FlutterGameChallengeColors.landingBackground,
-      body: BlocProvider<TimerCubit>(
-        create: (_) => ServiceProvider.get<TimerCubit>(),
-        child: BlocListener<TimerCubit, TimerState>(
-          listener: _handleTimerState,
-          child: LayoutBuilder(builder: (context, constraints) {
-            return Stack(
-              children: [
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Assets.images.cloudsBackground.image(fit: BoxFit.fill),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: constraints.maxWidth > _maxGameWidth
-                          ? _maxGameWidth
-                          : constraints.maxWidth,
-                      maxHeight: constraints.maxHeight > _maxGameHeight
-                          ? _maxGameHeight
-                          : constraints.maxHeight,
-                    ),
-                    child: Material(
-                      elevation: 9,
-                      child: GameWidget(
-                        game: _game!,
-                        overlayBuilderMap: {
-                          CatcherGame.timerOverlayKey: (_, __) =>
-                              const TimerOverlay(),
-                        },
-                      ),
-                    ),
+      body: BlocBuilder<TutorialCubit, TutorialState>(
+        builder: (context, state) {
+          return state.isTutorialShown
+              ? BlocListener<TimerCubit, TimerState>(
+                  listener: _handleTimerState,
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: Assets.images.cloudsBackground
+                                .image(fit: BoxFit.fill),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxWidth: constraints.maxWidth > _maxGameWidth
+                                    ? _maxGameWidth
+                                    : constraints.maxWidth,
+                                maxHeight:
+                                    constraints.maxHeight > _maxGameHeight
+                                        ? _maxGameHeight
+                                        : constraints.maxHeight,
+                              ),
+                              child: Material(
+                                elevation: 9,
+                                child: GameWidget(
+                                  game: _game!,
+                                  overlayBuilderMap: {
+                                    CatcherGame.timerOverlayKey: (_, __) =>
+                                        const TimerOverlay(),
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          SafeArea(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  RoundButton(
+                                    icon: Icons.keyboard_arrow_left,
+                                    onPressed: _handleBackButton,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
-                ),
-                SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        RoundButton(
-                          icon: Icons.keyboard_arrow_left,
-                          onPressed: _handleBackButton,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            );
-          }),
-        ),
+                )
+              : TutorialOverlay(
+                  onBackButtonPressed: _handleBackButton,
+                  onGameStart: _handleTutorialCompleted,
+                );
+        },
       ),
     );
   }
@@ -116,6 +135,10 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
         },
       );
     }
+  }
+
+  void _handleTutorialCompleted() {
+    context.read<TutorialCubit>().tutorialIsShown();
   }
 }
 

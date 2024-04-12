@@ -4,7 +4,6 @@ import 'package:flutter_game_challenge/app/view/app.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dart';
 import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/common/extensions/extensoins.dart';
 import 'package:flutter_game_challenge/landing/index.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';

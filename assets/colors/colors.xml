@@ -34,5 +34,6 @@
     <color name="yehor_color" type="material">#EC6EAA</color>
     <color name="nikita_color" type="material">#EC6E6E</color>
     <color name="yura_color" type="material">#9E6EEC</color>
-
+    <color name="tutorial_background">#FFE0EBF1</color>
+    <color name="finder_background">#FF72A8CD</color>
 </resources>
