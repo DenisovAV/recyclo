@@ -237,5 +237,25 @@
   "@downloadApp": {
     "description": "Title scrolling to bottom button"
   },
-  "playOnlineButtonTitle": "Play in Browser"
+  "playOnlineButtonTitle": "Play in Browser",
+  "gameSettings": "Game Settings",
+  "@gameSettings": {
+    "description": "Title of Settings page"
+  },
+  "audioSettings": "Audio",
+  "@audioSettings": {
+    "description": "Audio settings title"
+  },
+  "accessibilitySettings": "Accessibility",
+  "@accessibilitySettings": {
+    "description": "Accessibility settings title"
+  },
+  "musicToggleSetting": "Music",
+  "@musicToggleSetting": {
+    "description": "Music toggle label"
+  },
+  "soundsToggleSetting": "Sound Effects",
+  "@soundsToggleSetting": {
+    "description": "Sounds toggle label"
+  }
 }

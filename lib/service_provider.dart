@@ -1,9 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_game_challenge/artifact_details/cubit/artifact_details_cubit.dart';
 import 'package:flutter_game_challenge/artifacts/artifacts_repository.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
 import 'package:flutter_game_challenge/artifacts/wallet/service/wallet_interface.dart';
+import 'package:flutter_game_challenge/audio/music_service.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
+import 'package:flutter_game_challenge/settings/cubit/settings_cubit.dart';
+import 'package:flutter_game_challenge/settings/settings.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
 import 'package:get_it/get_it.dart';
@@ -35,8 +38,21 @@ class ServiceProvider {
       ),
     );
 
+    GetIt.instance.registerFactory<MainPageCubit>(
+      () => MainPageCubit(
+        GetIt.instance.get(),
+      ),
+    );
+
     GetIt.instance.registerFactory<ArtifactsCubit>(
       () => ArtifactsCubit(
+        GetIt.instance.get(),
+      ),
+    );
+
+    GetIt.instance.registerFactory<SettingsCubit>(
+      () => SettingsCubit(
+        GetIt.instance.get(),
         GetIt.instance.get(),
       ),
     );
@@ -46,11 +62,21 @@ class ServiceProvider {
         GetIt.instance.get(),
         GetIt.instance.get(),
         GetIt.instance.get(),
+        GetIt.instance.get(),
       ),
     );
 
     GetIt.instance.registerFactory<TimerCubit>(
       TimerCubit.new,
+    );
+
+    GetIt.instance
+        .registerLazySingleton<SettingsController>(SettingsController.new);
+
+    GetIt.instance.registerLazySingleton<MusicService>(
+      () => MusicService(
+        GetIt.instance.get(),
+      ),
     );
   }
 

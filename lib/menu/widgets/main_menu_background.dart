@@ -53,6 +53,12 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
       });
     ;
 
+    _playerController.addListener(() {
+      if (!_playerController.value.isPlaying) {
+        _playerController.play();
+      }
+    });
+
     _compactController = AnimationController(
       vsync: this,
       duration: _highlightDuratioh,

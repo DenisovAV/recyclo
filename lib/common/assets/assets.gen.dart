@@ -11,6 +11,26 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $AssetsAudioGen {
+  const $AssetsAudioGen();
+
+  /// File path: assets/audio/catcher_theme.mp3
+  String get catcherTheme => 'assets/audio/catcher_theme.mp3';
+
+  /// File path: assets/audio/clicker_theme.mp3
+  String get clickerTheme => 'assets/audio/clicker_theme.mp3';
+
+  /// File path: assets/audio/finder_theme.mp3
+  String get finderTheme => 'assets/audio/finder_theme.mp3';
+
+  /// File path: assets/audio/main_menu_theme.mp3
+  String get mainMenuTheme => 'assets/audio/main_menu_theme.mp3';
+
+  /// List of all assets
+  List<String> get values =>
+      [catcherTheme, clickerTheme, finderTheme, mainMenuTheme];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -111,6 +131,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/game_mode_finder.png
   AssetGenImage get gameModeFinder =>
       const AssetGenImage('assets/images/game_mode_finder.png');
+
+  /// File path: assets/images/gears.png
+  AssetGenImage get gears => const AssetGenImage('assets/images/gears.png');
 
   /// File path: assets/images/glass.png
   AssetGenImage get glass => const AssetGenImage('assets/images/glass.png');
@@ -236,6 +259,7 @@ class $AssetsImagesGen {
         gameModeCathcer,
         gameModeClicker,
         gameModeFinder,
+        gears,
         glass,
         hole,
         holeMask,
@@ -580,6 +604,7 @@ class $AssetsImagesCatcherDropsPlasticGen {
 class Assets {
   Assets._();
 
+  static const $AssetsAudioGen audio = $AssetsAudioGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLicensesGen licenses = $AssetsLicensesGen();
 }

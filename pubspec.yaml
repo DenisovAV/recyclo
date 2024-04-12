@@ -65,6 +65,7 @@ flutter:
     - assets/images/catcher/tutorial/
     - assets/images/catcher/button/
     - assets/images/clicker/images/
+    - assets/audio/
 
   fonts:
     - family: Sniglet
