@@ -13,6 +13,7 @@ import 'package:flutter_game_challenge/settings/settings.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
 import 'package:get_it/get_it.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ServiceProvider {
   static Future<void> initialize() async {
@@ -73,30 +74,11 @@ class ServiceProvider {
       ),
     );
 
-    GetIt.instance.registerFactory<ArtifactsCubit>(
-      () => ArtifactsCubit(
-        GetIt.instance.get(),
-      ),
-    );
-
     GetIt.instance.registerFactory<SettingsCubit>(
       () => SettingsCubit(
         GetIt.instance.get(),
         GetIt.instance.get(),
       ),
-    );
-
-    GetIt.instance.registerFactory<ArtifactDetailsCubit>(
-      () => ArtifactDetailsCubit(
-        GetIt.instance.get(),
-        GetIt.instance.get(),
-        GetIt.instance.get(),
-        GetIt.instance.get(),
-      ),
-    );
-
-    GetIt.instance.registerFactory<TimerCubit>(
-      TimerCubit.new,
     );
 
     ///Game Resources
@@ -107,8 +89,12 @@ class ServiceProvider {
     GetIt.instance
         .registerLazySingleton<SettingsController>(SettingsController.new);
 
+    GetIt.instance
+        .registerLazySingleton<CreatePlayerFunc>(() => AudioPlayer.new);
+
     GetIt.instance.registerLazySingleton<MusicService>(
       () => MusicService(
+        GetIt.instance.get(),
         GetIt.instance.get(),
       ),
     );
@@ -116,3 +102,5 @@ class ServiceProvider {
 
   static T get<T extends Object>() => GetIt.instance.get<T>();
 }
+
+typedef CreatePlayerFunc = AudioPlayer Function();

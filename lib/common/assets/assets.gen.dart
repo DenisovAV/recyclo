@@ -14,6 +14,12 @@ import 'package:flutter/services.dart';
 class $AssetsAudioGen {
   const $AssetsAudioGen();
 
+  /// File path: assets/audio/artifact_crafted.mp3
+  String get artifactCrafted => 'assets/audio/artifact_crafted.mp3';
+
+  /// File path: assets/audio/button_tap.mp3
+  String get buttonTap => 'assets/audio/button_tap.mp3';
+
   /// File path: assets/audio/catcher_theme.mp3
   String get catcherTheme => 'assets/audio/catcher_theme.mp3';
 
@@ -26,9 +32,19 @@ class $AssetsAudioGen {
   /// File path: assets/audio/main_menu_theme.mp3
   String get mainMenuTheme => 'assets/audio/main_menu_theme.mp3';
 
+  /// File path: assets/audio/toggle_sound.mp3
+  String get toggleSound => 'assets/audio/toggle_sound.mp3';
+
   /// List of all assets
-  List<String> get values =>
-      [catcherTheme, clickerTheme, finderTheme, mainMenuTheme];
+  List<String> get values => [
+        artifactCrafted,
+        buttonTap,
+        catcherTheme,
+        clickerTheme,
+        finderTheme,
+        mainMenuTheme,
+        toggleSound
+      ];
 }
 
 class $AssetsImagesGen {

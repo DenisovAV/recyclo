@@ -39,7 +39,7 @@ class _AppLifecycleObserverState extends State<AppLifecycleObserver> {
   void initState() {
     super.initState();
     _appLifecycleListener = AppLifecycleListener(
-      onStateChange: (s) => lifecycleListenable.value = s,
+      onStateChange: (appState) => lifecycleListenable.value = appState,
     );
 
     GetIt.instance.get<MusicService>().lifecycleNotifier = lifecycleListenable;

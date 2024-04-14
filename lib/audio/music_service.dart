@@ -5,15 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/settings/settings.dart';
 
 class MusicService {
-  final AudioPlayer _musicPlayer = AudioPlayer()..setVolume(0.4);
+  final AudioPlayer _musicPlayer;
+  final AudioPlayer Function() _createAudioPlayer;
   final SettingsController _settingsController;
   bool _isMusicEnabled;
   bool _isSoundsEnabled;
   AssetSource? _latestSource;
 
-  MusicService(this._settingsController)
-      : _isMusicEnabled = _settingsController.musicOn.value,
-        _isSoundsEnabled = _settingsController.soundsOn.value {
+  MusicService(
+    this._createAudioPlayer,
+    this._settingsController,
+  )   : _isMusicEnabled = _settingsController.musicOn.value,
+        _isSoundsEnabled = _settingsController.soundsOn.value,
+        _musicPlayer = _createAudioPlayer() {
     _settingsController.musicOn.addListener(_updateIsMusicEnabled);
     _settingsController.soundsOn.addListener(_updateIsSoundsEnabled);
   }
@@ -42,7 +46,7 @@ class MusicService {
       return;
     }
 
-    final tempPlayer = AudioPlayer();
+    final tempPlayer = _createAudioPlayer();
     await tempPlayer.play(source);
 
     StreamSubscription<void>? tempSubscription;
