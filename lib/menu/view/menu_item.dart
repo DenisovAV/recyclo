@@ -44,25 +44,31 @@ class MenuItem extends StatelessWidget {
       ],
     );
 
-    return GestureDetector(
-      onTap: onTap,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (assetId != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: Image.asset(
-                assetId!,
-                width: 60,
-                height: 60,
+    return Semantics(
+      label: text,
+      button: true,
+      enabled: true,
+      excludeSemantics: true,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (assetId != null)
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Image.asset(
+                  assetId!,
+                  width: 60,
+                  height: 60,
+                ),
               ),
+            Text(
+              text,
+              style: style,
             ),
-          Text(
-            text,
-            style: style,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

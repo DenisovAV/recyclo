@@ -78,6 +78,7 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
                         RoundButton(
                           icon: Icons.keyboard_arrow_left,
                           onPressed: _handleBackButton,
+                          semanticsLabel: context.l10n.backButtonLabel,
                         ),
                       ],
                     ),

@@ -50,11 +50,17 @@ class _DownloadButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () {
-          _goToLink(url);
-        },
-        child: image,
+      child: Semantics(
+        link: true,
+        label: url,
+        enabled: true,
+        excludeSemantics: true,
+        child: GestureDetector(
+          onTap: () {
+            _goToLink(url);
+          },
+          child: image,
+        ),
       ),
     );
   }
@@ -79,25 +85,31 @@ class PlayOnlineButton extends StatelessWidget {
     return Material(
       color: FlutterGameChallengeColors.textStroke,
       borderRadius: BorderRadius.all(Radius.circular(5)),
-      child: InkWell(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-        onTap: onTap,
-        child: Container(
-          height: 40,
-          width: 130,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            border: Border.all(
-              width: 1,
-              color: FlutterGameChallengeColors.teamBackground,
+      child: Semantics(
+        label: l10n.playOnlineButtonTitle,
+        button: true,
+        enabled: true,
+        excludeSemantics: true,
+        child: InkWell(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          onTap: onTap,
+          child: Container(
+            height: 40,
+            width: 130,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              border: Border.all(
+                width: 1,
+                color: FlutterGameChallengeColors.teamBackground,
+              ),
             ),
-          ),
-          child: Center(
-            child: Text(
-              l10n.playOnlineButtonTitle,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12,
+            child: Center(
+              child: Text(
+                l10n.playOnlineButtonTitle,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                ),
               ),
             ),
           ),

@@ -237,5 +237,9 @@
   "@downloadApp": {
     "description": "Title scrolling to bottom button"
   },
-  "playOnlineButtonTitle": "Play in Browser"
+  "playOnlineButtonTitle": "Play in Browser",
+  "backButtonLabel": "Back",
+  "nextButtonLabel": "Next",
+  "scrollToDownButtonLabel": "Scroll to bottom"
+
 }

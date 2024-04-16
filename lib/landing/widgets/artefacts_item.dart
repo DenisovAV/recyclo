@@ -198,17 +198,23 @@ class _ImagePageView extends StatelessWidget {
                   topLeft: Radius.circular(16),
                   bottomLeft: Radius.circular(16),
                 ),
-                child: InkWell(
-                  onTap: _onPreviousPage,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    bottomLeft: Radius.circular(16),
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.keyboard_arrow_left_rounded,
-                      size: 32,
-                      color: FlutterGameChallengeColors.teamBackground,
+                child: Semantics(
+                  label: context.l10n.backButtonLabel,
+                  button: true,
+                  enabled: true,
+                  excludeSemantics: true,
+                  child: InkWell(
+                    onTap: _onPreviousPage,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      bottomLeft: Radius.circular(16),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.keyboard_arrow_left_rounded,
+                        size: 32,
+                        color: FlutterGameChallengeColors.teamBackground,
+                      ),
                     ),
                   ),
                 ),
@@ -256,17 +262,23 @@ class _ImagePageView extends StatelessWidget {
                   topRight: Radius.circular(16),
                   bottomRight: Radius.circular(16),
                 ),
-                child: InkWell(
-                  onTap: _onNextPage,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(16),
-                    bottomRight: Radius.circular(16),
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.keyboard_arrow_right_rounded,
-                      size: 32,
-                      color: FlutterGameChallengeColors.teamBackground,
+                child: Semantics(
+                  label: context.l10n.nextButtonLabel,
+                  button: true,
+                  enabled: true,
+                  excludeSemantics: true,
+                  child: InkWell(
+                    onTap: _onNextPage,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(16),
+                      bottomRight: Radius.circular(16),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.keyboard_arrow_right_rounded,
+                        size: 32,
+                        color: FlutterGameChallengeColors.teamBackground,
+                      ),
                     ),
                   ),
                 ),
@@ -292,13 +304,19 @@ class _ImagePageView extends StatelessWidget {
                     topLeft: Radius.circular(16),
                     bottomLeft: Radius.circular(16),
                   ),
-                  child: InkWell(
-                    onTap: _onPreviousPage,
-                    child: Center(
-                      child: Icon(
-                        Icons.keyboard_arrow_left_rounded,
-                        size: 32,
-                        color: FlutterGameChallengeColors.teamBackground,
+                  child: Semantics(
+                    label: context.l10n.backButtonLabel,
+                    button: true,
+                    enabled: true,
+                    excludeSemantics: true,
+                    child: InkWell(
+                      onTap: _onPreviousPage,
+                      child: Center(
+                        child: Icon(
+                          Icons.keyboard_arrow_left_rounded,
+                          size: 32,
+                          color: FlutterGameChallengeColors.teamBackground,
+                        ),
                       ),
                     ),
                   ),
@@ -344,13 +362,19 @@ class _ImagePageView extends StatelessWidget {
                     topRight: Radius.circular(16),
                     bottomRight: Radius.circular(16),
                   ),
-                  child: InkWell(
-                    onTap: _onNextPage,
-                    child: Center(
-                      child: Icon(
-                        Icons.keyboard_arrow_right_rounded,
-                        size: 32,
-                        color: FlutterGameChallengeColors.teamBackground,
+                  child: Semantics(
+                     label: context.l10n.nextButtonLabel,
+                    button: true,
+                    enabled: true,
+                    excludeSemantics: true,
+                    child: InkWell(
+                      onTap: _onNextPage,
+                      child: Center(
+                        child: Icon(
+                          Icons.keyboard_arrow_right_rounded,
+                          size: 32,
+                          color: FlutterGameChallengeColors.teamBackground,
+                        ),
                       ),
                     ),
                   ),
@@ -421,7 +445,9 @@ class _Dot extends StatelessWidget {
       width: 10,
       height: 10,
       decoration: BoxDecoration(
-        color: isActive ? FlutterGameChallengeColors.textStroke : Colors.transparent,
+        color: isActive
+            ? FlutterGameChallengeColors.textStroke
+            : Colors.transparent,
         borderRadius: BorderRadius.all(Radius.circular(5)),
         border: Border.all(
           width: 2,

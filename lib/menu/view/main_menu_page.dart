@@ -16,7 +16,6 @@ import 'package:flutter_game_challenge/menu/view/menu_item.dart';
 import 'package:flutter_game_challenge/menu/widgets/main_menu_background.dart';
 import 'package:flutter_game_challenge/service_provider.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
-import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_widget.dart';
 
 class MainMenuPage extends StatelessWidget {
@@ -66,6 +65,7 @@ class MainMenuPage extends StatelessWidget {
                               padding: const EdgeInsets.only(top: 10),
                               child: RoundButton(
                                 icon: Icons.keyboard_arrow_left,
+                                semanticsLabel: context.l10n.backButtonLabel,
                                 onPressed: () => _onBackBtn(state, context),
                               ),
                             ),

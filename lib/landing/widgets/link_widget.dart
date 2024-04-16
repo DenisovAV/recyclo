@@ -17,23 +17,29 @@ class LinkWidget extends StatelessWidget {
 
     return Material(
       color: Colors.transparent,
-      child: InkWell(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        onTap: _launchHref,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-            border: Border.all(
-              width: 1,
-              color: linkColor,
+      child: Semantics(
+        label: l10n.aboutAppRecycleLink,
+        button: true,
+        enabled: true,
+        excludeSemantics: true,
+        child: InkWell(
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          onTap: _launchHref,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              border: Border.all(
+                width: 1,
+                color: linkColor,
+              ),
             ),
-          ),
-          child: Text(
-            l10n.aboutAppRecycleLink,
-            style: TextStyle(
-              fontSize: 14,
-              color: linkColor,
+            child: Text(
+              l10n.aboutAppRecycleLink,
+              style: TextStyle(
+                fontSize: 14,
+                color: linkColor,
+              ),
             ),
           ),
         ),

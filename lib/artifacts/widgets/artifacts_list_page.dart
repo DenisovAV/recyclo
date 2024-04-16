@@ -91,98 +91,107 @@ class _ArtifactItem extends StatelessWidget {
     required this.model,
     required this.imagePath,
     required this.description,
+    // ignore: unused_element
+    this.semanticsLabel,
   });
 
   final String name;
+  final String? semanticsLabel;
   final ArtifactModel model;
   final String imagePath;
   final String description;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(kNestedNavigatorKey.currentContext!).push(
-          MaterialPageRoute<void>(
-            builder: (_) => BlocProvider<ArtifactDetailsCubit>(
-              create: (_) => ServiceProvider.get<ArtifactDetailsCubit>()
-                ..initialize(
-                    name: name,
-                    imagePath: imagePath,
-                    description: description,
-                    model: model),
-              child: ArtifactDetails(),
-            ),
-          ),
-        );
-        BlocProvider.of<MainPageCubit>(context).navigateToArtifactDetails();
-      },
-      child: Hero(
-        tag: name,
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(40),
-                topRight: Radius.circular(24),
-                bottomLeft: Radius.circular(40),
-                bottomRight: Radius.circular(40),
-              ),
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: FlutterGameChallengeColors.textStroke,
-                ),
-                child: Stack(
-                  children: [
-                    Image.asset(imagePath),
-                    Column(
-                      children: [
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: ArtifactStatusIcon(
-                              status: model.status,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 4,
-                          ),
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          color: FlutterGameChallengeColors.textStroke,
-                          child: Text(
-                            name,
-                            textAlign: TextAlign.center,
-                            style: context.generalTextStyle(
-                              fontSize: 14,
-                              color: FlutterGameChallengeColors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+    return Semantics(
+      label: semanticsLabel ?? name,
+      enabled: true,
+      link: true,
+      excludeSemantics: true,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(kNestedNavigatorKey.currentContext!).push(
+            MaterialPageRoute<void>(
+              builder: (_) => BlocProvider<ArtifactDetailsCubit>(
+                create: (_) => ServiceProvider.get<ArtifactDetailsCubit>()
+                  ..initialize(
+                      name: name,
+                      imagePath: imagePath,
+                      description: description,
+                      model: model),
+                child: ArtifactDetails(),
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 2,
-                  color: FlutterGameChallengeColors.textStroke,
-                ),
+          );
+          BlocProvider.of<MainPageCubit>(context).navigateToArtifactDetails();
+        },
+        child: Hero(
+          tag: name,
+          child: Stack(
+            children: [
+              ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(40),
                   topRight: Radius.circular(24),
                   bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40),
                 ),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: FlutterGameChallengeColors.textStroke,
+                  ),
+                  child: Stack(
+                    children: [
+                      Image.asset(imagePath),
+                      Column(
+                        children: [
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: ArtifactStatusIcon(
+                                status: model.status,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 4,
+                            ),
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            color: FlutterGameChallengeColors.textStroke,
+                            child: Text(
+                              name,
+                              textAlign: TextAlign.center,
+                              style: context.generalTextStyle(
+                                fontSize: 14,
+                                color: FlutterGameChallengeColors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ],
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 2,
+                    color: FlutterGameChallengeColors.textStroke,
+                  ),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(24),
+                    bottomLeft: Radius.circular(40),
+                    bottomRight: Radius.circular(40),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

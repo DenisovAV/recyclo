@@ -32,6 +32,7 @@ class GameHUD extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 12),
                 child: RoundButton(
                   icon: Icons.keyboard_arrow_left,
+                  semanticsLabel: context.l10n.backButtonLabel,
                   onPressed: handleRightButton,
                 ),
               ),
