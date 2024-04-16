@@ -109,3 +109,6 @@ app.*.map.json
 !.idea/dictionaries/
 !.idea/runConfigurations/
 /.fvm/
+devtools_options.yaml
+android/app/google-services.json
+lib/firebase_options.dart
