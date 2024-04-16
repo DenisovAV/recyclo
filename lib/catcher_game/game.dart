@@ -6,8 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_challenge/catcher_game/common/size_config.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/main_scene.dart';
+import 'package:flutter_game_challenge/catcher_game/main_scene.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/service_provider.dart';
 
 enum CatcherGameStatus { playing, pause, result, tutorial }
 
@@ -33,6 +34,8 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
     mainScene = MainScene(
       onPauseResumeGameCallback: _handlePauseResumeGameCallback,
       onResetCallback: _handleOnResetCallback,
+      assetsByItemTypeCallback:
+          ServiceProvider.get<AssetsLoader>().getAssetsListByItemType,
     );
 
     await add(mainScene!);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/landing/common/team_constants.dart';
 import 'package:flutter_game_challenge/landing/models/team_member.dart';
@@ -31,11 +30,15 @@ class TeamItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 30,),
+                SizedBox(
+                  height: 30,
+                ),
                 Wrap(
                   spacing: 30,
                   runSpacing: 30,
-                  children: TeamConstants.teams.map<Widget>(_TeamMemberWidget.new).toList(),
+                  children: TeamConstants.teams
+                      .map<Widget>(_TeamMemberWidget.new)
+                      .toList(),
                 )
               ],
             ),

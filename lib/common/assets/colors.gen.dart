@@ -400,6 +400,9 @@ class FlutterGameChallengeColors {
     },
   );
 
+  /// Color: #FF72A8CD
+  static const Color finderBackground = Color(0xFF72A8CD);
+
   /// MaterialColor:
   ///   50: #FFF6FBF3
   ///   100: #FFE8F5E2
@@ -597,6 +600,9 @@ class FlutterGameChallengeColors {
       900: Color(0xFF1E0D25),
     },
   );
+
+  /// Color: #FFE0EBF1
+  static const Color tutorialBackground = Color(0xFFE0EBF1);
 
   /// MaterialColor:
   ///   50: #FFFDFBEE
