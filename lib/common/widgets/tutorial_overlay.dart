@@ -56,6 +56,7 @@ class TutorialOverlay extends StatelessWidget {
                       child: RoundButton(
                         icon: Icons.keyboard_arrow_left,
                         onPressed: onBackButtonPressed,
+                        semanticsLabel: context.l10n.backButtonLabel,
                       ),
                     ),
                   ),

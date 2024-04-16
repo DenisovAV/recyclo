@@ -89,6 +89,7 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   RoundButton(
+                                    semanticsLabel: context.l10n.backButtonLabel,
                                     icon: Icons.keyboard_arrow_left,
                                     onPressed: _handleBackButton,
                                   ),
