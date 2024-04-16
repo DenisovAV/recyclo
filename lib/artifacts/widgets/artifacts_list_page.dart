@@ -21,7 +21,8 @@ class ArtifactsListPage extends StatefulWidget {
 class _ArtifactsListPageState extends State<ArtifactsListPage> {
   final _heroController = HeroController();
 
-  @override void dispose() {
+  @override
+  void dispose() {
     _heroController.dispose();
     super.dispose();
   }
@@ -34,50 +35,58 @@ class _ArtifactsListPageState extends State<ArtifactsListPage> {
       onGenerateRoute: (_) => MaterialPageRoute(
         builder: (_) => BlocBuilder<ArtifactsCubit, ArtifactsListState>(
           builder: (context, state) {
-            return GridView.count(
-              padding: EdgeInsets.only(bottom: 20),
-              crossAxisCount: 2,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              children: [
-                _ArtifactItem(
-                  name: context.l10n.artifactNewspaperTitle,
-                  model: state.artifacts.newspaper,
-                  imagePath: Assets.images.artifactNewspaper.path,
-                  description: context.l10n.artifactNewspaperDescripton,
+            return LayoutBuilder(builder: (context, constr) {
+              return Center(
+                child: SizedBox(
+                  width: 800,
+                  child: GridView.count(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.only(bottom: 40),
+                    crossAxisCount: constr.maxWidth < 800 ? 2 : 3,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                    children: [
+                      _ArtifactItem(
+                        name: context.l10n.artifactNewspaperTitle,
+                        model: state.artifacts.newspaper,
+                        imagePath: Assets.images.artifactNewspaper.path,
+                        description: context.l10n.artifactNewspaperDescripton,
+                      ),
+                      _ArtifactItem(
+                        name: context.l10n.artifactShampooTitle,
+                        model: state.artifacts.shampoo,
+                        imagePath: Assets.images.artifactShampoo.path,
+                        description: context.l10n.artifactShampooDescripton,
+                      ),
+                      _ArtifactItem(
+                        name: context.l10n.artifactPlantTitle,
+                        model: state.artifacts.plant,
+                        imagePath: Assets.images.artifactPlant.path,
+                        description: context.l10n.artifactPlantDescripton,
+                      ),
+                      _ArtifactItem(
+                        name: context.l10n.artifactLaptopTitle,
+                        model: state.artifacts.laptop,
+                        imagePath: Assets.images.artifactLaptop.path,
+                        description: context.l10n.artifactLaptopDescripton,
+                      ),
+                      _ArtifactItem(
+                        name: context.l10n.artifactCarTitle,
+                        model: state.artifacts.car,
+                        imagePath: Assets.images.artifactCar.path,
+                        description: context.l10n.artifactCarDescripton,
+                      ),
+                      _ArtifactItem(
+                        name: context.l10n.artifactHouseTitle,
+                        model: state.artifacts.house,
+                        imagePath: Assets.images.artifactHouse.path,
+                        description: context.l10n.artifactHouseDescripton,
+                      ),
+                    ],
+                  ),
                 ),
-                _ArtifactItem(
-                  name: context.l10n.artifactShampooTitle,
-                  model: state.artifacts.shampoo,
-                  imagePath: Assets.images.artifactShampoo.path,
-                  description: context.l10n.artifactShampooDescripton,
-                ),
-                _ArtifactItem(
-                  name: context.l10n.artifactPlantTitle,
-                  model: state.artifacts.plant,
-                  imagePath: Assets.images.artifactPlant.path,
-                  description: context.l10n.artifactPlantDescripton,
-                ),
-                _ArtifactItem(
-                  name: context.l10n.artifactLaptopTitle,
-                  model: state.artifacts.laptop,
-                  imagePath: Assets.images.artifactLaptop.path,
-                  description: context.l10n.artifactLaptopDescripton,
-                ),
-                _ArtifactItem(
-                  name: context.l10n.artifactCarTitle,
-                  model: state.artifacts.car,
-                  imagePath: Assets.images.artifactCar.path,
-                  description: context.l10n.artifactCarDescripton,
-                ),
-                _ArtifactItem(
-                  name: context.l10n.artifactHouseTitle,
-                  model: state.artifacts.house,
-                  imagePath: Assets.images.artifactHouse.path,
-                  description: context.l10n.artifactHouseDescripton,
-                ),
-              ],
-            );
+              );
+            });
           },
         ),
       ),

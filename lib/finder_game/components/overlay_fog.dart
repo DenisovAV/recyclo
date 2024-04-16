@@ -8,7 +8,6 @@ import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
-import 'package:flutter_game_challenge/finder_game/asset_extensions.dart';
 import 'package:flutter_game_challenge/finder_game/components/item.dart';
 import 'package:flutter_game_challenge/finder_game/finder_game.dart';
 
@@ -23,14 +22,12 @@ class OverlayFog extends PositionComponent
   static const int _kVerticalHolePositionOffset = 56;
   static const double _kHoleZoomFactor = 8;
 
-  static const double timerPeriod = .5;
-  static const int timerTicksLimit = 4;
+  static const int timerTicksLimit = 3;
 
   Item? currentCollisionItem;
 
   Vector2 get holeHitboxPosition => dragPosition + Vector2(-12, -34);
 
-  Rect overlayTargetRect = Rect.fromLTWH(0, 0, 0, 0);
   Vector2 dragPosition = Vector2(0, 0);
   bool isDragInProgress = false;
   int numberOfTicks = 0;
@@ -40,9 +37,15 @@ class OverlayFog extends PositionComponent
 
   final double topPadding;
 
+  Rect overlayTargetRect = Rect.fromLTWH(0, 0, 0, 0);
+  Rect fogSourceRect = Rect.fromLTWH(0, 0, 0, 0);
+
   late Size maskSize;
   late Size maskScaledSize;
   late Size fogImageSize;
+
+  late FittedSizes maskFittedSizes;
+  late FittedSizes fogFittedSizes;
 
   late final Image maskImage;
   late final Image fogImage;
@@ -54,8 +57,11 @@ class OverlayFog extends PositionComponent
   void onGameResize(Vector2 size) {
     super.size = size;
     zoomFactorInPixels = _kHoleZoomFactor * size.x;
+
     _setTargetRectSize(size);
     _setMaskSizes(maskWidth, maskHeight);
+    _setFittedSizes();
+    _setSourceRectangles();
 
     super.onGameResize(size);
   }
@@ -67,9 +73,11 @@ class OverlayFog extends PositionComponent
     _loadImages();
     _setImageSizes();
     _setMaskSizes(maskWidth, maskHeight);
+    _setFittedSizes();
+    _setSourceRectangles();
 
     timerComponent = TimerComponent(
-      period: timerPeriod,
+      period: .5,
       onTick: _onTick,
       autoStart: false,
       repeat: true,
@@ -168,13 +176,13 @@ class OverlayFog extends PositionComponent
 
   void _loadImages() {
     fogImage = Flame.images.fromCache(
-      Assets.images.fog.path.trimAssetPath(),
+      Assets.images.fog.path,
     );
     maskImage = Flame.images.fromCache(
-      Assets.images.holeMask.path.trimAssetPath(),
+      Assets.images.holeMask.path,
     );
     holeDecoration = Flame.images.fromCache(
-      Assets.images.hole.path.trimAssetPath(),
+      Assets.images.hole.path,
     );
   }
 
@@ -188,37 +196,82 @@ class OverlayFog extends PositionComponent
     maskSize = Size(maskWidth, maskHeight);
 
     zoomFactorInPixels = _kHoleZoomFactor * size.x;
+    if (zoomFactorInPixels.toInt().isOdd) ++zoomFactorInPixels;
     maskScaledSize = Size(
       maskWidth - zoomFactorInPixels,
       maskHeight - zoomFactorInPixels,
     );
   }
 
+  void _setFittedSizes() {
+    final rectSize = overlayTargetRect.size;
+    fogFittedSizes = applyBoxFit(BoxFit.fill, fogImageSize, rectSize);
+    maskFittedSizes = applyBoxFit(BoxFit.cover, maskScaledSize, rectSize);
+  }
+
+  void _setSourceRectangles() {
+    fogSourceRect = Alignment.topCenter
+        .inscribe(fogFittedSizes.source, Offset.zero & fogImageSize);
+  }
+
   @override
   void render(Canvas canvas) {
     final paint = Paint();
-    final rectSize = size.toSize();
 
     if (!isDragInProgress) {
-      final fittedSizes = applyBoxFit(BoxFit.fill, fogImageSize, rectSize);
-      final sourceRect = Alignment.center
-          .inscribe(fittedSizes.source, Offset.zero & fogImageSize);
-
-      canvas
-        ..drawImageRect(
-          fogImage,
-          sourceRect,
-          overlayTargetRect,
-          paint,
-        )
-        ..restore();
+      _drawFog(canvas, paint);
       return;
     }
 
-    final maskFittedSizes = applyBoxFit(BoxFit.cover, maskScaledSize, rectSize);
+    _drawFogWithHole(canvas, paint);
+  }
 
+  void _drawFog(Canvas canvas, Paint paint) {
+    canvas
+      ..drawImageRect(
+        fogImage,
+        fogSourceRect,
+        overlayTargetRect,
+        paint,
+      )
+      ..restore();
+  }
+
+  void _drawFogWithHole(Canvas canvas, Paint paint) {
+    final maskSourceRect = _calculateMaskSourceRect();
+
+    canvas
+      ..saveLayer(overlayTargetRect, paint)
+      ..drawImageRect(
+        maskImage,
+        maskSourceRect,
+        overlayTargetRect,
+        paint..blendMode = BlendMode.src,
+      );
+
+    canvas
+      ..drawImageRect(
+        fogImage,
+        fogSourceRect,
+        overlayTargetRect,
+        paint..blendMode = BlendMode.srcIn,
+      )
+      ..restore();
+
+    canvas
+      ..drawImageRect(
+        holeDecoration,
+        maskSourceRect,
+        overlayTargetRect,
+        paint..blendMode = BlendMode.srcOver,
+      );
+  }
+
+  Rect _calculateMaskSourceRect() {
+    final rectSize = overlayTargetRect.size;
     final fittedSourceSize = maskFittedSizes.source;
-    final maskSourceRect = Alignment.center.inscribe(
+
+    return Alignment.center.inscribe(
       fittedSourceSize,
       Offset(
             fittedSourceSize.width / 2 -
@@ -237,29 +290,6 @@ class OverlayFog extends PositionComponent
           ) &
           maskSize,
     );
-
-    canvas
-      ..saveLayer(overlayTargetRect, paint)
-      ..drawImageRect(maskImage, maskSourceRect, overlayTargetRect, paint);
-
-    
-
-    final fittedSizes = applyBoxFit(BoxFit.fill, fogImageSize, rectSize);
-    final sourceRect = Alignment.center
-        .inscribe(fittedSizes.source, Offset.zero & fogImageSize);
-
-    canvas
-      ..drawImageRect(
-        fogImage,
-        sourceRect,
-        overlayTargetRect,
-        paint..blendMode = BlendMode.srcIn,
-      )
-      ..restore();
-
-      canvas
-      ..drawImageRect(
-          holeDecoration, maskSourceRect, overlayTargetRect, paint..blendMode = BlendMode.srcOver);
   }
 
   double _getAxisOffset({
