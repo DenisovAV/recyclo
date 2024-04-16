@@ -148,9 +148,6 @@ class $AssetsImagesGen {
   AssetGenImage get gameModeFinder =>
       const AssetGenImage('assets/images/game_mode_finder.png');
 
-  /// File path: assets/images/gears.png
-  AssetGenImage get gears => const AssetGenImage('assets/images/gears.png');
-
   /// File path: assets/images/glass.png
   AssetGenImage get glass => const AssetGenImage('assets/images/glass.png');
 
@@ -275,7 +272,6 @@ class $AssetsImagesGen {
         gameModeCathcer,
         gameModeClicker,
         gameModeFinder,
-        gears,
         glass,
         hole,
         holeMask,

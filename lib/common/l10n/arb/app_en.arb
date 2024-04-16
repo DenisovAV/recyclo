@@ -238,7 +238,7 @@
     "description": "Title scrolling to bottom button"
   },
   "playOnlineButtonTitle": "Play in Browser",
-  "gameSettings": "Game Settings",
+  "gameSettings": "Settings",
   "@gameSettings": {
     "description": "Title of Settings page"
   },
@@ -257,5 +257,25 @@
   "soundsToggleSetting": "Sound Effects",
   "@soundsToggleSetting": {
     "description": "Sounds toggle label"
+  },
+  "languageSettings": "Language",
+  "@languageSettings": {
+    "description": "Lang settings label"
+  },
+  "penaltySettings": "Penalty for mistake",
+  "@penaltySettings": {
+    "description": "Penalty settings label"
+  },
+  "colorSettings": "Black & White mode",
+  "@colorSettings": {
+    "description": "Color settings label"
+  },
+  "englishLanguageLabel": "English",
+  "@englishLanguageLabel": {
+    "description": "English language settings label"
+  },
+  "gameSpeedSettings": "Game speed",
+  "@gameSpeedSettings": {
+    "description": "Game speed settings label"
   }
 }
