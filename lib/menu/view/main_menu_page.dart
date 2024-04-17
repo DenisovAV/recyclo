@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_challenge/app/view/app.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
@@ -203,39 +204,40 @@ class _ArtifactsContent extends StatelessWidget {
 class _TutorialContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: FlutterGameChallengeColors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(40),
-          topRight: Radius.circular(40),
+    return Semantics(
+      image: true,
+      excludeSemantics: true,
+      label: context.l10n.mainMenuTutorialItemTitle,
+      child: Container(
+        decoration: BoxDecoration(
+          color: FlutterGameChallengeColors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40),
+            topRight: Radius.circular(40),
+          ),
+          border: Border(
+            top: BorderSide(
+              width: 2,
+              color: FlutterGameChallengeColors.primary1,
+            ),
+            left: BorderSide(
+              width: 2,
+              color: FlutterGameChallengeColors.primary1,
+            ),
+            right: BorderSide(
+              width: 2,
+              color: FlutterGameChallengeColors.primary1,
+            ),
+          ),
         ),
-        border: Border(
-          top: BorderSide(
-            width: 2,
-            color: FlutterGameChallengeColors.primary1,
-          ),
-          left: BorderSide(
-            width: 2,
-            color: FlutterGameChallengeColors.primary1,
-          ),
-          right: BorderSide(
-            width: 2,
-            color: FlutterGameChallengeColors.primary1,
-          ),
+        padding: EdgeInsets.all(28),
+        child: Column(
+          children: [
+            Assets.images.howToPlayWithoutSpaces.image(
+              fit: BoxFit.cover,
+            ),
+          ],
         ),
-      ),
-      padding: EdgeInsets.all(28),
-      child: Column(
-        children: [
-          Assets.images.howToPlayWithoutSpaces.image(
-            fit: BoxFit.cover,
-          ),
-          SafeArea(
-              child: SizedBox(
-            height: 200,
-          )),
-        ],
       ),
     );
   }

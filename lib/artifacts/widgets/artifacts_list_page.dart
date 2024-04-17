@@ -113,7 +113,11 @@ class _ArtifactItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: semanticsLabel ?? name,
+      label: (semanticsLabel ?? name) +
+          "." +
+          (model.isCrafted
+              ? context.l10n.craftedLabel
+              : context.l10n.notCraftedLabel),
       enabled: true,
       link: true,
       excludeSemantics: true,

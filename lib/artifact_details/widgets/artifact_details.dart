@@ -61,64 +61,66 @@ class ArtifactDetails extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(20),
-                          child: Wrap(
-                            alignment: WrapAlignment.center,
-                            runAlignment: WrapAlignment.center,
-                            children: [
-                              if (state.model.requirements.organic > 0)
-                                ArtifactRequirementsStatus(
-                                  type: ItemType.organic,
-                                  count: state.model.requirements.organic,
-                                  isEnough: state.trashReserve.organic >=
-                                      state.model.requirements.organic,
-                                  color:
-                                      FlutterGameChallengeColors.categoryGreen,
-                                ),
-                              if (state.model.requirements.plastic > 0) ...[
-                                const SizedBox(width: 4),
-                                ArtifactRequirementsStatus(
-                                  type: ItemType.plastic,
-                                  count: state.model.requirements.plastic,
-                                  isEnough: state.trashReserve.plastic >=
-                                      state.model.requirements.plastic,
-                                  color:
-                                      FlutterGameChallengeColors.categoryOrange,
-                                ),
+                          child: MergeSemantics(
+                            child: Wrap(
+                              alignment: WrapAlignment.center,
+                              runAlignment: WrapAlignment.center,
+                              children: [
+                                if (state.model.requirements.organic > 0)
+                                  ArtifactRequirementsStatus(
+                                    type: ItemType.organic,
+                                    count: state.model.requirements.organic,
+                                    isEnough: state.trashReserve.organic >=
+                                        state.model.requirements.organic,
+                                    color:
+                                        FlutterGameChallengeColors.categoryGreen,
+                                  ),
+                                if (state.model.requirements.plastic > 0) ...[
+                                  const SizedBox(width: 4),
+                                  ArtifactRequirementsStatus(
+                                    type: ItemType.plastic,
+                                    count: state.model.requirements.plastic,
+                                    isEnough: state.trashReserve.plastic >=
+                                        state.model.requirements.plastic,
+                                    color:
+                                        FlutterGameChallengeColors.categoryOrange,
+                                  ),
+                                ],
+                                if (state.model.requirements.glass > 0) ...[
+                                  const SizedBox(width: 4),
+                                  ArtifactRequirementsStatus(
+                                    type: ItemType.glass,
+                                    count: state.model.requirements.glass,
+                                    isEnough: state.trashReserve.glass >=
+                                        state.model.requirements.glass,
+                                    color:
+                                        FlutterGameChallengeColors.categoryViolet,
+                                  ),
+                                ],
+                                if (state.model.requirements.paper > 0) ...[
+                                  const SizedBox(width: 4),
+                                  ArtifactRequirementsStatus(
+                                    type: ItemType.paper,
+                                    count: state.model.requirements.paper,
+                                    isEnough: state.trashReserve.paper >=
+                                        state.model.requirements.paper,
+                                    color:
+                                        FlutterGameChallengeColors.categoryPink,
+                                  ),
+                                ],
+                                if (state.model.requirements.electronics > 0) ...[
+                                  const SizedBox(width: 4),
+                                  ArtifactRequirementsStatus(
+                                    type: ItemType.electronic,
+                                    count: state.model.requirements.electronics,
+                                    isEnough: state.trashReserve.electronics >=
+                                        state.model.requirements.electronics,
+                                    color:
+                                        FlutterGameChallengeColors.categoryYellow,
+                                  ),
+                                ],
                               ],
-                              if (state.model.requirements.glass > 0) ...[
-                                const SizedBox(width: 4),
-                                ArtifactRequirementsStatus(
-                                  type: ItemType.glass,
-                                  count: state.model.requirements.glass,
-                                  isEnough: state.trashReserve.glass >=
-                                      state.model.requirements.glass,
-                                  color:
-                                      FlutterGameChallengeColors.categoryViolet,
-                                ),
-                              ],
-                              if (state.model.requirements.paper > 0) ...[
-                                const SizedBox(width: 4),
-                                ArtifactRequirementsStatus(
-                                  type: ItemType.paper,
-                                  count: state.model.requirements.paper,
-                                  isEnough: state.trashReserve.paper >=
-                                      state.model.requirements.paper,
-                                  color:
-                                      FlutterGameChallengeColors.categoryPink,
-                                ),
-                              ],
-                              if (state.model.requirements.electronics > 0) ...[
-                                const SizedBox(width: 4),
-                                ArtifactRequirementsStatus(
-                                  type: ItemType.electronic,
-                                  count: state.model.requirements.electronics,
-                                  isEnough: state.trashReserve.electronics >=
-                                      state.model.requirements.electronics,
-                                  color:
-                                      FlutterGameChallengeColors.categoryYellow,
-                                ),
-                              ],
-                            ],
+                            ),
                           ),
                         ),
                         if (state.model.status ==
