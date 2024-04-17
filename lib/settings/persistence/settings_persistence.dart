@@ -1,7 +1,7 @@
 abstract class SettingsPersistence {
-  Future<bool> getMusicOn({required bool defaultValue});
+  bool getMusicOn({required bool defaultValue});
 
-  Future<bool> getSoundsOn({required bool defaultValue});
+  bool getSoundsOn({required bool defaultValue});
 
   Future<void> saveMusicOn(bool value);
 

@@ -22,14 +22,8 @@ class SettingsController {
     return _store.saveSoundsOn(soundsOn.value);
   }
 
-  Future<void> _loadStateFromPersistence() {
-    return Future.wait([
-      _store
-          .getSoundsOn(defaultValue: true)
-          .then((value) => soundsOn.value = value),
-      _store
-          .getMusicOn(defaultValue: true)
-          .then((value) => musicOn.value = value),
-    ]);
+  void _loadStateFromPersistence() {
+    soundsOn.value = _store.getSoundsOn(defaultValue: true);
+    musicOn.value = _store.getMusicOn(defaultValue: true);
   }
 }
