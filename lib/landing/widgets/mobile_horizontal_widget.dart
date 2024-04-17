@@ -1,4 +1,3 @@
-import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';

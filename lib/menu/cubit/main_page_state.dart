@@ -44,6 +44,14 @@ class MainPageTutorialState extends MainPageState {
   MainPageTutorialState()
       : super(
           isBackgroundCompact: true,
-          isBackgroundHighlighted: false,
+          isBackgroundHighlighted: true,
+        );
+}
+
+class MainPageSettingsState extends MainPageState {
+  MainPageSettingsState()
+      : super(
+          isBackgroundCompact: true,
+          isBackgroundHighlighted: true,
         );
 }
