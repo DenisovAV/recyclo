@@ -3,14 +3,14 @@ import 'package:flutter_game_challenge/common.dart';
 
 class ArtifactRequirementsStatus extends StatelessWidget {
   const ArtifactRequirementsStatus({
-    required this.imagePath,
+    required this.type,
     required this.count,
     required this.isEnough,
     required this.color,
     super.key,
   });
 
-  final String imagePath;
+  final ItemType type;
   final int count;
   final bool isEnough;
   final Color color;
@@ -19,55 +19,63 @@ class ArtifactRequirementsStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: _width,
-          height: _width,
-          decoration: BoxDecoration(
-            color: isEnough
-                ? FlutterGameChallengeColors.artifactGreen
-                : FlutterGameChallengeColors.artifactRed,
-            border: Border.all(
-              color: FlutterGameChallengeColors.textStroke,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(18),
-          ),
-        ),
-        Container(
-          width: _width,
-          height: _width,
-          margin: const EdgeInsets.only(top: 8),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: color,
-            border: Border.all(
-              color: FlutterGameChallengeColors.textStroke,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(18),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                imagePath,
-                width: 28,
-                height: 28,
+    return Semantics(
+      label: context.l10n.toCraftResourceType(
+         count,
+        isEnough.toString(),
+        type.name,
+      ),
+      excludeSemantics: true,
+      child: Stack(
+        children: [
+          Container(
+            width: _width,
+            height: _width,
+            decoration: BoxDecoration(
+              color: isEnough
+                  ? FlutterGameChallengeColors.artifactGreen
+                  : FlutterGameChallengeColors.artifactRed,
+              border: Border.all(
+                color: FlutterGameChallengeColors.textStroke,
+                width: 2,
               ),
-              Text(
-                count.toString(),
-                style: const TextStyle(
-                  color: FlutterGameChallengeColors.textStroke,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              borderRadius: BorderRadius.circular(18),
+            ),
+          ),
+          Container(
+            width: _width,
+            height: _width,
+            margin: const EdgeInsets.only(top: 8),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: color,
+              border: Border.all(
+                color: FlutterGameChallengeColors.textStroke,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  type.iconPath,
+                  width: 28,
+                  height: 28,
                 ),
-              ),
-            ],
+                Text(
+                  count.toString(),
+                  style: const TextStyle(
+                    color: FlutterGameChallengeColors.textStroke,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

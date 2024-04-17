@@ -1,7 +1,7 @@
 PODS:
   - audioplayers_darwin (0.0.1):
     - Flutter
-  - cloud_functions (4.6.7):
+  - cloud_functions (4.6.8):
     - Firebase/Functions (= 10.22.0)
     - firebase_core
     - Flutter
@@ -10,7 +10,7 @@ PODS:
   - Firebase/Functions (10.22.0):
     - Firebase/CoreOnly
     - FirebaseFunctions (~> 10.22.0)
-  - firebase_core (2.26.0):
+  - firebase_core (2.27.0):
     - Firebase/CoreOnly (= 10.22.0)
     - Flutter
   - FirebaseAppCheckInterop (10.22.0)
@@ -112,9 +112,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
-  cloud_functions: 038ea30a247f20a9b57c1c27fe5efbeb619cfb53
+  cloud_functions: a407598ce11f5a6537b9dd634ebd4fed0ea9ddae
   Firebase: 797fd7297b7e1be954432743a0b3f90038e45a71
-  firebase_core: 8e100adc478919c6f3224f854ce8fa0bd98e36fd
+  firebase_core: 100945864b4aedce3cfef0c62ab864858bf013cf
   FirebaseAppCheckInterop: 58db3e9494751399cf3e7b7e3e705cff71099153
   FirebaseAuthInterop: fa6a29d88cf7d5649cf6f4284918a8b7627e98a9
   FirebaseCore: 0326ec9b05fbed8f8716cddbf0e36894a13837f7
@@ -136,4 +136,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.13.0

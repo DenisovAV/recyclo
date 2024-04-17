@@ -61,12 +61,13 @@ class ArtifactDetails extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(20),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
+                          child: Wrap(
+                            alignment: WrapAlignment.center,
+                            runAlignment: WrapAlignment.center,
                             children: [
                               if (state.model.requirements.organic > 0)
                                 ArtifactRequirementsStatus(
-                                  imagePath: Assets.images.organic.path,
+                                  type: ItemType.organic,
                                   count: state.model.requirements.organic,
                                   isEnough: state.trashReserve.organic >=
                                       state.model.requirements.organic,
@@ -76,7 +77,7 @@ class ArtifactDetails extends StatelessWidget {
                               if (state.model.requirements.plastic > 0) ...[
                                 const SizedBox(width: 4),
                                 ArtifactRequirementsStatus(
-                                  imagePath: Assets.images.plastic.path,
+                                  type: ItemType.plastic,
                                   count: state.model.requirements.plastic,
                                   isEnough: state.trashReserve.plastic >=
                                       state.model.requirements.plastic,
@@ -87,7 +88,7 @@ class ArtifactDetails extends StatelessWidget {
                               if (state.model.requirements.glass > 0) ...[
                                 const SizedBox(width: 4),
                                 ArtifactRequirementsStatus(
-                                  imagePath: Assets.images.glass.path,
+                                  type: ItemType.glass,
                                   count: state.model.requirements.glass,
                                   isEnough: state.trashReserve.glass >=
                                       state.model.requirements.glass,
@@ -98,7 +99,7 @@ class ArtifactDetails extends StatelessWidget {
                               if (state.model.requirements.paper > 0) ...[
                                 const SizedBox(width: 4),
                                 ArtifactRequirementsStatus(
-                                  imagePath: Assets.images.paper.path,
+                                  type: ItemType.paper,
                                   count: state.model.requirements.paper,
                                   isEnough: state.trashReserve.paper >=
                                       state.model.requirements.paper,
@@ -109,7 +110,7 @@ class ArtifactDetails extends StatelessWidget {
                               if (state.model.requirements.electronics > 0) ...[
                                 const SizedBox(width: 4),
                                 ArtifactRequirementsStatus(
-                                  imagePath: Assets.images.energy.path,
+                                  type: ItemType.electronic,
                                   count: state.model.requirements.electronics,
                                   isEnough: state.trashReserve.electronics >=
                                       state.model.requirements.electronics,
@@ -183,56 +184,62 @@ class _AddToGoogleWallet extends StatelessWidget {
         key: ValueKey(artifactStatus),
         builder: (_) {
           if (artifactStatus == ArtifactStatus.crafted) {
-            return InkWell(
-              onTap: () {
-                if (ExtendedPlatform.isIos) {
-                  return;
-                }
+            return Semantics(
+              label: context.l10n.addToWalletButtonTitle,
+              button: true,
+              enabled: true,
+              excludeSemantics: true,
+              child: InkWell(
+                onTap: () {
+                  if (ExtendedPlatform.isIos) {
+                    return;
+                  }
 
-                BlocProvider.of<ArtifactDetailsCubit>(context)
-                    .addToWallet(artifactModel);
-              },
-              child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    bottom: 20,
-                  ),
-                  child: Builder(
-                    builder: (_) {
-                      if (ExtendedPlatform.isAndroid) {
-                        return Assets.images.addToWalletAndroid.image(
-                          height: 52,
-                        );
-                      }
+                  BlocProvider.of<ArtifactDetailsCubit>(context)
+                      .addToWallet(artifactModel);
+                },
+                child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      bottom: 20,
+                    ),
+                    child: Builder(
+                      builder: (_) {
+                        if (ExtendedPlatform.isAndroid) {
+                          return Assets.images.addToWalletAndroid.image(
+                            height: 52,
+                          );
+                        }
 
-                      if (ExtendedPlatform.isIos) {
-                        return Opacity(
-                          opacity: 0.4,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Assets.images.addToWalletIos.image(
-                                height: 52,
-                              ),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Text(
-                                  context.l10n.featureInProgress,
-                                  style: context.generalTextStyle(
-                                    fontSize: 14,
-                                    color: FlutterGameChallengeColors.black,
+                        if (ExtendedPlatform.isIos) {
+                          return Opacity(
+                            opacity: 0.4,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Assets.images.addToWalletIos.image(
+                                  height: 52,
+                                ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    context.l10n.featureInProgress,
+                                    style: context.generalTextStyle(
+                                      fontSize: 14,
+                                      color: FlutterGameChallengeColors.black,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
+                              ],
+                            ),
+                          );
+                        }
 
-                      return const SizedBox();
-                    },
-                  )),
+                        return const SizedBox();
+                      },
+                    )),
+              ),
             );
           }
 

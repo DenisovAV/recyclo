@@ -35,75 +35,68 @@ class MainMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: FlutterGameChallengeColors.blueSky,
-      body: BlocBuilder<MainPageCubit, MainPageState>(
-        builder: (context, state) {
-          return PopScope(
-            canPop: false,
-            onPopInvoked: (_) async {
-              _onBackBtn(state, context);
-              return Future.value(false);
-            },
-            child: Stack(
-              children: [
-                MainMenuBackground(
-                  isHighlighted: state.isBackgroundHighlighted,
-                  isCompact: state.isBackgroundCompact,
-                ),
-                SafeArea(
-                  bottom: false,
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(width: 20),
-                          Visibility(
-                            visible:
-                                state is! MainPageInitialState || Navigator.of(context).canPop(),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: RoundButton(
-                                icon: Icons.keyboard_arrow_left,
-                                semanticsLabel: context.l10n.backButtonLabel,
-                                onPressed: () => _onBackBtn(state, context),
-                              ),
+      body: SafeArea(
+        bottom: false,
+        child: BlocBuilder<MainPageCubit, MainPageState>(
+          builder: (context, state) {
+            return PopScope(
+              canPop: false,
+              onPopInvoked: (_) async {
+                _onBackBtn(state, context);
+                return Future.value(false);
+              },
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  MainMenuBackground(
+                    isHighlighted: state.isBackgroundHighlighted,
+                    isCompact: state.isBackgroundCompact,
+                  ),
+                  Positioned.fill(
+                    top: 100,
+                    left: 20,
+                    right: 20,
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 200),
+                      child: switch (state) {
+                        MainPageInitialState() => _MainMenuContent(),
+                        MainPageChooseGameState() => _ChooseGameContent(),
+                        MainPageArtifactDetailsState() => _ArtifactsContent(),
+                        MainPageArtifactsState() => _ArtifactsContent(),
+                        MainPageTutorialState() => _TutorialContent(),
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 100,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Visibility(
+                          visible: state is! MainPageInitialState ||
+                              Navigator.of(context).canPop(),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 10,
+                              left: 20,
                             ),
-                          ),
-                          const Expanded(
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: TrashReserveWidget(),
+                            child: RoundButton(
+                              icon: Icons.keyboard_arrow_left,
+                              semanticsLabel: context.l10n.backButtonLabel,
+                              onPressed: () => _onBackBtn(state, context),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 40),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20,
-                            right: 20,
-                          ),
-                          child: AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 200),
-                            child: switch (state) {
-                              MainPageInitialState() => _MainMenuContent(),
-                              MainPageChooseGameState() => _ChooseGameContent(),
-                              MainPageArtifactDetailsState() =>
-                                _ArtifactsContent(),
-                              MainPageArtifactsState() => _ArtifactsContent(),
-                              MainPageTutorialState() => _TutorialContent(),
-                            },
                           ),
                         ),
-                      ),
-                    ],
+                        TrashReserveWidget(),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -211,7 +204,6 @@ class _TutorialContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterGameChallengeColors.white,
         borderRadius: BorderRadius.only(
@@ -234,8 +226,16 @@ class _TutorialContent extends StatelessWidget {
         ),
       ),
       padding: EdgeInsets.all(28),
-      child: Assets.images.howToPlayWithoutSpaces.image(
-        fit: BoxFit.cover,
+      child: Column(
+        children: [
+          Assets.images.howToPlayWithoutSpaces.image(
+            fit: BoxFit.cover,
+          ),
+          SafeArea(
+              child: SizedBox(
+            height: 200,
+          )),
+        ],
       ),
     );
   }
