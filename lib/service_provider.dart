@@ -10,6 +10,7 @@ import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/settings/cubit/settings_cubit.dart';
 import 'package:flutter_game_challenge/settings/persistence/local_storage_settings_persistence.dart';
+import 'package:flutter_game_challenge/settings/persistence/settings_persistence.dart';
 import 'package:flutter_game_challenge/settings/settings.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
@@ -33,7 +34,7 @@ class ServiceProvider {
       );
 
     await getIt
-        .registerSingleton<LocalStorageSettingsPersistence>(
+        .registerSingleton<SettingsPersistence>(
           LocalStorageSettingsPersistence(),
         )
         .initialize();

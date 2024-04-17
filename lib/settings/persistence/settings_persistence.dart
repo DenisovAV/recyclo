@@ -6,4 +6,6 @@ abstract class SettingsPersistence {
   Future<void> saveMusicOn(bool value);
 
   Future<void> saveSoundsOn(bool value);
+
+  Future<void> initialize();
 }
