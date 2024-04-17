@@ -10,6 +10,7 @@ import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifact_requirements_status.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifact_status_icon.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/common/feature_type.dart';
 
 class ArtifactDetails extends StatelessWidget {
   const ArtifactDetails({
@@ -150,10 +151,11 @@ class ArtifactDetails extends StatelessWidget {
                               text: context.l10n.buttonCraft,
                             ),
                           ),
-                        _AddToGoogleWallet(
-                          artifactStatus: state.model.status,
-                          artifactModel: state.model,
-                        ),
+                        if (FeatureType.googleWallet.isEnabled)
+                          _AddToGoogleWallet(
+                            artifactStatus: state.model.status,
+                            artifactModel: state.model,
+                          ),
                       ],
                     ),
                   );
