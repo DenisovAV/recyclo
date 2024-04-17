@@ -49,8 +49,8 @@ class OverlayRenderer {
     required double gameWidth,
   }) {
     maskScaledSize = Size(
-      maskWidth * FinderConstraints.kHoleZoomFactor,
-      maskHeight * FinderConstraints.kHoleZoomFactor,
+      maskWidth * FinderConstraints.holeZoomFactor,
+      maskHeight * FinderConstraints.holeZoomFactor,
     );
   }
 

@@ -5,8 +5,8 @@ class FinderConstraints {
   static const trashAdditionalTopPaddingPercentage = 0.08;
   static const trashSizeFactor = 0.15;
   static const sidePadding = 5;
-  static const kVerticalHolePositionOffset = 56;
-  static const kHoleZoomFactor = 0.2;
+  static const verticalHolePositionOffset = 56;
+  static const holeZoomFactor = 0.2;
   static const timerTicksLimit = 3;
   static const extraRowsGenerated = 0;
 
