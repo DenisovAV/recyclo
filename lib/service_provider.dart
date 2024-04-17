@@ -107,10 +107,10 @@ class ServiceProvider {
           getIt.get(),
         ),
       )
-      ..registerLazySingleton<CreatePlayerFunc>(() => AudioPlayer.new);
+      ..registerLazySingleton<CreatePlayerFunction>(() => AudioPlayer.new);
   }
 
   static T get<T extends Object>() => GetIt.instance.get<T>();
 }
 
-typedef CreatePlayerFunc = AudioPlayer Function();
+typedef CreatePlayerFunction = AudioPlayer Function();
