@@ -7,9 +7,9 @@ import 'package:flame/events.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
-import 'package:flutter_game_challenge/finder_game/components/item.dart';
-import 'package:flutter_game_challenge/finder_game/finder_game.dart';
+import 'package:recyclo/common/assets/assets.gen.dart';
+import 'package:recyclo/finder_game/components/item.dart';
+import 'package:recyclo/finder_game/finder_game.dart';
 
 class OverlayFog extends PositionComponent
     with DragCallbacks, CollisionCallbacks, HasGameReference<FinderGame> {

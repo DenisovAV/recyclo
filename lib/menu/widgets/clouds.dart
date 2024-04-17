@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
+import 'package:recyclo/common/assets/assets.gen.dart';
 
 class Clouds extends StatelessWidget {
   const Clouds({

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/artifacts/wallet/service/artifacts_wallet.dart';
-import 'package:flutter_game_challenge/artifacts/wallet/wallet_pass.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
-import 'package:flutter_game_challenge/landing/widgets/landing_item.dart';
+import 'package:recyclo/artifacts/wallet/service/artifacts_wallet.dart';
+import 'package:recyclo/artifacts/wallet/wallet_pass.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/widgets/brand_text.dart';
+import 'package:recyclo/landing/widgets/landing_item.dart';
 
 final _artefacts = wallet.values.toList();
 

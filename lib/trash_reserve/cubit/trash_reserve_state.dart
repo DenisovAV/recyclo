@@ -1,4 +1,4 @@
-import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
+import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
 
 class TrashReserveState {
   TrashReserveState({required this.model});

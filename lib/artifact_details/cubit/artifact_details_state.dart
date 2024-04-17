@@ -1,5 +1,5 @@
-import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
-import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
+import 'package:recyclo/artifacts/artifacts_model.dart';
+import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
 
 sealed class ArtifactDetailsState {}
 

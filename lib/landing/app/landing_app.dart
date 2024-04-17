@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/app/view/app.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/index.dart';
+import 'package:recyclo/app/view/app.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/index.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LandingApp extends StatelessWidget {

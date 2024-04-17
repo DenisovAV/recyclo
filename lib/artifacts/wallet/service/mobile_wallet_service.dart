@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
-import 'package:flutter_game_challenge/artifacts/wallet/service/artifacts_wallet.dart';
-import 'package:flutter_game_challenge/artifacts/wallet/service/wallet_interface.dart';
+import 'package:recyclo/artifacts/artifacts_model.dart';
+import 'package:recyclo/artifacts/wallet/service/artifacts_wallet.dart';
+import 'package:recyclo/artifacts/wallet/service/wallet_interface.dart';
 
 WalletService getWalletService() {
   if (Platform.isAndroid) {

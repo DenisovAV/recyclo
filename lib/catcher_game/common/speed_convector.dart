@@ -1,4 +1,4 @@
-import 'package:flutter_game_challenge/catcher_game/common/config.dart';
+import 'package:recyclo/catcher_game/common/config.dart';
 
 extension SpeedConvectorExtension on double {
   double rangeToSpeed() {

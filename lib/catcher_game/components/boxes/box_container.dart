@@ -5,9 +5,9 @@ import 'package:flame/effects.dart';
 import 'package:flame/extensions.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_game_challenge/catcher_game/components.dart';
-import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/catcher_game/components.dart';
+import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/common.dart';
 
 class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   BoxContainer() {

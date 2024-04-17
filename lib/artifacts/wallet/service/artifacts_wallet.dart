@@ -1,5 +1,5 @@
-import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
-import 'package:flutter_game_challenge/artifacts/wallet/wallet_pass.dart';
+import 'package:recyclo/artifacts/artifacts_model.dart';
+import 'package:recyclo/artifacts/wallet/wallet_pass.dart';
 
 const Map<ArtifactType, WalletPass> wallet = {
   ArtifactType.newspaper : WalletPass(

@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_game_challenge/catcher_game/game.dart';
+import 'package:recyclo/catcher_game/game.dart';
 
 class Background extends SpriteComponent with HasGameRef<CatcherGame> {
   Background({super.sprite});

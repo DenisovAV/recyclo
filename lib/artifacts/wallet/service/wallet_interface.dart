@@ -1,4 +1,4 @@
-import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
+import 'package:recyclo/artifacts/artifacts_model.dart';
 
 abstract class WalletService {
   Future<void> addToWallet(ArtifactType artifact, String id);

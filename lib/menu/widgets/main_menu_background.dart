@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common/assets.dart';
+import 'package:recyclo/common/assets.dart';
 import 'package:video_player/video_player.dart';
-import 'package:flutter_game_challenge/menu/widgets/clouds.dart';
+import 'package:recyclo/menu/widgets/clouds.dart';
 
 class MainMenuBackground extends StatefulWidget {
   const MainMenuBackground({

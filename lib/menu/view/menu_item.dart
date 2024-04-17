@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_game_challenge/common/assets/colors.gen.dart';
+import 'package:recyclo/common/assets/colors.gen.dart';
 
 class MenuItem extends StatelessWidget {
   const MenuItem({

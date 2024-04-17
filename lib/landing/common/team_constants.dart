@@ -1,5 +1,5 @@
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/models/team_member.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/models/team_member.dart';
 
 class TeamConstants {
   static const mobileCommunityLink = 'https://wearecommunity.io/communities/mobilepeople';

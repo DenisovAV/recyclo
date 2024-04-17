@@ -3,8 +3,8 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/clicker_game/game_models/trash_item.dart';
-import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart';
+import 'package:recyclo/clicker_game/game_models/trash_item.dart';
+import 'package:recyclo/finder_game/const/finder_constraints.dart';
 
 class Item extends PositionComponent with HasGameRef {
   Item(
