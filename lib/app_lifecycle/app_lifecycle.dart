@@ -21,11 +21,13 @@ class _AppLifecycleObserverState extends State<AppLifecycleObserver> {
       ValueNotifier(AppLifecycleState.inactive);
 
   @override
-  Widget build(BuildContext context) {
-    return InheritedProvider<AppLifecycleStateNotifier>.value(
-      value: lifecycleListenable,
-      child: widget.child,
+  void initState() {
+    super.initState();
+    _appLifecycleListener = AppLifecycleListener(
+      onStateChange: (appState) => lifecycleListenable.value = appState,
     );
+
+    GetIt.instance.get<MusicService>().lifecycleNotifier = lifecycleListenable;
   }
 
   @override
@@ -36,12 +38,10 @@ class _AppLifecycleObserverState extends State<AppLifecycleObserver> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    _appLifecycleListener = AppLifecycleListener(
-      onStateChange: (appState) => lifecycleListenable.value = appState,
+  Widget build(BuildContext context) {
+    return InheritedProvider<AppLifecycleStateNotifier>.value(
+      value: lifecycleListenable,
+      child: widget.child,
     );
-
-    GetIt.instance.get<MusicService>().lifecycleNotifier = lifecycleListenable;
   }
 }

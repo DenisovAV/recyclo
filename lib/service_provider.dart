@@ -9,6 +9,7 @@ import 'package:flutter_game_challenge/audio/music_service.dart';
 import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/settings/cubit/settings_cubit.dart';
+import 'package:flutter_game_challenge/settings/persistence/local_storage_settings_persistence.dart';
 import 'package:flutter_game_challenge/settings/settings.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
@@ -20,9 +21,22 @@ class ServiceProvider {
     final getIt = GetIt.instance;
 
     //Services
-    getIt.registerFactory<WalletService>(
-      getWalletService,
-    );
+    getIt
+      ..registerFactory<WalletService>(
+        getWalletService,
+      )
+      ..registerLazySingleton<MusicService>(
+        () => MusicService(
+          GetIt.instance.get(),
+          GetIt.instance.get(),
+        ),
+      );
+
+    await getIt
+        .registerSingleton<LocalStorageSettingsPersistence>(
+          LocalStorageSettingsPersistence(),
+        )
+        .initialize();
 
     ///Repositories
     await getIt
@@ -66,38 +80,33 @@ class ServiceProvider {
       )
       ..registerFactory<TutorialCubit>(() => TutorialCubit(
             localDataRepository: getIt.get(),
-          ));
-
-    GetIt.instance.registerFactory<MainPageCubit>(
-      () => MainPageCubit(
-        GetIt.instance.get(),
-      ),
-    );
-
-    GetIt.instance.registerFactory<SettingsCubit>(
-      () => SettingsCubit(
-        GetIt.instance.get(),
-        GetIt.instance.get(),
-      ),
-    );
+          ))
+      ..registerFactory<MainPageCubit>(
+        () => MainPageCubit(
+          GetIt.instance.get(),
+        ),
+      )
+      ..registerFactory<SettingsCubit>(
+        () => SettingsCubit(
+          GetIt.instance.get(),
+          GetIt.instance.get(),
+        ),
+      );
 
     ///Game Resources
-    getIt.registerSingleton<AssetsLoader>(
-      AssetsLoader(images: Flame.images..prefix = ''),
-    );
+    getIt
+      ..registerSingleton<AssetsLoader>(
+        AssetsLoader(images: Flame.images..prefix = ''),
+      );
 
-    GetIt.instance
-        .registerLazySingleton<SettingsController>(SettingsController.new);
-
-    GetIt.instance
-        .registerLazySingleton<CreatePlayerFunc>(() => AudioPlayer.new);
-
-    GetIt.instance.registerLazySingleton<MusicService>(
-      () => MusicService(
-        GetIt.instance.get(),
-        GetIt.instance.get(),
-      ),
-    );
+    ///Cross cutting
+    getIt
+      ..registerLazySingleton<SettingsController>(
+        () => SettingsController(
+          getIt.get(),
+        ),
+      )
+      ..registerLazySingleton<CreatePlayerFunc>(() => AudioPlayer.new);
   }
 
   static T get<T extends Object>() => GetIt.instance.get<T>();

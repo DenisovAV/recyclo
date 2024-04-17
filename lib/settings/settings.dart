@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-import 'persistence/local_storage_settings_persistence.dart';
 import 'persistence/settings_persistence.dart';
 
 class SettingsController {
@@ -9,8 +8,7 @@ class SettingsController {
   ValueNotifier<bool> soundsOn = ValueNotifier(false);
   ValueNotifier<bool> musicOn = ValueNotifier(false);
 
-  SettingsController({SettingsPersistence? store})
-      : _store = store ?? LocalStorageSettingsPersistence() {
+  SettingsController(this._store) {
     _loadStateFromPersistence();
   }
 
