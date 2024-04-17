@@ -1,3 +1,7 @@
 enum FeatureType {
-  googleWallet,
+  googleWallet(false);
+  
+  const FeatureType(this.isEnabled);
+  
+  final bool isEnabled;
 }
