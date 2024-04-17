@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_challenge/app/view/app.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
