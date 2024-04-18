@@ -81,32 +81,8 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
                       clipBehavior: Clip.hardEdge,
                       child: GameWidget(
                         game: _game,
-                        overlayBuilderMap: {
-                          GameHUD.id: (_, ClickerGame game) => GameHUD(
-                                game: game,
-                                handleRightButton: _handleBackButton,
-                              ),
-                          GameStartOverlay.id: (context, __) =>
-                              GameStartOverlay(
-                                onPressed: () => _handleGameStart(context),
-                              ),
-                          TimerReductionEffect.id: (context, __) =>
-                              TimerReductionEffect(
-                                text: '-5',
-                                onAnimationEnded: () {
-                                  context.read<TimerCubit>().penalty = 5;
-                                  _game.overlays
-                                      .remove(TimerReductionEffect.id);
-                                },
-                              ),
-                          TutorialOverlay.id: (context, __) => TutorialOverlay(
-                                onBackButtonPressed: _handleBackButton,
-                                onGameStart: () =>
-                                    _handleTutorialCompleted(context),
-                              ),
-                        },
+                        overlayBuilderMap: _clickerOverlayBuilder,
                         backgroundBuilder: (context) => Container(
-                          // color: FlutterGameChallengeColors.blueSky,
                           color: const Color(0xFF72A8CD),
                         ),
                         initialActiveOverlays: context
@@ -131,6 +107,33 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
         ),
       ),
     );
+  }
+
+  Map<String, Widget Function(BuildContext, ClickerGame)>
+      get _clickerOverlayBuilder {
+    return {
+      GameHUD.id: (BuildContext context, ClickerGame game) => GameHUD(
+            game: game,
+            handleRightButton: _handleBackButton,
+          ),
+      GameStartOverlay.id: (BuildContext context, ClickerGame game) =>
+          GameStartOverlay(
+            onPressed: () => _handleGameStart(context),
+          ),
+      TimerReductionEffect.id: (BuildContext context, ClickerGame game) =>
+          TimerReductionEffect(
+            text: '-5',
+            onAnimationEnded: () {
+              context.read<TimerCubit>().penalty = 5;
+              _game.overlays.remove(TimerReductionEffect.id);
+            },
+          ),
+      TutorialOverlay.id: (BuildContext context, ClickerGame game) =>
+          TutorialOverlay(
+            onBackButtonPressed: _handleBackButton,
+            onGameStart: () => _handleTutorialCompleted(context),
+          ),
+    };
   }
 
   void _handleBackButton() {

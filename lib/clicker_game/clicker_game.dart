@@ -3,6 +3,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_game_challenge/clicker_game/components/bound_component.dart';
 import 'package:flutter_game_challenge/clicker_game/const/clicker_constraints.dart';
 import 'package:flutter_game_challenge/clicker_game/game_state.dart';
@@ -52,6 +53,7 @@ class ClickerGame extends Forge2DGame with TapDetector {
   @override
   void onTapDown(TapDownInfo info) {
     super.onTapDown(info);
+
     final worldPosition = info.eventPosition.widget;
 
     final tappedItem = gameState.trashItems.value
@@ -60,6 +62,10 @@ class ClickerGame extends Forge2DGame with TapDetector {
     if (tappedItem != null) {
       if (gameState.currentTargetTypes.value.lastOrNull ==
           tappedItem.trashData.classification) {
+        SemanticsService.announce(
+          tappedItem.trashData.name,
+          TextDirection.ltr,
+        );
         tappedItem.onCollected();
         gameState.collectTrash(tappedItem);
       } else {
