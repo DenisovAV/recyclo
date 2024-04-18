@@ -1,4 +1,5 @@
 import 'package:flame/flame.dart';
+import 'package:flutter_game_challenge/app/app_localisations_provider.dart';
 import 'package:flutter_game_challenge/artifact_details/cubit/artifact_details_cubit.dart';
 import 'package:flutter_game_challenge/artifacts/artifacts_repository.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
@@ -31,6 +32,11 @@ class ServiceProvider {
           GetIt.instance.get(),
           GetIt.instance.get(),
         ),
+      )
+      ..registerLazySingleton<AppLocalizationsProvider>(
+        () => AppLocalizationsProvider(
+          GetIt.instance.get(),
+        ),
       );
 
     await getIt
@@ -40,9 +46,7 @@ class ServiceProvider {
         .initialize();
 
     ///Repositories
-    await getIt
-        .registerSingleton<TrashReserveRepository>(TrashReserveRepository())
-        .initialize();
+    await getIt.registerSingleton<TrashReserveRepository>(TrashReserveRepository()).initialize();
 
     await getIt
         .registerSingleton<ArtifactsRepository>(
@@ -89,6 +93,7 @@ class ServiceProvider {
       )
       ..registerFactory<SettingsCubit>(
         () => SettingsCubit(
+          GetIt.instance.get(),
           GetIt.instance.get(),
           GetIt.instance.get(),
         ),

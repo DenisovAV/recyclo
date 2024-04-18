@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_game_challenge/app/app_localisations_provider.dart';
 import 'package:flutter_game_challenge/common.dart';
+import 'package:flutter_game_challenge/common/entities/recyclo_language.dart';
 import 'package:flutter_game_challenge/settings/cubit/settings_cubit.dart';
 import 'package:flutter_game_challenge/settings/cubit/settings_state.dart';
 import 'package:flutter_game_challenge/settings/widgets/recyclo_switch.dart';
@@ -103,7 +105,10 @@ class _LanguageSettings extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 4),
-      _SettingsDropdown(),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: _SettingsDropdown(),
+      ),
     ]);
   }
 }
@@ -246,30 +251,28 @@ class _SettingToggleItem extends StatelessWidget {
 class _SettingsDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 52,
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        color: FlutterGameChallengeColors.settingsAccent,
-        borderRadius: BorderRadius.circular(18),
-      ),
-      child: Row(
-        children: [
-          Expanded(
+    final localisationProvider = context.watch<AppLocalizationsProvider>();
+
+    return DropdownButton<RecycloLanguage>(
+      borderRadius: BorderRadius.circular(18),
+      value: context.l10n.toAppLanguage(),
+      style: context.generalTextStyle(fontSize: 18),
+      items: localisationProvider.supportLocales.map<DropdownMenuItem<RecycloLanguage>>(
+        (locale) {
+          final language = locale.toAppLanguage();
+
+          return DropdownMenuItem(
+            value: language,
             child: Text(
-              context.l10n.englishLanguageLabel,
+              language.localeName,
               style: context.generalTextStyle(
                 fontSize: 18,
               ),
             ),
-          ),
-          Icon(
-            Icons.arrow_drop_down,
-            size: 24,
-            color: FlutterGameChallengeColors.primary1,
-          )
-        ],
-      ),
+          );
+        },
+      ).toList(),
+      onChanged: context.read<SettingsCubit>().changeLocale,
     );
   }
 }
@@ -310,8 +313,7 @@ class _GameSpeedSettings extends StatelessWidget {
                   child: Slider(
                     thumbColor: FlutterGameChallengeColors.primary1,
                     activeColor: FlutterGameChallengeColors.primary1,
-                    inactiveColor:
-                        FlutterGameChallengeColors.primary1.withOpacity(0.5),
+                    inactiveColor: FlutterGameChallengeColors.primary1.withOpacity(0.5),
                     onChanged: (value) {},
                     divisions: 2,
                     min: 1,
