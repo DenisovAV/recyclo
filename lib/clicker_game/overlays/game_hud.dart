@@ -7,7 +7,7 @@ import 'package:flutter_game_challenge/common.dart';
 
 import '../game_models/trash_type.dart';
 
-class GameHUD extends StatelessWidget {
+class GameHUD extends StatefulWidget {
   const GameHUD({
     required this.game,
     required this.handleRightButton,
@@ -18,6 +18,34 @@ class GameHUD extends StatelessWidget {
 
   final ClickerGame game;
   final VoidCallback handleRightButton;
+
+  @override
+  State<GameHUD> createState() => _GameHUDState();
+}
+
+class _GameHUDState extends State<GameHUD> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        context.read<TimerCubit>().resume();
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.hidden:
+        context.read<TimerCubit>().pause();
+        break;
+      case AppLifecycleState.detached:
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +61,7 @@ class GameHUD extends StatelessWidget {
                 child: RoundButton(
                   icon: Icons.keyboard_arrow_left,
                   semanticsLabel: context.l10n.backButtonLabel,
-                  onPressed: handleRightButton,
+                  onPressed: widget.handleRightButton,
                 ),
               ),
             ),
@@ -56,7 +84,7 @@ class GameHUD extends StatelessWidget {
             ),
             Flexible(
               child: ValueListenableBuilder<List<TrashType>>(
-                valueListenable: game.gameState.currentTargetTypes,
+                valueListenable: widget.game.gameState.currentTargetTypes,
                 builder: (context, targetTypes, widget) {
                   final visibleItems = targetTypes.reversed.take(5).toList();
                   return Stack(

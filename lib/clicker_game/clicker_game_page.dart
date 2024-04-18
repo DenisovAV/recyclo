@@ -19,14 +19,23 @@ class ClickerGamePage extends StatefulWidget {
 
   static MaterialPageRoute<void> route() {
     return MaterialPageRoute<void>(
-      builder: (_) => MultiBlocProvider(providers: [
-        BlocProvider<TimerCubit>(
-          create: (_) => ServiceProvider.get<TimerCubit>(),
+      builder: (_) => MultiBlocProvider(
+        providers: [
+          BlocProvider<TimerCubit>(
+            create: (_) => ServiceProvider.get<TimerCubit>(),
+          ),
+          BlocProvider<TutorialCubit>(
+            create: (_) => ServiceProvider.get<TutorialCubit>(),
+          ),
+        ],
+        child: Scaffold(
+          backgroundColor: const Color(0xFF72A8CD),
+          body: BlocProvider<TimerCubit>(
+            create: (_) => ServiceProvider.get<TimerCubit>(),
+            child: const ClickerGamePage(),
+          ),
         ),
-        BlocProvider<TutorialCubit>(
-          create: (_) => ServiceProvider.get<TutorialCubit>(),
-        ),
-      ], child: const ClickerGamePage()),
+      ),
     );
   }
 
@@ -48,64 +57,58 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF72A8CD),
-      body: BlocProvider<TimerCubit>(
-        create: (_) => ServiceProvider.get<TimerCubit>(),
-        child: BlocListener<TimerCubit, TimerState>(
-          listener: (context, state) => _handleTimerState(
-            context,
-            state,
-            _game.gameState,
-          ),
-          child: LayoutBuilder(builder: (context, constraints) {
-            return Stack(
-              children: [
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Assets.images.cloudsBackground.image(fit: BoxFit.fill),
+    return BlocListener<TimerCubit, TimerState>(
+      listener: (context, state) => _handleTimerState(
+        context,
+        state,
+        _game.gameState,
+      ),
+      child: LayoutBuilder(builder: (context, constraints) {
+        return Stack(
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Assets.images.cloudsBackground.image(fit: BoxFit.fill),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: constraints.maxWidth > _maxGameWidth
+                      ? _maxGameWidth
+                      : constraints.maxWidth,
+                  maxHeight: constraints.maxHeight > _maxGameHeight
+                      ? _maxGameHeight
+                      : constraints.maxHeight,
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: constraints.maxWidth > _maxGameWidth
-                          ? _maxGameWidth
-                          : constraints.maxWidth,
-                      maxHeight: constraints.maxHeight > _maxGameHeight
-                          ? _maxGameHeight
-                          : constraints.maxHeight,
+                child: Material(
+                  elevation: 9,
+                  clipBehavior: Clip.hardEdge,
+                  child: GameWidget(
+                    game: _game,
+                    overlayBuilderMap: _clickerOverlayBuilder,
+                    backgroundBuilder: (context) => Container(
+                      color: const Color(0xFF72A8CD),
                     ),
-                    child: Material(
-                      elevation: 9,
-                      clipBehavior: Clip.hardEdge,
-                      child: GameWidget(
-                        game: _game,
-                        overlayBuilderMap: _clickerOverlayBuilder,
-                        backgroundBuilder: (context) => Container(
-                          color: const Color(0xFF72A8CD),
-                        ),
-                        initialActiveOverlays: context
-                                .read<TutorialCubit>()
-                                .state
-                                .isTutorialShownBefore
-                            ? [
-                                GameHUD.id,
-                                GameStartOverlay.id,
-                              ]
-                            : [
-                                GameHUD.id,
-                                TutorialOverlay.id,
-                              ],
-                      ),
-                    ),
+                    initialActiveOverlays: context
+                            .read<TutorialCubit>()
+                            .state
+                            .isTutorialShownBefore
+                        ? [
+                            GameHUD.id,
+                            GameStartOverlay.id,
+                          ]
+                        : [
+                            GameHUD.id,
+                            TutorialOverlay.id,
+                          ],
                   ),
                 ),
-              ],
-            );
-          }),
-        ),
-      ),
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 
