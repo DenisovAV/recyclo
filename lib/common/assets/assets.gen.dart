@@ -11,6 +11,42 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $AssetsAudioGen {
+  const $AssetsAudioGen();
+
+  /// File path: assets/audio/artifact_crafted.mp3
+  String get artifactCrafted => 'assets/audio/artifact_crafted.mp3';
+
+  /// File path: assets/audio/button_tap.mp3
+  String get buttonTap => 'assets/audio/button_tap.mp3';
+
+  /// File path: assets/audio/catcher_theme.mp3
+  String get catcherTheme => 'assets/audio/catcher_theme.mp3';
+
+  /// File path: assets/audio/clicker_theme.mp3
+  String get clickerTheme => 'assets/audio/clicker_theme.mp3';
+
+  /// File path: assets/audio/finder_theme.mp3
+  String get finderTheme => 'assets/audio/finder_theme.mp3';
+
+  /// File path: assets/audio/main_menu_theme.mp3
+  String get mainMenuTheme => 'assets/audio/main_menu_theme.mp3';
+
+  /// File path: assets/audio/toggle_sound.mp3
+  String get toggleSound => 'assets/audio/toggle_sound.mp3';
+
+  /// List of all assets
+  List<String> get values => [
+        artifactCrafted,
+        buttonTap,
+        catcherTheme,
+        clickerTheme,
+        finderTheme,
+        mainMenuTheme,
+        toggleSound
+      ];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -580,6 +616,7 @@ class $AssetsImagesCatcherDropsPlasticGen {
 class Assets {
   Assets._();
 
+  static const $AssetsAudioGen audio = $AssetsAudioGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLicensesGen licenses = $AssetsLicensesGen();
 }

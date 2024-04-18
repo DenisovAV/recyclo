@@ -3,18 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_challenge/app/view/app.dart';
 import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
 import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dart';
-import 'package:flutter_game_challenge/catcher_game/catcher_game_page.dart';
-import 'package:flutter_game_challenge/clicker_game/clicker_game_page.dart';
 import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/finder_game/finder_game_page.dart';
 import 'package:flutter_game_challenge/landing/index.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
 import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';
 import 'package:flutter_game_challenge/menu/view/menu_item.dart';
 import 'package:flutter_game_challenge/menu/widgets/main_menu_background.dart';
 import 'package:flutter_game_challenge/service_provider.dart';
+import 'package:flutter_game_challenge/settings/cubit/settings_cubit.dart';
+import 'package:flutter_game_challenge/settings/settings_page.dart';
 import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
 import 'package:flutter_game_challenge/trash_reserve/trash_reserve_widget.dart';
+import 'package:get_it/get_it.dart';
 
 class MainMenuPage extends StatelessWidget {
   const MainMenuPage({super.key});
@@ -23,7 +23,7 @@ class MainMenuPage extends StatelessWidget {
     return MaterialPageRoute<void>(
       builder: (_) => MultiBlocProvider(
         providers: [
-          BlocProvider<MainPageCubit>(create: (_) => MainPageCubit()),
+          BlocProvider<MainPageCubit>(create: (_) => GetIt.instance.get()),
           BlocProvider<TrashReserveCubit>(create: (_) => ServiceProvider.get()),
         ],
         child: const MainMenuPage(),
@@ -64,6 +64,7 @@ class MainMenuPage extends StatelessWidget {
                         MainPageArtifactDetailsState() => _ArtifactsContent(),
                         MainPageArtifactsState() => _ArtifactsContent(),
                         MainPageTutorialState() => _TutorialContent(),
+                        MainPageSettingsState() => _SettingsContent(),
                       },
                     ),
                   ),
@@ -140,6 +141,12 @@ class _MainMenuContent extends StatelessWidget {
                 BlocProvider.of<MainPageCubit>(context).navigateToTutorial();
               },
             ),
+            MenuItem(
+              text: context.l10n.mainMenuSettingsItemTitle,
+              onTap: () {
+                BlocProvider.of<MainPageCubit>(context).navigateToSettings();
+              },
+            ),
           ],
         ),
       ),
@@ -159,34 +166,25 @@ class _ChooseGameContent extends StatelessWidget {
             MenuItem(
               text: context.l10n.gameModeCatcherItemTitle,
               assetId: Assets.images.gameModeCathcer.path,
-              onTap: () => _handleNavigateToCatcherGame(context),
+              onTap: () => BlocProvider.of<MainPageCubit>(context)
+                  .navigateToCatcherGame(context),
             ),
             MenuItem(
               text: context.l10n.gameModeClickerItemTitle,
               assetId: Assets.images.gameModeClicker.path,
-              onTap: () => _handleNavigateToClickerGame(context),
+              onTap: () => BlocProvider.of<MainPageCubit>(context)
+                  .navigateToClickerGame(context),
             ),
             MenuItem(
               text: context.l10n.gameModeFinderItemTitle,
               assetId: Assets.images.gameModeFinder.path,
-              onTap: () => _handleNavigateToFinderGame(context),
+              onTap: () => BlocProvider.of<MainPageCubit>(context)
+                  .navigateToFinderGame(context),
             ),
           ],
         ),
       ),
     );
-  }
-
-  void _handleNavigateToCatcherGame(BuildContext context) {
-    Navigator.of(context).push<void>(CatcherGamePage.route());
-  }
-
-  void _handleNavigateToClickerGame(BuildContext context) {
-    Navigator.of(context).push<void>(ClickerGamePage.route());
-  }
-
-  void _handleNavigateToFinderGame(BuildContext context) {
-    Navigator.of(context).push<void>(FinderGamePage.route());
   }
 }
 
@@ -203,41 +201,71 @@ class _ArtifactsContent extends StatelessWidget {
 class _TutorialContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      image: true,
-      excludeSemantics: true,
-      label: context.l10n.mainMenuTutorialItemTitle,
-      child: Container(
-        decoration: BoxDecoration(
-          color: FlutterGameChallengeColors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40),
-            topRight: Radius.circular(40),
+    return TweenAnimationBuilder(
+      tween: Tween<double>(
+        begin: 1,
+        end: 0,
+      ),
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+      builder: (context, v, child) {
+        return LayoutBuilder(builder: (context, constraints) {
+          return Transform.translate(
+            offset: Offset(
+              0,
+              constraints.maxHeight * v,
+            ),
+            child: child,
+          );
+        });
+      },
+      child: Semantics(
+        image: true,
+        excludeSemantics: true,
+        label: context.l10n.mainMenuTutorialItemTitle,
+        child: Container(
+          width: 600.0,
+          decoration: BoxDecoration(
+            color: FlutterGameChallengeColors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40),
+              topRight: Radius.circular(40),
+            ),
+            border: Border(
+              top: BorderSide(
+                width: 2,
+                color: FlutterGameChallengeColors.primary1,
+              ),
+              left: BorderSide(
+                width: 2,
+                color: FlutterGameChallengeColors.primary1,
+              ),
+              right: BorderSide(
+                width: 2,
+                color: FlutterGameChallengeColors.primary1,
+              ),
+            ),
           ),
-          border: Border(
-            top: BorderSide(
-              width: 2,
-              color: FlutterGameChallengeColors.primary1,
-            ),
-            left: BorderSide(
-              width: 2,
-              color: FlutterGameChallengeColors.primary1,
-            ),
-            right: BorderSide(
-              width: 2,
-              color: FlutterGameChallengeColors.primary1,
-            ),
+          padding: EdgeInsets.all(28),
+          child: Column(
+            children: [
+              Assets.images.howToPlayWithoutSpaces.image(
+                fit: BoxFit.contain,
+              ),
+            ],
           ),
-        ),
-        padding: EdgeInsets.all(28),
-        child: Column(
-          children: [
-            Assets.images.howToPlayWithoutSpaces.image(
-              fit: BoxFit.cover,
-            ),
-          ],
         ),
       ),
+    );
+  }
+}
+
+class _SettingsContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<SettingsCubit>(
+      create: (_) => ServiceProvider.get<SettingsCubit>(),
+      child: const SettingsPage(),
     );
   }
 }

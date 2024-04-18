@@ -53,6 +53,8 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
       });
     ;
 
+    _playerController.addListener(_onPlayerStopped);
+
     _compactController = AnimationController(
       vsync: this,
       duration: _highlightDuratioh,
@@ -82,6 +84,12 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
     ).animate(highlightAnimationCurved);
   }
 
+  void _onPlayerStopped() {
+    if (!_playerController.value.isPlaying) {
+      _playerController.play();
+    }
+  }
+
   @override
   void didUpdateWidget(MainMenuBackground oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -101,6 +109,7 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
 
   @override
   void dispose() {
+    _playerController.removeListener(_onPlayerStopped);
     _playerController.dispose();
     _highlightController.dispose();
     _compactController.dispose();

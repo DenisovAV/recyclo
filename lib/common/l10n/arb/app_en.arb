@@ -275,5 +275,45 @@
         "example": "false"
       }
     }
+  },
+  "gameSettings": "Settings",
+  "@gameSettings": {
+    "description": "Title of Settings page"
+  },
+  "audioSettings": "Audio",
+  "@audioSettings": {
+    "description": "Audio settings title"
+  },
+  "accessibilitySettings": "Accessibility",
+  "@accessibilitySettings": {
+    "description": "Accessibility settings title"
+  },
+  "musicToggleSetting": "Music",
+  "@musicToggleSetting": {
+    "description": "Music toggle label"
+  },
+  "soundsToggleSetting": "Sound Effects",
+  "@soundsToggleSetting": {
+    "description": "Sounds toggle label"
+  },
+  "languageSettings": "Language",
+  "@languageSettings": {
+    "description": "Lang settings label"
+  },
+  "penaltySettings": "Penalty for mistake",
+  "@penaltySettings": {
+    "description": "Penalty settings label"
+  },
+  "colorSettings": "Black & White mode",
+  "@colorSettings": {
+    "description": "Color settings label"
+  },
+  "englishLanguageLabel": "English",
+  "@englishLanguageLabel": {
+    "description": "English language settings label"
+  },
+  "gameSpeedSettings": "Game speed",
+  "@gameSpeedSettings": {
+    "description": "Game speed settings label"
   }
 }
