@@ -118,37 +118,36 @@ class _MainMenuContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 180),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            MenuItem(
-              text: context.l10n.mainMenuGamesItemTitle,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToChooseGame();
-              },
-            ),
-            MenuItem(
-              text: context.l10n.mainMenuArtifactsItemTitle,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
-              },
-            ),
-            MenuItem(
-              text: context.l10n.mainMenuTutorialItemTitle,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToTutorial();
-              },
-            ),
-            MenuItem(
-              text: context.l10n.mainMenuSettingsItemTitle,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToSettings();
-              },
-            ),
-          ],
-        ),
+      padding: const EdgeInsets.only(bottom: 160),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          MenuItem(
+            text: context.l10n.mainMenuGamesItemTitle,
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToChooseGame();
+            },
+          ),
+          MenuItem(
+            text: context.l10n.mainMenuArtifactsItemTitle,
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
+            },
+          ),
+          MenuItem(
+            text: context.l10n.mainMenuTutorialItemTitle,
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToTutorial();
+            },
+          ),
+          MenuItem(
+            text: context.l10n.mainMenuSettingsItemTitle,
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToSettings();
+            },
+          ),
+        ],
       ),
     );
   }
@@ -222,7 +221,7 @@ class _TutorialContent extends StatelessWidget {
       child: Semantics(
         image: true,
         excludeSemantics: true,
-        label: context.l10n.mainMenuTutorialItemTitle,
+        label: context.l10n.tutorialDescription,
         child: Container(
           width: 600.0,
           decoration: BoxDecoration(

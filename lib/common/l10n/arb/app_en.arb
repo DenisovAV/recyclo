@@ -315,5 +315,7 @@
   "gameSpeedSettings": "Game speed",
   "@gameSpeedSettings": {
     "description": "Game speed settings label"
-  }
+  },
+  "earthAnimation": "Earth spinning among the skyies animation",
+  "tutorialDescription": "Tutorial explains how to sort trash. Bucket, plastic bottle, plastic shovel, cup to 'Plastic' bucket. Book, box, newspaper, letter to 'Paper' bucket. Gamepad, phone, battery, bulb to 'Electric' bucket. Banana skin, apple snaw, junk food, old cheese to 'Organic' bucket. Wine bottle, glass, ceramic cup, glass decoration to 'Glass' bucket."
 }

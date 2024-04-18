@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_game_challenge/common.dart';
 import 'package:flutter_game_challenge/common/assets.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_game_challenge/menu/widgets/clouds.dart';
@@ -164,7 +165,10 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
                                         _playerController.value.aspectRatio,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(170),
-                                      child: VideoPlayer(_playerController),
+                                      child: Semantics(
+                                        label: context.l10n.earthAnimation,
+                                        child: VideoPlayer(_playerController),
+                                      ),
                                     ),
                                   ),
                                 ),

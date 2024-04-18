@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_game_challenge/common.dart';
 
@@ -58,10 +59,10 @@ class ArtifactRequirementsStatus extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(
-                  type.iconPath,
-                  width: 28,
-                  height: 28,
+                Flexible(
+                  child: Image.asset(
+                    type.iconPath,
+                  ),
                 ),
                 Text(
                   count.toString(),

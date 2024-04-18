@@ -52,8 +52,13 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
                         children: [
                           Align(
                             alignment: Alignment.topCenter,
-                            child: Assets.images.cloudsBackground
-                                .image(fit: BoxFit.fill),
+                            child: Semantics(
+                              image: true,
+                              excludeSemantics: true,
+                              label: context.l10n.tutorialDescription,
+                              child: Assets.images.cloudsBackground
+                                  .image(fit: BoxFit.fill),
+                            ),
                           ),
                           Align(
                             alignment: Alignment.bottomCenter,
@@ -89,7 +94,8 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   RoundButton(
-                                    semanticsLabel: context.l10n.backButtonLabel,
+                                    semanticsLabel:
+                                        context.l10n.backButtonLabel,
                                     icon: Icons.keyboard_arrow_left,
                                     onPressed: _handleBackButton,
                                   ),
