@@ -29,7 +29,12 @@ class OverlayFog extends PositionComponent
       );
 
   Vector2 get colliderPosition =>
-      dragPosition - Vector2(colliderSize.x / 2, colliderSize.y);
+      dragPosition -
+      Vector2(
+        colliderSize.x / 2,
+        colliderSize.y / 2 +
+            FinderConstraints.colliderVerticalOffsetFactor * size.y / 2,
+      );
 
   Item? currentCollisionItem;
   Vector2 dragPosition = Vector2(0, 0);
