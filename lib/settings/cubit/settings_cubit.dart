@@ -14,7 +14,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit(
     this._settingsController,
     this._musicService,
-      this._localisationsProvider,
+    this._localisationsProvider
   ) : super(
           SettingsState(
             isMusicEnabled: _settingsController.musicOn.value,

@@ -19,7 +19,10 @@ class AppLocalizationsProvider extends ChangeNotifier {
   }
 
   void getLocale() {
-    final localeCode = _controller.currentLanguage.value ?? '';
+    final localeCode = _controller.currentLanguage.value;
+
+    if(localeCode == null) return;
+
     final language = Locale(localeCode).toAppLanguage();
     if (isSupportedLocale(language)) {
       _locale = language;
