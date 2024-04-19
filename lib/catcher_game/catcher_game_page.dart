@@ -4,10 +4,10 @@ import 'package:collection/collection.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/service_provider.dart';
-import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
+import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/service_provider.dart';
+import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
 
 class CatcherGamePage extends StatefulWidget {
   const CatcherGamePage({super.key});

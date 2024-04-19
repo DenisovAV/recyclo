@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/common/team_constants.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/common/team_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LinkWidget extends StatelessWidget {

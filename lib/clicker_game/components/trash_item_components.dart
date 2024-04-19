@@ -3,8 +3,8 @@ import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/clicker_game/game_models/trash_item.dart';
-import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
+import 'package:recyclo/clicker_game/game_models/trash_item.dart';
+import 'package:recyclo/common/assets/assets.gen.dart';
 
 class TrashItemComponent extends BodyComponent {
   TrashItemComponent(

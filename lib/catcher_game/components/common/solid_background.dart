@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:flutter_game_challenge/catcher_game/common/config.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/catcher_game/common/config.dart';
+import 'package:recyclo/common.dart';
 
 class SolidBackground extends PositionComponent {
   SolidBackground() {

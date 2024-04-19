@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/settings/settings.dart';
+import 'package:recyclo/settings/settings.dart';
 
 class MusicService {
   final AudioPlayer _musicPlayer;

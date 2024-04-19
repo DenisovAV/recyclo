@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/common.dart';
 
 class TeamMember {
   final String fullName;

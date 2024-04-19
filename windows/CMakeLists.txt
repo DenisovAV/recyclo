@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(flutter_game_challenge LANGUAGES CXX)
+project(recyclo LANGUAGES CXX)
 
-set(BINARY_NAME "flutter_game_challenge")
+set(BINARY_NAME "recyclo")
 
 cmake_policy(SET CMP0063 NEW)
 

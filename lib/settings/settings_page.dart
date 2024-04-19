@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/settings/cubit/settings_cubit.dart';
-import 'package:flutter_game_challenge/settings/cubit/settings_state.dart';
-import 'package:flutter_game_challenge/settings/widgets/recyclo_switch.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/settings/cubit/settings_cubit.dart';
+import 'package:recyclo/settings/cubit/settings_state.dart';
+import 'package:recyclo/settings/widgets/recyclo_switch.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

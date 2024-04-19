@@ -4,11 +4,11 @@ import 'dart:ui';
 
 import 'package:bezier/bezier.dart';
 import 'package:flame/components.dart';
-import 'package:flutter_game_challenge/catcher_game/common/random_generator.dart';
-import 'package:flutter_game_challenge/catcher_game/components.dart';
-import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene.dart';
-import 'package:flutter_game_challenge/common/entities/item_type.dart';
+import 'package:recyclo/catcher_game/common/random_generator.dart';
+import 'package:recyclo/catcher_game/components.dart';
+import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/catcher_game/main_scene.dart';
+import 'package:recyclo/common/entities/item_type.dart';
 import 'package:vector_math/vector_math.dart' as vector_math;
 
 typedef AssetsByItemTypeCallback = List<String> Function(ItemType dropType);

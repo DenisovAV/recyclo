@@ -2,9 +2,9 @@ import 'package:flame/cache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/app_lifecycle/app_lifecycle.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/loading/loading.dart';
+import 'package:recyclo/app_lifecycle/app_lifecycle.dart';
+import 'package:recyclo/loading/loading.dart';
+import 'package:recyclo/common.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final kNestedNavigatorKey = GlobalKey<NavigatorState>();

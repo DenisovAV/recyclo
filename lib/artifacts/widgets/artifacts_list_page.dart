@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/app/view/app.dart';
-import 'package:flutter_game_challenge/artifact_details/cubit/artifact_details_cubit.dart';
-import 'package:flutter_game_challenge/artifact_details/widgets/artifact_details.dart';
-import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
-import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
-import 'package:flutter_game_challenge/artifacts/cubit/artifacts_state.dart';
-import 'package:flutter_game_challenge/artifacts/widgets/artifact_status_icon.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
-import 'package:flutter_game_challenge/service_provider.dart';
+import 'package:recyclo/app/view/app.dart';
+import 'package:recyclo/artifact_details/cubit/artifact_details_cubit.dart';
+import 'package:recyclo/artifact_details/widgets/artifact_details.dart';
+import 'package:recyclo/artifacts/artifacts_model.dart';
+import 'package:recyclo/artifacts/cubit/artifacts_cubit.dart';
+import 'package:recyclo/artifacts/cubit/artifacts_state.dart';
+import 'package:recyclo/artifacts/widgets/artifact_status_icon.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/menu/cubit/main_page_cubit.dart';
+import 'package:recyclo/service_provider.dart';
 
 class ArtifactsListPage extends StatefulWidget {
   const ArtifactsListPage({super.key});

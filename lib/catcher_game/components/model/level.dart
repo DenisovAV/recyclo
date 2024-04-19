@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_game_challenge/catcher_game/components/model/wave.dart';
+import 'package:recyclo/catcher_game/components/model/wave.dart';
 
 @immutable
 class Level {

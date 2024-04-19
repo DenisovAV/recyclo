@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_game_challenge/catcher_game/common/config.dart';
-import 'package:flutter_game_challenge/catcher_game/components.dart';
-import 'package:flutter_game_challenge/common/entities/item_type.dart';
+import 'package:recyclo/catcher_game/common/config.dart';
+import 'package:recyclo/catcher_game/components.dart';
+import 'package:recyclo/common/entities/item_type.dart';
 
 @immutable
 class Wave {

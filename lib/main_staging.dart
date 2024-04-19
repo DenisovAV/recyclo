@@ -1,5 +1,5 @@
-import 'package:flutter_game_challenge/app/app.dart';
-import 'package:flutter_game_challenge/bootstrap.dart';
+import 'package:recyclo/app/app.dart';
+import 'package:recyclo/bootstrap.dart';
 
 void main() {
   bootstrap(() => const App());
