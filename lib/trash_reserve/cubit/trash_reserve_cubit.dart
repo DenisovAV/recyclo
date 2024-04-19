@@ -15,7 +15,10 @@ class TrashReserveCubit extends Cubit<TrashReserveState> {
   StreamSubscription<TrashReserveModel>? _trashReserveSubscription;
 
   Future<void> initialize() async {
-    _trashReserveSubscription = _trashReserveRepository.reservedTrashStream.listen((newValue) {
+    emit(TrashReserveState(model: _trashReserveRepository.reservedTrash));
+    
+    _trashReserveSubscription =
+        _trashReserveRepository.reservedTrashStream.listen((newValue) {
       emit(TrashReserveState(model: newValue));
     });
   }

@@ -2,22 +2,42 @@ import 'package:flame/flame.dart';
 import 'package:recyclo/artifact_details/cubit/artifact_details_cubit.dart';
 import 'package:recyclo/artifacts/artifacts_repository.dart';
 import 'package:recyclo/artifacts/cubit/artifacts_cubit.dart';
-import 'package:recyclo/artifacts/wallet/service/mobile_wallet_service.dart'
-    if (dart.library.html) 'package:recyclo/artifacts/wallet/service/web_wallet_service.dart';
 import 'package:recyclo/artifacts/wallet/service/wallet_interface.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/trash_reserve/cubit/trash_reserve_cubit.dart';
 import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
+import 'package:recyclo/artifacts/wallet/service/mobile_wallet_service.dart'
+    if (dart.library.html) 'package:recyclo/artifacts/wallet/service/web_wallet_service.dart';
+import 'package:recyclo/audio/music_service.dart';
+import 'package:recyclo/menu/cubit/main_page_cubit.dart';
+import 'package:recyclo/settings/cubit/settings_cubit.dart';
+import 'package:recyclo/settings/persistence/local_storage_settings_persistence.dart';
+import 'package:recyclo/settings/persistence/settings_persistence.dart';
+import 'package:recyclo/settings/settings.dart';
 import 'package:get_it/get_it.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ServiceProvider {
   static Future<void> initialize() async {
     final getIt = GetIt.instance;
 
     //Services
-    getIt.registerFactory<WalletService>(
-      getWalletService,
-    );
+    getIt
+      ..registerFactory<WalletService>(
+        getWalletService,
+      )
+      ..registerLazySingleton<MusicService>(
+        () => MusicService(
+          GetIt.instance.get(),
+          GetIt.instance.get(),
+        ),
+      );
+
+    await getIt
+        .registerSingleton<SettingsPersistence>(
+          LocalStorageSettingsPersistence(),
+        )
+        .initialize();
 
     ///Repositories
     await getIt
@@ -53,6 +73,7 @@ class ServiceProvider {
           getIt.get(),
           getIt.get(),
           getIt.get(),
+          getIt.get(),
         ),
       )
       ..registerFactory<TimerCubit>(
@@ -60,13 +81,36 @@ class ServiceProvider {
       )
       ..registerFactory<TutorialCubit>(() => TutorialCubit(
             localDataRepository: getIt.get(),
-          ));
+          ))
+      ..registerFactory<MainPageCubit>(
+        () => MainPageCubit(
+          GetIt.instance.get(),
+        ),
+      )
+      ..registerFactory<SettingsCubit>(
+        () => SettingsCubit(
+          GetIt.instance.get(),
+          GetIt.instance.get(),
+        ),
+      );
 
     ///Game Resources
-    getIt.registerSingleton<AssetsLoader>(
-      AssetsLoader(images: Flame.images..prefix = ''),
-    );
+    getIt
+      ..registerSingleton<AssetsLoader>(
+        AssetsLoader(images: Flame.images..prefix = ''),
+      );
+
+    ///Cross cutting
+    getIt
+      ..registerLazySingleton<SettingsController>(
+        () => SettingsController(
+          getIt.get(),
+        ),
+      )
+      ..registerLazySingleton<CreatePlayerFunction>(() => AudioPlayer.new);
   }
 
   static T get<T extends Object>() => GetIt.instance.get<T>();
 }
+
+typedef CreatePlayerFunction = AudioPlayer Function();

@@ -4,12 +4,16 @@ import 'package:recyclo/artifacts/artifacts_model.dart';
 import 'package:recyclo/artifacts/artifacts_repository.dart';
 import 'package:recyclo/artifacts/wallet/service/wallet_interface.dart';
 import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
+import 'package:recyclo/audio/sounds.dart';
+import 'package:recyclo/audio/music_service.dart';
+
 
 class ArtifactDetailsCubit extends Cubit<ArtifactDetailsState> {
   ArtifactDetailsCubit(
     this._artifactsRepository,
     this._trashReserveRepository,
     this._walletService,
+    this._musicService,
   ) : super(
           ArtifactDetailsEmptyState(),
         );
@@ -17,6 +21,7 @@ class ArtifactDetailsCubit extends Cubit<ArtifactDetailsState> {
   final ArtifactsRepository _artifactsRepository;
   final TrashReserveRepository _trashReserveRepository;
   final WalletService _walletService;
+  final MusicService _musicService;
 
   void initialize({
     required String name,
@@ -35,8 +40,10 @@ class ArtifactDetailsCubit extends Cubit<ArtifactDetailsState> {
     );
   }
 
-  void craftArtifact(ArtifactModel model) {
+  void craftArtifact(ArtifactModel model) async {
     final updatedArtifact = _artifactsRepository.craftArtifact(model);
+
+    await _musicService.playSound(Sounds.artifactCrafted);
 
     emit((state as ArtifactDetailsLoadedState).copyWithModel(updatedArtifact));
   }
@@ -44,8 +51,10 @@ class ArtifactDetailsCubit extends Cubit<ArtifactDetailsState> {
   void addToWallet(ArtifactModel artifact) {
     final updatedArtifact = _artifactsRepository.addToGoogleWallet(artifact);
     try {
-      _walletService.addToWallet(updatedArtifact.artifactType, updatedArtifact.uuid!);
-      emit((state as ArtifactDetailsLoadedState).copyWithModel(updatedArtifact));
+      _walletService.addToWallet(
+          updatedArtifact.artifactType, updatedArtifact.uuid!);
+      emit(
+          (state as ArtifactDetailsLoadedState).copyWithModel(updatedArtifact));
     } catch (e) {
       print("Failed to add to wallet: '${e}'.");
     }

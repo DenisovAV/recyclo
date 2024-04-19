@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:async';
 
 import 'package:recyclo/artifacts/artifacts_model.dart';
 import 'package:recyclo/artifacts/requirements.dart';

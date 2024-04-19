@@ -34,7 +34,7 @@ const Map<ArtifactType, WalletPass> wallet = {
       backgroundColor: '#79b8ae'),
   ArtifactType.plant: WalletPass(
       title: 'EcoSpawn Monstera',
-      header: 'Plant grown with the help of recycled materials.',
+      header: 'Plant grown with the help of recycled materials',
       details:
       'The Monstera plant, flourishing in a vibrant, colorful pot crafted from recycled plastic bottles and other materials, and is supported by the use of organic fertilizers,is a symbol of sustainable living and environmental consciousness.',
       description:
@@ -68,7 +68,7 @@ const Map<ArtifactType, WalletPass> wallet = {
       details:
       'The futuristic urban SUV, ingeniously crafted entirely from recycled materials.',
       description:
-      'The car body is assembled from metallic sheets sourced from old cans and car parts, alongside textures from assorted recycled plastics on the doors and hood. Recycled tires form the wheels, while solar panels atop the roof underscore its eco-friendly design.',
+        'The car body is assembled from metallic sheets sourced from old cans and car parts, alongside textures from assorted recycled plastics on the doors and hood. Recycled tires form the wheels, while solar panels atop the roof underscore its eco-friendly design.',
       reality:
       'The automotive industry increasingly incorporates recycled materials to enhance sustainability and reduce environmental impact. Metals such as steel and aluminum are commonly recycled from old vehicles, appliances, and construction materials, offering a robust option for car frames and engine parts. Plastics, recovered from consumer waste, packaging, and old automotive parts, are transformed into interior components, underbody systems, and even fuel lines. Rubber from tires is repurposed into floor mats, pedal pads, and insulation. Glass is recycled into windshield and window materials. Even textiles, sourced from used clothing and industrial scraps, find new life as seat upholstery, panel linings, and soundproofing materials. These recycling efforts not only conserve natural resources but also reduce the energy consumption and greenhouse gas emissions associated with new material production, paving the way for a more sustainable automotive future.',
       image:

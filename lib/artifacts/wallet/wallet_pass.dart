@@ -1,5 +1,3 @@
-import 'package:recyclo/artifacts/artifacts_model.dart';
-
 class WalletPass {
   const WalletPass({
     required this.title,

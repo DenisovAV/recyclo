@@ -10,6 +10,7 @@ import 'package:recyclo/artifacts/artifacts_model.dart';
 import 'package:recyclo/artifacts/widgets/artifact_requirements_status.dart';
 import 'package:recyclo/artifacts/widgets/artifact_status_icon.dart';
 import 'package:recyclo/common.dart';
+import 'package:recyclo/common/feature_type.dart';
 
 class ArtifactDetails extends StatelessWidget {
   const ArtifactDetails({
@@ -150,10 +151,11 @@ class ArtifactDetails extends StatelessWidget {
                               text: context.l10n.buttonCraft,
                             ),
                           ),
-                        _AddToGoogleWallet(
-                          artifactStatus: state.model.status,
-                          artifactModel: state.model,
-                        ),
+                        if (FeatureType.googleWallet.isEnabled)
+                          _AddToGoogleWallet(
+                            artifactStatus: state.model.status,
+                            artifactModel: state.model,
+                          ),
                       ],
                     ),
                   );
