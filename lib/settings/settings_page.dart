@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/settings/cubit/settings_cubit.dart';
@@ -135,7 +133,7 @@ class _AccessibilitySettings extends StatelessWidget {
                 label: context.l10n.accessibilitySettings,
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.accessibility_rounded,
                       size: 24,
                       color: FlutterGameChallengeColors.primary1,
@@ -153,7 +151,11 @@ class _AccessibilitySettings extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             _GameSpeedSettings(
-              value: 2,
+              value: state.gameDifficulty,
+              onUpdateStatus: (value) {
+                BlocProvider.of<SettingsCubit>(context)
+                    .setGameDifficulty(value);
+              },
             ),
             const SizedBox(height: 8),
             _SettingToggleItem(
@@ -298,7 +300,7 @@ class _SettingsDropdown extends StatelessWidget {
               Icons.arrow_drop_down,
               size: 24,
               color: FlutterGameChallengeColors.primary1,
-            )
+            ),
           ],
         ),
       ),
@@ -307,18 +309,20 @@ class _SettingsDropdown extends StatelessWidget {
 }
 
 class _GameSpeedSettings extends StatefulWidget {
-  final int value;
-
-  _GameSpeedSettings({
+  const _GameSpeedSettings({
     required this.value,
+    required this.onUpdateStatus,
   });
+
+  final GameDifficultyType value;
+  final void Function(GameDifficultyType) onUpdateStatus;
 
   @override
   State<_GameSpeedSettings> createState() => _GameSpeedSettingsState();
 }
 
 class _GameSpeedSettingsState extends State<_GameSpeedSettings> {
-  int _value = 2;
+  GameDifficultyType _value = GameDifficultyType.easy;
 
   @override
   void initState() {
@@ -333,10 +337,10 @@ class _GameSpeedSettingsState extends State<_GameSpeedSettings> {
       slider: true,
       increasedValue: 3.toString(),
       decreasedValue: 1.toString(),
-      value: _value.toString(),
+      value: _value.index.toString(),
       excludeSemantics: true,
       child: Container(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: FlutterGameChallengeColors.settingsAccent,
           borderRadius: BorderRadius.circular(18),
@@ -356,7 +360,7 @@ class _GameSpeedSettingsState extends State<_GameSpeedSettings> {
               child: Stack(
                 children: [
                   SliderTheme(
-                    data: SliderThemeData(
+                    data: const SliderThemeData(
                       trackHeight: 4,
                     ),
                     child: Slider(
@@ -366,12 +370,14 @@ class _GameSpeedSettingsState extends State<_GameSpeedSettings> {
                           FlutterGameChallengeColors.primary1.withOpacity(0.5),
                       onChanged: (value) {
                         setState(() {
-                          _value = value.toInt();
+                          _value = GameDifficultyType.values[value.toInt()];
                         });
                       },
-                      min: 1,
-                      max: 3,
-                      value: _value.toDouble(),
+                      onChangeEnd: (_) {
+                        widget.onUpdateStatus(_value);
+                      },
+                      max: 2,
+                      value: _value.index.toDouble(),
                     ),
                   ),
                   Align(

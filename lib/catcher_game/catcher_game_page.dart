@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/catcher_game/game.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/service_provider.dart';
+import 'package:recyclo/settings/persistence/settings_persistence.dart';
 import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
 
 class CatcherGamePage extends StatefulWidget {
@@ -34,13 +35,28 @@ class CatcherGamePage extends StatefulWidget {
 
 class _CatcherGamePageState extends State<CatcherGamePage> {
   CatcherGame? _game;
+  late SettingsPersistence settingsPersistence;
 
   static const _maxGameWidth = 500.0;
   static const _maxGameHeight = 1100.0;
 
   @override
+  void initState() {
+    settingsPersistence = ServiceProvider.get<SettingsPersistence>();
+    print(settingsPersistence.getGameDifficulty(
+      defaultValue: GameDifficultyType.easy,
+    ));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    _game ??= CatcherGame();
+    _game ??= CatcherGame(
+      gameDifficultyType: settingsPersistence.getGameDifficulty(
+        defaultValue: GameDifficultyType.easy,
+      ),
+      isPenaltyEnabled: settingsPersistence.getPenaltyFlag(),
+    );
 
     return Scaffold(
       backgroundColor: FlutterGameChallengeColors.landingBackground,

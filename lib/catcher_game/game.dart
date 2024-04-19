@@ -17,14 +17,18 @@ typedef LevelCallback = void Function(int level);
 
 class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
   CatcherGame({
+    bool? isPenaltyEnabled,
     AccessibilityGameScaleType? gameScaleType,
     GameDifficultyType? gameDifficultyType,
-  })  : status = CatcherGameStatusType.playing,
+  })  : isPenaltyEnabled = isPenaltyEnabled ?? true,
+        status = CatcherGameStatusType.playing,
         scaleType = gameScaleType ?? AccessibilityGameScaleType.small,
         difficultyType = gameDifficultyType ?? GameDifficultyType.easy;
 
   final AccessibilityGameScaleType scaleType;
   final GameDifficultyType difficultyType;
+  final bool isPenaltyEnabled;
+
   late SizeConfig sizeConfig;
   late CatcherGameStatusType status;
   MainScene? mainScene;

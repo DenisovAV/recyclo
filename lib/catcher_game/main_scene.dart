@@ -180,7 +180,9 @@ class MainScene extends PositionComponent
       score[dropType] = currentScore + 1;
       game.overlays.add(TimerReductionOrIncrementEffect.idIncrement);
     } else {
-      game.overlays.add(TimerReductionOrIncrementEffect.idReduction);
+      if (game.isPenaltyEnabled) {
+        game.overlays.add(TimerReductionOrIncrementEffect.idReduction);
+      }
 
       _omissionsToShowTutorial++;
       HapticFeedback.mediumImpact();
