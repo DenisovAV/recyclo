@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:recyclo/catcher_game/common/speed_convector.dart';
-import 'package:recyclo/catcher_game/components.dart';
+import 'package:recyclo/catcher_game/game_models.dart';
+import 'package:recyclo/common/entities/game_difficulty_level_type.dart';
 import 'package:recyclo/common/entities/item_type.dart';
 
 abstract class Levels {

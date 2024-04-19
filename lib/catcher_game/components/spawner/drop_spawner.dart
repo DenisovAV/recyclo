@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:recyclo/catcher_game/common/random_generator.dart';
+import 'package:recyclo/catcher_game/components.dart';
 import 'package:recyclo/catcher_game/game.dart';
 
 class DropSpawner extends Component

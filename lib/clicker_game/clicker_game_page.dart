@@ -11,9 +11,7 @@ import 'package:recyclo/clicker_game/overlays/game_start_overlay.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/service_provider.dart';
 import 'package:recyclo/settings/persistence/settings_persistence.dart';
-
-import '../trash_reserve/trash_reserve_repository.dart';
-import 'overlays/timer_reduction_effect.dart';
+import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
 
 class ClickerGamePage extends StatefulWidget {
   const ClickerGamePage({
@@ -71,52 +69,54 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
         state,
         _game.gameState,
       ),
-      child: LayoutBuilder(builder: (context, constraints) {
-        return Stack(
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Assets.images.cloudsBackground.image(fit: BoxFit.fill),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: constraints.maxWidth > _maxGameWidth
-                      ? _maxGameWidth
-                      : constraints.maxWidth,
-                  maxHeight: constraints.maxHeight > _maxGameHeight
-                      ? _maxGameHeight
-                      : constraints.maxHeight,
-                ),
-                child: Material(
-                  elevation: 9,
-                  clipBehavior: Clip.hardEdge,
-                  child: GameWidget(
-                    game: _game,
-                    overlayBuilderMap: _clickerOverlayBuilder,
-                    backgroundBuilder: (context) => Container(
-                      color: const Color(0xFF72A8CD),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Stack(
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Assets.images.cloudsBackground.image(fit: BoxFit.fill),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: constraints.maxWidth > _maxGameWidth
+                        ? _maxGameWidth
+                        : constraints.maxWidth,
+                    maxHeight: constraints.maxHeight > _maxGameHeight
+                        ? _maxGameHeight
+                        : constraints.maxHeight,
+                  ),
+                  child: Material(
+                    elevation: 9,
+                    clipBehavior: Clip.hardEdge,
+                    child: GameWidget(
+                      game: _game,
+                      overlayBuilderMap: _clickerOverlayBuilder,
+                      backgroundBuilder: (context) => Container(
+                        color: const Color(0xFF72A8CD),
+                      ),
+                      initialActiveOverlays: context
+                              .read<TutorialCubit>()
+                              .state
+                              .isTutorialShownBefore
+                          ? [
+                              GameHUD.id,
+                              GameStartOverlay.id,
+                            ]
+                          : [
+                              GameHUD.id,
+                              TutorialOverlay.id,
+                            ],
                     ),
-                    initialActiveOverlays: context
-                            .read<TutorialCubit>()
-                            .state
-                            .isTutorialShownBefore
-                        ? [
-                            GameHUD.id,
-                            GameStartOverlay.id,
-                          ]
-                        : [
-                            GameHUD.id,
-                            TutorialOverlay.id,
-                          ],
                   ),
                 ),
               ),
-            ),
-          ],
-        );
-      }),
+            ],
+          );
+        },
+      ),
     );
   }
 
@@ -131,19 +131,21 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
           GameStartOverlay(
             onPressed: () => _handleGameStart(context),
           ),
-      TimerReductionOrIncrementEffect.idReduction: (BuildContext context, ClickerGame game) =>
-          TimerReductionEffect(
-            text: '-5',
-            onAnimationEnded: () async {
-              final isPenaltyEnbled =
-                  widget.settingsPersistence.getPenaltyFlag();
+      TimerReductionOrIncrementEffect.idReduction:
+          (BuildContext context, ClickerGame game) =>
+              TimerReductionOrIncrementEffect(
+                text: '-5',
+                onAnimationEnded: () async {
+                  final isPenaltyEnbled =
+                      widget.settingsPersistence.getPenaltyFlag();
 
-              if (isPenaltyEnbled) {
-                context.read<TimerCubit>().penalty = 5;
-              }
-              _game.overlays.remove(TimerReductionOrIncrementEffect.idReduction);
-            },
-          ),
+                  if (isPenaltyEnbled) {
+                    context.read<TimerCubit>().decreaseTime(seconds: 5);
+                  }
+                  _game.overlays
+                      .remove(TimerReductionOrIncrementEffect.idReduction);
+                },
+              ),
       TutorialOverlay.id: (BuildContext context, ClickerGame game) =>
           TutorialOverlay(
             onBackButtonPressed: _handleBackButton,

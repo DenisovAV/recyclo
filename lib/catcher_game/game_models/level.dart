@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_game_challenge/catcher_game/game_models/wave.dart';
+import 'package:recyclo/catcher_game/game_models.dart';
 
 @immutable
 class Level extends Equatable {

@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:bezier/bezier.dart';
 import 'package:flame/components.dart';
 import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/catcher_game/game_models/catcher_game_status_type.dart';
 import 'package:recyclo/catcher_game/main_scene.dart';
 import 'package:recyclo/common.dart';
 

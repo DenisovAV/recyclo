@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:recyclo/catcher_game/common/config.dart';
+import 'package:recyclo/common/entities/accessibility_game_scale_type.dart';
 
 class SizeConfig extends Component {
   SizeConfig(this._gameScale);

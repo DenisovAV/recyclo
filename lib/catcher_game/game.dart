@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/catcher_game/common/size_config.dart';
+import 'package:recyclo/catcher_game/components.dart';
 import 'package:recyclo/catcher_game/main_scene.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/service_provider.dart';

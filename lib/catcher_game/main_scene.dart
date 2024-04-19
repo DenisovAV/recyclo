@@ -9,6 +9,7 @@ import 'package:recyclo/catcher_game/common/config.dart';
 import 'package:recyclo/catcher_game/common/levels_config.dart';
 import 'package:recyclo/catcher_game/components.dart';
 import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/catcher_game/game_models.dart';
 import 'package:recyclo/common.dart';
 
 typedef CatchCallback = void Function(ItemType dropType);
