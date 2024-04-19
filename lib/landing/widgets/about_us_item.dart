@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
-import 'package:flutter_game_challenge/landing/widgets/landing_item.dart';
-import 'package:flutter_game_challenge/landing/widgets/link_widget.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/widgets/brand_text.dart';
+import 'package:recyclo/landing/widgets/landing_item.dart';
+import 'package:recyclo/landing/widgets/link_widget.dart';
 
 class AboutUsItem extends StatelessWidget {
   const AboutUsItem({super.key});

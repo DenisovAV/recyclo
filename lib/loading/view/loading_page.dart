@@ -1,9 +1,9 @@
 import 'package:flame/cache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/loading/loading.dart';
-import 'package:flutter_game_challenge/menu/view/main_menu_page.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/loading/loading.dart';
+import 'package:recyclo/menu/view/main_menu_page.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({super.key});

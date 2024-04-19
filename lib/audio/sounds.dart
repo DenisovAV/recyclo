@@ -1,6 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter_game_challenge/audio/extensions.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/audio/extensions.dart';
+import 'package:recyclo/common.dart';
 
 class Sounds {
   static AssetSource buttonTap =

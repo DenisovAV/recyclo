@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:flutter_game_challenge/catcher_game/common/config.dart';
+import 'package:recyclo/catcher_game/common/config.dart';
 
 class SizeConfig extends Component {
   double _tileSize = 0;

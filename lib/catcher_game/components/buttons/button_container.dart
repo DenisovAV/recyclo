@@ -3,12 +3,12 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flutter_game_challenge/catcher_game/common/sprite_sheet_util.dart';
-import 'package:flutter_game_challenge/catcher_game/common/visible_component.dart';
-import 'package:flutter_game_challenge/catcher_game/components.dart';
-import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/catcher_game/common/sprite_sheet_util.dart';
+import 'package:recyclo/catcher_game/common/visible_component.dart';
+import 'package:recyclo/catcher_game/components.dart';
+import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/catcher_game/main_scene.dart';
+import 'package:recyclo/common.dart';
 
 enum ButtonType {
   reset,

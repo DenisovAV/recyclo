@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/widgets/brand_text.dart';
 
 class MobileVerticalWidget extends StatelessWidget {
   final String text;

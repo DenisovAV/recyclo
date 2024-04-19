@@ -508,7 +508,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.recyclo.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/flutter_game_challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/flutter_game_challenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recyclo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/recyclo";
 			};
 			name = "Debug-production";
 		};
@@ -523,7 +523,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.recyclo.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/flutter_game_challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/flutter_game_challenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recyclo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/recyclo";
 			};
 			name = "Release-production";
 		};
@@ -538,7 +538,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.recyclo.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/flutter_game_challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/flutter_game_challenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recyclo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/recyclo";
 			};
 			name = "Profile-production";
 		};
@@ -865,7 +865,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.recyclo.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/flutter_game_challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/flutter_game_challenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recyclo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/recyclo";
 			};
 			name = "Debug-development";
 		};
@@ -964,7 +964,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.recyclo.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/flutter_game_challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/flutter_game_challenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recyclo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/recyclo";
 			};
 			name = "Debug-staging";
 		};
@@ -1055,7 +1055,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.recyclo.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/flutter_game_challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/flutter_game_challenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recyclo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/recyclo";
 			};
 			name = "Release-staging";
 		};
@@ -1146,7 +1146,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.recyclo.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/flutter_game_challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/flutter_game_challenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recyclo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/recyclo";
 			};
 			name = "Release-development";
 		};
@@ -1237,7 +1237,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.recyclo.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/flutter_game_challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/flutter_game_challenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recyclo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/recyclo";
 			};
 			name = "Profile-staging";
 		};
@@ -1328,7 +1328,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.recyclo.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/flutter_game_challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/flutter_game_challenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recyclo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/recyclo";
 			};
 			name = "Profile-development";
 		};

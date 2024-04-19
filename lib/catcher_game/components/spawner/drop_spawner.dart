@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:flutter_game_challenge/catcher_game/common/random_generator.dart';
-import 'package:flutter_game_challenge/catcher_game/game.dart';
+import 'package:recyclo/catcher_game/common/random_generator.dart';
+import 'package:recyclo/catcher_game/game.dart';
 
 class DropSpawner extends Component
     with RandomGenerator, HasGameRef<CatcherGame> {

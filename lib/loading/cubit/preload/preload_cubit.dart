@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flame/cache.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/service_provider.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/service_provider.dart';
 
 part 'preload_state.dart';
 

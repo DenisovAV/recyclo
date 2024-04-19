@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/index.dart';
-import 'package:flutter_game_challenge/landing/widgets/artefacts_item.dart';
-import 'package:flutter_game_challenge/landing/widgets/download_from_stores_widget.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/index.dart';
+import 'package:recyclo/landing/widgets/artefacts_item.dart';
+import 'package:recyclo/landing/widgets/download_from_stores_widget.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

@@ -1,11 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/artifact_details/cubit/artifact_details_state.dart';
-import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
-import 'package:flutter_game_challenge/artifacts/artifacts_repository.dart';
-import 'package:flutter_game_challenge/artifacts/wallet/service/wallet_interface.dart';
-import 'package:flutter_game_challenge/audio/music_service.dart';
-import 'package:flutter_game_challenge/audio/sounds.dart';
-import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
+import 'package:recyclo/artifact_details/cubit/artifact_details_state.dart';
+import 'package:recyclo/artifacts/artifacts_model.dart';
+import 'package:recyclo/artifacts/artifacts_repository.dart';
+import 'package:recyclo/artifacts/wallet/service/wallet_interface.dart';
+import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
+import 'package:recyclo/audio/sounds.dart';
+import 'package:recyclo/audio/music_service.dart';
+
 
 class ArtifactDetailsCubit extends Cubit<ArtifactDetailsState> {
   ArtifactDetailsCubit(

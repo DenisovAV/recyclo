@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene.dart';
+import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/catcher_game/main_scene.dart';
 
 class WaveDelay extends Component with HasGameRef<CatcherGame> {
   WaveDelay({
