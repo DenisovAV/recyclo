@@ -11,72 +11,75 @@ class TimerCubit extends Cubit<TimerState> {
 
   static const int _defaultDuration = 60;
 
-  final Stopwatch _stopwatch = Stopwatch();
+  int _durationInSeconds = 0;
+  int _millisecondsInPause = 0;
   Timer? _timer;
-  int _duration = 0;
+  DateTime? _timeWhenPaused;
 
   /// additional param to timer for additional ticks
-  int _penalty = 0;
+  int _penaltyInSeconds = 0;
 
-  void set penalty(int ticks) {
-    _penalty += ticks;
+  void decreaseTime({required int seconds}) {
+    _penaltyInSeconds += seconds;
+  }
+
+  void increaseTime({required int seconds}) {
+    _penaltyInSeconds -= seconds;
   }
 
   void start() {
-    _duration = _defaultDuration;
-    _stopwatch
-      ..reset()
-      ..start();
+    _durationInSeconds = _defaultDuration;
     _startTimer();
+    _safeEmit(TimerInitialState(_defaultDuration));
   }
 
   void pause() {
-    _stopwatch.stop();
     _timer?.cancel();
-    _safeEmit(TimerPausedState(_duration));
+    _timeWhenPaused = DateTime.now();
+    _safeEmit(TimerPausedState(_durationInSeconds));
   }
 
   void resume() {
-    _stopwatch.start();
-    _startTimer();
-  }
-
-  void play() {
-    if (!_stopwatch.isRunning) {
-      _stopwatch.start();
+    if (_timeWhenPaused != null) {
+      _millisecondsInPause +=
+          DateTime.now().difference(_timeWhenPaused!).inMilliseconds;
     }
+
+    if (_millisecondsInPause >= 1000) {
+      _millisecondsInPause = 0;
+      _timeWhenPaused = null;
+      _tickTimer();
+    }
+
     _startTimer();
-    _tickTimer();
   }
 
   void restart() {
-    _penalty = 0;
-    _stopwatch
-      ..reset()
-      ..start();
+    _penaltyInSeconds = 0;
+    _durationInSeconds = _defaultDuration;
     _safeEmit(TimerInitialState(_defaultDuration));
   }
 
   @override
   Future<void> close() {
     _timer?.cancel();
-    _stopwatch.stop();
     return super.close();
   }
 
   void _startTimer() {
-    _penalty = 0;
+    _penaltyInSeconds = 0;
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (_) => _tickTimer());
   }
 
   void _tickTimer() {
-    _duration = _defaultDuration - _stopwatch.elapsed.inSeconds - _penalty;
-    if (_duration <= 0) {
+    _durationInSeconds = _durationInSeconds - 1 - _penaltyInSeconds;
+    _penaltyInSeconds = 0;
+    if (_durationInSeconds <= 0) {
       _timer?.cancel();
       _safeEmit(TimerFinishedState());
     } else {
-      _safeEmit(TimerRunningState(_duration));
+      _safeEmit(TimerRunningState(_durationInSeconds));
     }
   }
 

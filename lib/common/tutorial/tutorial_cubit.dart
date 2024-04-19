@@ -9,17 +9,22 @@ part 'tutorial_state.dart';
 class TutorialCubit extends Cubit<TutorialState> {
   TutorialCubit({required LocalDataRepository localDataRepository})
       : _localDataRepository = localDataRepository,
-        super(TutorialState(
-          isTutorialShown: localDataRepository.isTutorialShown,
-          isTutorialShownBefore: localDataRepository.isTutorialShown,
-        ));
+        super(
+          TutorialState(
+            isTutorialShown: localDataRepository.isTutorialShown,
+            isTutorialShownBefore: localDataRepository.isTutorialShown,
+          ),
+        );
 
   final LocalDataRepository _localDataRepository;
 
   void tutorialIsShown() {
-    emit(TutorialState(
+    emit(
+      TutorialState(
         isTutorialShown: true,
-        isTutorialShownBefore: state.isTutorialShownBefore));
+        isTutorialShownBefore: state.isTutorialShownBefore,
+      ),
+    );
 
     _localDataRepository.tutorialIsShown();
   }

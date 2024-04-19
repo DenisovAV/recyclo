@@ -118,7 +118,7 @@ class _FinderGamePageState extends State<FinderGamePage> {
 
   void _handleGameStart(BuildContext context) {
     _game.overlays.remove(GameStartOverlay.id);
-    context.read<TimerCubit>().play();
+    context.read<TimerCubit>().start();
   }
 
   void _handleTimerState(
@@ -154,7 +154,7 @@ class _FinderGamePageState extends State<FinderGamePage> {
 
   void _handleTutorialCompleted(BuildContext context) {
     _game.overlays.remove(TutorialOverlay.id);
-    context.read<TimerCubit>().play();
+    context.read<TimerCubit>().start();
     context.read<TutorialCubit>().tutorialIsShown();
   }
 }

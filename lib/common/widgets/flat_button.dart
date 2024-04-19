@@ -36,7 +36,7 @@ class FlatButton extends StatelessWidget {
             style: const TextStyle(
               color: FlutterGameChallengeColors.white,
               fontSize: 26,
-              fontFamily: 'Sniglet'
+              fontFamily: 'Sniglet',
             ),
           ),
         ),

@@ -4,25 +4,26 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter_game_challenge/common.dart';
 
-class Box extends SpriteComponent {
+class Box extends PositionComponent with HasPaint {
   Box({
-    required super.sprite,
     required this.type,
+    required this.sprite,
     required this.order,
+    this.isChosen = false,
   }) {
     super.anchor = Anchor.center;
     paint = Paint()..filterQuality = FilterQuality.high;
   }
 
+  Sprite sprite;
   int order;
   ItemType type;
-  bool isChosen = false;
+  bool isChosen;
   EffectController? _effectController;
 
   @override
-  //ignore: must_call_super, intended function override
   void render(Canvas canvas) {
-    sprite?.render(
+    sprite.render(
       canvas,
       size: size * scale.y,
       position: position,

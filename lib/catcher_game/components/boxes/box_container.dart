@@ -36,7 +36,10 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   bool _finishAnimation = false;
   bool _resizeInProgress = false;
 
-  void resize(Size size) {
+  // Required to prevent box resizing when showing overlay.
+  Vector2 _currentSize = Vector2.zero();
+
+  void _resize(Size size) {
     _resizeInProgress = true;
 
     final tile = game.sizeConfig.tileSize;
@@ -66,9 +69,9 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
         y - (_chosenBoxWidth - _swappingBoxWidth) / initialBoxList.length;
 
     _containerClip = Rect.fromLTRB(
-      x,
+      game.mainScene!.background.rect.left,
       height,
-      screenSize.width,
+      game.mainScene!.background.rect.right,
       screenSize.height,
     );
     boxContainerClip = Rect.fromCenter(
@@ -102,15 +105,16 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
 
   @override
   void onGameResize(Vector2 size) {
-    if (isLoaded) {
-      resize(size.toSize());
+    if (isLoaded && _currentSize != size) {
+      _currentSize = size;
+      _resize(size.toSize());
     }
     super.onGameResize(size);
   }
 
   @override
   void render(Canvas canvas) {
-    if (game.status != CatcherGameStatus.result) {
+    if (game.status != CatcherGameStatusType.result) {
       canvas.save();
       for (final comp in children) {
         _renderComponent(canvas, comp);
@@ -142,7 +146,7 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
         }
       }
       if (_finishAnimation) {
-        resize(game.canvasSize.toSize());
+        _resize(game.canvasSize.toSize());
         _startAnimationToHook = false;
         _finishAnimation = false;
       } else {
@@ -158,7 +162,7 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   void handleDragStart() {
     if (!_resizeInProgress) {
       _startAnimationToHook = false;
-      resize(game.canvasSize.toSize());
+      _resize(game.canvasSize.toSize());
       _distributeAssetsBoxesOnScreen();
     }
   }
