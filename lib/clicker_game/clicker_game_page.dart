@@ -10,12 +10,18 @@ import 'package:recyclo/clicker_game/overlays/game_hud.dart';
 import 'package:recyclo/clicker_game/overlays/game_start_overlay.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/service_provider.dart';
+import 'package:recyclo/settings/persistence/settings_persistence.dart';
 
 import '../trash_reserve/trash_reserve_repository.dart';
 import 'overlays/timer_reduction_effect.dart';
 
 class ClickerGamePage extends StatefulWidget {
-  const ClickerGamePage({super.key});
+  const ClickerGamePage({
+    super.key,
+    required this.settingsPersistence,
+  });
+
+  final SettingsPersistence settingsPersistence;
 
   static MaterialPageRoute<void> route() {
     return MaterialPageRoute<void>(
@@ -30,9 +36,8 @@ class ClickerGamePage extends StatefulWidget {
         ],
         child: Scaffold(
           backgroundColor: const Color(0xFF72A8CD),
-          body: BlocProvider<TimerCubit>(
-            create: (_) => ServiceProvider.get<TimerCubit>(),
-            child: const ClickerGamePage(),
+          body: ClickerGamePage(
+            settingsPersistence: ServiceProvider.get(),
           ),
         ),
       ),
@@ -52,7 +57,10 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
   @override
   void initState() {
     super.initState();
-    _game = ClickerGame(context: context);
+    _game = ClickerGame(
+      context: context,
+      settingsPersistence: widget.settingsPersistence,
+    );
   }
 
   @override
@@ -126,8 +134,13 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
       TimerReductionEffect.id: (BuildContext context, ClickerGame game) =>
           TimerReductionEffect(
             text: '-5',
-            onAnimationEnded: () {
-              context.read<TimerCubit>().penalty = 5;
+            onAnimationEnded: () async {
+              final isPenaltyEnbled =
+                  widget.settingsPersistence.getPenaltyFlag();
+
+              if (isPenaltyEnbled) {
+                context.read<TimerCubit>().penalty = 5;
+              }
               _game.overlays.remove(TimerReductionEffect.id);
             },
           ),

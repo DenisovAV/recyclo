@@ -124,43 +124,50 @@ class _AccessibilitySettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Semantics(
-            excludeSemantics: true,
-            label: context.l10n.accessibilitySettings,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.accessibility_rounded,
-                  size: 24,
-                  color: FlutterGameChallengeColors.primary1,
+    return BlocBuilder<SettingsCubit, SettingsState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Semantics(
+                excludeSemantics: true,
+                label: context.l10n.accessibilitySettings,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.accessibility_rounded,
+                      size: 24,
+                      color: FlutterGameChallengeColors.primary1,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      context.l10n.accessibilitySettings,
+                      style: context.generalTextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 8),
-                Text(
-                  context.l10n.accessibilitySettings,
-                  style: context.generalTextStyle(
-                    fontSize: 22,
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
-        const SizedBox(height: 4),
-        _GameSpeedSettings(
-          value: 2,
-        ),
-        const SizedBox(height: 8),
-        _SettingToggleItem(
-          isEnabled: true,
-          onToggle: () {},
-          title: context.l10n.penaltySettings,
-        ),
-        const SizedBox(height: 8),
-      ],
+            const SizedBox(height: 4),
+            _GameSpeedSettings(
+              value: 2,
+            ),
+            const SizedBox(height: 8),
+            _SettingToggleItem(
+              key: UniqueKey(),
+              isEnabled: state.isPenaltyEnabled,
+              onToggle: () {
+                BlocProvider.of<SettingsCubit>(context).togglePenalty();
+              },
+              title: context.l10n.penaltySettings,
+            ),
+            const SizedBox(height: 8),
+          ],
+        );
+      },
     );
   }
 }
@@ -225,6 +232,7 @@ class _SettingToggleItem extends StatelessWidget {
     required this.isEnabled,
     required this.onToggle,
     required this.title,
+    super.key,
   });
 
   @override
