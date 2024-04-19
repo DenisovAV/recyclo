@@ -3,6 +3,7 @@ import 'package:recyclo/common.dart';
 import 'package:recyclo/common/widgets/item_container.dart';
 
 const _itemsInnerPadding = 4.0;
+const _dialogContentInnerPadding = 12.0;
 
 Future<void> showGameFinishDialog({
   required BuildContext context,
@@ -37,7 +38,7 @@ Future<void> showGameFinishDialog({
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 12),
+                  const SizedBox(height: _dialogContentInnerPadding),
                   Flexible(
                     child: Text(
                       context.l10n.gameFinishDialogTitle,
@@ -49,7 +50,7 @@ Future<void> showGameFinishDialog({
                       maxLines: 1,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: _dialogContentInnerPadding),
                   Flexible(
                     child: Text(
                       sortedItems.isEmpty
@@ -105,9 +106,7 @@ Future<void> showGameFinishDialog({
                         },
                       ),
                     ),
-                  const SizedBox(
-                    height: 24,
-                  ),
+                  const SizedBox(height: 24),
                   FlatButton(
                     onPressed: () {
                       Navigator.of(context).pop();
