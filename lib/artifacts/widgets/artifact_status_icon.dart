@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/artifacts/artifacts_model.dart';
+import 'package:recyclo/common.dart';
 
 class ArtifactStatusIcon extends StatelessWidget {
   const ArtifactStatusIcon({

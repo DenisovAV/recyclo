@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_game_challenge/common/entities/recyclo_language.dart';
+import 'package:recyclo/common.dart';
 
 class SettingsState extends Equatable {
   final bool isMusicEnabled;

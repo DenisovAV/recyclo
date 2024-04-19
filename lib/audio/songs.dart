@@ -1,6 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter_game_challenge/audio/extensions.dart';
-import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
+import 'package:recyclo/audio/extensions.dart';
+import 'package:recyclo/common/assets/assets.gen.dart';
 
 class Songs {
   static AssetSource mainMenuAmbient =

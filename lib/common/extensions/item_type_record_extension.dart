@@ -1,4 +1,4 @@
-import 'package:flutter_game_challenge/common/entities/item_type.dart';
+import 'package:recyclo/common/entities/item_type.dart';
 
 extension ItemTypeListExtension on List<({ItemType type, int score})> {
   List<({ItemType type, int score})> sortedByType() {

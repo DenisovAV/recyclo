@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:flutter_game_challenge/clicker_game/game_models/trash_item.dart';
-import 'package:flutter_game_challenge/clicker_game/game_models/trash_type.dart';
+import 'package:recyclo/clicker_game/game_models/trash_item.dart';
+import 'package:recyclo/clicker_game/game_models/trash_type.dart';
 
 class TrashBin {
   TrashBin()

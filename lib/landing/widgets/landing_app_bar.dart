@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/common/dimensions.dart';
-import 'package:flutter_game_challenge/landing/widgets/download_from_stores_widget.dart';
-import 'package:flutter_game_challenge/landing/widgets/landing_logo.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/common/dimensions.dart';
+import 'package:recyclo/landing/widgets/download_from_stores_widget.dart';
+import 'package:recyclo/landing/widgets/landing_logo.dart';
 
 class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onTap;

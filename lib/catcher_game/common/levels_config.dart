@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:flutter_game_challenge/catcher_game/common/speed_convector.dart';
-import 'package:flutter_game_challenge/catcher_game/components.dart';
-import 'package:flutter_game_challenge/common/entities/item_type.dart';
+import 'package:recyclo/catcher_game/common/speed_convector.dart';
+import 'package:recyclo/catcher_game/components.dart';
+import 'package:recyclo/common/entities/item_type.dart';
 
 abstract class Levels {
   static const int initialLevel = 1;

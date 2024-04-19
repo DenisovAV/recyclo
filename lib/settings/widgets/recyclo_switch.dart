@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common/assets/colors.gen.dart';
+import 'package:recyclo/common/assets/colors.gen.dart';
 
 class RecycloSwitch extends StatelessWidget {
   final bool isEnabled;

@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/common.dart';
 
 class ItemContainer extends StatelessWidget {
   const ItemContainer({

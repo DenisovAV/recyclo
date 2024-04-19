@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
-import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_state.dart';
-import 'package:flutter_game_challenge/trash_reserve/trash_reserve_item_widget.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/trash_reserve/cubit/trash_reserve_cubit.dart';
+import 'package:recyclo/trash_reserve/cubit/trash_reserve_state.dart';
+import 'package:recyclo/trash_reserve/trash_reserve_item_widget.dart';
 
 class TrashReserveWidget extends StatelessWidget {
   const TrashReserveWidget({super.key});

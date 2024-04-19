@@ -1,7 +1,7 @@
-name: flutter_game_challenge
-description: A project for the Recyclo.
+name: recyclo
+description: A recycling game showing how waste sorting leads to useful products through recycling. Make a difference!
 publish_to: none
-version: 1.0.0+1
+version: 1.0.0
 
 environment:
   sdk: ">=3.1.0 <4.0.0"

@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_game_challenge/audio/music_service.dart';
+import 'package:recyclo/audio/music_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 

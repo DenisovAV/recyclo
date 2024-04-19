@@ -3,9 +3,9 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_game_challenge/clicker_game/components/bound_component.dart';
-import 'package:flutter_game_challenge/clicker_game/const/clicker_constraints.dart';
-import 'package:flutter_game_challenge/clicker_game/game_state.dart';
+import 'package:recyclo/clicker_game/components/bound_component.dart';
+import 'package:recyclo/clicker_game/const/clicker_constraints.dart';
+import 'package:recyclo/clicker_game/game_state.dart';
 
 import 'overlays/timer_reduction_effect.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/common/entities/recyclo_language.dart';
+import 'package:recyclo/common.dart';
 
 extension LocaleExtension on Locale {
   RecycloLanguage toAppLanguage() {

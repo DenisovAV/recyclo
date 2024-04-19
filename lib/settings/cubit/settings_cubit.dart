@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/app/app_localisations_provider.dart';
-import 'package:flutter_game_challenge/audio/music_service.dart';
-import 'package:flutter_game_challenge/audio/sounds.dart';
-import 'package:flutter_game_challenge/common/entities/recyclo_language.dart';
-import 'package:flutter_game_challenge/settings/cubit/settings_state.dart';
-import 'package:flutter_game_challenge/settings/settings.dart';
+import 'package:recyclo/app/app_localisations_provider.dart';
+import 'package:recyclo/audio/music_service.dart';
+import 'package:recyclo/audio/sounds.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/settings/cubit/settings_state.dart';
+import 'package:recyclo/settings/settings.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
   final SettingsController _settingsController;

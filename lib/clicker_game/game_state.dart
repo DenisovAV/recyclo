@@ -1,9 +1,9 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_game_challenge/clicker_game/components/trash_item_components.dart';
-import 'package:flutter_game_challenge/clicker_game/const/clicker_constraints.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/clicker_game/components/trash_item_components.dart';
+import 'package:recyclo/clicker_game/const/clicker_constraints.dart';
+import 'package:recyclo/common.dart';
 
 import 'game_models/trash_bin.dart';
 import 'game_models/trash_type.dart';

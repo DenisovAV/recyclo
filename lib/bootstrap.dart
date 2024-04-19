@@ -6,9 +6,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/firebase_options.dart';
-import 'package:flutter_game_challenge/service_provider.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/firebase_options.dart';
+import 'package:recyclo/service_provider.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
 class AppBlocObserver extends BlocObserver {

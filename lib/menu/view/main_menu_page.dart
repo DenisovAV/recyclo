@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/app/view/app.dart';
-import 'package:flutter_game_challenge/artifacts/cubit/artifacts_cubit.dart';
-import 'package:flutter_game_challenge/artifacts/widgets/artifacts_list_page.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/index.dart';
-import 'package:flutter_game_challenge/menu/cubit/main_page_cubit.dart';
-import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';
-import 'package:flutter_game_challenge/menu/view/menu_item.dart';
-import 'package:flutter_game_challenge/menu/widgets/main_menu_background.dart';
-import 'package:flutter_game_challenge/service_provider.dart';
-import 'package:flutter_game_challenge/settings/cubit/settings_cubit.dart';
-import 'package:flutter_game_challenge/settings/settings_page.dart';
-import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_cubit.dart';
-import 'package:flutter_game_challenge/trash_reserve/trash_reserve_widget.dart';
+import 'package:recyclo/app/view/app.dart';
+import 'package:recyclo/artifacts/cubit/artifacts_cubit.dart';
+import 'package:recyclo/artifacts/widgets/artifacts_list_page.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/index.dart';
+import 'package:recyclo/menu/cubit/main_page_cubit.dart';
+import 'package:recyclo/menu/cubit/main_page_state.dart';
+import 'package:recyclo/menu/view/menu_item.dart';
+import 'package:recyclo/menu/widgets/main_menu_background.dart';
+import 'package:recyclo/service_provider.dart';
+import 'package:recyclo/trash_reserve/cubit/trash_reserve_cubit.dart';
+import 'package:recyclo/trash_reserve/trash_reserve_widget.dart';
+import 'package:recyclo/settings/cubit/settings_cubit.dart';
+import 'package:recyclo/settings/settings_page.dart';
 import 'package:get_it/get_it.dart';
 
 class MainMenuPage extends StatelessWidget {

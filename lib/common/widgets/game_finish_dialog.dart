@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/common/widgets/item_container.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/common/widgets/item_container.dart';
 
 const _itemsInnerPadding = 4.0;
 
