@@ -10,23 +10,37 @@ import 'package:recyclo/clicker_game/overlays/game_hud.dart';
 import 'package:recyclo/clicker_game/overlays/game_start_overlay.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/service_provider.dart';
+import 'package:recyclo/settings/persistence/settings_persistence.dart';
 
 import '../trash_reserve/trash_reserve_repository.dart';
 import 'overlays/timer_reduction_effect.dart';
 
 class ClickerGamePage extends StatefulWidget {
-  const ClickerGamePage({super.key});
+  const ClickerGamePage({
+    super.key,
+    required this.settingsPersistence,
+  });
+
+  final SettingsPersistence settingsPersistence;
 
   static MaterialPageRoute<void> route() {
     return MaterialPageRoute<void>(
-      builder: (_) => MultiBlocProvider(providers: [
-        BlocProvider<TimerCubit>(
-          create: (_) => ServiceProvider.get<TimerCubit>(),
+      builder: (_) => MultiBlocProvider(
+        providers: [
+          BlocProvider<TimerCubit>(
+            create: (_) => ServiceProvider.get<TimerCubit>(),
+          ),
+          BlocProvider<TutorialCubit>(
+            create: (_) => ServiceProvider.get<TutorialCubit>(),
+          ),
+        ],
+        child: Scaffold(
+          backgroundColor: const Color(0xFF72A8CD),
+          body: ClickerGamePage(
+            settingsPersistence: ServiceProvider.get(),
+          ),
         ),
-        BlocProvider<TutorialCubit>(
-          create: (_) => ServiceProvider.get<TutorialCubit>(),
-        ),
-      ], child: const ClickerGamePage()),
+      ),
     );
   }
 
@@ -43,94 +57,99 @@ class _ClickerGamePageState extends State<ClickerGamePage> {
   @override
   void initState() {
     super.initState();
-    _game = ClickerGame(context: context);
+    _game = ClickerGame(
+      context: context,
+      settingsPersistence: widget.settingsPersistence,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF72A8CD),
-      body: BlocProvider<TimerCubit>(
-        create: (_) => ServiceProvider.get<TimerCubit>(),
-        child: BlocListener<TimerCubit, TimerState>(
-          listener: (context, state) => _handleTimerState(
-            context,
-            state,
-            _game.gameState,
-          ),
-          child: LayoutBuilder(builder: (context, constraints) {
-            return Stack(
-              children: [
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Assets.images.cloudsBackground.image(fit: BoxFit.fill),
+    return BlocListener<TimerCubit, TimerState>(
+      listener: (context, state) => _handleTimerState(
+        context,
+        state,
+        _game.gameState,
+      ),
+      child: LayoutBuilder(builder: (context, constraints) {
+        return Stack(
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Assets.images.cloudsBackground.image(fit: BoxFit.fill),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: constraints.maxWidth > _maxGameWidth
+                      ? _maxGameWidth
+                      : constraints.maxWidth,
+                  maxHeight: constraints.maxHeight > _maxGameHeight
+                      ? _maxGameHeight
+                      : constraints.maxHeight,
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: constraints.maxWidth > _maxGameWidth
-                          ? _maxGameWidth
-                          : constraints.maxWidth,
-                      maxHeight: constraints.maxHeight > _maxGameHeight
-                          ? _maxGameHeight
-                          : constraints.maxHeight,
+                child: Material(
+                  elevation: 9,
+                  clipBehavior: Clip.hardEdge,
+                  child: GameWidget(
+                    game: _game,
+                    overlayBuilderMap: _clickerOverlayBuilder,
+                    backgroundBuilder: (context) => Container(
+                      color: const Color(0xFF72A8CD),
                     ),
-                    child: Material(
-                      elevation: 9,
-                      clipBehavior: Clip.hardEdge,
-                      child: GameWidget(
-                        game: _game,
-                        overlayBuilderMap: {
-                          GameHUD.id: (_, ClickerGame game) => GameHUD(
-                                game: game,
-                                handleRightButton: _handleBackButton,
-                              ),
-                          GameStartOverlay.id: (context, __) =>
-                              GameStartOverlay(
-                                onPressed: () => _handleGameStart(context),
-                              ),
-                          TimerReductionEffect.id: (context, __) =>
-                              TimerReductionEffect(
-                                text: '-5',
-                                onAnimationEnded: () {
-                                  context.read<TimerCubit>().penalty = 5;
-                                  _game.overlays
-                                      .remove(TimerReductionEffect.id);
-                                },
-                              ),
-                          TutorialOverlay.id: (context, __) => TutorialOverlay(
-                                onBackButtonPressed: _handleBackButton,
-                                onGameStart: () =>
-                                    _handleTutorialCompleted(context),
-                              ),
-                        },
-                        backgroundBuilder: (context) => Container(
-                          // color: FlutterGameChallengeColors.blueSky,
-                          color: const Color(0xFF72A8CD),
-                        ),
-                        initialActiveOverlays: context
-                                .read<TutorialCubit>()
-                                .state
-                                .isTutorialShownBefore
-                            ? [
-                                GameHUD.id,
-                                GameStartOverlay.id,
-                              ]
-                            : [
-                                GameHUD.id,
-                                TutorialOverlay.id,
-                              ],
-                      ),
-                    ),
+                    initialActiveOverlays: context
+                            .read<TutorialCubit>()
+                            .state
+                            .isTutorialShownBefore
+                        ? [
+                            GameHUD.id,
+                            GameStartOverlay.id,
+                          ]
+                        : [
+                            GameHUD.id,
+                            TutorialOverlay.id,
+                          ],
                   ),
                 ),
-              ],
-            );
-          }),
-        ),
-      ),
+              ),
+            ),
+          ],
+        );
+      }),
     );
+  }
+
+  Map<String, Widget Function(BuildContext, ClickerGame)>
+      get _clickerOverlayBuilder {
+    return {
+      GameHUD.id: (BuildContext context, ClickerGame game) => GameHUD(
+            game: game,
+            handleRightButton: _handleBackButton,
+          ),
+      GameStartOverlay.id: (BuildContext context, ClickerGame game) =>
+          GameStartOverlay(
+            onPressed: () => _handleGameStart(context),
+          ),
+      TimerReductionEffect.id: (BuildContext context, ClickerGame game) =>
+          TimerReductionEffect(
+            text: '-5',
+            onAnimationEnded: () async {
+              final isPenaltyEnbled =
+                  widget.settingsPersistence.getPenaltyFlag();
+
+              if (isPenaltyEnbled) {
+                context.read<TimerCubit>().penalty = 5;
+              }
+              _game.overlays.remove(TimerReductionEffect.id);
+            },
+          ),
+      TutorialOverlay.id: (BuildContext context, ClickerGame game) =>
+          TutorialOverlay(
+            onBackButtonPressed: _handleBackButton,
+            onGameStart: () => _handleTutorialCompleted(context),
+          ),
+    };
   }
 
   void _handleBackButton() {

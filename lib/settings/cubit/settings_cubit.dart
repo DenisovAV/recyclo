@@ -20,10 +20,12 @@ class SettingsCubit extends Cubit<SettingsState> {
             isMusicEnabled: _settingsController.musicOn.value,
             isSoundEffectsEnabled: _settingsController.soundsOn.value,
             currentLanguage: _localisationsProvider.currentLanguage,
+            isPenaltyEnabled: _settingsController.penaltyOn.value,
           ),
         ) {
     _settingsController.musicOn.addListener(_updateSettings);
     _settingsController.soundsOn.addListener(_updateSettings);
+    _settingsController.penaltyOn.addListener(_updateSettings);
   }
 
   void _updateSettings() {
@@ -32,6 +34,7 @@ class SettingsCubit extends Cubit<SettingsState> {
         isMusicEnabled: _settingsController.musicOn.value,
         isSoundEffectsEnabled: _settingsController.soundsOn.value,
         currentLanguage: _localisationsProvider.currentLanguage,
+        isPenaltyEnabled: _settingsController.penaltyOn.value,
       ),
     );
   }
@@ -51,10 +54,15 @@ class SettingsCubit extends Cubit<SettingsState> {
     _settingsController.changeLanguage(language.locale);
   }
 
+  void togglePenalty() {
+    _settingsController.togglePenaltyOn();
+  }
+
   @override
   Future<void> close() {
     _settingsController.musicOn.removeListener(_updateSettings);
     _settingsController.soundsOn.removeListener(_updateSettings);
+    _settingsController.penaltyOn.removeListener(_updateSettings);
     return super.close();
   }
 }

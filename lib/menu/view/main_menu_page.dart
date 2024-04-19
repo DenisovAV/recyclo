@@ -35,75 +35,69 @@ class MainMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: FlutterGameChallengeColors.blueSky,
-      body: BlocBuilder<MainPageCubit, MainPageState>(
-        builder: (context, state) {
-          return PopScope(
-            canPop: false,
-            onPopInvoked: (_) async {
-              _onBackBtn(state, context);
-              return Future.value(false);
-            },
-            child: Stack(
-              children: [
-                MainMenuBackground(
-                  isHighlighted: state.isBackgroundHighlighted,
-                  isCompact: state.isBackgroundCompact,
-                ),
-                SafeArea(
-                  bottom: false,
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(width: 20),
-                          Visibility(
-                            visible:
-                                state is! MainPageInitialState || ExtendedPlatform.isWeb,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: RoundButton(
-                                icon: Icons.keyboard_arrow_left,
-                                onPressed: () => _onBackBtn(state, context),
-                              ),
+      body: SafeArea(
+        bottom: false,
+        child: BlocBuilder<MainPageCubit, MainPageState>(
+          builder: (context, state) {
+            return PopScope(
+              canPop: false,
+              onPopInvoked: (_) async {
+                _onBackBtn(state, context);
+                return Future.value(false);
+              },
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  MainMenuBackground(
+                    isHighlighted: state.isBackgroundHighlighted,
+                    isCompact: state.isBackgroundCompact,
+                  ),
+                  Positioned.fill(
+                    top: 100,
+                    left: 20,
+                    right: 20,
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 200),
+                      child: switch (state) {
+                        MainPageInitialState() => _MainMenuContent(),
+                        MainPageChooseGameState() => _ChooseGameContent(),
+                        MainPageArtifactDetailsState() => _ArtifactsContent(),
+                        MainPageArtifactsState() => _ArtifactsContent(),
+                        MainPageTutorialState() => _TutorialContent(),
+                        MainPageSettingsState() => _SettingsContent(),
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 100,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Visibility(
+                          visible: state is! MainPageInitialState ||
+                              Navigator.of(context).canPop(),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 10,
+                              left: 20,
                             ),
-                          ),
-                          const Expanded(
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: TrashReserveWidget(),
+                            child: RoundButton(
+                              icon: Icons.keyboard_arrow_left,
+                              semanticsLabel: context.l10n.backButtonLabel,
+                              onPressed: () => _onBackBtn(state, context),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 40),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20,
-                            right: 20,
-                          ),
-                          child: AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 200),
-                            child: switch (state) {
-                              MainPageInitialState() => _MainMenuContent(),
-                              MainPageChooseGameState() => _ChooseGameContent(),
-                              MainPageArtifactDetailsState() =>
-                                _ArtifactsContent(),
-                              MainPageArtifactsState() => _ArtifactsContent(),
-                              MainPageTutorialState() => _TutorialContent(),
-                              MainPageSettingsState() => _SettingsContent(),
-                            },
                           ),
                         ),
-                      ),
-                    ],
+                        TrashReserveWidget(),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -124,37 +118,36 @@ class _MainMenuContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 180),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            MenuItem(
-              text: context.l10n.mainMenuGamesItemTitle,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToChooseGame();
-              },
-            ),
-            MenuItem(
-              text: context.l10n.mainMenuArtifactsItemTitle,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
-              },
-            ),
-            MenuItem(
-              text: context.l10n.mainMenuTutorialItemTitle,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToTutorial();
-              },
-            ),
-            MenuItem(
-              text: context.l10n.mainMenuSettingsItemTitle,
-              onTap: () {
-                BlocProvider.of<MainPageCubit>(context).navigateToSettings();
-              },
-            ),
-          ],
-        ),
+      padding: const EdgeInsets.only(bottom: 160),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          MenuItem(
+            text: context.l10n.mainMenuGamesItemTitle,
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToChooseGame();
+            },
+          ),
+          MenuItem(
+            text: context.l10n.mainMenuArtifactsItemTitle,
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
+            },
+          ),
+          MenuItem(
+            text: context.l10n.mainMenuTutorialItemTitle,
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToTutorial();
+            },
+          ),
+          MenuItem(
+            text: context.l10n.mainMenuSettingsItemTitle,
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToSettings();
+            },
+          ),
+        ],
       ),
     );
   }
@@ -225,33 +218,41 @@ class _TutorialContent extends StatelessWidget {
           );
         });
       },
-      child: Container(
-        width: 600.0,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          color: FlutterGameChallengeColors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40),
-            topRight: Radius.circular(40),
+      child: Semantics(
+        image: true,
+        excludeSemantics: true,
+        label: context.l10n.tutorialDescription,
+        child: Container(
+          width: 600.0,
+          decoration: BoxDecoration(
+            color: FlutterGameChallengeColors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40),
+              topRight: Radius.circular(40),
+            ),
+            border: Border(
+              top: BorderSide(
+                width: 2,
+                color: FlutterGameChallengeColors.primary1,
+              ),
+              left: BorderSide(
+                width: 2,
+                color: FlutterGameChallengeColors.primary1,
+              ),
+              right: BorderSide(
+                width: 2,
+                color: FlutterGameChallengeColors.primary1,
+              ),
+            ),
           ),
-          border: Border(
-            top: BorderSide(
-              width: 2,
-              color: FlutterGameChallengeColors.primary1,
-            ),
-            left: BorderSide(
-              width: 2,
-              color: FlutterGameChallengeColors.primary1,
-            ),
-            right: BorderSide(
-              width: 2,
-              color: FlutterGameChallengeColors.primary1,
-            ),
+          padding: EdgeInsets.all(28),
+          child: Column(
+            children: [
+              Assets.images.howToPlayWithoutSpaces.image(
+                fit: BoxFit.contain,
+              ),
+            ],
           ),
-        ),
-        padding: EdgeInsets.all(28),
-        child: Assets.images.howToPlayWithoutSpaces.image(
-          fit: BoxFit.contain,
         ),
       ),
     );

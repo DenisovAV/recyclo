@@ -70,54 +70,61 @@ class _TrashReserveItemWidgetState extends State<TrashReserveItemWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 56,
-      height: 64,
-      decoration: BoxDecoration(
-        color: widget.type.color,
-        border: const Border(
-          left: BorderSide(
-            color: FlutterGameChallengeColors.textStroke,
-            width: 2,
-          ),
-          bottom: BorderSide(
-            color: FlutterGameChallengeColors.textStroke,
-            width: 2,
-          ),
-          top: BorderSide(
-            color: FlutterGameChallengeColors.textStroke,
-            width: 2,
-          ),
-        ),
-        borderRadius: widget.isRounded
-            ? const BorderRadius.only(
-                bottomLeft: Radius.circular(12),
-                topLeft: Radius.circular(12),
-              )
-            : null,
-      ),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              widget.type.iconPath,
-              width: 24,
-              height: 24,
+    return Semantics(
+      container: true,
+      excludeSemantics: true,
+      label: context.l10n.resourceType(widget.type.name, widget.count),
+      child: Container(
+        width: 56,
+        height: 64,
+        decoration: BoxDecoration(
+          color: widget.type.color,
+          border: const Border(
+            left: BorderSide(
+              color: FlutterGameChallengeColors.textStroke,
+              width: 2,
             ),
-            AnimatedBuilder(
-                animation: _animation,
-                builder: (context, child) {
-                  return Text(
-                    _animation.value.toInt().toString(),
-                    style: const TextStyle(
-                      color: FlutterGameChallengeColors.textStroke,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                }),
-          ],
+            bottom: BorderSide(
+              color: FlutterGameChallengeColors.textStroke,
+              width: 2,
+            ),
+            top: BorderSide(
+              color: FlutterGameChallengeColors.textStroke,
+              width: 2,
+            ),
+          ),
+          borderRadius: widget.isRounded
+              ? const BorderRadius.only(
+                  bottomLeft: Radius.circular(12),
+                  topLeft: Radius.circular(12),
+                )
+              : null,
+        ),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                widget.type.iconPath,
+                width: 24,
+                height: 24,
+              ),
+              AnimatedBuilder(
+                  animation: _animation,
+                  builder: (context, child) {
+                    return Text(
+                      _animation.value.toInt() >= 1000
+                          ? "${_animation.value ~/ 1000}K"
+                          : _animation.value.toInt().toString(),
+                      style: const TextStyle(
+                        color: FlutterGameChallengeColors.textStroke,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  }),
+            ],
+          ),
         ),
       ),
     );

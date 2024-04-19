@@ -3,22 +3,24 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
 import 'package:recyclo/clicker_game/components/bound_component.dart';
 import 'package:recyclo/clicker_game/const/clicker_constraints.dart';
 import 'package:recyclo/clicker_game/game_state.dart';
+import 'package:recyclo/settings/persistence/settings_persistence.dart';
 
 import 'overlays/timer_reduction_effect.dart';
 
 class ClickerGame extends Forge2DGame with TapDetector {
-  ClickerGame({
-    required this.context,
-  }) : super(
+  ClickerGame({required this.context, required this.settingsPersistence})
+      : super(
           gravity: Vector2(0, -10),
           zoom: 1,
         );
 
   late final ClickerState gameState;
   final BuildContext context;
+  final SettingsPersistence settingsPersistence;
 
   @override
   Future<void> onLoad() async {
@@ -52,6 +54,7 @@ class ClickerGame extends Forge2DGame with TapDetector {
   @override
   void onTapDown(TapDownInfo info) {
     super.onTapDown(info);
+
     final worldPosition = info.eventPosition.widget;
 
     final tappedItem = gameState.trashItems.value
@@ -60,11 +63,18 @@ class ClickerGame extends Forge2DGame with TapDetector {
     if (tappedItem != null) {
       if (gameState.currentTargetTypes.value.lastOrNull ==
           tappedItem.trashData.classification) {
+        SemanticsService.announce(
+          tappedItem.trashData.name,
+          TextDirection.ltr,
+        );
         tappedItem.onCollected();
         gameState.collectTrash(tappedItem);
       } else {
         tappedItem.onMiss();
-        overlays.add(TimerReductionEffect.id);
+        final isPenaltyEnbled = settingsPersistence.getPenaltyFlag();
+        if (isPenaltyEnbled) {
+          overlays.add(TimerReductionEffect.id);
+        }
       }
     }
   }

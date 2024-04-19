@@ -7,6 +7,7 @@ class SettingsController {
 
   ValueNotifier<bool> soundsOn = ValueNotifier(false);
   ValueNotifier<bool> musicOn = ValueNotifier(false);
+  ValueNotifier<bool> penaltyOn = ValueNotifier(false);
   ValueNotifier<String?> currentLanguage = ValueNotifier(null);
 
   SettingsController(this._store) {
@@ -23,6 +24,11 @@ class SettingsController {
     return _store.saveSoundsOn(soundsOn.value);
   }
 
+  Future<void> togglePenaltyOn() {
+    penaltyOn.value = !penaltyOn.value;
+    return _store.setPenalty(penaltyOn.value);
+  }
+
   Future<void> changeLanguage(Locale locale) {
     currentLanguage.value = locale.languageCode;
     return _store.saveCurrentLocale(locale.languageCode);
@@ -31,6 +37,7 @@ class SettingsController {
   void _loadStateFromPersistence() {
     soundsOn.value = _store.getSoundsOn(defaultValue: true);
     musicOn.value = _store.getMusicOn(defaultValue: true);
+    penaltyOn.value = _store.getPenaltyFlag(defaultValue: true);
     currentLanguage.value = _store.getCurrentLocale();
   }
 }
