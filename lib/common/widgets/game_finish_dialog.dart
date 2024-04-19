@@ -59,7 +59,8 @@ Future<void> showGameFinishDialog({
                       fontSize: 18,
                     ),
                     overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 if (sortedItems.isNotEmpty)

@@ -33,6 +33,7 @@ class FinderHUD extends StatelessWidget {
                 child: RoundButton(
                   icon: Icons.keyboard_arrow_left,
                   onPressed: handleRightButton,
+                  semanticsLabel: context.l10n.backButtonLabel,
                 ),
               ),
             ),
