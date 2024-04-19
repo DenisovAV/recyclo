@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_game_challenge/common/tutorial/local_data_repository.dart';
+import 'package:recyclo/common/tutorial/local_data_repository.dart';
 
 part 'tutorial_state.dart';
 

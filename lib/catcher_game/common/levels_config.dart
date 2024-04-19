@@ -1,9 +1,8 @@
 import 'dart:math';
 
-import 'package:flutter_game_challenge/catcher_game/game_models/drop.dart';
-import 'package:flutter_game_challenge/catcher_game/game_models/level.dart';
-import 'package:flutter_game_challenge/catcher_game/game_models/wave.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/catcher_game/common/speed_convector.dart';
+import 'package:recyclo/catcher_game/components.dart';
+import 'package:recyclo/common/entities/item_type.dart';
 
 abstract class Levels {
   static List<Level> levels(GameDifficultyType difficulty) => [

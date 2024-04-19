@@ -4,13 +4,13 @@ import 'package:collection/collection.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/clicker_game/overlays/game_hud.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/finder_game/finder_game.dart';
-import 'package:flutter_game_challenge/finder_game/finder_state.dart';
-import 'package:flutter_game_challenge/finder_game/overlays/finder_hud.dart';
-import 'package:flutter_game_challenge/finder_game/overlays/game_start_overlay.dart';
-import 'package:flutter_game_challenge/service_provider.dart';
+import 'package:recyclo/clicker_game/overlays/game_hud.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/finder_game/finder_game.dart';
+import 'package:recyclo/finder_game/finder_state.dart';
+import 'package:recyclo/finder_game/overlays/finder_hud.dart';
+import 'package:recyclo/finder_game/overlays/game_start_overlay.dart';
+import 'package:recyclo/service_provider.dart';
 
 import '../trash_reserve/trash_reserve_repository.dart';
 

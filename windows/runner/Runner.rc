@@ -90,11 +90,11 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "dev.recyclo.game" "\0"
-            VALUE "FileDescription", "flutter_game_challenge" "\0"
+            VALUE "FileDescription", "recyclo" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "flutter_game_challenge" "\0"
+            VALUE "InternalName", "recyclo" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 dev.recyclo.game. All rights reserved." "\0"
-            VALUE "OriginalFilename", "flutter_game_challenge.exe" "\0"
+            VALUE "OriginalFilename", "recyclo.exe" "\0"
             VALUE "ProductName", "Recyclo" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END

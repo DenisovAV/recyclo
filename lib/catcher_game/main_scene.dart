@@ -5,12 +5,11 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_game_challenge/catcher_game/common/config.dart';
-import 'package:flutter_game_challenge/catcher_game/common/levels_config.dart';
-import 'package:flutter_game_challenge/catcher_game/components.dart';
-import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/game_models.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/catcher_game/common/config.dart';
+import 'package:recyclo/catcher_game/common/levels_config.dart';
+import 'package:recyclo/catcher_game/components.dart';
+import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/common.dart';
 
 typedef CatchCallback = void Function(ItemType dropType);
 

@@ -35,4 +35,14 @@ class LocalStorageSettingsPersistence extends SettingsPersistence {
   Future<void> saveSoundsOn(bool value) async {
     await _sharedPreferences.setBool('soundsOn', value);
   }
+  
+  @override
+  bool getPenaltyFlag({bool defaultValue = true}) {
+    return _sharedPreferences.getBool('penaltyOn') ?? defaultValue;
+  }
+  
+  @override
+  Future<void> setPenalty(bool value) async {
+    await _sharedPreferences.setBool('penaltyOn', value);
+  }
 }

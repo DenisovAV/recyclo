@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/common/dimensions.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/common/dimensions.dart';
 
 class LandingItem extends StatelessWidget {
   final Widget child;

@@ -1,5 +1,4 @@
 {
-  
   "titleAppBarTitle": "Recyclo",
   "@titleAppBarTitle": {
     "description": "Text shown in the AppBar of the Title Page"
@@ -238,6 +237,45 @@
     "description": "Title scrolling to bottom button"
   },
   "playOnlineButtonTitle": "Play in Browser",
+  "backButtonLabel": "Back",
+  "nextButtonLabel": "Next",
+  "scrollToDownButtonLabel": "Scroll to bottom",
+  "addToWalletButtonTitle": "Add to wallet",
+  "resourcesLabel": "Your resources",
+  "craftedLabel": "Crafted",
+  "notCraftedLabel": "Not crafted",
+  "resourceType": "You have {count} of {type} resource",
+  "@resourceType": {
+    "description": "Text for the loading page",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "Stuff"
+      },
+      "count": {
+        "type": "int",
+        "example": "100"
+      }
+    }
+  },
+  "toCraftResourceType": "Needs {count} of {type} resource, you {isEnough, select, true{have enough} other{dont have enough}}",
+  "@toCraftResourceType": {
+    "description": "Text for the loading page",
+    "place.holders": {
+      "type": {
+        "type": "String",
+        "example": "Stuff"
+      },
+      "count": {
+        "type": "int",
+        "example": "100"
+      },
+      "isEnough": {
+        "type": "String",
+        "example": "false"
+      }
+    }
+  },
   "gameSettings": "Settings",
   "@gameSettings": {
     "description": "Title of Settings page"
@@ -277,5 +315,7 @@
   "gameSpeedSettings": "Game speed",
   "@gameSpeedSettings": {
     "description": "Game speed settings label"
-  }
+  },
+  "earthAnimation": "Earth spinning among the skyies animation",
+  "tutorialDescription": "Tutorial explains how to sort trash. Bucket, plastic bottle, plastic shovel, cup to 'Plastic' bucket. Book, box, newspaper, letter to 'Paper' bucket. Gamepad, phone, battery, bulb to 'Electric' bucket. Banana skin, apple snaw, junk food, old cheese to 'Organic' bucket. Wine bottle, glass, ceramic cup, glass decoration to 'Glass' bucket."
 }

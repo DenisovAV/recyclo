@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/catcher_game/game.dart';
 
 class Background extends PositionComponent with HasGameRef<CatcherGame> {
   Background({

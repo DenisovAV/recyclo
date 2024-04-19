@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/catcher_game/common/config.dart';
 
 class SizeConfig extends Component {
   SizeConfig(this._gameScale);

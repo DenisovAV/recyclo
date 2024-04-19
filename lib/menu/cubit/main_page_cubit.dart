@@ -1,12 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/audio/music_service.dart';
-import 'package:flutter_game_challenge/audio/songs.dart';
-import 'package:flutter_game_challenge/audio/sounds.dart';
-import 'package:flutter_game_challenge/catcher_game/catcher_game_page.dart';
-import 'package:flutter_game_challenge/clicker_game/clicker_game_page.dart';
-import 'package:flutter_game_challenge/finder_game/finder_game_page.dart';
-import 'package:flutter_game_challenge/menu/cubit/main_page_state.dart';
+import 'package:recyclo/menu/cubit/main_page_state.dart';
+import 'package:recyclo/audio/music_service.dart';
+import 'package:recyclo/audio/songs.dart';
+import 'package:recyclo/audio/sounds.dart';
+import 'package:recyclo/catcher_game/catcher_game_page.dart';
+import 'package:recyclo/clicker_game/clicker_game_page.dart';
+import 'package:recyclo/finder_game/finder_game_page.dart';
+import 'package:recyclo/menu/cubit/main_page_state.dart';
 
 class MainPageCubit extends Cubit<MainPageState> {
   final MusicService _musicService;

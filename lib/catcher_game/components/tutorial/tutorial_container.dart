@@ -3,12 +3,13 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_game_challenge/catcher_game/common/visible_component.dart';
-import 'package:flutter_game_challenge/catcher_game/components.dart';
-import 'package:flutter_game_challenge/catcher_game/components/tutorial/solid_background.dart';
-import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/catcher_game/common/visible_component.dart';
+import 'package:recyclo/catcher_game/components/background/background.dart';
+import 'package:recyclo/catcher_game/components/common/common.dart';
+import 'package:recyclo/catcher_game/components/tutorial/tutorial.dart';
+import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/catcher_game/main_scene.dart';
+import 'package:recyclo/common.dart';
 
 class TutorialContainer extends PositionComponent
     with HasGameRef<CatcherGame>, TapCallbacks {

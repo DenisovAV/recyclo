@@ -1,6 +1,6 @@
 import 'dart:core';
-import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
-import 'package:flutter_game_challenge/artifacts/wallet/service/wallet_interface.dart';
+import 'package:recyclo/artifacts/artifacts_model.dart';
+import 'package:recyclo/artifacts/wallet/service/wallet_interface.dart';
 
 WalletService getWalletService() {
   return WebWalletService();

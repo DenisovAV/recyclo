@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/common.dart';
 
 class TutorialOverlay extends StatelessWidget {
   const TutorialOverlay({
@@ -28,7 +28,12 @@ class TutorialOverlay extends StatelessWidget {
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.all(50.0),
-                      child: Assets.images.howToPlayWithoutSpaces.image(),
+                      child: Semantics(
+                        image: true,
+                        excludeSemantics: true,
+                        label: context.l10n.tutorialDescription,
+                        child: Assets.images.howToPlayWithoutSpaces.image(),
+                      ),
                     ),
                   ),
                   Padding(
@@ -55,6 +60,7 @@ class TutorialOverlay extends StatelessWidget {
                       child: RoundButton(
                         icon: Icons.keyboard_arrow_left,
                         onPressed: onBackButtonPressed,
+                        semanticsLabel: context.l10n.backButtonLabel,
                       ),
                     ),
                   ),

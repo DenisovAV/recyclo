@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/clicker_game/game_models/trash_type.dart';
+import 'package:recyclo/clicker_game/game_models/trash_type.dart';
 
 class TargetCategories extends StatefulWidget {
   const TargetCategories({
