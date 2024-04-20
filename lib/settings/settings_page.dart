@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/app/app_localisations_provider.dart';
 import 'package:recyclo/common.dart';
@@ -279,26 +277,29 @@ class _SettingsDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     final localisationProvider = context.watch<AppLocalizationsProvider>();
 
-    return DropdownButton<RecycloLanguage>(
-      borderRadius: BorderRadius.circular(18),
-      value: context.l10n.toAppLanguage(),
-      style: context.generalTextStyle(fontSize: 18),
-      items: localisationProvider.supportLocales.map<DropdownMenuItem<RecycloLanguage>>(
-        (locale) {
-          final language = locale.toAppLanguage();
+    return Semantics(
+      label: context.l10n.toAppLanguage().localeName,
+      child: DropdownButton<RecycloLanguage>(
+        borderRadius: BorderRadius.circular(18),
+        value: context.l10n.toAppLanguage(),
+        style: context.generalTextStyle(fontSize: 18),
+        items: localisationProvider.supportLocales.map<DropdownMenuItem<RecycloLanguage>>(
+          (locale) {
+            final language = locale.toAppLanguage();
 
-          return DropdownMenuItem(
-            value: language,
-            child: Text(
-              language.localeName,
-              style: context.generalTextStyle(
-                fontSize: 18,
+            return DropdownMenuItem(
+              value: language,
+              child: Text(
+                language.localeName,
+                style: context.generalTextStyle(
+                  fontSize: 18,
+                ),
               ),
-            ),
-          );
-        },
-      ).toList(),
-      onChanged: context.read<SettingsCubit>().changeLocale,
+            );
+          },
+        ).toList(),
+        onChanged: context.read<SettingsCubit>().changeLocale,
+      ),
     );
   }
 }
