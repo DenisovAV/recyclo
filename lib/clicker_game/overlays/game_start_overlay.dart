@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/common/extensions.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/common/extensions.dart';
 
 class GameStartOverlay extends StatelessWidget {
   const GameStartOverlay({

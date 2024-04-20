@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/common.dart';
 
 class TutorialOverlay extends StatelessWidget {
   const TutorialOverlay({
@@ -16,12 +16,11 @@ class TutorialOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: Color(0xFFE0EBF1),
+      color: FlutterGameChallengeColors.tutorialBackground,
       child: SafeArea(
         child: Stack(
           children: [
             Align(
-              alignment: Alignment.center,
               child: Column(
                 // crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -29,11 +28,16 @@ class TutorialOverlay extends StatelessWidget {
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.all(50.0),
-                      child: Assets.images.howToPlayWithoutSpaces.image(),
+                      child: Semantics(
+                        image: true,
+                        excludeSemantics: true,
+                        label: context.l10n.tutorialDescription,
+                        child: Assets.images.howToPlayWithoutSpaces.image(),
+                      ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 20.0),
+                    padding: const EdgeInsets.only(bottom: 20.0),
                     child: GestureDetector(
                       onTap: onGameStart,
                       child: Assets.images.catcher.tutorial.play.image(
@@ -56,6 +60,7 @@ class TutorialOverlay extends StatelessWidget {
                       child: RoundButton(
                         icon: Icons.keyboard_arrow_left,
                         onPressed: onBackButtonPressed,
+                        semanticsLabel: context.l10n.backButtonLabel,
                       ),
                     ),
                   ),

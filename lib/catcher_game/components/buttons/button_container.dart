@@ -3,12 +3,12 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flutter_game_challenge/catcher_game/common/sprite_sheet_util.dart';
-import 'package:flutter_game_challenge/catcher_game/common/visible_component.dart';
-import 'package:flutter_game_challenge/catcher_game/components.dart';
-import 'package:flutter_game_challenge/catcher_game/game.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/catcher_game/common/sprite_sheet_util.dart';
+import 'package:recyclo/catcher_game/common/visible_component.dart';
+import 'package:recyclo/catcher_game/components.dart';
+import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/catcher_game/main_scene.dart';
+import 'package:recyclo/common.dart';
 
 enum ButtonType {
   reset,
@@ -114,7 +114,7 @@ class ButtonsContainer extends PositionComponent
 
   @override
   bool containsLocalPoint(Vector2 point) => switch (game.status) {
-        CatcherGameStatus.playing || CatcherGameStatus.pause => true,
+        CatcherGameStatusType.playing || CatcherGameStatusType.pause => true,
         _ => false,
       };
 
@@ -124,7 +124,7 @@ class ButtonsContainer extends PositionComponent
       if (button.tappingArea.contains(event.canvasPosition.toOffset()) &&
           button.isVisible) {
         if (button.buttonType == ButtonType.pausePlay) {
-          if (game.status != CatcherGameStatus.result) {
+          if (game.status != CatcherGameStatusType.result) {
             onPauseOrPlayCallback();
             _pauseOverlay.isVisible = false;
             button.playing = true;
@@ -148,7 +148,7 @@ class ButtonsContainer extends PositionComponent
   }
 
   void showPauseOverlay() {
-    if (game.status == CatcherGameStatus.pause &&
+    if (game.status == CatcherGameStatusType.pause &&
         !isAnimationStarted &&
         !_pauseOverlay.isVisible) {
       _pauseOverlay.isVisible = true;

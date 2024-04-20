@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_game_challenge/common/assets/colors.gen.dart';
+import 'package:recyclo/common/assets/colors.gen.dart';
 
 class MenuItem extends StatelessWidget {
   const MenuItem({
@@ -44,25 +44,31 @@ class MenuItem extends StatelessWidget {
       ],
     );
 
-    return GestureDetector(
-      onTap: onTap,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (assetId != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: Image.asset(
-                assetId!,
-                width: 60,
-                height: 60,
+    return Semantics(
+      label: text,
+      button: true,
+      enabled: true,
+      excludeSemantics: true,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (assetId != null)
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Image.asset(
+                  assetId!,
+                  width: 60,
+                  height: 60,
+                ),
               ),
+            Text(
+              text,
+              style: style,
             ),
-          Text(
-            text,
-            style: style,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

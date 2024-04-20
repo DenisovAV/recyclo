@@ -2,20 +2,20 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 
-class VisibleComponent extends SpriteComponent {
+class VisibleComponent extends PositionComponent with HasPaint {
   VisibleComponent({
-    required super.sprite,
+    required this.sprite,
     super.anchor = Anchor.center,
     this.isVisible = false,
   });
 
+  final Sprite sprite;
   bool isVisible;
 
   @override
-  //ignore: must_call_super, intended function override
   void render(Canvas canvas) {
     if (isVisible) {
-      sprite?.render(
+      sprite.render(
         canvas,
         position: position,
         size: size,

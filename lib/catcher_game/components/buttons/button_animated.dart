@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:flutter_game_challenge/catcher_game/components/buttons/button_config.dart';
-import 'package:flutter_game_challenge/catcher_game/components/buttons/button_container.dart';
+import 'package:recyclo/catcher_game/components/buttons/button_config.dart';
+import 'package:recyclo/catcher_game/components/buttons/button_container.dart';
 
 class ButtonAnimated extends SpriteAnimationComponent {
   ButtonAnimated({

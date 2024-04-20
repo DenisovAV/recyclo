@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/settings/cubit/settings_cubit.dart';
-import 'package:flutter_game_challenge/settings/cubit/settings_state.dart';
-import 'package:flutter_game_challenge/settings/widgets/recyclo_switch.dart';
+import 'package:recyclo/app/app_localisations_provider.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/settings/cubit/settings_cubit.dart';
+import 'package:recyclo/settings/cubit/settings_state.dart';
+import 'package:recyclo/settings/widgets/recyclo_switch.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -18,25 +19,28 @@ class SettingsPage extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
       builder: (context, v, child) {
-        return LayoutBuilder(builder: (context, constraints) {
-          return Transform.translate(
-            offset: Offset(
-              0,
-              constraints.maxHeight * v,
-            ),
-            child: child,
-          );
-        });
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return Transform.translate(
+              offset: Offset(
+                0,
+                constraints.maxHeight * v,
+              ),
+              child: child,
+            );
+          },
+        );
       },
       child: SafeArea(
+        bottom: false,
         child: Container(
           width: 600,
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: 20,
             left: 12,
             right: 12,
           ),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: FlutterGameChallengeColors.detailsBackground,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40),
@@ -59,16 +63,20 @@ class SettingsPage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Text(
-                context.l10n.gameSettings,
-                style: context.generalTextStyle(
-                  fontSize: 28,
+              Semantics(
+                header: true,
+                focusable: true,
+                child: Text(
+                  context.l10n.gameSettings,
+                  style: context.generalTextStyle(
+                    fontSize: 28,
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
-              _AudioSettings(),
+              const _AudioSettings(),
               const SizedBox(height: 36),
-              _AccessibilitySettings(),
+              const _AccessibilitySettings(),
               const SizedBox(height: 36),
               _LanguageSettings(),
             ],
@@ -82,29 +90,38 @@ class SettingsPage extends StatelessWidget {
 class _LanguageSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Row(
-          children: [
-            Icon(
-              Icons.language_rounded,
-              size: 24,
-              color: FlutterGameChallengeColors.primary1,
+    return Column(
+      children: [
+        Semantics(
+          excludeSemantics: true,
+          label: context.l10n.languageSettings,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.language_rounded,
+                  size: 24,
+                  color: FlutterGameChallengeColors.primary1,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  context.l10n.languageSettings,
+                  style: context.generalTextStyle(
+                    fontSize: 22,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(width: 8),
-            Text(
-              context.l10n.languageSettings,
-              style: context.generalTextStyle(
-                fontSize: 22,
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
-      const SizedBox(height: 4),
-      _SettingsDropdown(),
-    ]);
+        const SizedBox(height: 4),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: _SettingsDropdown(),
+        ),
+      ],
+    );
   }
 }
 
@@ -113,45 +130,54 @@ class _AccessibilitySettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Row(
-            children: [
-              Icon(
-                Icons.accessibility_rounded,
-                size: 24,
-                color: FlutterGameChallengeColors.primary1,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                context.l10n.accessibilitySettings,
-                style: context.generalTextStyle(
-                  fontSize: 22,
+    return BlocBuilder<SettingsCubit, SettingsState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Semantics(
+                excludeSemantics: true,
+                label: context.l10n.accessibilitySettings,
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.accessibility_rounded,
+                      size: 24,
+                      color: FlutterGameChallengeColors.primary1,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      context.l10n.accessibilitySettings,
+                      style: context.generalTextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 4),
-        _GameSpeedSettings(
-          value: 2,
-        ),
-        const SizedBox(height: 8),
-        _SettingToggleItem(
-          isEnabled: true,
-          onToggle: () {},
-          title: context.l10n.penaltySettings,
-        ),
-        const SizedBox(height: 8),
-        _SettingToggleItem(
-          isEnabled: false,
-          onToggle: () {},
-          title: context.l10n.colorSettings,
-        ),
-        const SizedBox(height: 8),
-      ],
+            ),
+            const SizedBox(height: 4),
+            _GameSpeedSettings(
+              value: state.gameDifficulty,
+              onUpdateStatus: (value) {
+                BlocProvider.of<SettingsCubit>(context)
+                    .setGameDifficulty(value);
+              },
+            ),
+            const SizedBox(height: 8),
+            _SettingToggleItem(
+              key: UniqueKey(),
+              isEnabled: state.isPenaltyEnabled,
+              onToggle: () {
+                BlocProvider.of<SettingsCubit>(context).togglePenalty();
+              },
+              title: context.l10n.penaltySettings,
+            ),
+            const SizedBox(height: 8),
+          ],
+        );
+      },
     );
   }
 }
@@ -167,21 +193,25 @@ class _AudioSettings extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.centerLeft,
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.music_note_rounded,
-                    size: 24,
-                    color: FlutterGameChallengeColors.primary1,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    context.l10n.audioSettings,
-                    style: context.generalTextStyle(
-                      fontSize: 22,
+              child: Semantics(
+                excludeSemantics: true,
+                label: context.l10n.audioSettings,
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.music_note_rounded,
+                      size: 24,
+                      color: FlutterGameChallengeColors.primary1,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 8),
+                    Text(
+                      context.l10n.audioSettings,
+                      style: context.generalTextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 4),
@@ -204,40 +234,47 @@ class _AudioSettings extends StatelessWidget {
 }
 
 class _SettingToggleItem extends StatelessWidget {
-  final bool isEnabled;
-  final VoidCallback onToggle;
-  final String title;
-
   const _SettingToggleItem({
     required this.isEnabled,
     required this.onToggle,
     required this.title,
+    super.key,
   });
+
+  final bool isEnabled;
+  final VoidCallback onToggle;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 52,
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        color: FlutterGameChallengeColors.settingsAccent,
-        borderRadius: BorderRadius.circular(18),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              title,
-              style: context.generalTextStyle(
-                fontSize: 18,
+    return Semantics(
+      label: title,
+      toggled: isEnabled,
+      excludeSemantics: true,
+      onTap: onToggle,
+      child: Container(
+        height: 52,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        decoration: BoxDecoration(
+          color: FlutterGameChallengeColors.settingsAccent,
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                title,
+                style: context.generalTextStyle(
+                  fontSize: 18,
+                ),
               ),
             ),
-          ),
-          RecycloSwitch(
-            isEnabled: isEnabled,
-            onToggle: onToggle,
-          ),
-        ],
+            RecycloSwitch(
+              isEnabled: isEnabled,
+              onToggle: onToggle,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -246,101 +283,131 @@ class _SettingToggleItem extends StatelessWidget {
 class _SettingsDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 52,
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        color: FlutterGameChallengeColors.settingsAccent,
+    final localisationProvider = context.watch<AppLocalizationsProvider>();
+
+    return Semantics(
+      label: context.l10n.toAppLanguage().localeName,
+      child: DropdownButton<RecycloLanguage>(
         borderRadius: BorderRadius.circular(18),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              context.l10n.englishLanguageLabel,
-              style: context.generalTextStyle(
-                fontSize: 18,
+        value: context.l10n.toAppLanguage(),
+        style: context.generalTextStyle(fontSize: 18),
+        items: localisationProvider.supportLocales
+            .map<DropdownMenuItem<RecycloLanguage>>(
+          (locale) {
+            final language = locale.toAppLanguage();
+
+            return DropdownMenuItem(
+              value: language,
+              child: Text(
+                language.localeName,
+                style: context.generalTextStyle(
+                  fontSize: 18,
+                ),
               ),
-            ),
-          ),
-          Icon(
-            Icons.arrow_drop_down,
-            size: 24,
-            color: FlutterGameChallengeColors.primary1,
-          )
-        ],
+            );
+          },
+        ).toList(),
+        onChanged: context.read<SettingsCubit>().changeLocale,
       ),
     );
   }
 }
 
-class _GameSpeedSettings extends StatelessWidget {
-  final int value;
-
+class _GameSpeedSettings extends StatefulWidget {
   const _GameSpeedSettings({
     required this.value,
+    required this.onUpdateStatus,
   });
+
+  final GameDifficultyType value;
+  final void Function(GameDifficultyType) onUpdateStatus;
+
+  @override
+  State<_GameSpeedSettings> createState() => _GameSpeedSettingsState();
+}
+
+class _GameSpeedSettingsState extends State<_GameSpeedSettings> {
+  GameDifficultyType _value = GameDifficultyType.easy;
+
+  @override
+  void initState() {
+    _value = widget.value;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: FlutterGameChallengeColors.settingsAccent,
-        borderRadius: BorderRadius.circular(18),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            context.l10n.gameSpeedSettings,
-            style: context.generalTextStyle(
-              fontSize: 18,
+    return Semantics(
+      label: context.l10n.gameSpeedSettings,
+      slider: true,
+      increasedValue: 3.toString(),
+      decreasedValue: 1.toString(),
+      value: _value.index.toString(),
+      excludeSemantics: true,
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: FlutterGameChallengeColors.settingsAccent,
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              context.l10n.gameSpeedSettings,
+              style: context.generalTextStyle(
+                fontSize: 18,
+              ),
             ),
-          ),
-          SizedBox(
-            height: 30,
-            child: Stack(
-              children: [
-                SliderTheme(
-                  data: SliderThemeData(
-                    trackHeight: 4,
-                  ),
-                  child: Slider(
-                    thumbColor: FlutterGameChallengeColors.primary1,
-                    activeColor: FlutterGameChallengeColors.primary1,
-                    inactiveColor:
-                        FlutterGameChallengeColors.primary1.withOpacity(0.5),
-                    onChanged: (value) {},
-                    divisions: 2,
-                    min: 1,
-                    max: 3,
-                    value: value.toDouble(),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    '1',
-                    style: context.generalTextStyle(
-                      fontSize: 18,
+            SizedBox(
+              height: 30,
+              child: Stack(
+                children: [
+                  SliderTheme(
+                    data: const SliderThemeData(
+                      trackHeight: 4,
+                    ),
+                    child: Slider(
+                      thumbColor: FlutterGameChallengeColors.primary1,
+                      activeColor: FlutterGameChallengeColors.primary1,
+                      inactiveColor:
+                          FlutterGameChallengeColors.primary1.withOpacity(0.5),
+                      onChanged: (value) {
+                        setState(() {
+                          _value = GameDifficultyType.values[value.toInt()];
+                        });
+                      },
+                      onChangeEnd: (_) {
+                        widget.onUpdateStatus(_value);
+                      },
+                      max: 2,
+                      value: _value.index.toDouble(),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    '3',
-                    style: context.generalTextStyle(
-                      fontSize: 18,
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      '1',
+                      style: context.generalTextStyle(
+                        fontSize: 18,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      '3',
+                      style: context.generalTextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

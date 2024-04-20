@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/common/dimensions.dart';
-import 'package:flutter_game_challenge/landing/widgets/download_from_stores_widget.dart';
-import 'package:flutter_game_challenge/landing/widgets/landing_logo.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/common/dimensions.dart';
+import 'package:recyclo/landing/widgets/download_from_stores_widget.dart';
+import 'package:recyclo/landing/widgets/landing_logo.dart';
 
 class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onTap;
@@ -115,33 +115,39 @@ class _ScrollToDownButton extends StatelessWidget {
     return Material(
       borderRadius: BorderRadius.all(Radius.circular(8)),
       color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-        onTap: onTap,
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-            border: Border.all(
-              width: 3,
-              color: Colors.white,
-            ),
-          ),
-          child: Row(
-            children: [
-              Text(
-                l10n.downloadApp,
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.white,
-                ),
-              ),
-              Icon(
-                Icons.keyboard_arrow_down_rounded,
-                size: 10,
+      child: Semantics(
+        label: l10n.scrollToDownButtonLabel,
+        button: true,
+        enabled: true,
+        excludeSemantics: true,
+        child: InkWell(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          onTap: onTap,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+              border: Border.all(
+                width: 3,
                 color: Colors.white,
               ),
-            ],
+            ),
+            child: Row(
+              children: [
+                Text(
+                  l10n.downloadApp,
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.white,
+                  ),
+                ),
+                Icon(
+                  Icons.keyboard_arrow_down_rounded,
+                  size: 10,
+                  color: Colors.white,
+                ),
+              ],
+            ),
           ),
         ),
       ),

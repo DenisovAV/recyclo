@@ -1,5 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/common.dart';
 
 class ItemContainer extends StatelessWidget {
   const ItemContainer({
@@ -32,8 +33,10 @@ class ItemContainer extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          type.image(
-            size: Size.square(32 * scale),
+          Flexible(
+            child: type.image(
+              size: Size.square(32 * scale),
+            ),
           ),
           Text(
             count.toString(),

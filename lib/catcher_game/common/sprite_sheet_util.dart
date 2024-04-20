@@ -33,7 +33,8 @@ class SpriteSheetUtil {
     final flattenList = <Sprite>[];
 
     for (final innerSpriteListItem in _sprites) {
-      for (final sprite in innerSpriteListItem) {
+      for (var i = 0; i < innerSpriteListItem.length; i++) {
+        final sprite = innerSpriteListItem[i];
         flattenList.add(sprite);
       }
     }

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/trash_reserve/cubit/trash_reserve_state.dart';
-import 'package:flutter_game_challenge/trash_reserve/trash_reserve_repository.dart';
+import 'package:recyclo/trash_reserve/cubit/trash_reserve_state.dart';
+import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
 
 class TrashReserveCubit extends Cubit<TrashReserveState> {
   TrashReserveCubit(this._trashReserveRepository)

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart';
+import 'package:recyclo/finder_game/const/finder_constraints.dart';
 import 'package:vector_math/vector_math_64.dart';
 
 class OverlayMaskCalculator {
