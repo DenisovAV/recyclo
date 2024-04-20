@@ -9,9 +9,11 @@ import 'package:flame/flame.dart';
 import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
 import 'package:flutter_game_challenge/finder_game/components/item.dart';
 import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart';
+import 'package:flutter_game_challenge/finder_game/events/event_type.dart';
+import 'package:flutter_game_challenge/finder_game/events/finder_game_event.dart';
 import 'package:flutter_game_challenge/finder_game/finder_game.dart';
-import 'package:flutter_game_challenge/finder_game/util/overlay_render_mode.dart';
-import 'package:flutter_game_challenge/finder_game/util/overlay_renderer.dart';
+import 'package:flutter_game_challenge/finder_game/components/overlay/overlay_render_mode.dart';
+import 'package:flutter_game_challenge/finder_game/components/overlay/overlay_renderer.dart';
 
 class OverlayFog extends PositionComponent
     with DragCallbacks, CollisionCallbacks, HasGameReference<FinderGame> {
@@ -96,6 +98,7 @@ class OverlayFog extends PositionComponent
         currentCollisionItem == null) return;
 
     itemToCollect.onCollected();
+    game.streamController.add(FinderGameEvent(type: EventType.itemCollected));
     game.gameState.collectTrash(itemToCollect);
   }
 

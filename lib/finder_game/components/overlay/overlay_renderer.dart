@@ -1,8 +1,8 @@
 import 'package:flame/extensions.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart';
-import 'package:flutter_game_challenge/finder_game/util/overlay_mask_calculator.dart';
-import 'package:flutter_game_challenge/finder_game/util/overlay_render_mode.dart';
+import 'package:flutter_game_challenge/finder_game/components/overlay/overlay_mask_calculator.dart';
+import 'package:flutter_game_challenge/finder_game/components/overlay/overlay_render_mode.dart';
 
 class OverlayRenderer {
   OverlayRenderer({
