@@ -19,26 +19,28 @@ class SettingsPage extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
       builder: (context, v, child) {
-        return LayoutBuilder(builder: (context, constraints) {
-          return Transform.translate(
-            offset: Offset(
-              0,
-              constraints.maxHeight * v,
-            ),
-            child: child,
-          );
-        });
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return Transform.translate(
+              offset: Offset(
+                0,
+                constraints.maxHeight * v,
+              ),
+              child: child,
+            );
+          },
+        );
       },
       child: SafeArea(
         bottom: false,
         child: Container(
           width: 600,
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: 20,
             left: 12,
             right: 12,
           ),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: FlutterGameChallengeColors.detailsBackground,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40),
@@ -72,9 +74,9 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              _AudioSettings(),
+              const _AudioSettings(),
               const SizedBox(height: 36),
-              _AccessibilitySettings(),
+              const _AccessibilitySettings(),
               const SizedBox(height: 36),
               _LanguageSettings(),
             ],
@@ -88,36 +90,38 @@ class SettingsPage extends StatelessWidget {
 class _LanguageSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Semantics(
-        excludeSemantics: true,
-        label: context.l10n.languageSettings,
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Row(
-            children: [
-              Icon(
-                Icons.language_rounded,
-                size: 24,
-                color: FlutterGameChallengeColors.primary1,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                context.l10n.languageSettings,
-                style: context.generalTextStyle(
-                  fontSize: 22,
+    return Column(
+      children: [
+        Semantics(
+          excludeSemantics: true,
+          label: context.l10n.languageSettings,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.language_rounded,
+                  size: 24,
+                  color: FlutterGameChallengeColors.primary1,
                 ),
-              ),
-            ],
+                const SizedBox(width: 8),
+                Text(
+                  context.l10n.languageSettings,
+                  style: context.generalTextStyle(
+                    fontSize: 22,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      const SizedBox(height: 4),
-      Align(
-        alignment: Alignment.centerLeft,
-        child: _SettingsDropdown(),
-      ),
-    ]);
+        const SizedBox(height: 4),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: _SettingsDropdown(),
+        ),
+      ],
+    );
   }
 }
 
@@ -194,7 +198,7 @@ class _AudioSettings extends StatelessWidget {
                 label: context.l10n.audioSettings,
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.music_note_rounded,
                       size: 24,
                       color: FlutterGameChallengeColors.primary1,
@@ -230,16 +234,16 @@ class _AudioSettings extends StatelessWidget {
 }
 
 class _SettingToggleItem extends StatelessWidget {
-  final bool isEnabled;
-  final VoidCallback onToggle;
-  final String title;
-
   const _SettingToggleItem({
     required this.isEnabled,
     required this.onToggle,
     required this.title,
     super.key,
   });
+
+  final bool isEnabled;
+  final VoidCallback onToggle;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -250,7 +254,7 @@ class _SettingToggleItem extends StatelessWidget {
       onTap: onToggle,
       child: Container(
         height: 52,
-        padding: EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         decoration: BoxDecoration(
           color: FlutterGameChallengeColors.settingsAccent,
           borderRadius: BorderRadius.circular(18),
@@ -287,7 +291,8 @@ class _SettingsDropdown extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
         value: context.l10n.toAppLanguage(),
         style: context.generalTextStyle(fontSize: 18),
-        items: localisationProvider.supportLocales.map<DropdownMenuItem<RecycloLanguage>>(
+        items: localisationProvider.supportLocales
+            .map<DropdownMenuItem<RecycloLanguage>>(
           (locale) {
             final language = locale.toAppLanguage();
 

@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/settings/persistence/settings_persistence.dart';
 
