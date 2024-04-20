@@ -10,27 +10,29 @@ class DownloadFromStoresWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Wrap(
+      spacing: 15,
+      runSpacing: 15,
+      alignment: WrapAlignment.center,
       children: [
-        _DownloadButton(
-          image: Assets.images.downloadGooglePlayButton.image(),
-          url: 'https://pub.dev',
+        Expanded(
+          child: _DownloadButton(
+            image: Assets.images.downloadGooglePlayButton.image(),
+            url: 'https://pub.dev',
+          ),
         ),
-        SizedBox(
-          width: 15,
+        Expanded(
+          child: _DownloadButton(
+            image: Assets.images.downloadAppleStoreButton.image(),
+            url: 'https://pub.dev',
+          ),
         ),
-        _DownloadButton(
-          image: Assets.images.downloadAppleStoreButton.image(),
-          url: 'https://pub.dev',
-        ),
-        SizedBox(
-          width: 15,
-        ),
-        PlayOnlineButton(
-          onTap: () {
-            Navigator.of(context).push(LoadingPage.route());
-          },
+        Expanded(
+          child: PlayOnlineButton(
+            onTap: () {
+              Navigator.of(context).push(LoadingPage.route());
+            },
+          ),
         )
       ],
     );
