@@ -4,23 +4,26 @@ import 'dart:ui';
 import 'package:bezier/bezier.dart';
 import 'package:flame/components.dart';
 import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/catcher_game/game_models/catcher_game_status_type.dart';
 import 'package:recyclo/catcher_game/main_scene.dart';
 import 'package:recyclo/common.dart';
 
-class DropComponent extends SpriteComponent
-    with HasVisibility, HasGameRef<CatcherGame> {
+class DropComponent extends PositionComponent
+    with HasGameRef<CatcherGame>, HasPaint {
   DropComponent({
-    required super.sprite,
-    required super.paint,
+    required this.sprite,
     required this.type,
     required this.wave,
     required this.catchCallback,
     required this.cubicCurve,
     required this.speed,
     required this.isLeft,
-    super.anchor = Anchor.center,
-  });
+  }) {
+    super.anchor = Anchor.center;
+    paint = Paint()..filterQuality = FilterQuality.high;
+  }
 
+  final Sprite sprite;
   final ItemType type;
   final int wave;
   final CatchCallback catchCallback;
@@ -31,9 +34,8 @@ class DropComponent extends SpriteComponent
   double rotation = 6;
 
   @override
-  //ignore: must_call_super, intended function override
   void render(Canvas canvas) {
-    sprite?.render(
+    sprite.render(
       canvas,
       position: position,
       size: size,
@@ -44,7 +46,7 @@ class DropComponent extends SpriteComponent
 
   @override
   void update(double dt) {
-    if (isVisible && game.status == CatcherGameStatus.playing) {
+    if (game.status == CatcherGameStatusType.playing) {
       if (step <= 1) {
         isLeft ? angle += sin(step / rotation) : angle -= sin(step / rotation);
 
@@ -53,7 +55,6 @@ class DropComponent extends SpriteComponent
         step = step + speed;
       } else {
         angle = 0;
-        isVisible = false;
         catchCallback(type);
         removeFromParent();
       }

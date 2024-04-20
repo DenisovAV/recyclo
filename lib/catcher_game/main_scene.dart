@@ -9,6 +9,7 @@ import 'package:recyclo/catcher_game/common/config.dart';
 import 'package:recyclo/catcher_game/common/levels_config.dart';
 import 'package:recyclo/catcher_game/components.dart';
 import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/catcher_game/game_models.dart';
 import 'package:recyclo/common.dart';
 
 typedef CatchCallback = void Function(ItemType dropType);
@@ -25,27 +26,27 @@ class MainScene extends PositionComponent
   final VoidCallback onResetCallback;
   final AssetsByItemTypeCallback assetsByItemTypeCallback;
   final Map<ItemType, int> score = {};
-  late List<Wave> waveList;
-  bool isDestroy = false;
-  bool isChangeWave = false;
-  int currentWave = 0;
-  int _spawned = 0;
-  int _omissionsToShowTutorial = 0;
-  bool _isHorizontalDragHandled = true;
 
-  late Background _background;
+  late List<Wave> waveList;
+  late Background background;
   late BoxContainer _boxContainer;
   late DropContainer _dropContainer;
   late ButtonsContainer _buttonsContainer;
   late DropSpawner _dropSpawner;
-  late WaveDelay _waveDelay;
   late TutorialContainer _tutorialContainer;
+
+  int currentWave = 0;
+  int spawned = 0;
+  int? _currentWaveItems;
+  int _omissionsToShowTutorial = 0;
+  bool isChangeWave = false;
+  bool _isHorizontalDragHandled = true;
 
   @override
   FutureOr<void> onLoad() async {
-    waveList = Levels.levels().first.waves;
+    waveList = Levels.levels(game.difficultyType).first.waves;
 
-    _background = Background(
+    background = Background(
       sprite: Sprite(game.images.fromCache(Assets.images.catcher.bg.bg.path)),
     );
     _boxContainer = BoxContainer();
@@ -54,16 +55,9 @@ class MainScene extends PositionComponent
       onPauseOrPlayCallback: onPauseResumeGameCallback,
       onResetCallback: _handleResetCallback,
     );
-    _waveDelay = WaveDelay(
-      scene: this,
-      duration: waveList[0].delay,
-      onWaveFinished: () {
-        _dropSpawner.start();
-      },
-    );
 
     _dropSpawner = DropSpawner(
-      onSpawnerUpdate: _onNextSpawn,
+      onNextSpawnCallback: _handleOnNextSpawnCallback,
       repeatNumber: waveList[currentWave].itemsInWave,
       ceilingTimeLimit: waveList[currentWave].maxDroppingInterval,
       floorTimeLimit: waveList[currentWave].minDroppingInterval,
@@ -80,23 +74,23 @@ class MainScene extends PositionComponent
     _tutorialContainer = TutorialContainer(scene: this);
 
     await addAll([
-      _background,
+      background,
       _boxContainer,
       _buttonsContainer,
       _dropSpawner,
-      _waveDelay,
       _dropContainer,
       _tutorialContainer,
     ]);
 
-    _initLevel();
+    changeWave(0);
+    game.status = CatcherGameStatusType.playing;
 
     return super.onLoad();
   }
 
   @override
   void renderTree(Canvas canvas) {
-    _background.render(canvas);
+    background.render(canvas);
     _boxContainer.render(canvas);
     canvas
       ..save()
@@ -112,33 +106,20 @@ class MainScene extends PositionComponent
 
   @override
   void update(double dt) {
-    if (game.status == CatcherGameStatus.playing) {
+    if (game.status == CatcherGameStatusType.playing) {
       super.update(dt);
-    } else if (game.status == CatcherGameStatus.pause) {
+    } else if (game.status == CatcherGameStatusType.pause) {
       _buttonsContainer.update(dt);
-    } else if (game.status == CatcherGameStatus.result) {
+    } else if (game.status == CatcherGameStatusType.result) {
       _buttonsContainer.update(dt);
-    } else if (game.status == CatcherGameStatus.tutorial) {
+    } else if (game.status == CatcherGameStatusType.tutorial) {
       _boxContainer.update(dt);
       _tutorialContainer.update(dt);
     }
   }
 
-  @override
-  void updateTree(double dt) {
-    if (game.status == CatcherGameStatus.playing) {
-      super.updateTree(dt);
-    } else if (game.status == CatcherGameStatus.pause) {
-      _buttonsContainer.updateTree(dt);
-    } else if (game.status == CatcherGameStatus.result) {
-      _buttonsContainer.updateTree(dt);
-    } else if (game.status == CatcherGameStatus.tutorial) {
-      _tutorialContainer.updateTree(dt);
-    }
-  }
-
   void onDragStart(DragStartDetails details) {
-    if (game.status == CatcherGameStatus.playing) {
+    if (game.status == CatcherGameStatusType.playing) {
       if (_boxContainer.toRect().contains(details.localPosition)) {
         _boxContainer.handleDragStart();
         _isHorizontalDragHandled = false;
@@ -147,7 +128,7 @@ class MainScene extends PositionComponent
   }
 
   void onDragUpdate(DragUpdateDetails details) {
-    if (game.status == CatcherGameStatus.playing) {
+    if (game.status == CatcherGameStatusType.playing) {
       if (_boxContainer.toRect().contains(details.localPosition) &&
           !_isHorizontalDragHandled) {
         _boxContainer.handleDragUpdate(details);
@@ -159,7 +140,7 @@ class MainScene extends PositionComponent
   }
 
   void onDragEnd(DragEndDetails details) {
-    if (game.status == CatcherGameStatus.playing) {
+    if (game.status == CatcherGameStatusType.playing) {
       if (!_isHorizontalDragHandled) {
         _boxContainer.handleDragEnd();
         _isHorizontalDragHandled = true;
@@ -168,18 +149,23 @@ class MainScene extends PositionComponent
   }
 
   void changeWave(int wave) {
+    _currentWaveItems = waveList[wave].itemsInWave;
     currentWave = wave;
-    waveList = Levels.levels().first.waves;
+    waveList = Levels.levels(game.difficultyType).first.waves;
     _dropSpawner
       ..stop()
+      ..start()
       ..repeatNumber = waveList[currentWave].itemsInWave
       ..ceilingTimeLimit = waveList[currentWave].maxDroppingInterval
       ..floorTimeLimit = waveList[currentWave].minDroppingInterval;
-    _waveDelay.reset(waveList[currentWave].delay);
-    _spawned = waveList[currentWave].itemsInWave;
   }
 
-  void _onNextSpawn() {
+  void resumed() {
+    _buttonsContainer.showPauseOverlay();
+  }
+
+  void _handleOnNextSpawnCallback() {
+    ++spawned;
     _dropContainer.genDrop(
       speedMin: waveList[currentWave].minDroppingSpeed,
       speedMax: waveList[currentWave].maxDroppingSpeed,
@@ -192,7 +178,12 @@ class MainScene extends PositionComponent
       _boxContainer.handleCatch(isSuccessful: true);
       final currentScore = score[dropType] ?? 0;
       score[dropType] = currentScore + 1;
+      game.overlays.add(TimerReductionOrIncrementEffect.idIncrement);
     } else {
+      if (game.isPenaltyEnabled) {
+        game.overlays.add(TimerReductionOrIncrementEffect.idReduction);
+      }
+
       _omissionsToShowTutorial++;
       HapticFeedback.mediumImpact();
       _boxContainer.handleCatch(isSuccessful: false);
@@ -204,20 +195,13 @@ class MainScene extends PositionComponent
       _tutorialContainer.showTutorial();
     }
 
-    --_spawned;
-    if (_spawned == 0 && currentWave < waveList.length - 1) {
+    if (_currentWaveItems != null) {
+      _currentWaveItems = _currentWaveItems! - 1;
+    }
+
+    if (_currentWaveItems != null && _currentWaveItems! <= 0) {
       _nextWave();
     }
-
-    if (_spawned == 0 && currentWave == waveList.length - 1) {
-      _showResultScreen();
-    }
-  }
-
-  void _showResultScreen() {
-    game.status = CatcherGameStatus.result;
-
-    // TODO(viktor): here we probably should show dialog with the result
   }
 
   void _nextWave() {
@@ -226,21 +210,13 @@ class MainScene extends PositionComponent
     changeWave(currentWave);
   }
 
-  void _initLevel() {
-    _waveDelay.start();
-    _spawned = waveList[currentWave].itemsInWave;
-    game.status = CatcherGameStatus.playing;
-  }
-
   void _handleResetCallback() {
     _omissionsToShowTutorial = 0;
     _dropContainer.removeAll(_dropContainer.children);
     changeWave(0);
     onResetCallback();
-  }
-
-  void resumed() {
-    _buttonsContainer.showPauseOverlay();
+    _dropSpawner.start();
+    spawned = 0;
   }
 
   void _handleDropReset() {

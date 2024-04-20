@@ -1,7 +1,7 @@
 part of 'tutorial_cubit.dart';
 
 final class TutorialState extends Equatable {
-  TutorialState({
+  const TutorialState({
     required this.isTutorialShownBefore,
     required this.isTutorialShown,
   });

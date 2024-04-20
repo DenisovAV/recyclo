@@ -114,7 +114,7 @@ class ButtonsContainer extends PositionComponent
 
   @override
   bool containsLocalPoint(Vector2 point) => switch (game.status) {
-        CatcherGameStatus.playing || CatcherGameStatus.pause => true,
+        CatcherGameStatusType.playing || CatcherGameStatusType.pause => true,
         _ => false,
       };
 
@@ -124,7 +124,7 @@ class ButtonsContainer extends PositionComponent
       if (button.tappingArea.contains(event.canvasPosition.toOffset()) &&
           button.isVisible) {
         if (button.buttonType == ButtonType.pausePlay) {
-          if (game.status != CatcherGameStatus.result) {
+          if (game.status != CatcherGameStatusType.result) {
             onPauseOrPlayCallback();
             _pauseOverlay.isVisible = false;
             button.playing = true;
@@ -148,7 +148,7 @@ class ButtonsContainer extends PositionComponent
   }
 
   void showPauseOverlay() {
-    if (game.status == CatcherGameStatus.pause &&
+    if (game.status == CatcherGameStatusType.pause &&
         !isAnimationStarted &&
         !_pauseOverlay.isVisible) {
       _pauseOverlay.isVisible = true;

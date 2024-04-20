@@ -19,26 +19,28 @@ class SettingsPage extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
       builder: (context, v, child) {
-        return LayoutBuilder(builder: (context, constraints) {
-          return Transform.translate(
-            offset: Offset(
-              0,
-              constraints.maxHeight * v,
-            ),
-            child: child,
-          );
-        });
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return Transform.translate(
+              offset: Offset(
+                0,
+                constraints.maxHeight * v,
+              ),
+              child: child,
+            );
+          },
+        );
       },
       child: SafeArea(
         bottom: false,
         child: Container(
           width: 600,
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: 20,
             left: 12,
             right: 12,
           ),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: FlutterGameChallengeColors.detailsBackground,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40),
@@ -72,9 +74,9 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              _AudioSettings(),
+              const _AudioSettings(),
               const SizedBox(height: 36),
-              _AccessibilitySettings(),
+              const _AccessibilitySettings(),
               const SizedBox(height: 36),
               _LanguageSettings(),
             ],
@@ -88,36 +90,38 @@ class SettingsPage extends StatelessWidget {
 class _LanguageSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Semantics(
-        excludeSemantics: true,
-        label: context.l10n.languageSettings,
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Row(
-            children: [
-              Icon(
-                Icons.language_rounded,
-                size: 24,
-                color: FlutterGameChallengeColors.primary1,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                context.l10n.languageSettings,
-                style: context.generalTextStyle(
-                  fontSize: 22,
+    return Column(
+      children: [
+        Semantics(
+          excludeSemantics: true,
+          label: context.l10n.languageSettings,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.language_rounded,
+                  size: 24,
+                  color: FlutterGameChallengeColors.primary1,
                 ),
-              ),
-            ],
+                const SizedBox(width: 8),
+                Text(
+                  context.l10n.languageSettings,
+                  style: context.generalTextStyle(
+                    fontSize: 22,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      const SizedBox(height: 4),
-      Align(
-        alignment: Alignment.centerLeft,
-        child: _SettingsDropdown(),
-      ),
-    ]);
+        const SizedBox(height: 4),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: _SettingsDropdown(),
+        ),
+      ],
+    );
   }
 }
 
@@ -137,7 +141,7 @@ class _AccessibilitySettings extends StatelessWidget {
                 label: context.l10n.accessibilitySettings,
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.accessibility_rounded,
                       size: 24,
                       color: FlutterGameChallengeColors.primary1,
@@ -155,7 +159,11 @@ class _AccessibilitySettings extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             _GameSpeedSettings(
-              value: 2,
+              value: state.gameDifficulty,
+              onUpdateStatus: (value) {
+                BlocProvider.of<SettingsCubit>(context)
+                    .setGameDifficulty(value);
+              },
             ),
             const SizedBox(height: 8),
             _SettingToggleItem(
@@ -190,7 +198,7 @@ class _AudioSettings extends StatelessWidget {
                 label: context.l10n.audioSettings,
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.music_note_rounded,
                       size: 24,
                       color: FlutterGameChallengeColors.primary1,
@@ -226,16 +234,16 @@ class _AudioSettings extends StatelessWidget {
 }
 
 class _SettingToggleItem extends StatelessWidget {
-  final bool isEnabled;
-  final VoidCallback onToggle;
-  final String title;
-
   const _SettingToggleItem({
     required this.isEnabled,
     required this.onToggle,
     required this.title,
     super.key,
   });
+
+  final bool isEnabled;
+  final VoidCallback onToggle;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -246,7 +254,7 @@ class _SettingToggleItem extends StatelessWidget {
       onTap: onToggle,
       child: Container(
         height: 52,
-        padding: EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         decoration: BoxDecoration(
           color: FlutterGameChallengeColors.settingsAccent,
           borderRadius: BorderRadius.circular(18),
@@ -283,7 +291,8 @@ class _SettingsDropdown extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
         value: context.l10n.toAppLanguage(),
         style: context.generalTextStyle(fontSize: 18),
-        items: localisationProvider.supportLocales.map<DropdownMenuItem<RecycloLanguage>>(
+        items: localisationProvider.supportLocales
+            .map<DropdownMenuItem<RecycloLanguage>>(
           (locale) {
             final language = locale.toAppLanguage();
 
@@ -305,18 +314,20 @@ class _SettingsDropdown extends StatelessWidget {
 }
 
 class _GameSpeedSettings extends StatefulWidget {
-  final int value;
-
-  _GameSpeedSettings({
+  const _GameSpeedSettings({
     required this.value,
+    required this.onUpdateStatus,
   });
+
+  final GameDifficultyType value;
+  final void Function(GameDifficultyType) onUpdateStatus;
 
   @override
   State<_GameSpeedSettings> createState() => _GameSpeedSettingsState();
 }
 
 class _GameSpeedSettingsState extends State<_GameSpeedSettings> {
-  int _value = 2;
+  GameDifficultyType _value = GameDifficultyType.easy;
 
   @override
   void initState() {
@@ -331,10 +342,10 @@ class _GameSpeedSettingsState extends State<_GameSpeedSettings> {
       slider: true,
       increasedValue: 3.toString(),
       decreasedValue: 1.toString(),
-      value: _value.toString(),
+      value: _value.index.toString(),
       excludeSemantics: true,
       child: Container(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: FlutterGameChallengeColors.settingsAccent,
           borderRadius: BorderRadius.circular(18),
@@ -354,7 +365,7 @@ class _GameSpeedSettingsState extends State<_GameSpeedSettings> {
               child: Stack(
                 children: [
                   SliderTheme(
-                    data: SliderThemeData(
+                    data: const SliderThemeData(
                       trackHeight: 4,
                     ),
                     child: Slider(
@@ -364,12 +375,14 @@ class _GameSpeedSettingsState extends State<_GameSpeedSettings> {
                           FlutterGameChallengeColors.primary1.withOpacity(0.5),
                       onChanged: (value) {
                         setState(() {
-                          _value = value.toInt();
+                          _value = GameDifficultyType.values[value.toInt()];
                         });
                       },
-                      min: 1,
-                      max: 3,
-                      value: _value.toDouble(),
+                      onChangeEnd: (_) {
+                        widget.onUpdateStatus(_value);
+                      },
+                      max: 2,
+                      value: _value.index.toDouble(),
                     ),
                   ),
                   Align(

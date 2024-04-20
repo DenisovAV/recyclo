@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/catcher_game/game.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/service_provider.dart';
+import 'package:recyclo/settings/persistence/settings_persistence.dart';
 import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
 
 class CatcherGamePage extends StatefulWidget {
@@ -14,14 +15,17 @@ class CatcherGamePage extends StatefulWidget {
 
   static MaterialPageRoute<void> route() {
     return MaterialPageRoute<void>(
-      builder: (_) => MultiBlocProvider(providers: [
-        BlocProvider<TimerCubit>(
-          create: (_) => ServiceProvider.get<TimerCubit>(),
-        ),
-        BlocProvider<TutorialCubit>(
-          create: (_) => ServiceProvider.get<TutorialCubit>(),
-        ),
-      ], child: const CatcherGamePage()),
+      builder: (_) => MultiBlocProvider(
+        providers: [
+          BlocProvider<TimerCubit>(
+            create: (_) => ServiceProvider.get<TimerCubit>(),
+          ),
+          BlocProvider<TutorialCubit>(
+            create: (_) => ServiceProvider.get<TutorialCubit>(),
+          ),
+        ],
+        child: const CatcherGamePage(),
+      ),
     );
   }
 
@@ -31,13 +35,28 @@ class CatcherGamePage extends StatefulWidget {
 
 class _CatcherGamePageState extends State<CatcherGamePage> {
   CatcherGame? _game;
+  late SettingsPersistence settingsPersistence;
 
   static const _maxGameWidth = 500.0;
   static const _maxGameHeight = 1100.0;
 
   @override
+  void initState() {
+    settingsPersistence = ServiceProvider.get<SettingsPersistence>();
+    print(settingsPersistence.getGameDifficulty(
+      defaultValue: GameDifficultyType.easy,
+    ));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    _game ??= CatcherGame();
+    _game ??= CatcherGame(
+      gameDifficultyType: settingsPersistence.getGameDifficulty(
+        defaultValue: GameDifficultyType.easy,
+      ),
+      isPenaltyEnabled: settingsPersistence.getPenaltyFlag(),
+    );
 
     return Scaffold(
       backgroundColor: FlutterGameChallengeColors.landingBackground,
@@ -77,8 +96,22 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
                                 child: GameWidget(
                                   game: _game!,
                                   overlayBuilderMap: {
-                                    CatcherGame.timerOverlayKey: (_, __) =>
+                                    TimerOverlay.id: (_, __) =>
                                         const TimerOverlay(),
+                                    TimerReductionOrIncrementEffect.idIncrement:
+                                        (_, __) =>
+                                            TimerReductionOrIncrementEffect(
+                                              text: '+5',
+                                              onAnimationEnded:
+                                                  _handleTimerIncrementEffectAnimationEnd,
+                                            ),
+                                    TimerReductionOrIncrementEffect.idReduction:
+                                        (_, __) =>
+                                            TimerReductionOrIncrementEffect(
+                                              text: '-5',
+                                              onAnimationEnded:
+                                                  _handleTimerReductionEffectAnimationEnd,
+                                            ),
                                   },
                                 ),
                               ),
@@ -131,13 +164,15 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
         context: context,
         items: playerScore,
         onDismiss: () {
-          unawaited(ServiceProvider.get<TrashReserveRepository>().addResource(
-            plastic: playerScore.getPlayerScore(ItemType.plastic),
-            paper: playerScore.getPlayerScore(ItemType.paper),
-            glass: playerScore.getPlayerScore(ItemType.glass),
-            organic: playerScore.getPlayerScore(ItemType.organic),
-            electronics: playerScore.getPlayerScore(ItemType.electronic),
-          ));
+          unawaited(
+            ServiceProvider.get<TrashReserveRepository>().addResource(
+              plastic: playerScore.getPlayerScore(ItemType.plastic),
+              paper: playerScore.getPlayerScore(ItemType.paper),
+              glass: playerScore.getPlayerScore(ItemType.glass),
+              organic: playerScore.getPlayerScore(ItemType.organic),
+              electronics: playerScore.getPlayerScore(ItemType.electronic),
+            ),
+          );
           Navigator.of(context).maybePop();
         },
       );
@@ -146,6 +181,20 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
 
   void _handleTutorialCompleted() {
     context.read<TutorialCubit>().tutorialIsShown();
+  }
+
+  void _handleTimerIncrementEffectAnimationEnd() {
+    context.read<TimerCubit>().increaseTime(seconds: 5);
+    _game!.overlays.remove(
+      TimerReductionOrIncrementEffect.idIncrement,
+    );
+  }
+
+  void _handleTimerReductionEffectAnimationEnd() {
+    context.read<TimerCubit>().decreaseTime(seconds: 5);
+    _game!.overlays.remove(
+      TimerReductionOrIncrementEffect.idReduction,
+    );
   }
 }
 

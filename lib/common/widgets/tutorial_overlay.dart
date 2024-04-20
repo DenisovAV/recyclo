@@ -16,12 +16,11 @@ class TutorialOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: Color(0xFFE0EBF1),
+      color: FlutterGameChallengeColors.tutorialBackground,
       child: SafeArea(
         child: Stack(
           children: [
             Align(
-              alignment: Alignment.center,
               child: Column(
                 // crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -38,7 +37,7 @@ class TutorialOverlay extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 20.0),
+                    padding: const EdgeInsets.only(bottom: 20.0),
                     child: GestureDetector(
                       onTap: onGameStart,
                       child: Assets.images.catcher.tutorial.play.image(

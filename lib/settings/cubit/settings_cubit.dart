@@ -7,26 +7,26 @@ import 'package:recyclo/settings/cubit/settings_state.dart';
 import 'package:recyclo/settings/settings.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
-  final SettingsController _settingsController;
-  final MusicService _musicService;
-  final AppLocalizationsProvider _localisationsProvider;
-
   SettingsCubit(
-    this._settingsController,
-    this._musicService,
-    this._localisationsProvider
-  ) : super(
+      this._settingsController, this._musicService, this._localisationsProvider)
+      : super(
           SettingsState(
             isMusicEnabled: _settingsController.musicOn.value,
             isSoundEffectsEnabled: _settingsController.soundsOn.value,
             currentLanguage: _localisationsProvider.currentLanguage,
             isPenaltyEnabled: _settingsController.penaltyOn.value,
+            gameDifficulty: _settingsController.gameDifficulty.value,
           ),
         ) {
     _settingsController.musicOn.addListener(_updateSettings);
     _settingsController.soundsOn.addListener(_updateSettings);
     _settingsController.penaltyOn.addListener(_updateSettings);
+    _settingsController.gameDifficulty.addListener(_updateSettings);
   }
+
+  final SettingsController _settingsController;
+  final MusicService _musicService;
+  final AppLocalizationsProvider _localisationsProvider;
 
   void _updateSettings() {
     emit(
@@ -35,6 +35,7 @@ class SettingsCubit extends Cubit<SettingsState> {
         isSoundEffectsEnabled: _settingsController.soundsOn.value,
         currentLanguage: _localisationsProvider.currentLanguage,
         isPenaltyEnabled: _settingsController.penaltyOn.value,
+        gameDifficulty: _settingsController.gameDifficulty.value,
       ),
     );
   }
@@ -50,12 +51,16 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   void changeLocale(RecycloLanguage? language) {
-    if(language != null && _localisationsProvider.isSupportedLocale(language))
-    _settingsController.changeLanguage(language.locale);
+    if (language != null && _localisationsProvider.isSupportedLocale(language))
+      _settingsController.changeLanguage(language.locale);
   }
 
   void togglePenalty() {
     _settingsController.togglePenaltyOn();
+  }
+
+  void setGameDifficulty(GameDifficultyType difficulty) {
+    _settingsController.setGameDifficulty(difficulty);
   }
 
   @override
@@ -63,6 +68,7 @@ class SettingsCubit extends Cubit<SettingsState> {
     _settingsController.musicOn.removeListener(_updateSettings);
     _settingsController.soundsOn.removeListener(_updateSettings);
     _settingsController.penaltyOn.removeListener(_updateSettings);
+    _settingsController.gameDifficulty.removeListener(_updateSettings);
     return super.close();
   }
 }

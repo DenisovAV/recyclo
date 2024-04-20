@@ -7,7 +7,9 @@ import 'package:flame/components.dart';
 import 'package:recyclo/catcher_game/common/random_generator.dart';
 import 'package:recyclo/catcher_game/components.dart';
 import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/catcher_game/game_models.dart';
 import 'package:recyclo/catcher_game/main_scene.dart';
+import 'package:recyclo/common/entities/game_difficulty_level_type.dart';
 import 'package:recyclo/common/entities/item_type.dart';
 import 'package:vector_math/vector_math.dart' as vector_math;
 
@@ -34,7 +36,6 @@ class DropContainer extends PositionComponent
   final Map<ItemType, int> _dropReiteration = <ItemType, int>{};
   final List<QuadraticBezier> trajectory = List.empty(growable: true);
   final List<QuadraticBezier> leftTrajectory = List.empty(growable: true);
-  final Paint paint = Paint()..filterQuality = FilterQuality.high;
 
   ItemType? _reiterationTyped;
   late double _leftDropInitialPositionX;
@@ -64,7 +65,6 @@ class DropContainer extends PositionComponent
     leftTrajectory.clear();
 
     if (children.isNotEmpty) {
-      removeAll(children);
       checkForWaveReset();
     }
 
@@ -134,10 +134,8 @@ class DropContainer extends PositionComponent
 
   @override
   void update(double dt) {
-    super.update(dt);
-
-    if (scene.isDestroy) {
-      removeFromParent();
+    if (game.status == CatcherGameStatusType.playing) {
+      super.update(dt);
     }
   }
 
@@ -146,31 +144,40 @@ class DropContainer extends PositionComponent
     required double speedMax,
     required List<Drop> dropDiversityList,
   }) {
-    final t = _getDiversityIndex(dropDiversityList);
+    final dropDiversityIndex = _getDiversityIndex(dropDiversityList);
 
-    final n = ItemType.values.indexOf(dropDiversityList[t].type);
+    final dropTypeIndex =
+        ItemType.values.indexOf(dropDiversityList[dropDiversityIndex].type);
 
-    final s = (dropDiversityList[t].varietyBounder - 1) <= 0
-        ? 0
-        : _getTypedDiversity(
-            ItemType.values[t],
-            dropDiversityList[t].varietyBounder,
-          );
+    final dropDiversityTypeIndex =
+        (dropDiversityList[dropDiversityIndex].varietyBounder - 1) <= 0
+            ? 0
+            : _getTypedDiversity(
+                ItemType.values[dropDiversityIndex],
+                dropDiversityList[dropDiversityIndex].varietyBounder,
+              );
 
-    final i = Random().nextInt(DropContainerConfig.trajectoryCount);
+    final randomTrajectoryIndex =
+        Random().nextInt(DropContainerConfig.trajectoryCount);
 
     final isLeft = Random().nextBool();
 
+    // Calculate new speed based on the number of spawned items
+    final newSpeed = doubleInRange(speedMin, speedMax) +
+        scene.spawned * game.difficultyType.speedIncrement();
+
     final fallen = DropComponent(
-      sprite: s <= (_dropAssets[ItemType.values[n]]!.length - 1)
-          ? _dropAssets[ItemType.values[n]]![s]
-          : _dropAssets[ItemType.values[n]]![0],
-      type: ItemType.values[n],
+      sprite: dropDiversityTypeIndex <=
+              (_dropAssets[ItemType.values[dropTypeIndex]]!.length - 1)
+          ? _dropAssets[ItemType.values[dropTypeIndex]]![dropDiversityTypeIndex]
+          : _dropAssets[ItemType.values[dropTypeIndex]]![0],
+      type: ItemType.values[dropTypeIndex],
       catchCallback: catchCallback,
       wave: scene.currentWave,
-      paint: paint,
-      cubicCurve: isLeft ? trajectory[i] : leftTrajectory[i],
-      speed: doubleInRange(speedMin, speedMax),
+      cubicCurve: isLeft
+          ? trajectory[randomTrajectoryIndex]
+          : leftTrajectory[randomTrajectoryIndex],
+      speed: newSpeed,
       isLeft: isLeft,
     );
     fallen
@@ -182,8 +189,7 @@ class DropContainer extends PositionComponent
       ..x = fallen.cubicCurve.pointAt(0).x
       ..y = fallen.cubicCurve.pointAt(0).y
       ..width = _dropWidth
-      ..height = _dropWidth
-      ..isVisible = true;
+      ..height = _dropWidth;
 
     add(fallen);
   }
@@ -242,4 +248,12 @@ class DropContainer extends PositionComponent
     }
     return result;
   }
+}
+
+extension on GameDifficultyType {
+  double speedIncrement() => switch (this) {
+        GameDifficultyType.easy => 0.000004,
+        GameDifficultyType.medium => 0.000005,
+        GameDifficultyType.hard => 0.000008,
+      };
 }

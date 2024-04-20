@@ -1,3 +1,5 @@
+import 'package:recyclo/common.dart';
+
 abstract class SettingsPersistence {
   bool getMusicOn({required bool defaultValue});
 
@@ -7,6 +9,10 @@ abstract class SettingsPersistence {
 
   String? getCurrentLocale();
 
+  GameDifficultyType getGameDifficulty({
+    required GameDifficultyType defaultValue,
+  });
+
   Future<void> saveCurrentLocale(String value);
 
   Future<void> saveMusicOn(bool value);
@@ -15,7 +21,7 @@ abstract class SettingsPersistence {
 
   Future<void> saveSoundsOn(bool value);
 
+  Future<void> setGameDifficulty(GameDifficultyType difficulty);
+
   Future<void> initialize();
-
-
 }

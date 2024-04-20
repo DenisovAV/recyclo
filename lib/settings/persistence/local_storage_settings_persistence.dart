@@ -1,3 +1,4 @@
+import 'package:recyclo/common/entities/game_difficulty_level_type.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'settings_persistence.dart';
@@ -27,6 +28,17 @@ class LocalStorageSettingsPersistence extends SettingsPersistence {
   }
 
   @override
+  GameDifficultyType getGameDifficulty({
+    required GameDifficultyType defaultValue,
+  }) {
+    final savedDifficulty = _sharedPreferences.getInt('gameDifficulty');
+
+    return savedDifficulty != null
+        ? GameDifficultyType.values[savedDifficulty]
+        : defaultValue;
+  }
+
+  @override
   Future<void> saveMusicOn(bool value) async {
     await _sharedPreferences.setBool('musicOn', value);
   }
@@ -35,12 +47,12 @@ class LocalStorageSettingsPersistence extends SettingsPersistence {
   Future<void> saveSoundsOn(bool value) async {
     await _sharedPreferences.setBool('soundsOn', value);
   }
-  
+
   @override
   bool getPenaltyFlag({bool defaultValue = true}) {
     return _sharedPreferences.getBool('penaltyOn') ?? defaultValue;
   }
-  
+
   @override
   Future<void> setPenalty(bool value) async {
     await _sharedPreferences.setBool('penaltyOn', value);
@@ -54,5 +66,10 @@ class LocalStorageSettingsPersistence extends SettingsPersistence {
   @override
   Future<void> saveCurrentLocale(String value) {
     return _sharedPreferences.setString('currentLocale', value);
+  }
+
+  @override
+  Future<bool> setGameDifficulty(GameDifficultyType difficulty) {
+    return _sharedPreferences.setInt('gameDifficulty', difficulty.index);
   }
 }
