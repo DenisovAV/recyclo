@@ -59,6 +59,16 @@ class LocalStorageSettingsPersistence extends SettingsPersistence {
   }
 
   @override
+  String? getCurrentLocale() {
+    return _sharedPreferences.getString('currentLocale');
+  }
+
+  @override
+  Future<void> saveCurrentLocale(String value) {
+    return _sharedPreferences.setString('currentLocale', value);
+  }
+
+  @override
   Future<bool> setGameDifficulty(GameDifficultyType difficulty) {
     return _sharedPreferences.setInt('gameDifficulty', difficulty.index);
   }

@@ -7,9 +7,13 @@ abstract class SettingsPersistence {
 
   bool getPenaltyFlag({bool defaultValue = false});
 
+  String? getCurrentLocale();
+
   GameDifficultyType getGameDifficulty({
     required GameDifficultyType defaultValue,
   });
+
+  Future<void> saveCurrentLocale(String value);
 
   Future<void> saveMusicOn(bool value);
 
