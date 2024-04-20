@@ -45,4 +45,14 @@ class LocalStorageSettingsPersistence extends SettingsPersistence {
   Future<void> setPenalty(bool value) async {
     await _sharedPreferences.setBool('penaltyOn', value);
   }
+
+  @override
+  String? getCurrentLocale() {
+    return _sharedPreferences.getString('currentLocale');
+  }
+
+  @override
+  Future<void> saveCurrentLocale(String value) {
+    return _sharedPreferences.setString('currentLocale', value);
+  }
 }

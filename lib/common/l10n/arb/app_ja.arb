@@ -1,0 +1,284 @@
+{
+  "titleAppBarTitle": "リサイクロ",
+  "@titleAppBarTitle": {
+    "description": "タイトルページのAppBarに表示されるテキスト"
+  },
+  "titleButtonStart": "スタート",
+  "@titleButtonStart": {
+    "description": "タイトルページのスタートボタンに表示されるテキスト"
+  },
+  "loading": "{label}を読み込み中...",
+  "@loading": {
+    "description": "ローディングページのテキスト",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "アイテム",
+        "description": "読み込み中の項目のラベル"
+      }
+    }
+  },
+  "loadingPhaseLabel": "{loadingPhase, select, audio{楽しい音楽} images{美しい風景} other{ }}",
+  "@loadingPhaseLabel": {
+    "description": "ローディングフェーズ",
+    "placeholders": {
+      "loadingPhase": {}
+    }
+  },
+  "counterText": "{count, plural, =1{あなたはユニコーンを1回タップしました} other{あなたはユニコーンを{count}回タップしました}}",
+  "@counterText": {
+    "description": "カウンターコンポーネントのテキスト",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10",
+        "description": "現在のカウント"
+      }
+    }
+  },
+  "mainMenuGamesItemTitle": "ゲーム",
+  "@mainMenuGamesItemTitle": {
+    "description": "メインメニューの最初の項目に表示されるテキスト"
+  },
+  "mainMenuTutorialItemTitle": "チュートリアル",
+  "@mainMenuTutorialItemTitle": {
+    "description": "メインメニューのチュートリアル項目に表示されるテキスト"
+  },
+  "mainMenuArtifactsItemTitle": "アーティファクト",
+  "@mainMenuArtifactsItemTitle": {
+    "description": "メインメニューの2番目の項目に表示されるテキスト"
+  },
+  "mainMenuSettingsItemTitle": "設定",
+  "@mainMenuSettingsItemTitle": {
+    "description": "メインメニューの3番目の項目に表示されるテキスト"
+  },
+  "gameModeCatcherItemTitle": "キャッチャー",
+  "@gameModeCatcherItemTitle": {
+    "description": "キャッチャーゲームモードボタンに表示されるテキスト"
+  },
+  "gameModeClickerItemTitle": "クリッカー",
+  "@gameModeClickerItemTitle": {
+    "description": "クリッカーゲームモードボタンに表示されるテキスト"
+  },
+  "gameModeFinderItemTitle": "ファインダー",
+  "@gameModeFinderItemTitle": {
+    "description": "ファインダーゲームモードボタンに表示されるテキスト"
+  },
+  "artifactCarTitle": "ウェイスト・ワンダラー",
+  "@artifactCarTitle": {
+    "description": "ゴミから作られた車のタイトル"
+  },
+  "artifactCarDescripton": "車体は古い缶や車部品から取り出した金属板で組み立てられ、ドアやボンネットには様々なリサイクルプラスチックのテクスチャが使われています。 ホイールはリサイクルタイヤで作られ、屋根の上のソーラーパネルがエコフレンドリーなデザインを強調しています。",
+  "@artifactCarDescripton": {
+    "description": "ゴミから作られた車の説明"
+  },
+  "artifactShampooTitle": "スクラブスクラップ",
+  "@artifactShampooTitle": {
+    "description": "ゴミから作られたシャンプーのタイトル"
+  },
+  "artifactShampooDescripton": "このシャンプーは、浄化された水と有機的なラベンダーやカモミールから抽出したエッセンシャルオイルを含む自然成分で作られています。その青い色は、自然をベースにした安全な鉱物色素を加えることで得られます。",
+  "@artifactShampooDescripton": {
+    "description": "ゴミから作られたシャンプーの説明"
+  },
+  "artifactHouseTitle": "エコレフュージ",
+  "@artifactHouseTitle": {
+    "description": "ゴミから作られた家のタイトル"
+  },
+  "artifactHouseDescripton": "このエコフレンドリーな家のファサードはリサイクルガラスと複合材料で構成され、屋根にはソーラーパネルが組み込まれており、クリーンエネルギーを提供します。中には竹やリサイクル材を主体とした自然な素材が主流で、リユースした材料から作られた家具と合わせています。エネルギー効率の良い技術、例えば断熱窓やソーラー給湿器が採用されており、生態系への影響を最小限に抑えています。",
+  "@artifactHouseDescripton": {
+    "description": "ゴミから作られた家の説明"
+  },
+  "artifactNewspaperTitle": "フラッターエコプレス",
+  "@artifactNewspaperTitle": {
+    "description": "ゴミから作られた新聞のタイトル"
+  },
+  "artifactNewspaperDescripton": "高品質のリサイクル素材から作られた新聞紙は、色や質感が異なる特徴があり、そのエコフレンドリーな起源を強調しています。これらのバリエーションにも関わらず、紙はテキストや画像の明瞭で鮮やかな印刷に適した優れた品質を維持しています。",
+  "@artifactNewspaperDescripton": {
+    "description": "ゴミから作られた新聞の説明"
+  },
+  "artifactLaptopTitle": "トラッシュパソコン",
+  "@artifactLaptopTitle": {
+    "description": "ゴミから作られたノートパソコンのタイトル"
+  },
+  "artifactLaptopDescripton": "トラッシュパソコンのボディは古いプラスチックボトルから作られ、リサイクルされたプラスチックキャップから作られたキーボードは、リソースを有効に再利用する一例です。 ディスプレイはリサイクルガラスで作られ、内部部品は二次金属材料から作られ、さらに廃棄物を削減しています。 すべてのコネクタやポートもリサイクル素材から作られ、このノートパソコンは単なる電子機器ではなく、リサイクルの重要性と環境保全を調和させる技術進歩の可能性を示しています。",
+  "@artifactLaptopDescripton": {
+    "description": "ゴミから作られたノートパソコンの説明"
+  },
+  "artifactPlantTitle": "エコスポーン モンステラ",
+  "@artifactPlantTitle": {
+    "description": "ゴミから作られた植物のタイトル"
+  },
+  "artifactPlantDescripton": "有機質堆積物や肥料の袋がシーンの一部として含まれていることで、そのような植物の育て方の実際的な側面を強調するだけでなく、リユースとリサイクルの重要性を強調しています。 この設定は、室内空間のディテールへの注意と、生活空間に持続可能性を統合する方法を示すエステティックとエコフレンドリーな実践の調和を反映しています。",
+  "@artifactPlantDescripton": {
+    "description": "ゴミから作られた植物の説明"
+  },
+  "buttonCraft": "クラフト",
+  "@buttonCraft": {
+    "description": "クラフトボタンのテキスト"
+  },
+  "gameFinishDialogTitle": "時間切れ",
+  "@gameFinishDialogTitle": {
+    "description": "ゲーム終了ダイアログのタイトルのテキスト"
+  },
+  "gameFinishDialogDescription": "あなたの結果",
+  "@gameFinishDialogDescription": {
+    "description": "ゲーム終了ダイアログの説明文"
+  },
+  "gameFinishDialogTryAgainDescription": "次回はもっと良くなりますよ！",
+  "@gameFinishDialogTryAgainDescription": {
+    "description": "再度試すためのゲーム終了ダイアログの説明"
+  },
+  "gameFinishDialogButtonTitle": "コレクト",
+  "@gameFinishDialogButtonTitle": {
+    "description": "ゲーム終了ダイアログのボタンタイトルのテキスト"
+  },
+  "gameFinishDialogTryAgainButtonTitle": "メニューに戻る",
+  "@gameFinishDialogTryAgainButtonTitle": {
+    "description": "再度試すためのゲーム終了ダイアログのボタンタイトルのテキスト"
+  },
+  "appName": "リサイクロ",
+  "@appName": {
+    "description": "アプリケーションの名称"
+  },
+  "aboutAppRecycle": "ゲーム Recyclo",
+  "@aboutAppRecycle": {
+    "description": "ランディングページの「アプリについて」項目の見出し"
+  },
+  "aboutAppRecycleContentTextColumnLeft": "多くの国では、廃棄物の分別が一般的でありながら、その重要性を理解していないためにそれに従わない人々が多くいます。このギャップを認識し、廃棄物の分別が新たな再生品を作るための資源を節約するだけでなく、それを促進することの重要性を強調するゲームを作ることを決定しました。\n\nプレイヤーに廃棄物の分別が資源の節約を意味するだけでなく、新たな再生品の生産を促進することを教えます。",
+  "@aboutAppRecycleContentTextColumnLeft": {
+    "description": "「私たちについて」の項目ページのコンテンツのテキスト"
+  },
+  "aboutAppRecycleContentTextColumnRight": "Mobile Peopleチーム（全員がMobile Peopleコミュニティのメンバー）は、プレイヤーに廃棄物の分別が資源を節約するだけでなく、新たな再生品の生産を促進する方法を教えるゲームを作ることを決定しました。私たちのコミュニティについて詳しくは、次をご覧ください：",
+  "@aboutAppRecycleContentTextColumnRight": {
+    "description": "「私たちについて」の項目ページのコンテンツのテキスト"
+  },
+  "aboutAppRecycleLink": "Mobile People Community >",
+  "@aboutAppRecycleLink": {
+    "description": "「私たちについて」の項目ページのコンテンツのリンク"
+  },
+  "buttonOk": "Ok",
+  "@buttonOk": {
+    "description": "Okボタンのテキスト"
+  },
+  "artifactCraftedDialogTitle": "おめでとうございます！",
+  "@artifactCraftedDialogTitle": {
+    "description": "作成したアーティファクトのダイアログヘッダー"
+  },
+  "artifactCraftedDialogBody": "あなたはアーティファクトを作成することに成功し、これをウォレットに追加することができます。",
+  "@artifactCraftedDialogBody": {
+    "description": "作成したアーティファクトのダイアログ本文"
+  },
+  "gamesTitle": "遊び＆コレクト",
+  "@gamesTitle": {
+    "description": "ランディングページの「ゲーム」項目の見出し"
+  },
+  "gamesDescription": "すべてのゲームは楽しく、有益であり、あなたのリサイクル材料の知識をテストする目的で作られており、もちろん、それらを区別する方法を学びます",
+  "@gamesDescription": {
+    "description": "ランディングページの「ゲーム」項目の説明"
+  },
+  "teamTitle": "チーム",
+  "@teamTitle": {
+    "description": "ランディングページの「チーム」項目の見出し"
+  },
+  "game1Title": "キャッチャー",
+  "@game1Title": {
+    "description": "ゲーム1のタイトル"
+  },
+  "game1Description": "アイテムが窓から飛んできます。それを正しいビンに分別するのはあなたの役目です。\n\n正しく分別できたら、あなたは賢者であることを示すことができます。間違っても心配しないでください。各ラウンドの後で、リサイクルのチートシートを目にすることができます。全てのゴミをキャッチできますか？",
+  "@game1Description": {
+    "description": "ゲーム1の説明"
+  },
+  "game2Title": "クリッカー",
+  "@game2Title": {
+    "description": "ゲーム2のタイトル"
+  },
+  "game2Description": "混乱と戦略を混合させたクリックの嵐をナビゲートするゲームです。散らばった中から、クリックして収集するのが挑戦です。各クリックは勝利への一歩か、混乱への誤歩です。",
+  "@game2Description": {
+    "description": "ゲーム2の説明"
+  },
+  "game3Title": "ファインダー",
+  "@game3Title": {
+    "description": "ゲーム3のタイトル"
+  },
+  "game3Description": "ゴミが緑の層の下に隠れています。茂みを掻き分けて目標のゴミのカテゴリーを見つけ出し、時間切れになる前に分別することが必要です！",
+  "@game3Description": {
+    "description": "ゲーム3の説明"
+  },
+  "mechanicsTittle": "クラフト＆Google Walletの使用",
+  "@mechanicsTittle": {
+    "description": "メカニクスアイテムのタイトル"
+  },
+  "craftingContent": "私たちのミニゲームでは、集めたすべてのリソースは後で使用できるように保管されます。これらのリソースを使って有用なアイテム,「アーティファクト」を作ることができます。このプロセスはゲームの一部だけでなく、どのようにリサイクリングが作動し、異なる素材が新たな製品を作るためにどのように再利用できるかについてのレッスンでもあります。",
+  "@craftingContent": {
+    "description": "メカニクスアイテムの内容"
+  },
+  "walletContent": "これらのアーティファクトを作ったら、それらをGoogle Walletに追加できます。クラフトがリサイクリングについて教えてくれる一方で、アーティファクトをWalletに追加すると、実際の商品に対する割引を解除できる可能性があります。現在、この機能のパートナーを探している初期段階であり、まだ利用できません。しかし、ゲーム内のリサイクリング活動を実際の利益で報いる可能性については、私たちは非常に期待しています。今後のアップデートをお楽しみに！",
+  "@walletContent": {
+    "description": "ウォレットメカニクスアイテム"
+  },
+  "artefacts": "アーティファクト",
+  "@artefacts": {
+    "description": "アーティファクト項目のタイトル"
+  },
+  "description": "説明",
+  "@description": {
+    "description": "アーティファクトの説明タイトル"
+  },
+  "reality": "現実",
+  "@reality": {
+    "description": "アーティファクトの現実タイトル"
+  },
+  "featureInProgress": "開発中の機能",
+  "@featureInProgress": {
+    "description": "開発中の機能のテキスト"
+  },
+  "downloadApp": "アプリをプレイ",
+  "@downloadApp": {
+    "description": "最下部へスクロールボタンのタイトル"
+  },
+  "playOnlineButtonTitle": "ブラウザでプレイ",
+  "playOnlineButtonTitle": "ブラウザでプレイ",
+  "@playOnlineButtonTitle": {
+    "description": "ブラウザでプレイするボタンのタイトル"
+  },
+  "gameSettings": "設定",
+  "@gameSettings": {
+    "description": "設定ページのタイトル"
+  },
+  "audioSettings": "オーディオ",
+  "@audioSettings": {
+    "description": "オーディオ設定タイトル"
+  },
+  "accessibilitySettings": "アクセシビリティ",
+  "@accessibilitySettings": {
+    "description": "アクセシビリティ設定タイトル"
+  },
+  "musicToggleSetting": "音楽",
+  "@musicToggleSetting": {
+    "description": "音楽トグルラベル"
+  },
+  "soundsToggleSetting": "サウンドエフェクト",
+  "@soundsToggleSetting": {
+    "description": "サウンドトグルラベル"
+  },
+  "languageSettings": "言語",
+  "@languageSettings": {
+    "description": "言語設定ラベル"
+  },
+  "penaltySettings": "ミスのペナルティ",
+  "@penaltySettings": {
+    "description": "ペナルティ設定ラベル"
+  },
+  "colorSettings": "白黒モード",
+  "@colorSettings": {
+    "description": "カラー設定ラベル"
+  },
+  "englishLanguageLabel": "英語",
+  "@englishLanguageLabel": {
+    "description": "英語の言語設定ラベル"
+  },
+  "gameSpeedSettings": "ゲームスピード",
+  "@gameSpeedSettings": {
+    "description": "ゲーム速度設定ラベル"
+  }
+}

@@ -5,6 +5,10 @@ abstract class SettingsPersistence {
 
   bool getPenaltyFlag({bool defaultValue = false});
 
+  String? getCurrentLocale();
+
+  Future<void> saveCurrentLocale(String value);
+
   Future<void> saveMusicOn(bool value);
 
   Future<void> setPenalty(bool value);
@@ -12,4 +16,6 @@ abstract class SettingsPersistence {
   Future<void> saveSoundsOn(bool value);
 
   Future<void> initialize();
+
+
 }

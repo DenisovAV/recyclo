@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:recyclo/app/app_localisations_provider.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/settings/cubit/settings_cubit.dart';
 import 'package:recyclo/settings/cubit/settings_state.dart';
@@ -114,7 +113,10 @@ class _LanguageSettings extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 4),
-      _SettingsDropdown(),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: _SettingsDropdown(),
+      ),
     ]);
   }
 }
@@ -273,34 +275,30 @@ class _SettingToggleItem extends StatelessWidget {
 class _SettingsDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final localisationProvider = context.watch<AppLocalizationsProvider>();
+
     return Semantics(
-      excludeSemantics: true,
-      label: context.l10n.englishLanguageLabel,
-      button: true,
-      child: Container(
-        height: 52,
-        padding: EdgeInsets.symmetric(horizontal: 12),
-        decoration: BoxDecoration(
-          color: FlutterGameChallengeColors.settingsAccent,
-          borderRadius: BorderRadius.circular(18),
-        ),
-        child: Row(
-          children: [
-            Expanded(
+      label: context.l10n.toAppLanguage().localeName,
+      child: DropdownButton<RecycloLanguage>(
+        borderRadius: BorderRadius.circular(18),
+        value: context.l10n.toAppLanguage(),
+        style: context.generalTextStyle(fontSize: 18),
+        items: localisationProvider.supportLocales.map<DropdownMenuItem<RecycloLanguage>>(
+          (locale) {
+            final language = locale.toAppLanguage();
+
+            return DropdownMenuItem(
+              value: language,
               child: Text(
-                context.l10n.englishLanguageLabel,
+                language.localeName,
                 style: context.generalTextStyle(
                   fontSize: 18,
                 ),
               ),
-            ),
-            Icon(
-              Icons.arrow_drop_down,
-              size: 24,
-              color: FlutterGameChallengeColors.primary1,
-            )
-          ],
-        ),
+            );
+          },
+        ).toList(),
+        onChanged: context.read<SettingsCubit>().changeLocale,
       ),
     );
   }
