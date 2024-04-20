@@ -30,6 +30,7 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
   final bool isPenaltyEnabled;
 
   late SizeConfig sizeConfig;
+  // TODO(vikrech): replace this property with a game cubit, and subscribe to its state in children.
   late CatcherGameStatusType status;
   MainScene? mainScene;
   bool _timerStarted = false;
