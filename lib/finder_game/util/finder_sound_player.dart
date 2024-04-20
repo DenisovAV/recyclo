@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
-import 'package:flutter_game_challenge/audio/music_service.dart';
-import 'package:flutter_game_challenge/audio/sounds.dart';
-import 'package:flutter_game_challenge/finder_game/events/event_type.dart';
-import 'package:flutter_game_challenge/finder_game/events/finder_game_event.dart';
-import 'package:flutter_game_challenge/finder_game/finder_game.dart';
 import 'package:get_it/get_it.dart';
+import 'package:recyclo/audio/music_service.dart';
+import 'package:recyclo/audio/sounds.dart';
+import 'package:recyclo/finder_game/events/event_type.dart';
+import 'package:recyclo/finder_game/events/finder_game_event.dart';
+import 'package:recyclo/finder_game/finder_game.dart';
 
 class FinderSoundPlayer extends Component with HasGameRef<FinderGame> {
   MusicService get musicService => GetIt.instance.get<MusicService>();
@@ -27,18 +27,20 @@ class FinderSoundPlayer extends Component with HasGameRef<FinderGame> {
   void eventReceived(FinderGameEvent gameEvent) {
     switch (gameEvent.type) {
       case EventType.wrongItem:
-        //musicService.playSound(Sounds.artifactCrafted);
+        musicService.playSound(Sounds.incorrectItem);
         break;
       case EventType.correctItem:
+        musicService.playSound(Sounds.correctItem);
         break;
       case EventType.itemCollected:
-        musicService.playSound(Sounds.artifactCrafted);
+        musicService.playSound(Sounds.pickup);
         break;
       case EventType.dragStarted:
-        // TODO: Handle this case.
-        break;
       case EventType.dragEnded:
-        // TODO: Handle this case.
+        musicService.playSound(Sounds.bushRustle);
+        break;
+      case EventType.gameEnd:
+        musicService.playSound(Sounds.timeIsUp);
         break;
     }
   }

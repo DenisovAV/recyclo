@@ -7,7 +7,7 @@ class FinderConstraints {
   static const sidePadding = 5;
   static const verticalHoleOffset = 140;
   static const holeZoomFactor = 0.40;
-  static const timerTicksLimit = 3;
+  static const timerTicksLimit = 2;
   static const extraRowsGenerated = 0;
 
   static const colliderHeightFactor = 0.045;

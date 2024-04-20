@@ -4,4 +4,5 @@ enum EventType {
   itemCollected,
   dragStarted,
   dragEnded,
+  gameEnd,
 }

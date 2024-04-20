@@ -2,9 +2,9 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:recyclo/clicker_game/game_models/trash_bin.dart';
 import 'package:recyclo/clicker_game/game_models/trash_type.dart';
+import 'package:recyclo/common.dart';
 import 'package:recyclo/finder_game/components/item.dart';
 import 'package:recyclo/finder_game/const/finder_constraints.dart';
-import 'package:recyclo/common.dart';
 
 class FinderState extends Component with HasGameRef {
   FinderState({

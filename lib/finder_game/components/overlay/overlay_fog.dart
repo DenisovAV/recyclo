@@ -6,14 +6,14 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
-import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
-import 'package:flutter_game_challenge/finder_game/components/item.dart';
-import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart';
-import 'package:flutter_game_challenge/finder_game/events/event_type.dart';
-import 'package:flutter_game_challenge/finder_game/events/finder_game_event.dart';
-import 'package:flutter_game_challenge/finder_game/finder_game.dart';
-import 'package:flutter_game_challenge/finder_game/components/overlay/overlay_render_mode.dart';
-import 'package:flutter_game_challenge/finder_game/components/overlay/overlay_renderer.dart';
+import 'package:recyclo/common/assets/assets.gen.dart';
+import 'package:recyclo/finder_game/components/item.dart';
+import 'package:recyclo/finder_game/components/overlay/overlay_render_mode.dart';
+import 'package:recyclo/finder_game/components/overlay/overlay_renderer.dart';
+import 'package:recyclo/finder_game/const/finder_constraints.dart';
+import 'package:recyclo/finder_game/events/event_type.dart';
+import 'package:recyclo/finder_game/events/finder_game_event.dart';
+import 'package:recyclo/finder_game/finder_game.dart';
 
 class OverlayFog extends PositionComponent
     with DragCallbacks, CollisionCallbacks, HasGameReference<FinderGame> {
@@ -69,7 +69,7 @@ class OverlayFog extends PositionComponent
     );
 
     timerComponent = TimerComponent(
-      period: .2,
+      period: .5,
       onTick: _onTick,
       autoStart: false,
       repeat: true,
@@ -88,11 +88,13 @@ class OverlayFog extends PositionComponent
 
     if (game.gameState.currentTargetTypes.value.lastOrNull !=
         itemToCollect.trashData.classification) {
-      itemToCollect.onTryCollectItem(Color.fromARGB(255, 240, 30, 30));
+      itemToCollect.onTryCollectItem(const Color.fromARGB(255, 240, 30, 30));
+      game.streamController.add(FinderGameEvent(type: EventType.wrongItem));
       return;
     }
 
-    itemToCollect.onTryCollectItem(Color.fromARGB(255, 76, 255, 48));
+    itemToCollect.onTryCollectItem(const Color.fromARGB(255, 76, 255, 48));
+    game.streamController.add(FinderGameEvent(type: EventType.correctItem));
 
     if (FinderConstraints.timerTicksLimit > numberOfTicks ||
         currentCollisionItem == null) return;
@@ -105,12 +107,15 @@ class OverlayFog extends PositionComponent
   @override
   Future<void> onDragStart(DragStartEvent event) async {
     super.onDragStart(event);
+    game.streamController.add(FinderGameEvent(type: EventType.dragStarted));
     renderMode = OverlayRenderMode.hole;
     dragPosition = event.localPosition;
 
-    await add(collider
-      ..position = colliderPosition
-      ..size = colliderSize);
+    await add(
+      collider
+        ..position = colliderPosition
+        ..size = colliderSize,
+    );
   }
 
   @override
@@ -122,7 +127,7 @@ class OverlayFog extends PositionComponent
   @override
   void onDragEnd(DragEndEvent event) {
     super.onDragEnd(event);
-
+    game.streamController.add(FinderGameEvent(type: EventType.dragEnded));
     renderMode = OverlayRenderMode.bushes;
     remove(collider);
   }
