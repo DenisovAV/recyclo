@@ -1,0 +1,42 @@
+{
+  "formatVersion" : 1,
+  "passTypeIdentifier" : "pass.dev.recyclo.game",
+  "serialNumber" : "NEWS01",
+  "teamIdentifier" : "K36CA7QL4T",
+  "barcode": {
+    "message": "Discount QR Code",
+    "format": "PKBarcodeFormatQR",
+    "messageEncoding": "iso-8859-1"
+  },
+  "organizationName" : "Mobile People Labs",
+  "description": "Flutter Magazine printed using recycled paper",
+  "logoText": "Flutter EcoPress",
+  "foregroundColor": "rgb(0, 0, 0)",
+  "backgroundColor": "rgb(214, 178, 136)",
+  "storeCard" : {
+    "auxiliaryFields" : [
+      {
+        "key" : "product",
+        "label" : "Product",
+        "value" : "Flutter Magazine printed using recycled paper"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "details",
+        "label": "Details",
+        "value": "The recycled paper used for this magazine is a testament to environmental stewardship and sustainable practices."
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "value": "Sourced from high-quality recycled materials, it showcases varying shades and textures, a characteristic that highlights its eco-friendly origin. Despite these variations, the paper maintains an excellent quality suitable for the clear and vibrant printing of texts and images."
+      },
+      {
+        "key": "reality",
+        "label": "Reality",
+        "value": "Recycled paper finds its use in a wide array of products beyond magazines, serving as a key component in office paper, notebooks, greeting cards, envelopes, and packaging materials. Its versatility and environmental benefits make it a popular choice in both the commercial and personal sectors, helping to reduce the demand for virgin paper pulp and thus lessen the environmental impact associated with deforestation and the paper manufacturing process. In addition to these uses, recycled paper is also utilized in eco-friendly tableware, egg cartons, and even in the construction industry as insulation material. The adoption of recycled paper across such diverse applications underscores a growing commitment to sustainable practices and the conservation of natural resources, showcasing how recycling can play a vital role in our everyday lives and in protecting the environment."
+      }
+    ]
+  }
+}

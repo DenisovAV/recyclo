@@ -5,7 +5,7 @@ import 'package:recyclo/common.dart';
 import 'package:recyclo/landing/widgets/brand_text.dart';
 import 'package:recyclo/landing/widgets/landing_item.dart';
 
-final _artefacts = wallet.values.toList();
+final _artefacts = androidWallet.values.toList();
 
 class ArtefactsItem extends StatefulWidget {
   const ArtefactsItem({super.key});
@@ -46,13 +46,13 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
         return LandingItem(
           color: FlutterGameChallengeColors.teamBackground,
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Column(
               children: [
                 Center(
                   child: BrandText(
                     l10n.artefacts,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 36,
                       color: FlutterGameChallengeColors.textStroke,
                     ),
@@ -72,7 +72,7 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                       activeIndex: activeIndex,
                       itemCount: _artefacts.length,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 50,
                     ),
                     _TextPageView(
@@ -91,19 +91,19 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
       return LandingItem(
         color: FlutterGameChallengeColors.teamBackground,
         child: Padding(
-          padding: EdgeInsets.all(50),
+          padding: const EdgeInsets.all(50),
           child: Column(
             children: [
               Center(
                 child: BrandText(
                   l10n.artefacts,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 36,
                     color: FlutterGameChallengeColors.textStroke,
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Row(
@@ -111,7 +111,6 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       _ImagePageView(
                         controller: _imagesController,
@@ -164,7 +163,7 @@ class _ArtefactsItemState extends State<ArtefactsItem> {
     });
     _imagesController.animateToPage(
       activeIndex,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.ease,
     );
   }
@@ -205,11 +204,11 @@ class _ImagePageView extends StatelessWidget {
                   excludeSemantics: true,
                   child: InkWell(
                     onTap: _onPreviousPage,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(16),
                       bottomLeft: Radius.circular(16),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Icon(
                         Icons.keyboard_arrow_left_rounded,
                         size: 32,
@@ -235,7 +234,7 @@ class _ImagePageView extends StatelessWidget {
                       height: 350,
                       width: 350,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                        borderRadius: const BorderRadius.all(Radius.circular(16)),
                         border: Border.all(
                           width: 4,
                           color: FlutterGameChallengeColors.textStroke,

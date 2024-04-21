@@ -1,14 +1,16 @@
 import 'dart:core';
-import 'dart:io';
-
+import 'dart:developer';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/services.dart';
 import 'package:recyclo/artifacts/artifacts_model.dart';
 import 'package:recyclo/artifacts/wallet/service/artifacts_wallet.dart';
 import 'package:recyclo/artifacts/wallet/service/wallet_interface.dart';
+import 'package:recyclo/common.dart';
+
+const method = MethodChannel('REQUEST_WALLET');
 
 WalletService getWalletService() {
-  if (Platform.isAndroid) {
+  if (ExtendedPlatform.isAndroid) {
     return AndroidWalletService();
   } else {
     return IosWalletService();
@@ -16,30 +18,40 @@ WalletService getWalletService() {
 }
 
 class IosWalletService implements WalletService {
+  @override
   Future<void> addToWallet(ArtifactType artifactType, String uid) async {
-    throw UnimplementedError();
+    try {
+      final artifact = appleWallet[artifactType]!;
+      await method.invokeMethod('ADD_TO_WALLET', {'passUrl': artifact});
+    } on Exception catch (e) {
+      log("Failed to add to wallet: '$e'.");
+    }
   }
 
+  @override
   Future<void> viewInWallet(String uid) async {
-    throw UnimplementedError();
+    try {
+      await method.invokeMethod('VIEW_IN_WALLET', {'id': uid});
+    } on Exception catch (e) {
+      log("Failed to open wallet: '$e'.");
+    }
   }
 }
 
 class AndroidWalletService implements WalletService {
-  static const method = MethodChannel('REQUEST_WALLET');
-
+  @override
   Future<void> addToWallet(ArtifactType artifactType, String uid) async {
     try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
+      final callable = FirebaseFunctions.instance.httpsCallable(
         'generateWalletObjectJWT',
         options: HttpsCallableOptions(
           timeout: const Duration(seconds: 5),
         ),
       );
 
-      final artifact = wallet[artifactType]!;
+      final artifact = androidWallet[artifactType]!;
 
-      final HttpsCallableResult result = await callable.call({
+      final result = await callable.call<Map<String, String>>({
         'objectSuffix': uid,
         'title': artifact.title,
         'header': artifact.header,
@@ -55,15 +67,16 @@ class AndroidWalletService implements WalletService {
 
       await method.invokeMethod('ADD_TO_WALLET', {'jwt': jwt});
     } on Exception catch (e) {
-      print("Failed to add to walletr: '${e}'.");
+      log("Failed to add to wallet: '$e'.");
     }
   }
 
+  @override
   Future<void> viewInWallet(String uid) async {
     try {
       await method.invokeMethod('VIEW_IN_WALLET', {'id': uid});
     } on Exception catch (e) {
-      print("Failed to open wallet: '${e}'.");
+      log("Failed to open wallet: '$e'.");
     }
   }
 }

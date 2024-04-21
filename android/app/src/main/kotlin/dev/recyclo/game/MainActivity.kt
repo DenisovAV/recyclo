@@ -1,4 +1,4 @@
-package dev.recyclo.game
+package dev.recyclo.games
 
 import io.flutter.embedding.android.FlutterActivity
 import com.google.android.gms.pay.Pay

@@ -1,0 +1,43 @@
+{
+  "formatVersion" : 1,
+  "passTypeIdentifier" : "pass.dev.recyclo.game",
+  "serialNumber" : "PLANT01",
+  "teamIdentifier" : "K36CA7QL4T",
+  "barcode": {
+    "message": "Discount QR Code",
+    "format": "PKBarcodeFormatQR",
+    "messageEncoding": "iso-8859-1"
+  },
+  "organizationName" : "Mobile People Labs",
+  "description": "Plant grown with the help of recycled materials",
+  "logoText": "EcoSpawn Monstera",
+  "labelColor": "rgb(255, 255, 255)",
+  "foregroundColor": "rgb(255, 255, 255)",
+  "backgroundColor": "rgb(48, 52, 40)",
+  "storeCard" : {
+    "auxiliaryFields" : [
+      {
+        "key" : "product",
+        "label" : "Product",
+        "value" : "Plant grown with the help of recycled materials"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "details",
+        "label": "Details",
+        "value": "The Monstera plant, flourishing in a vibrant, colorful pot crafted from recycled plastic bottles and other materials, and is supported by the use of organic fertilizers,is a symbol of sustainable living and environmental consciousness."
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "value": "The inclusion of bags of organic compost or manure as part of the scene not only highlights the practical aspects of nurturing such a plant but also emphasizes the importance of repurposing and recycling for environmental care. This setting, with its attention to detail in the interior space, reflects a harmonious blend of aesthetics and eco-friendly practices, illustrating how sustainability can be integrated into everyday living spaces."
+      },
+      {
+        "key": "reality",
+        "label": "Reality",
+        "value": "Recycled materials offer a sustainable and innovative approach to gardening, transforming waste into valuable resources for plant cultivation. Plastic bottles, containers, and cans can be repurposed into pots and planters, while organic waste from kitchens and yards can be composted into nutrient-rich soil, serving as a natural fertilizer. Shredded paper, cardboard, and wood chips make excellent mulch, helping to retain soil moisture and suppress weeds. Additionally, recycled plastic bottles can be ingeniously converted into efficient drip irrigation systems, ensuring water conservation and direct root hydration.\n These eco-friendly practices not only reduce waste but also enhance the health and growth of plants. By utilizing recycled materials for compost, mulching, watering systems, and even as decorative elements, gardeners can create productive and aesthetically pleasing spaces. This approach promotes environmental sustainability, encouraging a harmonious relationship between human activities and nature, and demonstrates the practical benefits of recycling and resource conservation in gardening."
+      }
+    ]
+  }
+}

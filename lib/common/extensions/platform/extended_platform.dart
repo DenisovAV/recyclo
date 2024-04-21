@@ -1,4 +1,5 @@
-import 'extended_platform_native.dart' if(dart.library.html) 'extended_platform_web.dart';
+import 'package:recyclo/common/extensions/platform/extended_platform_native.dart'
+    if (dart.library.html) 'package:recyclo/common/extensions/platform/extended_platform_web.dart';
 
 class ExtendedPlatform {
   static bool get isAndroid => targetIsAndroid;
