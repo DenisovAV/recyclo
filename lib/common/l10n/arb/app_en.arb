@@ -204,15 +204,15 @@
   "@game3Description": {
     "description": "Game 3 description"
   },
-  "mechanicsTittle": "Craft & Use Google Wallet",
+  "mechanicsTittle": "Craft & Use Google or Apple Wallets",
   "@mechanicsTittle": {
     "description": "Title mechanics item"
   },
-  "craftingContent": "In our mini-games, every resource you gather is stored away for you to use later. You can take these resources and craft useful items, or 'artifacts.' This process isn't just part of the game; it's a lesson in how recycling works and how different materials can be reused to make new products.",
+  "craftingContent": "In our mini-games, every resource you gather is stored away for you to use later. You can take these resources and craft useful items, or 'artifacts.' This process isn't just part of the game; it's a lesson in how recycling works and how different materials can be reused to make new products. ",
   "@craftingContent": {
     "description": "Content mechanics item"
   },
-  "walletContent": "Once you've crafted these artifacts, you can add them to your Google Wallet. While the crafting teaches you about recycling, adding artifacts to your Wallet could, in the future, unlock discounts on real-world products. We're still in the early stages of finding partners for this feature, so it's not available yet. But we're excited about the potential to reward your in-game recycling efforts with real-life benefits. Stay tuned for future updates!",
+  "walletContent": "Once you've crafted these artifacts, you can add them to your Google Wallet or Apple Wallet. While the crafting teaches you about recycling, adding artifacts to your Wallet could, in the future, unlock discounts on real-world products. We're still in the early stages of finding partners for this feature, so it's not available yet. But we're excited about the potential to reward your in-game recycling efforts with real-life benefits. Stay tuned for future updates!",
   "@walletContent": {
     "description": "Wallet mechanics item"
   },

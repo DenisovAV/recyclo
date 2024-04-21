@@ -8,28 +8,30 @@ class DownloadFromStoresWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Wrap(
+      spacing: 15,
+      runSpacing: 15,
+      alignment: WrapAlignment.center,
       children: [
-        _DownloadButton(
-          image: Assets.images.downloadGooglePlayButton.image(),
-          url: 'https://play.google.com/store/apps/details?id=dev.recyclo.games',
+        Expanded(
+          child: _DownloadButton(
+            image: Assets.images.downloadGooglePlayButton.image(),
+            url: 'https://play.google.com/store/apps/details?id=dev.recyclo.games',
+          ),
         ),
-        const SizedBox(
-          width: 15,
+        Expanded(
+          child: _DownloadButton(
+            image: Assets.images.downloadAppleStoreButton.image(),
+            url: 'https://apps.apple.com/de/app/recyclo-game/id6479239285',
+          ),
         ),
-        _DownloadButton(
-          image: Assets.images.downloadAppleStoreButton.image(),
-          url: 'https://apps.apple.com/de/app/recyclo-game/id6479239285',
-        ),
-        const SizedBox(
-          width: 15,
-        ),
-        PlayOnlineButton(
-          onTap: () {
-            Navigator.of(context).push(LoadingPage.route());
-          },
-        ),
+        Expanded(
+          child: PlayOnlineButton(
+            onTap: () {
+              Navigator.of(context).push(LoadingPage.route());
+            },
+          ),
+        )
       ],
     );
   }
