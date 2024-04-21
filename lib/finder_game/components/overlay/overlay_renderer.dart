@@ -1,8 +1,8 @@
 import 'package:flame/extensions.dart';
 import 'package:flutter/rendering.dart';
+import 'package:recyclo/finder_game/components/overlay/overlay_mask_calculator.dart';
+import 'package:recyclo/finder_game/components/overlay/overlay_render_mode.dart';
 import 'package:recyclo/finder_game/const/finder_constraints.dart';
-import 'package:recyclo/finder_game/util/overlay_mask_calculator.dart';
-import 'package:recyclo/finder_game/util/overlay_render_mode.dart';
 
 class OverlayRenderer {
   OverlayRenderer({
@@ -22,8 +22,8 @@ class OverlayRenderer {
   Size get maskSize => maskImage.size.toSize();
   Size get imageSize => image.size.toSize();
 
-  Rect overlayTargetRect = Rect.fromLTWH(0, 0, 0, 0);
-  Rect fogSourceRect = Rect.fromLTWH(0, 0, 0, 0);
+  Rect overlayTargetRect = Rect.zero;
+  Rect fogSourceRect = Rect.zero;
 
   late Size maskScaledSize;
   late FittedSizes maskFittedSizes;
@@ -105,7 +105,7 @@ class OverlayRenderer {
     );
 
     canvas
-      ..drawImageRect(
+      .drawImageRect(
         decorationImage,
         maskSourceRect,
         overlayTargetRect,

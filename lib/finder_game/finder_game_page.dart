@@ -12,21 +12,24 @@ import 'package:recyclo/finder_game/overlays/finder_hud.dart';
 import 'package:recyclo/finder_game/overlays/game_start_overlay.dart';
 import 'package:recyclo/service_provider.dart';
 
-import '../trash_reserve/trash_reserve_repository.dart';
+import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
 
 class FinderGamePage extends StatefulWidget {
   const FinderGamePage({super.key});
 
   static MaterialPageRoute<void> route() {
     return MaterialPageRoute<void>(
-      builder: (_) => MultiBlocProvider(providers: [
-        BlocProvider<TimerCubit>(
-          create: (_) => ServiceProvider.get<TimerCubit>(),
-        ),
-        BlocProvider<TutorialCubit>(
-          create: (_) => ServiceProvider.get<TutorialCubit>(),
-        ),
-      ], child: const FinderGamePage()),
+      builder: (_) => MultiBlocProvider(
+        providers: [
+          BlocProvider<TimerCubit>(
+            create: (_) => ServiceProvider.get<TimerCubit>(),
+          ),
+          BlocProvider<TutorialCubit>(
+            create: (_) => ServiceProvider.get<TutorialCubit>(),
+          ),
+        ],
+        child: const FinderGamePage(),
+      ),
     );
   }
 
@@ -36,7 +39,9 @@ class FinderGamePage extends StatefulWidget {
 
 class _FinderGamePageState extends State<FinderGamePage> {
   static const _maxGameWidth = 500.0;
+  static const _minGameWith = 320.0;
   static const _maxGameHeight = 1100.0;
+  static const _minGameHeight = 500.0;
 
   late final FinderGame _game;
 
@@ -67,9 +72,11 @@ class _FinderGamePageState extends State<FinderGamePage> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: ConstrainedBox(
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     maxWidth: _maxGameWidth,
                     maxHeight: _maxGameHeight,
+                    minWidth: _minGameWith,
+                    minHeight: _minGameHeight,
                   ),
                   child: GameWidget(
                     game: _game,
@@ -129,7 +136,7 @@ class _FinderGamePageState extends State<FinderGamePage> {
     if (state == TimerFinishedState()) {
       final items = _game.gameState.generateCollectedResources();
 
-      int _getTrashCountFor(ItemType type) {
+      int getTrashCountFor(ItemType type) {
         return items.firstWhereOrNull((trash) => trash.type == type)?.score ??
             0;
       }
@@ -139,13 +146,15 @@ class _FinderGamePageState extends State<FinderGamePage> {
         context: context,
         items: items,
         onDismiss: () {
-          unawaited(ServiceProvider.get<TrashReserveRepository>().addResource(
-            plastic: _getTrashCountFor(ItemType.plastic),
-            paper: _getTrashCountFor(ItemType.paper),
-            glass: _getTrashCountFor(ItemType.glass),
-            organic: _getTrashCountFor(ItemType.organic),
-            electronics: _getTrashCountFor(ItemType.electronic),
-          ));
+          unawaited(
+            ServiceProvider.get<TrashReserveRepository>().addResource(
+              plastic: getTrashCountFor(ItemType.plastic),
+              paper: getTrashCountFor(ItemType.paper),
+              glass: getTrashCountFor(ItemType.glass),
+              organic: getTrashCountFor(ItemType.organic),
+              electronics: getTrashCountFor(ItemType.electronic),
+            ),
+          );
           Navigator.of(context).maybePop();
         },
       );

@@ -17,6 +17,9 @@ class $AssetsAudioGen {
   /// File path: assets/audio/artifact_crafted.mp3
   String get artifactCrafted => 'assets/audio/artifact_crafted.mp3';
 
+  /// File path: assets/audio/bush_rustle.wav
+  String get bushRustle => 'assets/audio/bush_rustle.wav';
+
   /// File path: assets/audio/button_tap.mp3
   String get buttonTap => 'assets/audio/button_tap.mp3';
 
@@ -26,11 +29,23 @@ class $AssetsAudioGen {
   /// File path: assets/audio/clicker_theme.mp3
   String get clickerTheme => 'assets/audio/clicker_theme.mp3';
 
+  /// File path: assets/audio/correct_item.wav
+  String get correctItem => 'assets/audio/correct_item.wav';
+
   /// File path: assets/audio/finder_theme.mp3
   String get finderTheme => 'assets/audio/finder_theme.mp3';
 
+  /// File path: assets/audio/incorrect-item.wav
+  String get incorrectItem => 'assets/audio/incorrect-item.wav';
+
+  /// File path: assets/audio/item-pickup-sound.wav
+  String get itemPickupSound => 'assets/audio/item-pickup-sound.wav';
+
   /// File path: assets/audio/main_menu_theme.mp3
   String get mainMenuTheme => 'assets/audio/main_menu_theme.mp3';
+
+  /// File path: assets/audio/time_is_up.wav
+  String get timeIsUp => 'assets/audio/time_is_up.wav';
 
   /// File path: assets/audio/toggle_sound.mp3
   String get toggleSound => 'assets/audio/toggle_sound.mp3';
@@ -38,11 +53,16 @@ class $AssetsAudioGen {
   /// List of all assets
   List<String> get values => [
         artifactCrafted,
+        bushRustle,
         buttonTap,
         catcherTheme,
         clickerTheme,
+        correctItem,
         finderTheme,
+        incorrectItem,
+        itemPickupSound,
         mainMenuTheme,
+        timeIsUp,
         toggleSound
       ];
 }
