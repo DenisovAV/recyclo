@@ -13,7 +13,7 @@ class OverlayMaskCalculator {
   }
 
   static double getZoomFactorInPixels(Vector2 overlaySize) {
-    return FinderConstraints.holeZoomFactor * overlaySize.x;
+    return FinderConstraints.holeZoomFactor * overlaySize.y;
   }
 
   static Rect getMaskRect({
@@ -39,7 +39,7 @@ class OverlayMaskCalculator {
                   axisDragPosition: dragPosition.y,
                   rectMeasurement: rectSize.height,
                 ) +
-                FinderConstraints.verticalHolePositionOffset,
+                FinderConstraints.verticalHoleOffset,
           ) &
           maskSize,
     );
