@@ -78,6 +78,10 @@ class $AssetsImagesGen {
   AssetGenImage get addToWalletIos =>
       const AssetGenImage('assets/images/add_to_wallet_ios.png');
 
+  /// File path: assets/images/apple_wallet.png
+  AssetGenImage get appleWallet =>
+      const AssetGenImage('assets/images/apple_wallet.png');
+
   /// File path: assets/images/artifact_car.png
   AssetGenImage get artifactCar =>
       const AssetGenImage('assets/images/artifact_car.png');
@@ -171,6 +175,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/glass.png
   AssetGenImage get glass => const AssetGenImage('assets/images/glass.png');
 
+  /// File path: assets/images/google_wallet.png
+  AssetGenImage get googleWallet =>
+      const AssetGenImage('assets/images/google_wallet.png');
+
   /// File path: assets/images/hole.png
   AssetGenImage get hole => const AssetGenImage('assets/images/hole.png');
 
@@ -192,10 +200,6 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/icon_ok.png
   AssetGenImage get iconOk => const AssetGenImage('assets/images/icon_ok.png');
-
-  /// File path: assets/images/icon_wallet.png
-  AssetGenImage get iconWallet =>
-      const AssetGenImage('assets/images/icon_wallet.png');
 
   /// File path: assets/images/logo_description.png
   AssetGenImage get logoDescription =>
@@ -269,6 +273,7 @@ class $AssetsImagesGen {
   List<dynamic> get values => [
         addToWalletAndroid,
         addToWalletIos,
+        appleWallet,
         artifactCar,
         artifactHouse,
         artifactLaptop,
@@ -293,13 +298,13 @@ class $AssetsImagesGen {
         gameModeClicker,
         gameModeFinder,
         glass,
+        googleWallet,
         hole,
         holeMask,
         howToPlayWithoutSpaces,
         iconForbidden,
         iconGeer,
         iconOk,
-        iconWallet,
         logoDescription,
         nikitaPhoto,
         organic,

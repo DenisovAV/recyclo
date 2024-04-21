@@ -1,0 +1,42 @@
+{
+  "formatVersion" : 1,
+  "passTypeIdentifier" : "pass.dev.recyclo.game",
+  "serialNumber" : "HOUSE01",
+  "teamIdentifier" : "K36CA7QL4T",
+  "barcode": {
+    "message": "Discount QR Code",
+    "format": "PKBarcodeFormatQR",
+    "messageEncoding": "iso-8859-1"
+  },
+  "organizationName" : "Mobile People Labs",
+  "description": "House built from recycled materials",
+  "logoText": "Ecorefuge",
+  "foregroundColor": "rgb(0, 0, 0)",
+  "backgroundColor": "rgb(159, 187, 199)",
+  "storeCard" : {
+    "auxiliaryFields" : [
+      {
+        "key" : "product",
+        "label" : "Product",
+        "value" : "House built from recycled materials"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "details",
+        "label": "Details",
+        "value": "This house is a testament to modern sustainability, constructed predominantly from recycled glass to create a transparent and sleek facade."
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "value": "The facade of this eco-friendly house features recycled glass and composite materials, while the roof boasts integrated solar panels, providing clean energy. Inside, natural materials such as bamboo and recycled wood dominate, complemented by furniture made from repurposed materials. The house incorporates energy-efficient technologies, including insulated windows and a solar-powered water heater, to minimize its ecological footprint. Surrounding the house, a drought-resistant landscape promotes biodiversity, embodying a commitment to environmental conservation in every detail."
+      },
+      {
+        "key": "reality",
+        "label": "Reality",
+        "value": "In reality, in the construction of eco-friendly homes, a diverse range of recycled materials finds new life, contributing to sustainable building practices. Recycled steel, used for its strength and durability, becomes a fundamental framing material, offering a lighter and more environmentally friendly alternative to traditional lumber. Recycled glass transforms into insulation or decorative tiles, providing both aesthetic appeal and energy efficiency. Reclaimed wood, sourced from old buildings or discarded pallets, is repurposed for flooring, beams, and interior finishes, adding character and reducing the demand for new timber. Recycled plastic, once destined for landfills, is now processed into lumber-like products for decking, fencing, and even structural components in some cases. These materials, alongside others like recycled concrete for foundations and walkways, exemplify the innovative use of repurposed resources in creating homes that are both sustainable and functional."
+      }
+    ]
+  }
+}

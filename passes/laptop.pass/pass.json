@@ -1,0 +1,42 @@
+{
+  "formatVersion" : 1,
+  "passTypeIdentifier" : "pass.dev.recyclo.game",
+  "serialNumber" : "LAPTOP01",
+  "teamIdentifier" : "K36CA7QL4T",
+  "barcode": {
+    "message": "Discount QR Code",
+    "format": "PKBarcodeFormatQR",
+    "messageEncoding": "iso-8859-1"
+  },
+  "organizationName" : "Mobile People Labs",
+  "description": "Laptop made using recycled components",
+  "logoText": "Trashputer",
+  "foregroundColor": "rgb(0, 0, 0)",
+  "backgroundColor": "rgb(169, 196, 178)",
+  "storeCard" : {
+    "auxiliaryFields" : [
+      {
+        "key" : "product",
+        "label" : "Product",
+        "value" : "Laptop made using recycled components"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "details",
+        "label": "Details",
+        "value": "This innovative laptop is a beacon of sustainability, ingeniously crafted from recycled trash."
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "value": "Trashputer body is constructed from old plastic bottles, demonstrating a textured and creative design. The keyboard stands out, made from recycled plastic caps, each key a testament to resourceful re-use. The screen, fashioned from recycled glass, adds to its eco-friendly credentials, while the internal components are sourced from secondary metal materials, further reducing waste. With connectors and ports also derived from recycled materials, this laptop is not just a piece of technology; it's a statement on the importance of recycling and the potential for technological advancements to harmonize with environmental conservation efforts."
+      },
+      {
+        "key": "reality",
+        "label": "Reality",
+        "value": "The production of laptops and other electronics, various recycled materials can be utilized to reduce waste and environmental impact. Plastic components such as casings and keyboards can be made from recycled plastics, like PET bottles and packaging, decreasing the need for new raw materials and reducing plastic waste. Metal parts, including frames and fastenings, can be crafted from recycled metals such as aluminum and steel, while recycled glass can be used for screens. This approach extends to the recycling of rare earth metals for magnets, batteries, and electronic components, and even the packaging can be made from recycled cardboard or plastic, minimizing environmental footprint. \n The adoption of recycled materials in manufacturing represents a broader strategy towards sustainable development, aiming to cut down on waste and utilize resources more efficiently. Companies are continuously exploring new ways to integrate recycled materials into their products, striving to lessen their ecological impact while promoting recycling and sustainability in the tech industry."
+      }
+    ]
+  }
+}

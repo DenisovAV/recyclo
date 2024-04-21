@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:async';
 
 import 'package:recyclo/artifacts/artifacts_model.dart';
 import 'package:recyclo/artifacts/requirements.dart';
@@ -17,7 +16,7 @@ class ArtifactsRepository {
   final StreamController<ArtifactsModel> _streamController =
   StreamController.broadcast();
 
-  final Uuid _uuid = Uuid();
+  final Uuid _uuid = const Uuid();
 
   ArtifactsModel get artifactModel {
     _updateArtifactStatuses();

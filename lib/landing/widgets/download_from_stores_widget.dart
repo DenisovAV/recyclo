@@ -15,11 +15,11 @@ class DownloadFromStoresWidget extends StatelessWidget {
       children: [
         _DownloadButton(
           image: Assets.images.downloadGooglePlayButton.image(),
-          url: 'https://pub.dev',
+          url: 'https://play.google.com/store/apps/details?id=dev.recyclo.games',
         ),
         _DownloadButton(
           image: Assets.images.downloadAppleStoreButton.image(),
-          url: 'https://pub.dev',
+          url: 'https://apps.apple.com/de/app/recyclo-game/id6479239285',
         ),
         PlayOnlineButton(
           onTap: () {
@@ -69,7 +69,6 @@ class PlayOnlineButton extends StatelessWidget {
     super.key,
     required this.onTap,
   });
-
   final VoidCallback onTap;
 
   @override

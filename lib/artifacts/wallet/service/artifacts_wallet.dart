@@ -1,7 +1,17 @@
 import 'package:recyclo/artifacts/artifacts_model.dart';
 import 'package:recyclo/artifacts/wallet/wallet_pass.dart';
 
-const Map<ArtifactType, WalletPass> wallet = {
+
+const Map<ArtifactType, String> appleWallet = {
+  ArtifactType.newspaper : 'https://firebasestorage.googleapis.com/v0/b/recyclo-game.appspot.com/o/apple_wallet%2Fnewspaper.pkpass?alt=media&token=7feb5b44-78d7-4040-9609-3cfd9bd30a8e',
+  ArtifactType.shampoo : 'https://firebasestorage.googleapis.com/v0/b/recyclo-game.appspot.com/o/apple_wallet%2Fshampoo.pkpass?alt=media&token=adb65427-44eb-43b4-9c7b-1ee951065be3',
+  ArtifactType.plant : 'https://firebasestorage.googleapis.com/v0/b/recyclo-game.appspot.com/o/apple_wallet%2Fplant.pkpass?alt=media&token=8ed31cfa-27d9-4a58-95e6-f1e40a665414',
+  ArtifactType.laptop : 'https://firebasestorage.googleapis.com/v0/b/recyclo-game.appspot.com/o/apple_wallet%2Flaptop.pkpass?alt=media&token=84fc7fdc-3783-4338-809f-9030630c0c68',
+  ArtifactType.car : 'https://firebasestorage.googleapis.com/v0/b/recyclo-game.appspot.com/o/apple_wallet%2Fcar.pkpass?alt=media&token=2bccc616-0953-4cf2-8088-b9527ccfb815',
+  ArtifactType.house : 'https://firebasestorage.googleapis.com/v0/b/recyclo-game.appspot.com/o/apple_wallet%2Fhouse.pkpass?alt=media&token=b8168cd5-2f0f-4e6d-b554-d236fa0ec5b0',
+};
+
+const Map<ArtifactType, WalletPass> androidWallet = {
   ArtifactType.newspaper : WalletPass(
       title: 'Flutter EcoPress',
       header: 'Flutter Magazine printed using recycled paper',

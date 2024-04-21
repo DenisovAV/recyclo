@@ -37,7 +37,16 @@ class ArtifactStatusIcon extends StatelessWidget {
       case ArtifactStatus.crafted:
         return Assets.images.iconOk.image();
       case ArtifactStatus.addedToWallet:
-        return Assets.images.iconWallet.image();
+        if (ExtendedPlatform.isAndroid) {
+          return Assets.images.googleWallet.image();
+        }
+
+        if (ExtendedPlatform.isApple) {
+          return Assets.images.appleWallet.image();
+        }
+
+        throw UnimplementedError(
+            'Wallet is supported only in Android and iOS platforms');
     }
   }
 
