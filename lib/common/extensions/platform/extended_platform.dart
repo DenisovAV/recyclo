@@ -7,4 +7,5 @@ class ExtendedPlatform {
   static bool get isWeb => targetIsWeb;
   static bool get isMacOs => targetIsMacOs;
   static bool get isMobile => isAndroid || isIos;
+  static bool get isApple => isMacOs || isIos;
 }

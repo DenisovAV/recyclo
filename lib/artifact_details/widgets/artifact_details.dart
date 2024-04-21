@@ -200,7 +200,7 @@ class _AddToGoogleWallet extends StatelessWidget {
                         return Assets.images.addToWalletAndroid.image(
                           height: 52,
                         );
-                      } else if (ExtendedPlatform.isIos) {
+                      } else if (ExtendedPlatform.isApple) {
                         return Assets.images.addToWalletIos.image(
                           height: 52,
                         );

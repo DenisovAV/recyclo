@@ -12,8 +12,10 @@ const method = MethodChannel('REQUEST_WALLET');
 WalletService getWalletService() {
   if (ExtendedPlatform.isAndroid) {
     return AndroidWalletService();
-  } else {
+  } else if (ExtendedPlatform.isApple) {
     return IosWalletService();
+  } else {
+    throw Exception('This platform is not supported yet');
   }
 }
 
