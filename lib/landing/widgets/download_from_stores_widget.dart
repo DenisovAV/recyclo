@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/loading/loading.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -31,14 +29,13 @@ class DownloadFromStoresWidget extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(LoadingPage.route());
           },
-        )
+        ),
       ],
     );
   }
 }
 
 class _DownloadButton extends StatelessWidget {
-
   const _DownloadButton({
     required this.image,
     required this.url,
@@ -71,7 +68,6 @@ class _DownloadButton extends StatelessWidget {
 }
 
 class PlayOnlineButton extends StatelessWidget {
-
   const PlayOnlineButton({
     super.key,
     required this.onTap,
