@@ -29,70 +29,72 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      final isSmallDevice = constraints.maxWidth < 800;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isSmallDevice = constraints.maxWidth < 800;
 
-      return Scaffold(
-        backgroundColor: FlutterGameChallengeColors.landingBackground,
-        body: Stack(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: Assets.images.cloudsBackground.image(fit: BoxFit.fitHeight),
-            ),
-            ListView(
-              controller: _controller,
-              children: [
-                SizedBox(
-                  height: 150,
-                ),
-                AboutUsItem(),
-                SizedBox(
-                  height: 50,
-                ),
-                GamesItem(),
-                SizedBox(
-                  height: 50,
-                ),
-                MechanicsWidget(),
-                SizedBox(
-                  height: 50,
-                ),
-                ArtefactsItem(),
-                SizedBox(
-                  height: 50,
-                ),
-                TeamItem(),
-                SizedBox(
-                  height: 50,
-                ),
-                if (isSmallDevice) ...[
-                  DownloadFromStoresWidget(),
-                  SizedBox(
+        return Scaffold(
+          backgroundColor: FlutterGameChallengeColors.landingBackground,
+          body: Stack(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Assets.images.cloudsBackground.image(fit: BoxFit.fitHeight),
+              ),
+              ListView(
+                controller: _controller,
+                children: [
+                  const SizedBox(
+                    height: 150,
+                  ),
+                  const AboutUsItem(),
+                  const SizedBox(
                     height: 50,
                   ),
+                  const GamesItem(),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  const MechanicsWidget(),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  const ArtefactsItem(),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  const TeamItem(),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  if (isSmallDevice) ...[
+                    const DownloadFromStoresWidget(),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                  ],
                 ],
-              ],
-            ),
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              height: 100,
-              child: LandingAppBar(
-                onTap: _onScrollingButtonTap,
               ),
-            ),
-          ],
-        ),
-      );
-    });
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 100,
+                child: LandingAppBar(
+                  onTap: _onScrollingButtonTap,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void _onScrollingButtonTap() {
     _controller.animateTo(
       _controller.position.maxScrollExtent,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
   }

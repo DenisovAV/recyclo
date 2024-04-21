@@ -15,16 +15,16 @@ class DownloadFromStoresWidget extends StatelessWidget {
       children: [
         _DownloadButton(
           image: Assets.images.downloadGooglePlayButton.image(),
-          url: 'https://pub.dev',
+          url: 'https://play.google.com/store/apps/details?id=dev.recyclo.games',
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
         _DownloadButton(
           image: Assets.images.downloadAppleStoreButton.image(),
-          url: 'https://pub.dev',
+          url: 'https://apps.apple.com/de/app/recyclo-game/id6479239285',
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
         PlayOnlineButton(
@@ -38,13 +38,13 @@ class DownloadFromStoresWidget extends StatelessWidget {
 }
 
 class _DownloadButton extends StatelessWidget {
-  final Widget image;
-  final String url;
 
   const _DownloadButton({
     required this.image,
     required this.url,
   });
+  final Widget image;
+  final String url;
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +71,12 @@ class _DownloadButton extends StatelessWidget {
 }
 
 class PlayOnlineButton extends StatelessWidget {
-  final VoidCallback onTap;
 
   const PlayOnlineButton({
     super.key,
     required this.onTap,
   });
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -84,29 +84,28 @@ class PlayOnlineButton extends StatelessWidget {
 
     return Material(
       color: FlutterGameChallengeColors.textStroke,
-      borderRadius: BorderRadius.all(Radius.circular(5)),
+      borderRadius: const BorderRadius.all(Radius.circular(5)),
       child: Semantics(
         label: l10n.playOnlineButtonTitle,
         button: true,
         enabled: true,
         excludeSemantics: true,
         child: InkWell(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderRadius: const BorderRadius.all(Radius.circular(5)),
           onTap: onTap,
           child: Container(
             height: 40,
             width: 130,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
+              borderRadius: const BorderRadius.all(Radius.circular(5)),
               border: Border.all(
-                width: 1,
                 color: FlutterGameChallengeColors.teamBackground,
               ),
             ),
             child: Center(
               child: Text(
                 l10n.playOnlineButtonTitle,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 12,
                 ),
