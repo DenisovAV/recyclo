@@ -43,7 +43,7 @@ class MainMenuPage extends StatelessWidget {
               canPop: false,
               onPopInvoked: (_) async {
                 _onBackBtn(state, context);
-                return Future.value(false);
+                return Future.value();
               },
               child: Stack(
                 fit: StackFit.expand,

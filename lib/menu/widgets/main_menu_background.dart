@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recyclo/common.dart';
-import 'package:video_player/video_player.dart';
 import 'package:recyclo/menu/widgets/clouds.dart';
+import 'package:video_player/video_player.dart';
 
 class MainMenuBackground extends StatefulWidget {
   const MainMenuBackground({
@@ -51,7 +51,6 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
       ..initialize().then((_) {
         setState(() {});
       });
-    ;
 
     _playerController.addListener(_onPlayerStopped);
 
@@ -109,8 +108,9 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
 
   @override
   void dispose() {
-    _playerController.removeListener(_onPlayerStopped);
-    _playerController.dispose();
+    _playerController
+      ..removeListener(_onPlayerStopped)
+      ..dispose();
     _highlightController.dispose();
     _compactController.dispose();
     super.dispose();

@@ -1,12 +1,10 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-
 import 'package:recyclo/clicker_game/components/trash_item_components.dart';
 import 'package:recyclo/clicker_game/const/clicker_constraints.dart';
+import 'package:recyclo/clicker_game/game_models/trash_bin.dart';
+import 'package:recyclo/clicker_game/game_models/trash_type.dart';
 import 'package:recyclo/common.dart';
-
-import 'game_models/trash_bin.dart';
-import 'game_models/trash_type.dart';
 
 class ClickerState extends Component {
   ClickerState({required this.gameWidgetSize})
@@ -29,7 +27,7 @@ class ClickerState extends Component {
   }
 
   void punishPlayer() {
-    // TODO: show tutorial overlay on 3-rd miss =- take 5 seconds away
+    // TODO(Dmytro): show tutorial overlay on 3-rd miss =- take 5 seconds away
   }
 
   void collectTrash(TrashItemComponent trash) {

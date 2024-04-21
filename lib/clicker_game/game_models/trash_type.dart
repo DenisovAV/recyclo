@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import '../../common/assets/assets.gen.dart';
-import '../../common/assets/colors.gen.dart';
-import '../../common/entities/item_type.dart';
+import 'package:recyclo/common/assets/assets.gen.dart';
+import 'package:recyclo/common/assets/colors.gen.dart';
+import 'package:recyclo/common/entities/item_type.dart';
 
 enum TrashType {
   organic,

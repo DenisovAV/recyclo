@@ -127,7 +127,7 @@ class _ArtifactItem extends StatelessWidget {
               builder: (_) => BlocProvider<ArtifactDetailsCubit>(
                 create: (_) => ServiceProvider.get<ArtifactDetailsCubit>()
                   ..initialize(
-                      name: name, imagePath: imagePath, description: description, model: model),
+                      name: name, imagePath: imagePath, description: description, model: model,),
                 child: const ArtifactDetails(),
               ),
             ),

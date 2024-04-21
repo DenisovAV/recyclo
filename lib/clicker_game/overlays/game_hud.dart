@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:recyclo/clicker_game/clicker_game.dart';
+import 'package:recyclo/clicker_game/game_models/trash_type.dart';
 import 'package:recyclo/clicker_game/overlays/widgets/target_category.dart';
 import 'package:recyclo/common.dart';
-
-import '../game_models/trash_type.dart';
 
 class GameHUD extends StatefulWidget {
   const GameHUD({

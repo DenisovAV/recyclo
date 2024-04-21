@@ -14,6 +14,7 @@ class TrashItemComponent extends BodyComponent {
   ) : super();
 
   final Vector2 baseSize;
+  @override
   final Vector2 position;
   final TrashItemData trashData;
   late final SpriteComponent backgroundSprite;
@@ -76,7 +77,7 @@ class TrashItemComponent extends BodyComponent {
     return distance <= radius;
   }
 
-  void onCollected() async {
+  Future<void> onCollected() async {
     Effect getResizeEvent() {
       return SequenceEffect(
         [
@@ -93,15 +94,13 @@ class TrashItemComponent extends BodyComponent {
             ),
           ),
         ],
-        infinite: false,
       );
     }
 
     await backgroundSprite.add(getResizeEvent());
-    await trashSprite.add(getResizeEvent()
-      ..onComplete = () {
-        removeFromParent();
-      });
+    await trashSprite.add(
+      getResizeEvent()..onComplete = removeFromParent,
+    );
   }
 
   void onMiss() {
@@ -123,7 +122,6 @@ class TrashItemComponent extends BodyComponent {
             ),
           ),
         ],
-        infinite: false,
         alternate: true,
       );
     }
@@ -138,9 +136,11 @@ class TrashItemComponent extends BodyComponent {
       );
     }
 
-    backgroundSprite.add(getShakeEffect());
-    backgroundSprite.add(getColorEffect());
-    trashSprite.add(getShakeEffect());
-    trashSprite.add(getColorEffect());
+    backgroundSprite
+      ..add(getShakeEffect())
+      ..add(getColorEffect());
+    trashSprite
+      ..add(getShakeEffect())
+      ..add(getColorEffect());
   }
 }

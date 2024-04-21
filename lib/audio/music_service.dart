@@ -5,12 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:recyclo/settings/settings.dart';
 
 class MusicService {
-  final AudioPlayer _musicPlayer;
-  final AudioPlayer Function() _createAudioPlayer;
-  final SettingsController _settingsController;
-  bool _isMusicEnabled;
-  bool _isSoundsEnabled;
-  AssetSource? _latestSource;
 
   MusicService(
     this._createAudioPlayer,
@@ -21,6 +15,12 @@ class MusicService {
     _settingsController.musicOn.addListener(_updateIsMusicEnabled);
     _settingsController.soundsOn.addListener(_updateIsSoundsEnabled);
   }
+  final AudioPlayer _musicPlayer;
+  final AudioPlayer Function() _createAudioPlayer;
+  final SettingsController _settingsController;
+  bool _isMusicEnabled;
+  bool _isSoundsEnabled;
+  AssetSource? _latestSource;
 
   ValueNotifier<AppLifecycleState>? _lifecycleNotifier;
   StreamSubscription<void>? _songCompletedSubscription;
@@ -87,7 +87,7 @@ class MusicService {
 
     await _musicPlayer.stop();
     await _musicPlayer.play(song);
-    _songCompletedSubscription?.cancel();
+    await _songCompletedSubscription?.cancel();
     _songCompletedSubscription =
         _musicPlayer.onPlayerComplete.listen((event) async {
       await _musicPlayer.stop();

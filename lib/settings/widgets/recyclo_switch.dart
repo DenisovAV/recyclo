@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:recyclo/common/assets/colors.gen.dart';
 
 class RecycloSwitch extends StatelessWidget {
-  final bool isEnabled;
-  final VoidCallback onToggle;
-
   const RecycloSwitch({
+    super.key,
     required this.isEnabled,
     required this.onToggle,
   });
+  final bool isEnabled;
+  final VoidCallback onToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class RecycloSwitch extends StatelessWidget {
       child: Container(
         width: 70,
         height: 40,
-        padding: EdgeInsets.symmetric(horizontal: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
           color: isEnabled
               ? FlutterGameChallengeColors.toggleSwitchEnabled

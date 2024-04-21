@@ -7,10 +7,12 @@ WalletService getWalletService() {
 }
 
 class WebWalletService implements WalletService {
+  @override
   Future<void> addToWallet(ArtifactType artifactType, String uid) async {
     throw UnimplementedError();
   }
 
+  @override
   Future<void> viewInWallet(String uid) async {
     throw UnimplementedError();
   }

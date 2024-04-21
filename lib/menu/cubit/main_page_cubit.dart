@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:recyclo/menu/cubit/main_page_state.dart';
 import 'package:recyclo/audio/music_service.dart';
 import 'package:recyclo/audio/songs.dart';
 import 'package:recyclo/audio/sounds.dart';
@@ -10,15 +9,15 @@ import 'package:recyclo/finder_game/finder_game_page.dart';
 import 'package:recyclo/menu/cubit/main_page_state.dart';
 
 class MainPageCubit extends Cubit<MainPageState> {
-  final MusicService _musicService;
 
   MainPageCubit(
     this._musicService,
   ) : super(MainPageInitialState()) {
     _initialize();
   }
+  final MusicService _musicService;
 
-  void _initialize() async {
+  Future<void> _initialize() async {
     await _musicService.stopMusic();
     await _musicService.playSong(Songs.mainMenuAmbient);
   }
@@ -53,7 +52,7 @@ class MainPageCubit extends Cubit<MainPageState> {
     emit(MainPageSettingsState());
   }
 
-  void navigateToCatcherGame(BuildContext context) async {
+  Future<void> navigateToCatcherGame(BuildContext context) async {
     await _musicService.playSound(Sounds.buttonTap);
     await _musicService.playSong(Songs.catcherTheme);
 
@@ -62,7 +61,7 @@ class MainPageCubit extends Cubit<MainPageState> {
     await _musicService.playSong(Songs.mainMenuAmbient);
   }
 
-  void navigateToClickerGame(BuildContext context) async {
+  Future<void> navigateToClickerGame(BuildContext context) async {
     await _musicService.playSound(Sounds.buttonTap);
     await _musicService.playSong(Songs.clickerTheme);
 
@@ -71,7 +70,7 @@ class MainPageCubit extends Cubit<MainPageState> {
     await _musicService.playSong(Songs.mainMenuAmbient);
   }
 
-  void navigateToFinderGame(BuildContext context) async {
+  Future<void> navigateToFinderGame(BuildContext context) async {
     await _musicService.playSound(Sounds.buttonTap);
     await _musicService.playSong(Songs.finderTheme);
 

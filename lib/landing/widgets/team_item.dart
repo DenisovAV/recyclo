@@ -13,8 +13,9 @@ class TeamItem extends StatelessWidget {
     final l10n = context.l10n;
 
     return LandingItem(
-        color: FlutterGameChallengeColors.aboutAppBackground,
-        child: LayoutBuilder(builder: (context, constraints) {
+      color: FlutterGameChallengeColors.aboutAppBackground,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
           final isSmallDevice = constraints.maxWidth < 800;
 
           return Padding(
@@ -24,13 +25,13 @@ class TeamItem extends StatelessWidget {
                 Center(
                   child: BrandText(
                     l10n.teamTitle,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 48,
                       color: FlutterGameChallengeColors.textStroke,
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Wrap(
@@ -39,18 +40,19 @@ class TeamItem extends StatelessWidget {
                   children: TeamConstants.teams
                       .map<Widget>(_TeamMemberWidget.new)
                       .toList(),
-                )
+                ),
               ],
             ),
           );
-        }));
+        },
+      ),
+    );
   }
 }
 
 class _TeamMemberWidget extends StatelessWidget {
-  final TeamMember member;
-
   const _TeamMemberWidget(this.member);
+  final TeamMember member;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,7 @@ class _TeamMemberWidget extends StatelessWidget {
           Container(
             width: 104,
             height: 104,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(52),
               ),
@@ -74,7 +76,7 @@ class _TeamMemberWidget extends StatelessWidget {
                     width: 100,
                     height: 100,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(50),
                       ),
                       border: Border.all(
@@ -87,7 +89,7 @@ class _TeamMemberWidget extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
           Column(
@@ -95,7 +97,7 @@ class _TeamMemberWidget extends StatelessWidget {
             children: [
               BrandText(
                 member.fullName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   color: FlutterGameChallengeColors.textStroke,
                 ),
@@ -108,7 +110,7 @@ class _TeamMemberWidget extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

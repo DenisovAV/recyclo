@@ -2,9 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:recyclo/common.dart';
 
 class GameMessageDialog extends StatelessWidget {
-  final String title;
-  final String body;
-  final VoidCallback? onClose;
 
   const GameMessageDialog({
     required this.title,
@@ -12,14 +9,17 @@ class GameMessageDialog extends StatelessWidget {
     this.onClose,
     super.key,
   });
+  final String title;
+  final String body;
+  final VoidCallback? onClose;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
         width: 720,
-        padding: EdgeInsets.all(20),
-        margin: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: FlutterGameChallengeColors.detailsBackground,
           borderRadius: BorderRadius.circular(40),

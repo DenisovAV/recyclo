@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../game_models/trash_type.dart';
+import 'package:recyclo/clicker_game/game_models/trash_type.dart';
 
 class TargetCategories extends StatefulWidget {
   const TargetCategories({
     required this.trashType,
     this.animate = true,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final TrashType trashType;
   final bool animate;
