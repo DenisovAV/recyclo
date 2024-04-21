@@ -41,7 +41,7 @@ class ArtifactStatusIcon extends StatelessWidget {
           return Assets.images.googleWallet.image();
         }
 
-        if (ExtendedPlatform.isIos || ExtendedPlatform.isMacOs) {
+        if (ExtendedPlatform.isApple) {
           return Assets.images.appleWallet.image();
         }
 
