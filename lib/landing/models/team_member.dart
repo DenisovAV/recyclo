@@ -8,9 +8,11 @@ class TeamMember {
     required this.role,
     required this.photo,
     required this.color,
+    required this.profileUrl,
   });
   final String fullName;
   final String role;
   final AssetGenImage photo;
   final Color color;
+  final String profileUrl;
 }
