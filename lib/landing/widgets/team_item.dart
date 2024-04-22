@@ -4,6 +4,7 @@ import 'package:recyclo/landing/common/team_constants.dart';
 import 'package:recyclo/landing/models/team_member.dart';
 import 'package:recyclo/landing/widgets/brand_text.dart';
 import 'package:recyclo/landing/widgets/landing_item.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TeamItem extends StatelessWidget {
   const TeamItem({super.key});
@@ -37,9 +38,7 @@ class TeamItem extends StatelessWidget {
                 Wrap(
                   spacing: 30,
                   runSpacing: 30,
-                  children: TeamConstants.teams
-                      .map<Widget>(_TeamMemberWidget.new)
-                      .toList(),
+                  children: TeamConstants.teams.map<Widget>(_TeamMemberWidget.new).toList(),
                 ),
               ],
             ),
@@ -52,67 +51,78 @@ class TeamItem extends StatelessWidget {
 
 class _TeamMemberWidget extends StatelessWidget {
   const _TeamMemberWidget(this.member);
+
   final TeamMember member;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 500,
-      child: Row(
-        children: [
-          Container(
-            width: 104,
-            height: 104,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(52),
-              ),
-            ),
-            child: Stack(
-              children: [
-                member.photo.image(),
-                Center(
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(50),
-                      ),
-                      border: Border.all(
-                        width: 4,
-                        color: member.color,
-                      ),
-                    ),
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: _openMemberProfile,
+        child: SizedBox(
+          width: 500,
+          child: Row(
+            children: [
+              Container(
+                width: 104,
+                height: 104,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(52),
                   ),
                 ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            width: 15,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              BrandText(
-                member.fullName,
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: FlutterGameChallengeColors.textStroke,
+                child: Stack(
+                  children: [
+                    member.photo.image(),
+                    Center(
+                      child: Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50),
+                          ),
+                          border: Border.all(
+                            width: 4,
+                            color: member.color,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              BrandText(
-                member.role,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: FlutterGameChallengeColors.textStroke.withOpacity(0.5),
-                ),
+              const SizedBox(
+                width: 15,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    member.fullName,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: FlutterGameChallengeColors.textStroke,
+                    ),
+                  ),
+                  Text(
+                    member.role,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: FlutterGameChallengeColors.textStroke.withOpacity(0.5),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
+  }
+
+  void _openMemberProfile() {
+    launchUrl(Uri.parse(member.profileUrl));
   }
 }
