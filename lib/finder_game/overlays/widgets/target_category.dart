@@ -12,10 +12,10 @@ class TargetCategories extends StatefulWidget {
   final bool animate;
 
   @override
-  _TargetCategoriesState createState() => _TargetCategoriesState();
+  TargetCategoriesState createState() => TargetCategoriesState();
 }
 
-class _TargetCategoriesState extends State<TargetCategories>
+class TargetCategoriesState extends State<TargetCategories>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
