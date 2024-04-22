@@ -15,11 +15,11 @@ abstract class SettingsPersistence {
 
   Future<void> saveCurrentLocale(String value);
 
-  Future<void> saveMusicOn(bool value);
+  Future<void> saveMusicOn({required bool isMusicOn});
 
-  Future<void> setPenalty(bool value);
+  Future<void> setPenalty({required bool value});
 
-  Future<void> saveSoundsOn(bool value);
+  Future<void> saveSoundsOn({required bool soundsOn});
 
   Future<void> setGameDifficulty(GameDifficultyType difficulty);
 

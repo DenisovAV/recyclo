@@ -42,7 +42,7 @@ class Item extends PositionComponent with HasGameRef {
     // Do not draw anything for the body itself to ensure it's "transparent"
   }
 
-  void onCollected() async {
+  Future<void> onCollected() async {
     Effect getResizeEvent() {
       return SequenceEffect(
         [
@@ -59,14 +59,12 @@ class Item extends PositionComponent with HasGameRef {
             ),
           ),
         ],
-        infinite: false,
       );
     }
 
-    await trashSprite.add(getResizeEvent()
-      ..onComplete = () {
-        removeFromParent();
-      });
+    await trashSprite.add(
+      getResizeEvent()..onComplete = removeFromParent,
+    );
   }
 
   void onTryCollectItem(Color color) {
@@ -88,7 +86,6 @@ class Item extends PositionComponent with HasGameRef {
             ),
           ),
         ],
-        infinite: false,
         alternate: true,
       );
     }
@@ -103,7 +100,8 @@ class Item extends PositionComponent with HasGameRef {
       );
     }
 
-    trashSprite.add(getShakeEffect());
-    trashSprite.add(getColorEffect(color));
+    trashSprite
+      ..add(getShakeEffect())
+      ..add(getColorEffect(color));
   }
 }

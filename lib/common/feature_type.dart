@@ -1,7 +1,9 @@
 enum FeatureType {
-  googleWallet(true);
+  googleWallet(isEnabled: true);
 
-  const FeatureType(this.isEnabled);
+  const FeatureType({
+    required this.isEnabled,
+  });
 
   final bool isEnabled;
 }

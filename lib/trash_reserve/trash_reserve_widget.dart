@@ -11,37 +11,38 @@ class TrashReserveWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TrashReserveCubit, TrashReserveState>(
-        builder: (context, state) {
-      return Semantics(
-        label: context.l10n.resourcesLabel,
-        explicitChildNodes: true,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TrashReserveItemWidget(
-              type: ItemType.organic,
-              isRounded: true,
-              count: state.model.organic,
-            ),
-            TrashReserveItemWidget(
-              type: ItemType.plastic,
-              count: state.model.plastic,
-            ),
-            TrashReserveItemWidget(
-              type: ItemType.glass,
-              count: state.model.glass,
-            ),
-            TrashReserveItemWidget(
-              type: ItemType.paper,
-              count: state.model.paper,
-            ),
-            TrashReserveItemWidget(
-              type: ItemType.electronic,
-              count: state.model.electronics,
-            ),
-          ],
-        ),
-      );
-    });
+      builder: (context, state) {
+        return Semantics(
+          label: context.l10n.resourcesLabel,
+          explicitChildNodes: true,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TrashReserveItemWidget(
+                type: ItemType.organic,
+                isRounded: true,
+                count: state.model.organic,
+              ),
+              TrashReserveItemWidget(
+                type: ItemType.plastic,
+                count: state.model.plastic,
+              ),
+              TrashReserveItemWidget(
+                type: ItemType.glass,
+                count: state.model.glass,
+              ),
+              TrashReserveItemWidget(
+                type: ItemType.paper,
+                count: state.model.paper,
+              ),
+              TrashReserveItemWidget(
+                type: ItemType.electronic,
+                count: state.model.electronics,
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

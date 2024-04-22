@@ -8,8 +8,10 @@ import 'package:recyclo/settings/settings.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit(
-      this._settingsController, this._musicService, this._localisationsProvider)
-      : super(
+    this._settingsController,
+    this._musicService,
+    this._localisationsProvider,
+  ) : super(
           SettingsState(
             isMusicEnabled: _settingsController.musicOn.value,
             isSoundEffectsEnabled: _settingsController.soundsOn.value,
@@ -40,9 +42,9 @@ class SettingsCubit extends Cubit<SettingsState> {
     );
   }
 
-  void toggleSoundsOn() async {
+  Future<void> toggleSoundsOn() async {
     await _settingsController.toggleSoundsOn();
-    _musicService.playSound(Sounds.toggleSound);
+    await _musicService.playSound(Sounds.toggleSound);
   }
 
   void toggleMusicOn() {
@@ -51,8 +53,10 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   void changeLocale(RecycloLanguage? language) {
-    if (language != null && _localisationsProvider.isSupportedLocale(language))
+    if (language != null &&
+        _localisationsProvider.isSupportedLocale(language)) {
       _settingsController.changeLanguage(language.locale);
+    }
   }
 
   void togglePenalty() {

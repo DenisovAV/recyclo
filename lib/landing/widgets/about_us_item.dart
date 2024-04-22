@@ -9,19 +9,23 @@ class AboutUsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      final isSmallDevice = constraints.maxWidth < 800;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isSmallDevice = constraints.maxWidth < 800;
 
-      return LandingItem(
-        color: FlutterGameChallengeColors.aboutAppBackground,
-        child: Padding(
-          padding: EdgeInsets.all(isSmallDevice ? 10 : 50),
-          child: Center(
-            child: isSmallDevice ? _AboutUsMobile() : _AboutUsDesktop(),
+        return LandingItem(
+          color: FlutterGameChallengeColors.aboutAppBackground,
+          child: Padding(
+            padding: EdgeInsets.all(isSmallDevice ? 10 : 50),
+            child: Center(
+              child: isSmallDevice
+                  ? const _AboutUsMobile()
+                  : const _AboutUsDesktop(),
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
 
@@ -33,7 +37,7 @@ class _AboutUsDesktop extends StatelessWidget {
     final l10n = context.l10n;
 
     return ConstrainedBox(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxWidth: 900,
       ),
       child: Column(
@@ -41,17 +45,17 @@ class _AboutUsDesktop extends StatelessWidget {
           Center(
             child: BrandText(
               l10n.aboutAppRecycle,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 48,
                 color: FlutterGameChallengeColors.textStroke,
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Assets.images.exampleScreen.image(),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           LayoutBuilder(
@@ -62,23 +66,22 @@ class _AboutUsDesktop extends StatelessWidget {
               );
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
                 child: BrandText(
                   l10n.aboutAppRecycleContentTextColumnLeft,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     color: FlutterGameChallengeColors.textStroke,
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 30,
               ),
               Expanded(
@@ -87,7 +90,7 @@ class _AboutUsDesktop extends StatelessWidget {
                   children: [
                     BrandText(
                       l10n.aboutAppRecycleContentTextColumnRight,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         color: FlutterGameChallengeColors.textStroke,
                       ),
@@ -102,7 +105,7 @@ class _AboutUsDesktop extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -121,29 +124,29 @@ class _AboutUsMobile extends StatelessWidget {
         Center(
           child: BrandText(
             l10n.aboutAppRecycle,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 32,
               color: FlutterGameChallengeColors.textStroke,
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 25,
         ),
         Assets.images.exampleScreenMobile.image(),
-        SizedBox(
+        const SizedBox(
           height: 25,
         ),
         BrandText(
           l10n.aboutAppRecycleContentTextColumnLeft,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             color: FlutterGameChallengeColors.textStroke,
           ),
         ),
         BrandText(
           l10n.aboutAppRecycleContentTextColumnRight,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             color: FlutterGameChallengeColors.textStroke,
           ),

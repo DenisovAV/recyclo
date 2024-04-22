@@ -46,7 +46,8 @@ class ArtifactStatusIcon extends StatelessWidget {
         }
 
         throw UnimplementedError(
-            'Wallet is supported only in Android and iOS platforms');
+          'Wallet is supported only in Android and iOS platforms',
+        );
     }
   }
 

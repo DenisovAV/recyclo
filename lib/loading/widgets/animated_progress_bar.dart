@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 /// {@endtemplate}
 class AnimatedProgressBar extends StatelessWidget {
   /// {@macro animated_progress_bar}
-  AnimatedProgressBar({
+  const AnimatedProgressBar({
     required this.progress,
     required this.backgroundColor,
     required this.foregroundColor,

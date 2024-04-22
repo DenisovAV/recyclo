@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/landing/index.dart';
 import 'package:recyclo/landing/widgets/artefacts_item.dart';
@@ -39,7 +38,8 @@ class _MainPageState extends State<MainPage> {
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height,
-                child: Assets.images.cloudsBackground.image(fit: BoxFit.fitHeight),
+                child:
+                    Assets.images.cloudsBackground.image(fit: BoxFit.fitHeight),
               ),
               ListView(
                 controller: _controller,

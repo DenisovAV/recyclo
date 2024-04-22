@@ -15,11 +15,11 @@ class TimerReductionOrIncrementEffect extends StatefulWidget {
   static const idIncrement = 'timer_increment_overlay';
 
   @override
-  _TimerReductionOrIncrementEffectState createState() =>
-      _TimerReductionOrIncrementEffectState();
+  TimerReductionOrIncrementEffectState createState() =>
+      TimerReductionOrIncrementEffectState();
 }
 
-class _TimerReductionOrIncrementEffectState
+class TimerReductionOrIncrementEffectState
     extends State<TimerReductionOrIncrementEffect>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;

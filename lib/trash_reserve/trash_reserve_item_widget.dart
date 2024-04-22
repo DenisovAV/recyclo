@@ -3,6 +3,7 @@ import 'package:recyclo/common.dart';
 
 class TrashReserveItemWidget extends StatefulWidget {
   const TrashReserveItemWidget({
+    super.key,
     required this.type,
     required this.count,
     this.isRounded = false,
@@ -110,19 +111,20 @@ class _TrashReserveItemWidgetState extends State<TrashReserveItemWidget>
                 height: 24,
               ),
               AnimatedBuilder(
-                  animation: _animation,
-                  builder: (context, child) {
-                    return Text(
-                      _animation.value.toInt() >= 1000
-                          ? "${_animation.value ~/ 1000}K"
-                          : _animation.value.toInt().toString(),
-                      style: const TextStyle(
-                        color: FlutterGameChallengeColors.textStroke,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    );
-                  }),
+                animation: _animation,
+                builder: (context, child) {
+                  return Text(
+                    _animation.value.toInt() >= 1000
+                        ? '${_animation.value ~/ 1000}K'
+                        : _animation.value.toInt().toString(),
+                    style: const TextStyle(
+                      color: FlutterGameChallengeColors.textStroke,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),

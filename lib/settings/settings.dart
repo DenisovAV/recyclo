@@ -3,6 +3,9 @@ import 'package:recyclo/common.dart';
 import 'package:recyclo/settings/persistence/settings_persistence.dart';
 
 class SettingsController {
+  SettingsController(this._store) {
+    _loadStateFromPersistence();
+  }
   final SettingsPersistence _store;
 
   ValueNotifier<bool> soundsOn = ValueNotifier(false);
@@ -12,23 +15,19 @@ class SettingsController {
   ValueNotifier<GameDifficultyType> gameDifficulty =
       ValueNotifier(GameDifficultyType.easy);
 
-  SettingsController(this._store) {
-    _loadStateFromPersistence();
-  }
-
   Future<void> toggleMusicOn() {
     musicOn.value = !musicOn.value;
-    return _store.saveMusicOn(musicOn.value);
+    return _store.saveMusicOn(isMusicOn: musicOn.value);
   }
 
   Future<void> toggleSoundsOn() {
     soundsOn.value = !soundsOn.value;
-    return _store.saveSoundsOn(soundsOn.value);
+    return _store.saveSoundsOn(soundsOn: soundsOn.value);
   }
 
   Future<void> togglePenaltyOn() {
     penaltyOn.value = !penaltyOn.value;
-    return _store.setPenalty(penaltyOn.value);
+    return _store.setPenalty(value: penaltyOn.value);
   }
 
   Future<void> changeLanguage(Locale locale) {

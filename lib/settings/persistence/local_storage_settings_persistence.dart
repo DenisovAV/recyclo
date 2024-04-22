@@ -1,12 +1,12 @@
 import 'package:recyclo/common/entities/game_difficulty_level_type.dart';
+import 'package:recyclo/settings/persistence/settings_persistence.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'settings_persistence.dart';
 
 class LocalStorageSettingsPersistence extends SettingsPersistence {
   late final SharedPreferences _sharedPreferences;
   bool _isInitialized = false;
 
+  @override
   Future<void> initialize() async {
     if (_isInitialized) {
       return;
@@ -39,13 +39,13 @@ class LocalStorageSettingsPersistence extends SettingsPersistence {
   }
 
   @override
-  Future<void> saveMusicOn(bool value) async {
-    await _sharedPreferences.setBool('musicOn', value);
+  Future<void> saveMusicOn({required bool isMusicOn}) async {
+    await _sharedPreferences.setBool('musicOn', isMusicOn);
   }
 
   @override
-  Future<void> saveSoundsOn(bool value) async {
-    await _sharedPreferences.setBool('soundsOn', value);
+  Future<void> saveSoundsOn({required bool soundsOn}) async {
+    await _sharedPreferences.setBool('soundsOn', soundsOn);
   }
 
   @override
@@ -54,7 +54,7 @@ class LocalStorageSettingsPersistence extends SettingsPersistence {
   }
 
   @override
-  Future<void> setPenalty(bool value) async {
+  Future<void> setPenalty({required bool value}) async {
     await _sharedPreferences.setBool('penaltyOn', value);
   }
 

@@ -2,14 +2,13 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:recyclo/common.dart';
-import 'package:recyclo/firebase_options.dart';
-import 'package:recyclo/service_provider.dart';
+
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
+import 'package:recyclo/common/assets/assets.gen.dart';
+import 'package:recyclo/service_provider.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -28,9 +27,6 @@ class AppBlocObserver extends BlocObserver {
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
 
   if (!kIsWeb) {
     await FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
