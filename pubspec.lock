@@ -50,7 +50,7 @@ packages:
     source: hosted
     version: "2.11.0"
   audioplayers:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: audioplayers
       sha256: c05c6147124cd63e725e861335a8b4d57300b80e6e92cea7c145c739223bbaef
@@ -838,7 +838,7 @@ packages:
     source: hosted
     version: "1.5.1"
   provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: provider
       sha256: c8a055ee5ce3fd98d6fc872478b03823ffdb448699c6ebdbbc71d59b596fd48c
