@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:recyclo/settings/settings.dart';
 
 class MusicService {
-
   MusicService(
     this._createAudioPlayer,
     this._settingsController,
@@ -15,6 +14,7 @@ class MusicService {
     _settingsController.musicOn.addListener(_updateIsMusicEnabled);
     _settingsController.soundsOn.addListener(_updateIsSoundsEnabled);
   }
+
   final AudioPlayer _musicPlayer;
   final AudioPlayer Function() _createAudioPlayer;
   final SettingsController _settingsController;
@@ -25,6 +25,7 @@ class MusicService {
   ValueNotifier<AppLifecycleState>? _lifecycleNotifier;
   StreamSubscription<void>? _songCompletedSubscription;
 
+  // ignore: avoid_setters_without_getters
   set lifecycleNotifier(ValueNotifier<AppLifecycleState> value) {
     _lifecycleNotifier = value;
 
