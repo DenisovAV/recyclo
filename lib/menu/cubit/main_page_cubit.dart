@@ -1,24 +1,29 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:recyclo/menu/cubit/main_page_state.dart';
 import 'package:recyclo/audio/music_service.dart';
 import 'package:recyclo/audio/songs.dart';
 import 'package:recyclo/audio/sounds.dart';
-import 'package:recyclo/catcher_game/catcher_game_page.dart';
-import 'package:recyclo/clicker_game/clicker_game_page.dart';
-import 'package:recyclo/finder_game/finder_game_page.dart';
 import 'package:recyclo/menu/cubit/main_page_state.dart';
 
-class MainPageCubit extends Cubit<MainPageState> {
-  final MusicService _musicService;
+typedef MainPageGameNavigationCallback = Future<void> Function(
+  GameType gameType,
+);
 
+enum GameType {
+  catcher,
+  clicker,
+  finder,
+}
+
+class MainPageCubit extends Cubit<MainPageState> {
   MainPageCubit(
     this._musicService,
   ) : super(MainPageInitialState()) {
     _initialize();
   }
 
-  void _initialize() async {
+  final MusicService _musicService;
+
+  Future<void> _initialize() async {
     await _musicService.stopMusic();
     await _musicService.playSong(Songs.mainMenuAmbient);
   }
@@ -53,29 +58,35 @@ class MainPageCubit extends Cubit<MainPageState> {
     emit(MainPageSettingsState());
   }
 
-  void navigateToCatcherGame(BuildContext context) async {
+  Future<void> navigateToCatcherGame(
+    MainPageGameNavigationCallback context,
+  ) async {
     await _musicService.playSound(Sounds.buttonTap);
     await _musicService.playSong(Songs.catcherTheme);
 
-    await Navigator.of(context).push<void>(CatcherGamePage.route());
+    await context(GameType.catcher);
 
     await _musicService.playSong(Songs.mainMenuAmbient);
   }
 
-  void navigateToClickerGame(BuildContext context) async {
+  Future<void> navigateToClickerGame(
+    MainPageGameNavigationCallback context,
+  ) async {
     await _musicService.playSound(Sounds.buttonTap);
     await _musicService.playSong(Songs.clickerTheme);
 
-    await Navigator.of(context).push<void>(ClickerGamePage.route());
+    await context(GameType.clicker);
 
     await _musicService.playSong(Songs.mainMenuAmbient);
   }
 
-  void navigateToFinderGame(BuildContext context) async {
+  Future<void> navigateToFinderGame(
+    MainPageGameNavigationCallback onGameNavigate,
+  ) async {
     await _musicService.playSound(Sounds.buttonTap);
     await _musicService.playSong(Songs.finderTheme);
 
-    await Navigator.of(context).push<void>(FinderGamePage.route());
+    await onGameNavigate(GameType.finder);
 
     await _musicService.playSong(Songs.mainMenuAmbient);
   }

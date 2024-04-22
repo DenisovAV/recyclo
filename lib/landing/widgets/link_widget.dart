@@ -4,12 +4,11 @@ import 'package:recyclo/landing/common/team_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LinkWidget extends StatelessWidget {
-  final Color linkColor;
-
   const LinkWidget({
     super.key,
     required this.linkColor,
   });
+  final Color linkColor;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,6 @@ class LinkWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(20)),
               border: Border.all(
-                width: 1,
                 color: linkColor,
               ),
             ),

@@ -3,12 +3,12 @@ import 'package:recyclo/common.dart';
 import 'package:recyclo/settings/settings.dart';
 
 class AppLocalizationsProvider extends ChangeNotifier {
-  final SettingsController _controller;
-  RecycloLanguage? _locale;
 
   AppLocalizationsProvider(this._controller) {
     _controller.currentLanguage.addListener(getLocale);
   }
+  final SettingsController _controller;
+  RecycloLanguage? _locale;
 
   RecycloLanguage get currentLanguage {
     if (_locale != null) {

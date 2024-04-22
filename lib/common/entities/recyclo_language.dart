@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class RecycloLanguage {
-  final Locale locale;
-  final String localeName;
-
-  RecycloLanguage({
+  const RecycloLanguage({
     required this.locale,
     required this.localeName,
   });
+  final Locale locale;
+  final String localeName;
 
   @override
   bool operator ==(Object other) =>

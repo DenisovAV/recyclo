@@ -19,6 +19,7 @@ class TrashReserveRepository {
 
   TrashReserveModel get reservedTrash => _reservedTrash;
 
+  // ignore: avoid_setters_without_getters
   static set setDefaultReservedTrash(int value) {
     _defaultReservedTrash = value;
   }

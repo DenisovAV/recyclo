@@ -3,34 +3,32 @@ import 'package:recyclo/common.dart';
 import 'package:recyclo/landing/widgets/brand_text.dart';
 
 class MobileVerticalWidget extends StatelessWidget {
-  final String text;
-  final Widget image;
-  final String? title;
-
   const MobileVerticalWidget({
     super.key,
     required this.text,
     required this.image,
     this.title,
   });
+  final String text;
+  final Widget image;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         if (title != null) ...[
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           BrandText(
             title!,
-            style: TextStyle(
+            style: const TextStyle(
               color: FlutterGameChallengeColors.textStroke,
               fontSize: 24,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
         ],
@@ -42,18 +40,18 @@ class MobileVerticalWidget extends StatelessWidget {
           ),
         ),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 30),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
           height: 4,
           color: FlutterGameChallengeColors.textStroke,
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           child: BrandText(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               color: FlutterGameChallengeColors.textStroke,
             ),

@@ -1,11 +1,7 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
 class BrandText extends StatelessWidget {
-  final String text;
-  final TextStyle? style;
-  final TextAlign? textAlign;
 
   const BrandText(
     this.text, {
@@ -13,6 +9,9 @@ class BrandText extends StatelessWidget {
     this.style,
     this.textAlign,
   });
+  final String text;
+  final TextStyle? style;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {

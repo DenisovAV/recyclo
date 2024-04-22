@@ -4,7 +4,10 @@ import 'package:get_it/get_it.dart';
 import 'package:recyclo/app/view/app.dart';
 import 'package:recyclo/artifacts/cubit/artifacts_cubit.dart';
 import 'package:recyclo/artifacts/widgets/artifacts_list_page.dart';
+import 'package:recyclo/catcher_game/catcher_game_page.dart';
+import 'package:recyclo/clicker_game/clicker_game_page.dart';
 import 'package:recyclo/common.dart';
+import 'package:recyclo/finder_game/finder_game_page.dart';
 import 'package:recyclo/landing/index.dart';
 import 'package:recyclo/menu/cubit/main_page_cubit.dart';
 import 'package:recyclo/menu/cubit/main_page_state.dart';
@@ -43,7 +46,7 @@ class MainMenuPage extends StatelessWidget {
               canPop: false,
               onPopInvoked: (_) async {
                 _onBackBtn(state, context);
-                return Future.value(false);
+                return Future.value();
               },
               child: Stack(
                 fit: StackFit.expand,
@@ -165,25 +168,57 @@ class _ChooseGameContent extends StatelessWidget {
             MenuItem(
               text: context.l10n.gameModeCatcherItemTitle,
               assetId: Assets.images.gameModeCathcer.path,
-              onTap: () => BlocProvider.of<MainPageCubit>(context)
-                  .navigateToCatcherGame(context),
+              onTap: () =>
+                  BlocProvider.of<MainPageCubit>(context).navigateToCatcherGame(
+                (gameType) => _handleNavigateToGameType(
+                  gameType: gameType,
+                  context: context,
+                ),
+              ),
             ),
             MenuItem(
               text: context.l10n.gameModeClickerItemTitle,
               assetId: Assets.images.gameModeClicker.path,
-              onTap: () => BlocProvider.of<MainPageCubit>(context)
-                  .navigateToClickerGame(context),
+              onTap: () =>
+                  BlocProvider.of<MainPageCubit>(context).navigateToClickerGame(
+                (gameType) => _handleNavigateToGameType(
+                  gameType: gameType,
+                  context: context,
+                ),
+              ),
             ),
             MenuItem(
               text: context.l10n.gameModeFinderItemTitle,
               assetId: Assets.images.gameModeFinder.path,
-              onTap: () => BlocProvider.of<MainPageCubit>(context)
-                  .navigateToFinderGame(context),
+              onTap: () =>
+                  BlocProvider.of<MainPageCubit>(context).navigateToFinderGame(
+                (gameType) => _handleNavigateToGameType(
+                  gameType: gameType,
+                  context: context,
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _handleNavigateToGameType({
+    required GameType gameType,
+    required BuildContext context,
+  }) async {
+    switch (gameType) {
+      case GameType.catcher:
+        await Navigator.of(context).push<void>(CatcherGamePage.route());
+        break;
+      case GameType.clicker:
+        await Navigator.of(context).push<void>(ClickerGamePage.route());
+        break;
+      case GameType.finder:
+        await Navigator.of(context).push<void>(FinderGamePage.route());
+        break;
+    }
   }
 }
 
