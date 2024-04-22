@@ -43,11 +43,6 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
   @override
   void initState() {
     settingsPersistence = ServiceProvider.get<SettingsPersistence>();
-    print(
-      settingsPersistence.getGameDifficulty(
-        defaultValue: GameDifficultyType.easy,
-      ),
-    );
     super.initState();
   }
 

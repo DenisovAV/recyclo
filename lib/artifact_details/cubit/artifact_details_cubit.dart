@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/artifact_details/cubit/artifact_details_state.dart';
 import 'package:recyclo/artifacts/artifacts_model.dart';
@@ -58,7 +60,7 @@ class ArtifactDetailsCubit extends Cubit<ArtifactDetailsState> {
         (state as ArtifactDetailsLoadedState).copyWithModel(updatedArtifact),
       );
     } catch (e) {
-      print("Failed to add to wallet: '$e'.");
+      log("Failed to add to wallet: '$e'.");
     }
   }
 }
