@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:recyclo/app/view/app.dart';
 import 'package:recyclo/artifacts/cubit/artifacts_cubit.dart';
 import 'package:recyclo/artifacts/widgets/artifacts_list_page.dart';
@@ -10,11 +11,10 @@ import 'package:recyclo/menu/cubit/main_page_state.dart';
 import 'package:recyclo/menu/view/menu_item.dart';
 import 'package:recyclo/menu/widgets/main_menu_background.dart';
 import 'package:recyclo/service_provider.dart';
-import 'package:recyclo/trash_reserve/cubit/trash_reserve_cubit.dart';
-import 'package:recyclo/trash_reserve/trash_reserve_widget.dart';
 import 'package:recyclo/settings/cubit/settings_cubit.dart';
 import 'package:recyclo/settings/settings_page.dart';
-import 'package:get_it/get_it.dart';
+import 'package:recyclo/trash_reserve/cubit/trash_reserve_cubit.dart';
+import 'package:recyclo/trash_reserve/trash_reserve_widget.dart';
 
 class MainMenuPage extends StatelessWidget {
   const MainMenuPage({super.key});
@@ -89,7 +89,7 @@ class MainMenuPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        TrashReserveWidget(),
+                        const TrashReserveWidget(),
                       ],
                     ),
                   ),
@@ -208,15 +208,17 @@ class _TutorialContent extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
       builder: (context, v, child) {
-        return LayoutBuilder(builder: (context, constraints) {
-          return Transform.translate(
-            offset: Offset(
-              0,
-              constraints.maxHeight * v,
-            ),
-            child: child,
-          );
-        });
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return Transform.translate(
+              offset: Offset(
+                0,
+                constraints.maxHeight * v,
+              ),
+              child: child,
+            );
+          },
+        );
       },
       child: Semantics(
         image: true,
@@ -224,7 +226,7 @@ class _TutorialContent extends StatelessWidget {
         label: context.l10n.tutorialDescription,
         child: Container(
           width: 600.0,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: FlutterGameChallengeColors.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40),
@@ -245,13 +247,14 @@ class _TutorialContent extends StatelessWidget {
               ),
             ),
           ),
-          padding: EdgeInsets.all(28),
-          child: Column(
-            children: [
-              Assets.images.howToPlayWithoutSpaces.image(
-                fit: BoxFit.contain,
-              ),
-            ],
+          padding: const EdgeInsets.all(28),
+          child: Flexible(
+            child: Semantics(
+              image: true,
+              excludeSemantics: true,
+              label: context.l10n.tutorialDescription,
+              child: Assets.images.howToPlayWithoutSpaces.image(),
+            ),
           ),
         ),
       ),
