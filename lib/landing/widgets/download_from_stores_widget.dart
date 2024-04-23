@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/widgets/download_button.dart';
 import 'package:recyclo/loading/loading.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class DownloadFromStoresWidget extends StatelessWidget {
   const DownloadFromStoresWidget({super.key});
@@ -13,11 +13,11 @@ class DownloadFromStoresWidget extends StatelessWidget {
       runSpacing: 15,
       alignment: WrapAlignment.center,
       children: [
-        _DownloadButton(
+        DownloadButton(
           image: Assets.images.downloadGooglePlayButton.image(),
           url: 'https://play.google.com/store/apps/details?id=dev.recyclo.games',
         ),
-        _DownloadButton(
+        DownloadButton(
           image: Assets.images.downloadAppleStoreButton.image(),
           url: 'https://apps.apple.com/de/app/recyclo-game/id6479239285',
         ),
@@ -28,39 +28,6 @@ class DownloadFromStoresWidget extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-class _DownloadButton extends StatelessWidget {
-  const _DownloadButton({
-    required this.image,
-    required this.url,
-  });
-
-  final Widget image;
-  final String url;
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: Semantics(
-        link: true,
-        label: url,
-        enabled: true,
-        excludeSemantics: true,
-        child: GestureDetector(
-          onTap: () {
-            _goToLink(url);
-          },
-          child: image,
-        ),
-      ),
-    );
-  }
-
-  void _goToLink(String link) {
-    launchUrl(Uri.parse(link));
   }
 }
 
