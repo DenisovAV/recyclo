@@ -63,7 +63,7 @@ class _MainPageState extends State<MainPage> {
                   const SizedBox(
                     height: 50,
                   ),
-                  const TeamItem(),
+                  const TeamWidget(),
                   const SizedBox(
                     height: 50,
                   ),
