@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 import 'package:recyclo/common/assets/assets.gen.dart';
+import 'package:recyclo/common/extensions.dart';
 import 'package:recyclo/service_provider.dart';
 
 class AppBlocObserver extends BlocObserver {
@@ -27,7 +28,6 @@ class AppBlocObserver extends BlocObserver {
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-
   if (!kIsWeb) {
     await FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
   }
@@ -37,6 +37,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   };
 
   await ServiceProvider.initialize();
+  await ExtendedPlatform.initialize();
 
   Bloc.observer = AppBlocObserver();
 

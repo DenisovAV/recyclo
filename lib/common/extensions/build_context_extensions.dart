@@ -4,11 +4,12 @@ import 'package:recyclo/common.dart';
 extension BuildContextExtensions on BuildContext {
   TextStyle textStyle({
     double fontSize = 46,
+    double height = 2,
   }) =>
       TextStyle(
         fontSize: fontSize,
         fontFamily: 'Sniglet',
-        height: 2,
+        height: height,
         color: FlutterGameChallengeColors.white,
         shadows: const [
           Shadow(

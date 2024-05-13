@@ -20,6 +20,10 @@ class App extends StatelessWidget {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
+      if (ExtendedPlatform.isTv) ...[
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ],
     ]);
     return AppLifecycleObserver(
       child: MultiBlocProvider(
@@ -42,7 +46,8 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AppLocalizationsProvider>(
-      create: (_) => ServiceProvider.get<AppLocalizationsProvider>()..getLocale(),
+      create: (_) =>
+          ServiceProvider.get<AppLocalizationsProvider>()..getLocale(),
       child: Consumer<AppLocalizationsProvider>(
         builder: (context, provider, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -65,7 +70,7 @@ class AppView extends StatelessWidget {
             textTheme: GoogleFonts.poppinsTextTheme(),
           ),
           locale: provider.currentLanguage.locale,
-          localizationsDelegates:  provider.localizationsDelegates,
+          localizationsDelegates: provider.localizationsDelegates,
           supportedLocales: provider.supportLocales,
           home: const LoadingPage(),
         ),

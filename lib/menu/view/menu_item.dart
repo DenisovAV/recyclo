@@ -5,6 +5,7 @@ class MenuItem extends StatelessWidget {
   const MenuItem({
     required this.text,
     required this.onTap,
+    this.autofocus = false,
     this.assetId,
     super.key,
   });
@@ -12,6 +13,7 @@ class MenuItem extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
   final String? assetId;
+  final bool autofocus;
 
   @override
   Widget build(BuildContext context) {
