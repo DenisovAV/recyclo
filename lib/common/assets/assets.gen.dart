@@ -106,6 +106,14 @@ class $AssetsImagesGen {
   AssetGenImage get artifactShampoo =>
       const AssetGenImage('assets/images/artifact_shampoo.png');
 
+  /// File path: assets/images/artifacts.png
+  AssetGenImage get artifacts =>
+      const AssetGenImage('assets/images/artifacts.png');
+
+  /// File path: assets/images/artifacts_selected.png
+  AssetGenImage get artifactsSelected =>
+      const AssetGenImage('assets/images/artifacts_selected.png');
+
   $AssetsImagesCatcherGen get catcher => const $AssetsImagesCatcherGen();
   $AssetsImagesClickerGen get clicker => const $AssetsImagesClickerGen();
 
@@ -171,6 +179,13 @@ class $AssetsImagesGen {
   /// File path: assets/images/game_mode_finder.png
   AssetGenImage get gameModeFinder =>
       const AssetGenImage('assets/images/game_mode_finder.png');
+
+  /// File path: assets/images/games.png
+  AssetGenImage get games => const AssetGenImage('assets/images/games.png');
+
+  /// File path: assets/images/games_selected.png
+  AssetGenImage get gamesSelected =>
+      const AssetGenImage('assets/images/games_selected.png');
 
   /// File path: assets/images/glass.png
   AssetGenImage get glass => const AssetGenImage('assets/images/glass.png');
@@ -242,6 +257,26 @@ class $AssetsImagesGen {
   AssetGenImage get screenshotGame3 =>
       const AssetGenImage('assets/images/screenshot_game_3.png');
 
+  /// File path: assets/images/settings.png
+  AssetGenImage get settings =>
+      const AssetGenImage('assets/images/settings.png');
+
+  /// File path: assets/images/settings_selected.png
+  AssetGenImage get settingsSelected =>
+      const AssetGenImage('assets/images/settings_selected.png');
+
+  /// File path: assets/images/tutorial.png
+  AssetGenImage get tutorial =>
+      const AssetGenImage('assets/images/tutorial.png');
+
+  /// File path: assets/images/tutorial_selected.png
+  AssetGenImage get tutorialSelected =>
+      const AssetGenImage('assets/images/tutorial_selected.png');
+
+  /// File path: assets/images/tv_background.png
+  AssetGenImage get tvBackground =>
+      const AssetGenImage('assets/images/tv_background.png');
+
   /// File path: assets/images/up.png
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
 
@@ -280,6 +315,8 @@ class $AssetsImagesGen {
         artifactNewspaper,
         artifactPlant,
         artifactShampoo,
+        artifacts,
+        artifactsSelected,
         clouds,
         cloudsBackground,
         craftingScreen,
@@ -297,6 +334,8 @@ class $AssetsImagesGen {
         gameModeCathcer,
         gameModeClicker,
         gameModeFinder,
+        games,
+        gamesSelected,
         glass,
         googleWallet,
         hole,
@@ -316,6 +355,11 @@ class $AssetsImagesGen {
         screenshotGame1,
         screenshotGame2,
         screenshotGame3,
+        settings,
+        settingsSelected,
+        tutorial,
+        tutorialSelected,
+        tvBackground,
         up,
         viewInGoogleWalletAndroid,
         vityaPhoto,

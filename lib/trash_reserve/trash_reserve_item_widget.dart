@@ -95,9 +95,9 @@ class _TrashReserveItemWidgetState extends State<TrashReserveItemWidget>
             ),
           ),
           borderRadius: widget.isRounded
-              ? const BorderRadius.only(
-                  bottomLeft: Radius.circular(12),
-                  topLeft: Radius.circular(12),
+              ? BorderRadius.only(
+                  bottomLeft: const Radius.circular(12),
+                  topLeft: Radius.circular(ExtendedPlatform.isApple ? 12 : 0),
                 )
               : null,
         ),
