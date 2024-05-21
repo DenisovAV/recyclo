@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/app/view/app.dart';
 import 'package:recyclo/artifact_details/cubit/artifact_details_cubit.dart';
-import 'package:recyclo/artifact_details/widgets/artifact_details.dart';
+import 'package:recyclo/artifact_details/widgets/artifact_details/artifact_details.dart';
 import 'package:recyclo/artifacts/artifacts_model.dart';
 import 'package:recyclo/artifacts/cubit/artifacts_cubit.dart';
 import 'package:recyclo/artifacts/cubit/artifacts_state.dart';
@@ -185,10 +185,10 @@ class _ArtifactItem extends StatelessWidget {
           excludeSemantics: true,
           child: GestureDetector(
             onTap: () {
-              Navigator.of(kNestedNavigatorKey.currentContext!).push(
+              Navigator.of(context).push(
                 MaterialPageRoute<void>(
                   builder: (_) => BlocProvider<ArtifactDetailsCubit>(
-                    create: (_) => ServiceProvider.get<ArtifactDetailsCubit>()
+                    create: (_) => ServiceProvider.get()
                       ..initialize(
                         name: name,
                         imagePath: imagePath,
@@ -199,6 +199,7 @@ class _ArtifactItem extends StatelessWidget {
                   ),
                 ),
               );
+
               BlocProvider.of<MainPageCubit>(context)
                   .navigateToArtifactDetails();
             },

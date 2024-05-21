@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/app/view/app.dart';
 import 'package:recyclo/artifact_details/cubit/artifact_details_cubit.dart';
-import 'package:recyclo/artifact_details/widgets/artifact_details.dart';
+import 'package:recyclo/artifact_details/widgets/artifact_details/artifact_details.dart';
 import 'package:recyclo/artifacts/artifacts_model.dart';
 import 'package:recyclo/artifacts/cubit/artifacts_cubit.dart';
 import 'package:recyclo/artifacts/cubit/artifacts_state.dart';
@@ -15,7 +15,8 @@ class ArtifactsListPageMobile extends StatefulWidget {
   const ArtifactsListPageMobile({super.key});
 
   @override
-  State<ArtifactsListPageMobile> createState() => _ArtifactsListPageMobileState();
+  State<ArtifactsListPageMobile> createState() =>
+      _ArtifactsListPageMobileState();
 }
 
 class _ArtifactsListPageMobileState extends State<ArtifactsListPageMobile> {
@@ -127,7 +128,11 @@ class _ArtifactItem extends StatelessWidget {
               builder: (_) => BlocProvider<ArtifactDetailsCubit>(
                 create: (_) => ServiceProvider.get<ArtifactDetailsCubit>()
                   ..initialize(
-                      name: name, imagePath: imagePath, description: description, model: model,),
+                    name: name,
+                    imagePath: imagePath,
+                    description: description,
+                    model: model,
+                  ),
                 child: const ArtifactDetails(),
               ),
             ),

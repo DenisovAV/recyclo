@@ -12,8 +12,8 @@ import 'package:recyclo/artifacts/widgets/artifact_status_icon.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/common/feature_type.dart';
 
-class ArtifactDetails extends StatelessWidget {
-  const ArtifactDetails({
+class ArtifactDetailsMobile extends StatelessWidget {
+  const ArtifactDetailsMobile({
     super.key,
   });
 

@@ -78,7 +78,8 @@ class _MainMenuPageTvState extends State<MainMenuPageTv> {
                       child: switch (state) {
                         MainPageInitialState() => _MainMenuContent(),
                         MainPageChooseGameState() => _ChooseGameContent(),
-                        MainPageArtifactDetailsState() => const SizedBox(),
+                        MainPageArtifactDetailsState() =>
+                          const _ArtifactsContent(),
                         MainPageArtifactsState() => const _ArtifactsContent(),
                         MainPageTutorialState() => const SizedBox(),
                         MainPageSettingsState() => const SizedBox(),
