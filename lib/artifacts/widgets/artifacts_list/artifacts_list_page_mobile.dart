@@ -11,14 +11,14 @@ import 'package:recyclo/common.dart';
 import 'package:recyclo/menu/cubit/main_page_cubit.dart';
 import 'package:recyclo/service_provider.dart';
 
-class ArtifactsListPage extends StatefulWidget {
-  const ArtifactsListPage({super.key});
+class ArtifactsListPageMobile extends StatefulWidget {
+  const ArtifactsListPageMobile({super.key});
 
   @override
-  State<ArtifactsListPage> createState() => _ArtifactsListPageState();
+  State<ArtifactsListPageMobile> createState() => _ArtifactsListPageMobileState();
 }
 
-class _ArtifactsListPageState extends State<ArtifactsListPage> {
+class _ArtifactsListPageMobileState extends State<ArtifactsListPageMobile> {
   final _heroController = HeroController();
 
   @override

@@ -11,16 +11,6 @@ class MainMenuBackground extends StatefulWidget {
     super.key,
   });
 
-  factory MainMenuBackground.withoutEarth({
-    bool isHighlighted = false,
-    bool isCompact = false,
-  }) =>
-      MainMenuBackground(
-        isHighlighted: isHighlighted,
-        isCompact: isCompact,
-        isShowingEarth: false,
-      );
-
   final bool isHighlighted;
   final bool isCompact;
   final bool isShowingEarth;

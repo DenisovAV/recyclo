@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/app/view/app.dart';
 import 'package:recyclo/artifacts/cubit/artifacts_cubit.dart';
-import 'package:recyclo/artifacts/widgets/artifacts_list_page.dart';
+import 'package:recyclo/artifacts/widgets/artifacts_list/artifacts_list_page.dart';
 import 'package:recyclo/catcher_game/catcher_game_page.dart';
 import 'package:recyclo/clicker_game/clicker_game_page.dart';
 import 'package:recyclo/common.dart';
@@ -50,8 +50,8 @@ class MainMenuPageMobile extends StatelessWidget {
                       child: switch (state) {
                         MainPageInitialState() => _MainMenuContent(),
                         MainPageChooseGameState() => _ChooseGameContent(),
-                        MainPageArtifactDetailsState() => _ArtifactsContent(),
-                        MainPageArtifactsState() => _ArtifactsContent(),
+                        MainPageArtifactDetailsState() => const ArtifactsListPage(),
+                        MainPageArtifactsState() => const SizedBox(),
                         MainPageTutorialState() => _TutorialContent(),
                         MainPageSettingsState() => _SettingsContent(),
                       },
@@ -206,16 +206,6 @@ class _ChooseGameContent extends StatelessWidget {
         await Navigator.of(context).push<void>(FinderGamePage.route());
         break;
     }
-  }
-}
-
-class _ArtifactsContent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider<ArtifactsCubit>(
-      create: (_) => ServiceProvider.get<ArtifactsCubit>(),
-      child: const ArtifactsListPage(),
-    );
   }
 }
 

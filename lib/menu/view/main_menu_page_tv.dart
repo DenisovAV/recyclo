@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/app/view/app.dart';
+import 'package:recyclo/artifacts/cubit/artifacts_cubit.dart';
+import 'package:recyclo/artifacts/widgets/artifacts_list/artifacts_list_page.dart';
 import 'package:recyclo/catcher_game/catcher_game_page.dart';
 import 'package:recyclo/clicker_game/clicker_game_page.dart';
 import 'package:recyclo/common.dart';
@@ -9,8 +11,11 @@ import 'package:recyclo/finder_game/finder_game_page.dart';
 import 'package:recyclo/landing/app/landing_app.dart';
 import 'package:recyclo/menu/cubit/main_page_cubit.dart';
 import 'package:recyclo/menu/cubit/main_page_state.dart';
+import 'package:recyclo/menu/widgets/main_menu_background_tv.dart';
+import 'package:recyclo/service_provider.dart';
 import 'package:recyclo/trash_reserve/trash_reserve_widget.dart';
 import 'package:recyclo/widgets/focusable.dart';
+import 'package:recyclo/widgets/scale_widget.dart';
 import 'package:video_player/video_player.dart';
 
 class MainMenuPageTv extends StatefulWidget {
@@ -45,74 +50,50 @@ class _MainMenuPageTvState extends State<MainMenuPageTv> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: FlutterGameChallengeColors.blueSky,
-      body: Stack(
-        children: [
-          Assets.images.tvBackground.image(
-            width: double.infinity,
-            height: double.infinity,
-          ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Transform.translate(
-              offset: const Offset(80, 80),
-              child: SizedBox(
-                width: 340,
-                height: 340,
-                child: Stack(
-                  children: [
-                    Assets.images.earthHalo.image(
-                      color: FlutterGameChallengeColors.earthGlow,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(32),
-                      child: AspectRatio(
-                        aspectRatio: _playerController.value.aspectRatio,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(170),
-                          child: Semantics(
-                            label: context.l10n.earthAnimation,
-                            child: VideoPlayer(_playerController),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: BlocBuilder<MainPageCubit, MainPageState>(
+    return ScaleWidget(
+      child: Scaffold(
+        backgroundColor: FlutterGameChallengeColors.blueSky,
+        body: Stack(
+          children: [
+            BlocBuilder<MainPageCubit, MainPageState>(
               builder: (context, state) {
-                return PopScope(
-                  canPop: false,
-                  onPopInvoked: (_) async {
-                    _onBackBtn(state, context);
-                    return Future.value();
-                  },
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 200),
-                    child: switch (state) {
-                      MainPageInitialState() => _MainMenuContent(),
-                      MainPageChooseGameState() => _ChooseGameContent(),
-                      MainPageArtifactDetailsState() => const SizedBox(),
-                      MainPageArtifactsState() => const SizedBox(),
-                      MainPageTutorialState() => const SizedBox(),
-                      MainPageSettingsState() => const SizedBox(),
-                    },
-                  ),
+                return MainMenuBackgroundTv(
+                  isHighlighted: state.isBackgroundHighlighted,
+                  isCompact: state.isBackgroundCompact,
                 );
               },
             ),
-          ),
-          const Align(
-            alignment: Alignment.topRight,
-            child: TrashReserveWidget(),
-          ),
-        ],
+            Align(
+              alignment: Alignment.centerLeft,
+              child: BlocBuilder<MainPageCubit, MainPageState>(
+                builder: (context, state) {
+                  return PopScope(
+                    canPop: false,
+                    onPopInvoked: (_) async {
+                      _onBackBtn(state, context);
+                      return Future.value();
+                    },
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 200),
+                      child: switch (state) {
+                        MainPageInitialState() => _MainMenuContent(),
+                        MainPageChooseGameState() => _ChooseGameContent(),
+                        MainPageArtifactDetailsState() => const SizedBox(),
+                        MainPageArtifactsState() => const _ArtifactsContent(),
+                        MainPageTutorialState() => const SizedBox(),
+                        MainPageSettingsState() => const SizedBox(),
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+            const Align(
+              alignment: Alignment.topRight,
+              child: TrashReserveWidget(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -141,8 +122,8 @@ class _ChooseGameContent extends StatelessWidget {
           _MainMenuItem(
             autofocus: true,
             title: context.l10n.gameModeCatcherItemTitle,
-            iconPath: Assets.images.games.path,
-            selectedIconPath: Assets.images.gamesSelected.path,
+            iconPath: Assets.images.gameModeCathcer.path,
+            selectedIconPath: Assets.images.gameModeCathcer.path,
             onTap: () {
               BlocProvider.of<MainPageCubit>(context).navigateToCatcherGame(
                 (gameType) => _handleNavigateToGameType(
@@ -154,8 +135,8 @@ class _ChooseGameContent extends StatelessWidget {
           ),
           _MainMenuItem(
             title: context.l10n.gameModeClickerItemTitle,
-            iconPath: Assets.images.artifacts.path,
-            selectedIconPath: Assets.images.artifactsSelected.path,
+            iconPath: Assets.images.gameModeClicker.path,
+            selectedIconPath: Assets.images.gameModeClicker.path,
             onTap: () {
               BlocProvider.of<MainPageCubit>(context).navigateToClickerGame(
                 (gameType) => _handleNavigateToGameType(
@@ -167,8 +148,8 @@ class _ChooseGameContent extends StatelessWidget {
           ),
           _MainMenuItem(
             title: context.l10n.gameModeFinderItemTitle,
-            iconPath: Assets.images.tutorial.path,
-            selectedIconPath: Assets.images.tutorialSelected.path,
+            iconPath: Assets.images.gameModeFinder.path,
+            selectedIconPath: Assets.images.gameModeFinder.path,
             onTap: () {
               BlocProvider.of<MainPageCubit>(context).navigateToFinderGame(
                 (gameType) => _handleNavigateToGameType(
@@ -223,7 +204,9 @@ class _MainMenuContent extends StatelessWidget {
             title: context.l10n.mainMenuArtifactsItemTitle,
             iconPath: Assets.images.artifacts.path,
             selectedIconPath: Assets.images.artifactsSelected.path,
-            onTap: () {},
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToArtifacts();
+            },
           ),
           _MainMenuItem(
             title: context.l10n.mainMenuTutorialItemTitle,
@@ -264,55 +247,32 @@ class _MainMenuItem extends StatefulWidget {
 
 class _MainMenuItemState extends State<_MainMenuItem>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
-      lowerBound: 0.6,
-      vsync: this,
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Focusable(
       autofocus: widget.autofocus,
-      onFocusChange: (newValue) {
-        if (newValue) {
-          _controller
-            ..animateTo(0, duration: Duration.zero)
-            ..forward();
-        }
-      },
       builder: (context, isFocused) {
         return GestureDetector(
           onTap: widget.onTap,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              RotationTransition(
-                turns: _controller,
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 200),
-                  child: Image.asset(
-                    key: ValueKey(isFocused),
-                    isFocused ? widget.selectedIconPath : widget.iconPath,
-                    width: 60,
-                  ),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 200),
+                child: Image.asset(
+                  key: ValueKey(isFocused),
+                  isFocused ? widget.selectedIconPath : widget.iconPath,
+                  width: 48,
                 ),
               ),
               const SizedBox(width: 32),
               AnimatedDefaultTextStyle(
-                style: context.textStyle(height: 1.6).copyWith(
+                style: context
+                    .textStyle(
+                      height: 1.6,
+                      fontSize: 38,
+                    )
+                    .copyWith(
                       color: isFocused
                           ? FlutterGameChallengeColors.gamesBackground
                           : FlutterGameChallengeColors.white,
@@ -324,6 +284,18 @@ class _MainMenuItemState extends State<_MainMenuItem>
           ),
         );
       },
+    );
+  }
+}
+
+class _ArtifactsContent extends StatelessWidget {
+  const _ArtifactsContent();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<ArtifactsCubit>(
+      create: (_) => ServiceProvider.get<ArtifactsCubit>(),
+      child: const ArtifactsListPage(),
     );
   }
 }
