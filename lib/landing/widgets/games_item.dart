@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/index.dart';
-import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
-import 'package:flutter_game_challenge/landing/widgets/landing_item.dart';
-import 'package:flutter_game_challenge/landing/widgets/mobile_vertical_widget.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/index.dart';
+import 'package:recyclo/landing/widgets/brand_text.dart';
+import 'package:recyclo/landing/widgets/landing_item.dart';
+import 'package:recyclo/landing/widgets/mobile_vertical_widget.dart';
 
 class GamesItem extends StatelessWidget {
   const GamesItem({super.key});
@@ -12,52 +12,55 @@ class GamesItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return LayoutBuilder(builder: (context, constraints) {
-      final isSmallDevice = constraints.maxWidth < 850;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isSmallDevice = constraints.maxWidth < 850;
 
-      return LandingItem(
-        color: FlutterGameChallengeColors.gamesBackground,
-        child: Padding(
-          padding: isSmallDevice
-              ? EdgeInsets.symmetric(
-                  vertical: 15,
-                )
-              : EdgeInsets.all(50),
-          child: Column(
-            children: [
-              Center(
-                child: BrandText(
-                  l10n.gamesTitle,
-                  style: TextStyle(
-                    fontSize: isSmallDevice ? 32 : 48,
-                    color: FlutterGameChallengeColors.textStroke,
+        return LandingItem(
+          color: FlutterGameChallengeColors.gamesBackground,
+          child: Padding(
+            padding: isSmallDevice
+                ? const EdgeInsets.symmetric(
+                    vertical: 15,
+                  )
+                : const EdgeInsets.all(50),
+            child: Column(
+              children: [
+                Center(
+                  child: BrandText(
+                    l10n.gamesTitle,
+                    style: TextStyle(
+                      fontSize: isSmallDevice ? 32 : 48,
+                      color: FlutterGameChallengeColors.textStroke,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: isSmallDevice ? 10 : 0),
-                child: BrandText(
-                  l10n.gamesDescription,
-                  style: TextStyle(
-                    fontSize: isSmallDevice ? 16 : 20,
-                    color: FlutterGameChallengeColors.textStroke,
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: isSmallDevice ? 10 : 0),
+                  child: BrandText(
+                    l10n.gamesDescription,
+                    style: TextStyle(
+                      fontSize: isSmallDevice ? 16 : 20,
+                      color: FlutterGameChallengeColors.textStroke,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              _Game1(),
-              _Game2(),
-              _Game3(),
-            ],
+                const SizedBox(
+                  height: 30,
+                ),
+                const _Game1(),
+                const _Game2(),
+                const _Game3(),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
 
@@ -80,7 +83,6 @@ class _Game1 extends StatelessWidget {
       }
 
       return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Assets.images.screenshotGame1.image(),
           GameDescription(
@@ -89,7 +91,7 @@ class _Game1 extends StatelessWidget {
           ),
         ],
       );
-    });
+    },);
   }
 }
 
@@ -123,7 +125,7 @@ class _Game2 extends StatelessWidget {
           Assets.images.screenshotGame2.image(),
         ],
       );
-    });
+    },);
   }
 }
 
@@ -147,7 +149,6 @@ class _Game3 extends StatelessWidget {
       }
 
       return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Assets.images.screenshotGame3.image(),
           GameDescription(
@@ -156,14 +157,11 @@ class _Game3 extends StatelessWidget {
           ),
         ],
       );
-    });
+    },);
   }
 }
 
 class GameDescription extends StatelessWidget {
-  final String title;
-  final String description;
-  final bool isLeft;
 
   const GameDescription({
     super.key,
@@ -171,11 +169,14 @@ class GameDescription extends StatelessWidget {
     required this.description,
     this.isLeft = true,
   });
+  final String title;
+  final String description;
+  final bool isLeft;
 
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxWidth: 500,
       ),
       child: Padding(
@@ -184,26 +185,27 @@ class GameDescription extends StatelessWidget {
           right: isLeft ? 0 : 50,
         ),
         child: Column(
-          crossAxisAlignment: isLeft ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+          crossAxisAlignment:
+              isLeft ? CrossAxisAlignment.start : CrossAxisAlignment.end,
           children: [
             BrandText(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 32,
                 color: FlutterGameChallengeColors.textStroke,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             BrandText(
               description,
               textAlign: isLeft ? TextAlign.start : TextAlign.right,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 color: FlutterGameChallengeColors.textStroke,
               ),
-            )
+            ),
           ],
         ),
       ),

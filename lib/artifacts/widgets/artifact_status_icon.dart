@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/artifacts/artifacts_model.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/artifacts/artifacts_model.dart';
+import 'package:recyclo/common.dart';
 
 class ArtifactStatusIcon extends StatelessWidget {
   const ArtifactStatusIcon({
     required this.status,
+    this.borderColor,
     super.key,
   });
 
   final ArtifactStatus status;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class ArtifactStatusIcon extends StatelessWidget {
         color: _getColorByStatus(),
         border: Border.all(
           width: 2,
-          color: FlutterGameChallengeColors.textStroke,
+          color: borderColor ?? FlutterGameChallengeColors.textStroke,
         ),
         borderRadius: BorderRadius.circular(24),
       ),
@@ -37,7 +39,17 @@ class ArtifactStatusIcon extends StatelessWidget {
       case ArtifactStatus.crafted:
         return Assets.images.iconOk.image();
       case ArtifactStatus.addedToWallet:
-        return Assets.images.iconWallet.image();
+        if (ExtendedPlatform.isAndroid) {
+          return Assets.images.googleWallet.image();
+        }
+
+        if (ExtendedPlatform.isApple) {
+          return Assets.images.appleWallet.image();
+        }
+
+        throw UnimplementedError(
+          'Wallet is supported only in Android and iOS platforms',
+        );
     }
   }
 

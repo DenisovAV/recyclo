@@ -1,0 +1,42 @@
+{
+  "formatVersion" : 1,
+  "passTypeIdentifier" : "pass.dev.recyclo.game",
+  "serialNumber" : "CAR01",
+  "teamIdentifier" : "K36CA7QL4T",
+  "barcode": {
+    "message": "Discount QR Code",
+    "format": "PKBarcodeFormatQR",
+    "messageEncoding": "iso-8859-1"
+  },
+  "organizationName" : "Mobile People Labs",
+  "description": "Car constructed from recycled materials",
+  "logoText": "WW (Waste Wanderer)",
+  "foregroundColor": "rgb(0, 0, 0)",
+  "backgroundColor": "rgb(214, 199, 170)",
+  "storeCard" : {
+    "auxiliaryFields" : [
+      {
+        "key" : "product",
+        "label" : "Product",
+        "value" : "Car constructed from recycled materials"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "details",
+        "label": "Details",
+        "value": "The futuristic urban SUV, ingeniously crafted entirely from recycled materials."
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "value": "The car body is assembled from metallic sheets sourced from old cans and car parts, alongside textures from assorted recycled plastics on the doors and hood. Recycled tires form the wheels, while solar panels atop the roof underscore its eco-friendly design."
+      },
+      {
+        "key": "reality",
+        "label": "Reality",
+        "value": "The automotive industry increasingly incorporates recycled materials to enhance sustainability and reduce environmental impact. Metals such as steel and aluminum are commonly recycled from old vehicles, appliances, and construction materials, offering a robust option for car frames and engine parts. Plastics, recovered from consumer waste, packaging, and old automotive parts, are transformed into interior components, underbody systems, and even fuel lines. Rubber from tires is repurposed into floor mats, pedal pads, and insulation. Glass is recycled into windshield and window materials. Even textiles, sourced from used clothing and industrial scraps, find new life as seat upholstery, panel linings, and soundproofing materials. These recycling efforts not only conserve natural resources but also reduce the energy consumption and greenhouse gas emissions associated with new material production, paving the way for a more sustainable automotive future."
+      }
+    ]
+  }
+}

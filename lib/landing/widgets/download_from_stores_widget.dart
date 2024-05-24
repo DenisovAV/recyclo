@@ -1,76 +1,42 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/loading/loading.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/widgets/download_button.dart';
+import 'package:recyclo/loading/loading.dart';
 
 class DownloadFromStoresWidget extends StatelessWidget {
   const DownloadFromStoresWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Wrap(
+      spacing: 15,
+      runSpacing: 15,
+      alignment: WrapAlignment.center,
       children: [
-        _DownloadButton(
+        DownloadButton(
           image: Assets.images.downloadGooglePlayButton.image(),
-          url: 'https://pub.dev',
+          url: 'https://play.google.com/store/apps/details?id=dev.recyclo.games',
         ),
-        SizedBox(
-          width: 15,
-        ),
-        _DownloadButton(
+        DownloadButton(
           image: Assets.images.downloadAppleStoreButton.image(),
-          url: 'https://pub.dev',
-        ),
-        SizedBox(
-          width: 15,
+          url: 'https://apps.apple.com/de/app/recyclo-game/id6479239285',
         ),
         PlayOnlineButton(
           onTap: () {
             Navigator.of(context).push(LoadingPage.route());
           },
-        )
+        ),
       ],
     );
   }
 }
 
-class _DownloadButton extends StatelessWidget {
-  final Widget image;
-  final String url;
-
-  const _DownloadButton({
-    required this.image,
-    required this.url,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () {
-          _goToLink(url);
-        },
-        child: image,
-      ),
-    );
-  }
-
-  void _goToLink(String link) {
-    launchUrl(Uri.parse(link));
-  }
-}
-
 class PlayOnlineButton extends StatelessWidget {
-  final VoidCallback onTap;
-
   const PlayOnlineButton({
     super.key,
     required this.onTap,
   });
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -78,26 +44,31 @@ class PlayOnlineButton extends StatelessWidget {
 
     return Material(
       color: FlutterGameChallengeColors.textStroke,
-      borderRadius: BorderRadius.all(Radius.circular(5)),
-      child: InkWell(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-        onTap: onTap,
-        child: Container(
-          height: 40,
-          width: 130,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            border: Border.all(
-              width: 1,
-              color: FlutterGameChallengeColors.teamBackground,
+      borderRadius: const BorderRadius.all(Radius.circular(5)),
+      child: Semantics(
+        label: l10n.playOnlineButtonTitle,
+        button: true,
+        enabled: true,
+        excludeSemantics: true,
+        child: InkWell(
+          borderRadius: const BorderRadius.all(Radius.circular(5)),
+          onTap: onTap,
+          child: Container(
+            height: 40,
+            width: 130,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(5)),
+              border: Border.all(
+                color: FlutterGameChallengeColors.teamBackground,
+              ),
             ),
-          ),
-          child: Center(
-            child: Text(
-              l10n.playOnlineButtonTitle,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12,
+            child: Center(
+              child: Text(
+                l10n.playOnlineButtonTitle,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                ),
               ),
             ),
           ),

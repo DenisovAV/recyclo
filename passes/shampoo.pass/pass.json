@@ -1,0 +1,43 @@
+{
+  "formatVersion" : 1,
+  "passTypeIdentifier" : "pass.dev.recyclo.game",
+  "serialNumber" : "SHAMPOO01",
+  "teamIdentifier" : "K36CA7QL4T",
+  "barcode": {
+    "message": "Discount QR Code",
+    "format": "PKBarcodeFormatQR",
+    "messageEncoding": "iso-8859-1"
+  },
+  "organizationName" : "Mobile People Labs",
+  "description": "Shampoo made from recycled materials",
+  "logoText": "Scrub-Scrap",
+  "labelColor": "rgb(255, 255, 255)",
+  "foregroundColor": "rgb(255, 255, 255)",
+  "backgroundColor": "rgb(121, 184, 174)",
+  "storeCard" : {
+    "auxiliaryFields" : [
+      {
+        "key" : "product",
+        "label" : "Product",
+        "value" : "Shampoo made from recycled materials"
+      }
+    ],
+    "backFields": [
+      {
+        "key": "details",
+        "label": "Details",
+        "value": "The shampoo bottle crafted from an innovative, eco-friendly material derived from a blend of recycled ocean plastics and plant-based biopolymers."
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "value": "The shampoo itself is a concoction of natural ingredients, including purified water infused with essential oils from organic lavender and chamomile, known for their soothing and hair-nourishing properties. The light blue hue of the shampoo is achieved through the addition of a natural, mineral-based colorant that safely decomposes without harming aquatic ecosystems."
+      },
+      {
+        "key": "reality",
+        "label": "Reality",
+        "value": "The production of shampoo and its bottles can utilize a variety of recycled materials to promote sustainability. For shampoo, ingredients may include recycled water and bio-based surfactants derived from waste plant materials, contributing to a circular economy. Bottles are often made from recycled plastics, such as PET (polyethylene terephthalate) and HDPE (high-density polyethylene), which come from post-consumer products like water bottles and cleaning containers. These materials can be thoroughly cleaned, processed, and repurposed into new, eco-friendly packaging for personal care products, significantly reducing the need for virgin plastics and minimizing the environmental footprint of the beauty and personal care industry."
+      }
+    ]
+  }
+}

@@ -1,12 +1,12 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/clicker_game/game_models/trash_bin.dart';
-import 'package:flutter_game_challenge/clicker_game/game_models/trash_type.dart';
-import 'package:flutter_game_challenge/finder_game/components/item.dart';
-import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/clicker_game/game_models/trash_bin.dart';
+import 'package:recyclo/clicker_game/game_models/trash_type.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/finder_game/components/item.dart';
+import 'package:recyclo/finder_game/const/finder_constraints.dart';
 
-class FinderState extends Component {
+class FinderState extends Component with HasGameRef {
   FinderState({
     required this.gameWidgetSize,
     required this.topPadding,
@@ -29,10 +29,6 @@ class FinderState extends Component {
     _generateTrashItems();
   }
 
-  void punishPlayer() {
-    // TODO: show tutorial overlay on 3-rd miss =- take 5 seconds away
-  }
-
   void collectTrash(Item trash) {
     trashItems.value.remove(trash);
     currentTargetTypes.value = List.from(
@@ -52,8 +48,9 @@ class FinderState extends Component {
   }
 
   void _generateTrashItems() {
-    final cellWidth = Item.baseSize.x;
-    final cellHeight = Item.baseSize.y;
+    final itemSize = FinderConstraints.getTrashItemSize(game.size.x);
+    final cellWidth = itemSize.x;
+    final cellHeight = itemSize.y;
 
     final topTrashPadding = topPadding +
         gameWidgetSize.y *

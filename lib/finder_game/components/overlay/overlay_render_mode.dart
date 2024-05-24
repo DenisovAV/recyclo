@@ -1,0 +1,4 @@
+enum OverlayRenderMode {
+  bushes,
+  hole,
+}

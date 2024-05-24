@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/common.dart';
 
 class LandingLogo extends StatelessWidget {
-  final double fontSize;
-
   const LandingLogo({super.key, this.fontSize = 36});
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +12,7 @@ class LandingLogo extends StatelessWidget {
     return Row(
       children: [
         Assets.images.recycleLogoSvg.svg(width: 65),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
         Text(
@@ -22,7 +21,7 @@ class LandingLogo extends StatelessWidget {
             color: FlutterGameChallengeColors.white,
             fontSize: fontSize,
           ),
-        )
+        ),
       ],
     );
   }

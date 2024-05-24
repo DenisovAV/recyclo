@@ -1,119 +1,90 @@
 import 'dart:math';
 
-import 'package:flutter_game_challenge/catcher_game/common/speed_convector.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
+import 'package:recyclo/catcher_game/game_models.dart';
+import 'package:recyclo/common/entities/game_difficulty_level_type.dart';
+import 'package:recyclo/common/entities/item_type.dart';
 
 abstract class Levels {
-  static const int initialLevel = 1;
-
-  // TODO(viktor): At this stage, we could still reuse this class to configure the 1 minute game.
-  static List<Level> levels() {
-    return [
-      Level(
-        number: 0,
-        waves: [
-          Wave(
-            delay: 0,
-            itemsInWave: 5,
-            dropDiversityList: [
-              _getInitialDrop(5),
-            ],
-            minDroppingSpeed: 9.0.rangeToSpeed(),
-            maxDroppingSpeed: 11.0.rangeToSpeed(),
-            minDroppingInterval: 1.2,
-            maxDroppingInterval: 1.8,
-          ),
-          Wave(
-            delay: 0.5,
-            itemsInWave: 10,
-            dropDiversityList: const [
-              Drop(type: RecycleType.organic, varietyBounder: 11),
-              Drop(type: RecycleType.electric, varietyBounder: 5),
-              Drop(type: RecycleType.glass, varietyBounder: 8),
-              Drop(type: RecycleType.paper, varietyBounder: 5),
-              Drop(type: RecycleType.plastic, varietyBounder: 5),
-            ],
-            minDroppingSpeed: 13.0.rangeToSpeed(),
-            maxDroppingSpeed: 14.0.rangeToSpeed(),
-            minDroppingInterval: 1.5,
-            maxDroppingInterval: 1.8,
-          ),
-          Wave(
-            delay: 1,
-            itemsInWave: 100,
-            dropDiversityList: const [
-              Drop(type: RecycleType.organic, varietyBounder: 11),
-              Drop(type: RecycleType.electric, varietyBounder: 5),
-              Drop(type: RecycleType.glass, varietyBounder: 8),
-              Drop(type: RecycleType.paper, varietyBounder: 5),
-              Drop(type: RecycleType.plastic, varietyBounder: 5),
-            ],
-            minDroppingSpeed: 15.0.rangeToSpeed(),
-            maxDroppingSpeed: 16.0.rangeToSpeed(),
-            minDroppingInterval: 1.5,
-            maxDroppingInterval: 1.8,
-          ),
-          Wave(
-            delay: 1,
-            itemsInWave: 2000,
-            dropDiversityList: const [
-              Drop(type: RecycleType.organic, varietyBounder: 11),
-              Drop(type: RecycleType.electric, varietyBounder: 5),
-              Drop(type: RecycleType.glass, varietyBounder: 8),
-              Drop(type: RecycleType.paper, varietyBounder: 5),
-              Drop(type: RecycleType.plastic, varietyBounder: 5),
-            ],
-            minDroppingSpeed: 15.0.rangeToSpeed(),
-            maxDroppingSpeed: 16.0.rangeToSpeed(),
-            minDroppingInterval: 1.5,
-            maxDroppingInterval: 1.8,
-          ),
-          Wave(
-            delay: 1,
-            itemsInWave: 5000,
-            dropDiversityList: const [
-              Drop(type: RecycleType.organic, varietyBounder: 11),
-              Drop(type: RecycleType.electric, varietyBounder: 5),
-              Drop(type: RecycleType.glass, varietyBounder: 8),
-              Drop(type: RecycleType.paper, varietyBounder: 5),
-              Drop(type: RecycleType.plastic, varietyBounder: 5),
-            ],
-            minDroppingSpeed: 15.0.rangeToSpeed(),
-            maxDroppingSpeed: 16.0.rangeToSpeed(),
-            minDroppingInterval: 1.5,
-            maxDroppingInterval: 1.8,
-          ),
-        ],
-      ),
-    ];
-  }
+  static List<Level> levels(GameDifficultyType difficulty) => [
+        Level(
+          number: 0,
+          waves: [
+            Wave(
+              itemsInWave: 5,
+              dropDiversityList: [
+                _getInitialDrop(5),
+              ],
+              minDroppingSpeed: difficulty.minSpeed,
+              maxDroppingSpeed: difficulty.maxSpeed,
+              minDroppingInterval: difficulty.minInterval,
+              maxDroppingInterval: difficulty.maxInterval,
+            ),
+            Wave(
+              itemsInWave: 10,
+              dropDiversityList: const [
+                Drop(type: ItemType.organic, varietyBounder: 11),
+                Drop(type: ItemType.electronic, varietyBounder: 5),
+                Drop(type: ItemType.glass, varietyBounder: 8),
+                Drop(type: ItemType.paper, varietyBounder: 5),
+                Drop(type: ItemType.plastic, varietyBounder: 5),
+              ],
+              minDroppingSpeed: difficulty.minSpeed,
+              maxDroppingSpeed: difficulty.maxSpeed,
+              minDroppingInterval: difficulty.minInterval,
+              maxDroppingInterval: difficulty.maxInterval,
+            ),
+            Wave(
+              dropDiversityList: const [
+                Drop(type: ItemType.organic, varietyBounder: 11),
+                Drop(type: ItemType.electronic, varietyBounder: 5),
+                Drop(type: ItemType.glass, varietyBounder: 8),
+                Drop(type: ItemType.paper, varietyBounder: 5),
+                Drop(type: ItemType.plastic, varietyBounder: 5),
+              ],
+              minDroppingSpeed: difficulty.minSpeed,
+              maxDroppingSpeed: difficulty.maxSpeed,
+              minDroppingInterval: difficulty.minInterval,
+              maxDroppingInterval: difficulty.maxInterval,
+            ),
+          ],
+        ),
+      ];
 
   static Drop _getInitialDrop(int varietyBounder) {
-    final index = varietyBounder >= RecycleType.values.length - 1
-        ? RecycleType.values.length - 1
+    final index = varietyBounder >= ItemType.values.length - 1
+        ? ItemType.values.length - 1
         : varietyBounder;
 
-    final type = RecycleType.values[Random().nextInt(index)];
+    final type = ItemType.values[Random().nextInt(index)];
     return Drop(
       type: type,
-      varietyBounder: type.varietyBounder,
+      varietyBounder: type.assetsVarietyBounder,
     );
   }
 }
 
-extension on RecycleType {
-  int get varietyBounder {
-    switch (this) {
-      case RecycleType.organic:
-        return 11;
-      case RecycleType.electric:
-        return 5;
-      case RecycleType.glass:
-        return 8;
-      case RecycleType.paper:
-        return 5;
-      case RecycleType.plastic:
-        return 5;
-    }
-  }
+extension on GameDifficultyType {
+  double get minSpeed => switch (this) {
+        GameDifficultyType.easy => 0.003,
+        GameDifficultyType.medium => 0.004,
+        GameDifficultyType.hard => 0.005,
+      };
+
+  double get maxSpeed => switch (this) {
+        GameDifficultyType.easy => 0.004,
+        GameDifficultyType.medium => 0.006,
+        GameDifficultyType.hard => 0.006,
+      };
+
+  double get minInterval => switch (this) {
+        GameDifficultyType.easy => 2.0,
+        GameDifficultyType.medium => 1.5,
+        GameDifficultyType.hard => 1.5,
+      };
+
+  double get maxInterval => switch (this) {
+        GameDifficultyType.easy => 3.0,
+        GameDifficultyType.medium => 2.0,
+        GameDifficultyType.hard => 1.8,
+      };
 }

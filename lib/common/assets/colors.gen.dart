@@ -400,6 +400,9 @@ class FlutterGameChallengeColors {
     },
   );
 
+  /// Color: #FF72A8CD
+  static const Color finderBackground = Color(0xFF72A8CD);
+
   /// MaterialColor:
   ///   50: #FFF6FBF3
   ///   100: #FFE8F5E2
@@ -544,6 +547,9 @@ class FlutterGameChallengeColors {
     },
   );
 
+  /// Color: #FFDED1DC
+  static const Color settingsAccent = Color(0xFFDED1DC);
+
   /// MaterialColor:
   ///   50: #FFFCFAFB
   ///   100: #FFF7F2F5
@@ -597,6 +603,15 @@ class FlutterGameChallengeColors {
       900: Color(0xFF1E0D25),
     },
   );
+
+  /// Color: #FFB5231A
+  static const Color toggleSwitchDisabled = Color(0xFFB5231A);
+
+  /// Color: #FF1DB51A
+  static const Color toggleSwitchEnabled = Color(0xFF1DB51A);
+
+  /// Color: #FFE0EBF1
+  static const Color tutorialBackground = Color(0xFFE0EBF1);
 
   /// MaterialColor:
   ///   50: #FFFDFBEE

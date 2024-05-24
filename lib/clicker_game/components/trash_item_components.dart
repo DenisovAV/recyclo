@@ -1,12 +1,10 @@
-import 'package:flame/game.dart';
-import 'package:flutter/material.dart';
-
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
-import 'package:flutter_game_challenge/clicker_game/game_models/trash_item.dart';
-import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
+import 'package:flutter/material.dart';
+import 'package:recyclo/clicker_game/game_models/trash_item.dart';
+import 'package:recyclo/common/assets/assets.gen.dart';
 
 class TrashItemComponent extends BodyComponent {
   TrashItemComponent(
@@ -16,6 +14,7 @@ class TrashItemComponent extends BodyComponent {
   ) : super();
 
   final Vector2 baseSize;
+  @override
   final Vector2 position;
   final TrashItemData trashData;
   late final SpriteComponent backgroundSprite;
@@ -28,10 +27,7 @@ class TrashItemComponent extends BodyComponent {
     backgroundSprite = SpriteComponent(
       sprite: Sprite(
         await Flame.images.load(
-          Assets.images.clicker.images.cloud.path.replaceFirst(
-            'assets/images/',
-            '',
-          ),
+          Assets.images.clicker.images.cloud.path,
         ),
       ),
       size: baseSize * trashData.sizeMultiplier,
@@ -42,12 +38,7 @@ class TrashItemComponent extends BodyComponent {
 
     trashSprite = SpriteComponent(
       sprite: Sprite(
-        await Flame.images.load(
-          trashData.assetPath.replaceFirst(
-            'assets/images/',
-            '',
-          ),
-        ),
+        await Flame.images.load(trashData.assetPath),
       ),
       size: (baseSize * trashData.sizeMultiplier) - Vector2.all(10),
       anchor: Anchor.center,
@@ -86,7 +77,7 @@ class TrashItemComponent extends BodyComponent {
     return distance <= radius;
   }
 
-  void onCollected() async {
+  Future<void> onCollected() async {
     Effect getResizeEvent() {
       return SequenceEffect(
         [
@@ -103,15 +94,13 @@ class TrashItemComponent extends BodyComponent {
             ),
           ),
         ],
-        infinite: false,
       );
     }
 
     await backgroundSprite.add(getResizeEvent());
-    await trashSprite.add(getResizeEvent()
-      ..onComplete = () {
-        removeFromParent();
-      });
+    await trashSprite.add(
+      getResizeEvent()..onComplete = removeFromParent,
+    );
   }
 
   void onMiss() {
@@ -133,7 +122,6 @@ class TrashItemComponent extends BodyComponent {
             ),
           ),
         ],
-        infinite: false,
         alternate: true,
       );
     }
@@ -148,9 +136,11 @@ class TrashItemComponent extends BodyComponent {
       );
     }
 
-    backgroundSprite.add(getShakeEffect());
-    backgroundSprite.add(getColorEffect());
-    trashSprite.add(getShakeEffect());
-    trashSprite.add(getColorEffect());
+    backgroundSprite
+      ..add(getShakeEffect())
+      ..add(getColorEffect());
+    trashSprite
+      ..add(getShakeEffect())
+      ..add(getColorEffect());
   }
 }

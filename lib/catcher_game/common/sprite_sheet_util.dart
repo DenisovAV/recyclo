@@ -26,8 +26,6 @@ class SpriteSheetUtil {
 
   late final List<List<Sprite>> _sprites;
 
-  Sprite getSprite(int row, int column) => _sprites[row][column];
-
   SpriteAnimation createAnimation({
     required double stepTime,
     bool loop = false,
@@ -35,7 +33,8 @@ class SpriteSheetUtil {
     final flattenList = <Sprite>[];
 
     for (final innerSpriteListItem in _sprites) {
-      for (final sprite in innerSpriteListItem) {
+      for (var i = 0; i < innerSpriteListItem.length; i++) {
+        final sprite = innerSpriteListItem[i];
         flattenList.add(sprite);
       }
     }

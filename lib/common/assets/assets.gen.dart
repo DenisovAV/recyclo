@@ -11,6 +11,62 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $AssetsAudioGen {
+  const $AssetsAudioGen();
+
+  /// File path: assets/audio/artifact_crafted.mp3
+  String get artifactCrafted => 'assets/audio/artifact_crafted.mp3';
+
+  /// File path: assets/audio/bush_rustle.wav
+  String get bushRustle => 'assets/audio/bush_rustle.wav';
+
+  /// File path: assets/audio/button_tap.mp3
+  String get buttonTap => 'assets/audio/button_tap.mp3';
+
+  /// File path: assets/audio/catcher_theme.mp3
+  String get catcherTheme => 'assets/audio/catcher_theme.mp3';
+
+  /// File path: assets/audio/clicker_theme.mp3
+  String get clickerTheme => 'assets/audio/clicker_theme.mp3';
+
+  /// File path: assets/audio/correct_item.wav
+  String get correctItem => 'assets/audio/correct_item.wav';
+
+  /// File path: assets/audio/finder_theme.mp3
+  String get finderTheme => 'assets/audio/finder_theme.mp3';
+
+  /// File path: assets/audio/incorrect-item.wav
+  String get incorrectItem => 'assets/audio/incorrect-item.wav';
+
+  /// File path: assets/audio/item-pickup-sound.wav
+  String get itemPickupSound => 'assets/audio/item-pickup-sound.wav';
+
+  /// File path: assets/audio/main_menu_theme.mp3
+  String get mainMenuTheme => 'assets/audio/main_menu_theme.mp3';
+
+  /// File path: assets/audio/time_is_up.wav
+  String get timeIsUp => 'assets/audio/time_is_up.wav';
+
+  /// File path: assets/audio/toggle_sound.mp3
+  String get toggleSound => 'assets/audio/toggle_sound.mp3';
+
+  /// List of all assets
+  List<String> get values => [
+        artifactCrafted,
+        bushRustle,
+        buttonTap,
+        catcherTheme,
+        clickerTheme,
+        correctItem,
+        finderTheme,
+        incorrectItem,
+        itemPickupSound,
+        mainMenuTheme,
+        timeIsUp,
+        toggleSound
+      ];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -21,6 +77,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/add_to_wallet_ios.png
   AssetGenImage get addToWalletIos =>
       const AssetGenImage('assets/images/add_to_wallet_ios.png');
+
+  /// File path: assets/images/apple_wallet.png
+  AssetGenImage get appleWallet =>
+      const AssetGenImage('assets/images/apple_wallet.png');
 
   /// File path: assets/images/artifact_car.png
   AssetGenImage get artifactCar =>
@@ -45,6 +105,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/artifact_shampoo.png
   AssetGenImage get artifactShampoo =>
       const AssetGenImage('assets/images/artifact_shampoo.png');
+
+  /// File path: assets/images/artifacts.png
+  AssetGenImage get artifacts =>
+      const AssetGenImage('assets/images/artifacts.png');
+
+  /// File path: assets/images/artifacts_selected.png
+  AssetGenImage get artifactsSelected =>
+      const AssetGenImage('assets/images/artifacts_selected.png');
 
   $AssetsImagesCatcherGen get catcher => const $AssetsImagesCatcherGen();
   $AssetsImagesClickerGen get clicker => const $AssetsImagesClickerGen();
@@ -112,8 +180,19 @@ class $AssetsImagesGen {
   AssetGenImage get gameModeFinder =>
       const AssetGenImage('assets/images/game_mode_finder.png');
 
+  /// File path: assets/images/games.png
+  AssetGenImage get games => const AssetGenImage('assets/images/games.png');
+
+  /// File path: assets/images/games_selected.png
+  AssetGenImage get gamesSelected =>
+      const AssetGenImage('assets/images/games_selected.png');
+
   /// File path: assets/images/glass.png
   AssetGenImage get glass => const AssetGenImage('assets/images/glass.png');
+
+  /// File path: assets/images/google_wallet.png
+  AssetGenImage get googleWallet =>
+      const AssetGenImage('assets/images/google_wallet.png');
 
   /// File path: assets/images/hole.png
   AssetGenImage get hole => const AssetGenImage('assets/images/hole.png');
@@ -136,10 +215,6 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/icon_ok.png
   AssetGenImage get iconOk => const AssetGenImage('assets/images/icon_ok.png');
-
-  /// File path: assets/images/icon_wallet.png
-  AssetGenImage get iconWallet =>
-      const AssetGenImage('assets/images/icon_wallet.png');
 
   /// File path: assets/images/logo_description.png
   AssetGenImage get logoDescription =>
@@ -182,6 +257,26 @@ class $AssetsImagesGen {
   AssetGenImage get screenshotGame3 =>
       const AssetGenImage('assets/images/screenshot_game_3.png');
 
+  /// File path: assets/images/settings.png
+  AssetGenImage get settings =>
+      const AssetGenImage('assets/images/settings.png');
+
+  /// File path: assets/images/settings_selected.png
+  AssetGenImage get settingsSelected =>
+      const AssetGenImage('assets/images/settings_selected.png');
+
+  /// File path: assets/images/tutorial.png
+  AssetGenImage get tutorial =>
+      const AssetGenImage('assets/images/tutorial.png');
+
+  /// File path: assets/images/tutorial_selected.png
+  AssetGenImage get tutorialSelected =>
+      const AssetGenImage('assets/images/tutorial_selected.png');
+
+  /// File path: assets/images/tv_background.png
+  AssetGenImage get tvBackground =>
+      const AssetGenImage('assets/images/tv_background.png');
+
   /// File path: assets/images/up.png
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
 
@@ -213,12 +308,15 @@ class $AssetsImagesGen {
   List<dynamic> get values => [
         addToWalletAndroid,
         addToWalletIos,
+        appleWallet,
         artifactCar,
         artifactHouse,
         artifactLaptop,
         artifactNewspaper,
         artifactPlant,
         artifactShampoo,
+        artifacts,
+        artifactsSelected,
         clouds,
         cloudsBackground,
         craftingScreen,
@@ -236,14 +334,16 @@ class $AssetsImagesGen {
         gameModeCathcer,
         gameModeClicker,
         gameModeFinder,
+        games,
+        gamesSelected,
         glass,
+        googleWallet,
         hole,
         holeMask,
         howToPlayWithoutSpaces,
         iconForbidden,
         iconGeer,
         iconOk,
-        iconWallet,
         logoDescription,
         nikitaPhoto,
         organic,
@@ -255,6 +355,11 @@ class $AssetsImagesGen {
         screenshotGame1,
         screenshotGame2,
         screenshotGame3,
+        settings,
+        settingsSelected,
+        tutorial,
+        tutorialSelected,
+        tvBackground,
         up,
         viewInGoogleWalletAndroid,
         vityaPhoto,
@@ -580,6 +685,7 @@ class $AssetsImagesCatcherDropsPlasticGen {
 class Assets {
   Assets._();
 
+  static const $AssetsAudioGen audio = $AssetsAudioGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLicensesGen licenses = $AssetsLicensesGen();
 }

@@ -5,38 +5,50 @@ import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/catcher_game/common/size_config.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/main_scene.dart';
-import 'package:flutter_game_challenge/common.dart';
+import 'package:recyclo/catcher_game/common/size_config.dart';
+import 'package:recyclo/catcher_game/components.dart';
+import 'package:recyclo/catcher_game/main_scene.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/service_provider.dart';
 
-enum CatcherGameStatus { playing, pause, result, tutorial }
-
-typedef UpdateStatusCallback = void Function(CatcherGameStatus status);
+typedef UpdateStatusCallback = void Function(CatcherGameStatusType status);
 typedef WaveCallback = void Function(int value);
 typedef LevelCallback = void Function(int level);
 
 class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
-  CatcherGame() : status = CatcherGameStatus.playing;
+  CatcherGame({
+    bool? isPenaltyEnabled,
+    AccessibilityGameScaleType? gameScaleType,
+    GameDifficultyType? gameDifficultyType,
+  })  : isPenaltyEnabled = isPenaltyEnabled ?? true,
+        status = CatcherGameStatusType.playing,
+        scaleType = gameScaleType ?? AccessibilityGameScaleType.small,
+        difficultyType = gameDifficultyType ?? GameDifficultyType.easy;
+
+  final AccessibilityGameScaleType scaleType;
+  final GameDifficultyType difficultyType;
+  final bool isPenaltyEnabled;
 
   late SizeConfig sizeConfig;
-  late CatcherGameStatus status;
+  // TODO(vikrech): replace this property with a game cubit, and subscribe to its state in children.
+  late CatcherGameStatusType status;
   MainScene? mainScene;
   bool _timerStarted = false;
 
-  static const String timerOverlayKey = 'timer';
-
   @override
   FutureOr<void> onLoad() async {
-    sizeConfig = SizeConfig();
+    sizeConfig = SizeConfig(scaleType);
     await add(sizeConfig);
 
     mainScene = MainScene(
       onPauseResumeGameCallback: _handlePauseResumeGameCallback,
       onResetCallback: _handleOnResetCallback,
+      assetsByItemTypeCallback:
+          ServiceProvider.get<AssetsLoader>().getAssetsListByItemType,
     );
 
     await add(mainScene!);
-    overlays.add(timerOverlayKey);
+    overlays.add(TimerOverlay.id);
     return super.onLoad();
   }
 
@@ -83,8 +95,8 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
   }
 
   void _pauseGame() {
-    if (status == CatcherGameStatus.playing) {
-      status = CatcherGameStatus.pause;
+    if (status == CatcherGameStatusType.playing) {
+      status = CatcherGameStatusType.pause;
     }
     if (isAttached) {
       BlocProvider.of<TimerCubit>(buildContext!).pause();
@@ -92,14 +104,14 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
   }
 
   void _resumeGame() {
-    status = CatcherGameStatus.playing;
+    status = CatcherGameStatusType.playing;
     if (isAttached) {
-      BlocProvider.of<TimerCubit>(buildContext!).play();
+      BlocProvider.of<TimerCubit>(buildContext!).resume();
     }
   }
 
   void _handlePauseResumeGameCallback() {
-    if (status == CatcherGameStatus.pause) {
+    if (status == CatcherGameStatusType.pause) {
       _resumeGame();
     } else {
       _pauseGame();
@@ -107,12 +119,13 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector {
   }
 
   void _handleOnResetCallback() {
-    if (status == CatcherGameStatus.pause) {
+    if (status == CatcherGameStatusType.pause) {
       BlocProvider.of<TimerCubit>(buildContext!).restart();
     } else {
-      BlocProvider.of<TimerCubit>(buildContext!)
-        ..restart()
-        ..start();
+      BlocProvider.of<TimerCubit>(buildContext!).start();
+      overlays.remove(
+        TimerReductionOrIncrementEffect.idIncrement,
+      );
     }
   }
 

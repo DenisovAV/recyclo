@@ -1,14 +1,16 @@
 import 'package:flame/collisions.dart';
-import 'package:flutter/material.dart';
-
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
-import 'package:flutter_game_challenge/clicker_game/game_models/trash_item.dart';
+import 'package:flutter/material.dart';
+import 'package:recyclo/clicker_game/game_models/trash_item.dart';
+import 'package:recyclo/finder_game/const/finder_constraints.dart';
 
-class Item extends PositionComponent with HasWorldReference {
-  Item(this.trashData, {required super.position}) : super();
-  static final baseSize = Vector2(76, 76);
+class Item extends PositionComponent with HasGameRef {
+  Item(
+    this.trashData, {
+    required super.position,
+  }) : super();
 
   final TrashItemData trashData;
   late final SpriteComponent trashSprite;
@@ -17,16 +19,12 @@ class Item extends PositionComponent with HasWorldReference {
   Future<void> onLoad() async {
     await super.onLoad();
 
+    final itemSize = FinderConstraints.getTrashItemSize(game.size.x);
     trashSprite = SpriteComponent(
       sprite: Sprite(
-        await Flame.images.load(
-          trashData.assetPath.replaceFirst(
-            'assets/images/',
-            '',
-          ),
-        ),
+        await Flame.images.load(trashData.assetPath),
       ),
-      size: (baseSize * trashData.sizeMultiplier) - Vector2.all(10),
+      size: (itemSize * trashData.sizeMultiplier) - Vector2.all(10),
       anchor: Anchor.center,
     );
     add(trashSprite);
@@ -44,7 +42,7 @@ class Item extends PositionComponent with HasWorldReference {
     // Do not draw anything for the body itself to ensure it's "transparent"
   }
 
-  void onCollected() async {
+  Future<void> onCollected() async {
     Effect getResizeEvent() {
       return SequenceEffect(
         [
@@ -61,14 +59,12 @@ class Item extends PositionComponent with HasWorldReference {
             ),
           ),
         ],
-        infinite: false,
       );
     }
 
-    await trashSprite.add(getResizeEvent()
-      ..onComplete = () {
-        removeFromParent();
-      });
+    await trashSprite.add(
+      getResizeEvent()..onComplete = removeFromParent,
+    );
   }
 
   void onTryCollectItem(Color color) {
@@ -90,7 +86,6 @@ class Item extends PositionComponent with HasWorldReference {
             ),
           ),
         ],
-        infinite: false,
         alternate: true,
       );
     }
@@ -105,7 +100,8 @@ class Item extends PositionComponent with HasWorldReference {
       );
     }
 
-    trashSprite.add(getShakeEffect());
-    trashSprite.add(getColorEffect(color));
+    trashSprite
+      ..add(getShakeEffect())
+      ..add(getColorEffect(color));
   }
 }

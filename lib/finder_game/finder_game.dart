@@ -1,34 +1,34 @@
+import 'dart:async';
+
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_game_challenge/common/assets/assets.gen.dart';
-import 'package:flutter_game_challenge/finder_game/asset_extensions.dart';
-import 'package:flutter_game_challenge/finder_game/components/background_fog.dart';
-import 'package:flutter_game_challenge/finder_game/components/overlay_fog.dart';
-import 'package:flutter_game_challenge/finder_game/const/finder_constraints.dart';
-import 'package:flutter_game_challenge/finder_game/finder_state.dart';
+import 'package:recyclo/common/assets.dart';
+import 'package:recyclo/finder_game/components/background_fog.dart';
+import 'package:recyclo/finder_game/components/overlay/overlay_fog.dart';
+import 'package:recyclo/finder_game/const/finder_constraints.dart';
+import 'package:recyclo/finder_game/events/finder_game_event.dart';
+import 'package:recyclo/finder_game/finder_state.dart';
+import 'package:recyclo/finder_game/util/finder_sound_player.dart';
 
 class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
-  FinderGame({
-    required this.context,
-  }) : super(
-          zoom: 1,
-        );
+  FinderGame() : super(zoom: 1);
 
   late final FinderState gameState;
-  final BuildContext context;
+  
+  StreamController<FinderGameEvent> streamController = StreamController.broadcast();
+  Stream<FinderGameEvent> get eventStream => streamController.stream;
 
   @override
   Future<void> onLoad() async {
     camera.moveTo(size / 2);
     await Flame.images.loadAll(
       [
-        Assets.images.fog.path.trimAssetPath(),
-        Assets.images.fogDark.path.trimAssetPath(),
-        Assets.images.holeMask.path.trimAssetPath(),
-        Assets.images.hole.path.trimAssetPath(),
+        Assets.images.fog.path,
+        Assets.images.fogDark.path,
+        Assets.images.holeMask.path,
+        Assets.images.hole.path,
       ],
     );
 
@@ -36,11 +36,12 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
 
     gameState = FinderState(gameWidgetSize: size, topPadding: topPadding);
     await add(gameState);
+    await add(FinderSoundPlayer());
     await add(
       BackgroundFog(
         sprite: Sprite(
           Flame.images.fromCache(
-            Assets.images.fogDark.path.trimAssetPath(),
+            Assets.images.fogDark.path,
           ),
         ),
         position: Vector2(0, topPadding),
@@ -57,5 +58,11 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
     );
 
     return super.onLoad();
+  }
+
+  @override
+  void onRemove() {
+    streamController.close();
+    super.onRemove();
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common/assets.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/menu/widgets/clouds.dart';
 import 'package:video_player/video_player.dart';
-import 'package:flutter_game_challenge/menu/widgets/clouds.dart';
 
 class MainMenuBackground extends StatefulWidget {
   const MainMenuBackground({
@@ -10,16 +10,6 @@ class MainMenuBackground extends StatefulWidget {
     this.isShowingEarth = true,
     super.key,
   });
-
-  factory MainMenuBackground.withoutEarth({
-    bool isHighlighted = false,
-    bool isCompact = false,
-  }) =>
-      MainMenuBackground(
-        isHighlighted: isHighlighted,
-        isCompact: isCompact,
-        isShowingEarth: false,
-      );
 
   final bool isHighlighted;
   final bool isCompact;
@@ -51,7 +41,8 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
       ..initialize().then((_) {
         setState(() {});
       });
-    ;
+
+    _playerController.addListener(_onPlayerStopped);
 
     _compactController = AnimationController(
       vsync: this,
@@ -82,6 +73,12 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
     ).animate(highlightAnimationCurved);
   }
 
+  void _onPlayerStopped() {
+    if (!_playerController.value.isPlaying) {
+      _playerController.play();
+    }
+  }
+
   @override
   void didUpdateWidget(MainMenuBackground oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -101,7 +98,9 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
 
   @override
   void dispose() {
-    _playerController.dispose();
+    _playerController
+      ..removeListener(_onPlayerStopped)
+      ..dispose();
     _highlightController.dispose();
     _compactController.dispose();
     super.dispose();
@@ -155,7 +154,10 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
                                         _playerController.value.aspectRatio,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(170),
-                                      child: VideoPlayer(_playerController),
+                                      child: Semantics(
+                                        label: context.l10n.earthAnimation,
+                                        child: VideoPlayer(_playerController),
+                                      ),
                                     ),
                                   ),
                                 ),

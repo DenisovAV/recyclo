@@ -1,14 +1,8 @@
-import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/widgets/brand_text.dart';
 
 class MobileHorizontalWidget extends StatelessWidget {
-  final bool isStart;
-  final String text;
-  final Widget image;
-  final String? title;
-
   const MobileHorizontalWidget({
     super.key,
     required this.isStart,
@@ -16,31 +10,35 @@ class MobileHorizontalWidget extends StatelessWidget {
     required this.image,
     this.title,
   });
+  final bool isStart;
+  final String text;
+  final Widget image;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         if (title != null) ...[
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 30),
+            margin: const EdgeInsets.symmetric(horizontal: 30),
             height: 4,
             color: FlutterGameChallengeColors.textStroke,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           BrandText(
             title!,
-            style: TextStyle(
+            style: const TextStyle(
               color: FlutterGameChallengeColors.textStroke,
               fontSize: 24,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
         ],
@@ -55,36 +53,36 @@ class MobileHorizontalWidget extends StatelessWidget {
                       child: image,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
                   Expanded(
                     child: BrandText(
                       text,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: FlutterGameChallengeColors.textStroke,
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
                 ]
               : [
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
                   Expanded(
                     child: BrandText(
                       text,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: FlutterGameChallengeColors.textStroke,
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
                   ClipRect(

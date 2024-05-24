@@ -4,22 +4,32 @@ import 'package:collection/collection.dart';
 import 'package:flame/game.dart' hide Route;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_game_challenge/clicker_game/overlays/game_hud.dart';
-import 'package:flutter_game_challenge/clicker_game/overlays/game_start_overlay.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/finder_game/finder_game.dart';
-import 'package:flutter_game_challenge/finder_game/finder_state.dart';
-import 'package:flutter_game_challenge/finder_game/overlays/finder_hud.dart';
-import 'package:flutter_game_challenge/service_provider.dart';
+import 'package:recyclo/clicker_game/overlays/game_hud.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/finder_game/finder_game.dart';
+import 'package:recyclo/finder_game/finder_state.dart';
+import 'package:recyclo/finder_game/overlays/finder_hud.dart';
+import 'package:recyclo/finder_game/overlays/game_start_overlay.dart';
+import 'package:recyclo/service_provider.dart';
 
-import '../trash_reserve/trash_reserve_repository.dart';
+import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
 
 class FinderGamePage extends StatefulWidget {
   const FinderGamePage({super.key});
 
   static MaterialPageRoute<void> route() {
     return MaterialPageRoute<void>(
-      builder: (_) => const FinderGamePage(),
+      builder: (_) => MultiBlocProvider(
+        providers: [
+          BlocProvider<TimerCubit>(
+            create: (_) => ServiceProvider.get<TimerCubit>(),
+          ),
+          BlocProvider<TutorialCubit>(
+            create: (_) => ServiceProvider.get<TutorialCubit>(),
+          ),
+        ],
+        child: const FinderGamePage(),
+      ),
     );
   }
 
@@ -29,13 +39,16 @@ class FinderGamePage extends StatefulWidget {
 
 class _FinderGamePageState extends State<FinderGamePage> {
   static const _maxGameWidth = 500.0;
+  static const _minGameWith = 320.0;
+  static const _maxGameHeight = 1100.0;
+  static const _minGameHeight = 500.0;
 
   late final FinderGame _game;
 
   @override
   void initState() {
     super.initState();
-    _game = FinderGame(context: context);
+    _game = FinderGame();
   }
 
   @override
@@ -59,8 +72,11 @@ class _FinderGamePageState extends State<FinderGamePage> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: ConstrainedBox(
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     maxWidth: _maxGameWidth,
+                    maxHeight: _maxGameHeight,
+                    minWidth: _minGameWith,
+                    minHeight: _minGameHeight,
                   ),
                   child: GameWidget(
                     game: _game,
@@ -72,14 +88,27 @@ class _FinderGamePageState extends State<FinderGamePage> {
                       GameStartOverlay.id: (context, __) => GameStartOverlay(
                             onPressed: () => _handleGameStart(context),
                           ),
+                      TutorialOverlay.id: (context, __) => TutorialOverlay(
+                            onBackButtonPressed: _handleBackButton,
+                            onGameStart: () =>
+                                _handleTutorialCompleted(context),
+                          ),
                     },
                     backgroundBuilder: (context) => Container(
                       color: const Color(0xFF72A8CD),
                     ),
-                    initialActiveOverlays: const [
-                      GameHUD.id,
-                      GameStartOverlay.id,
-                    ],
+                    initialActiveOverlays: context
+                            .read<TutorialCubit>()
+                            .state
+                            .isTutorialShownBefore
+                        ? [
+                            GameHUD.id,
+                            GameStartOverlay.id,
+                          ]
+                        : [
+                            GameHUD.id,
+                            TutorialOverlay.id,
+                          ],
                   ),
                 ),
               ),
@@ -96,7 +125,7 @@ class _FinderGamePageState extends State<FinderGamePage> {
 
   void _handleGameStart(BuildContext context) {
     _game.overlays.remove(GameStartOverlay.id);
-    context.read<TimerCubit>().play();
+    context.read<TimerCubit>().start();
   }
 
   void _handleTimerState(
@@ -107,7 +136,7 @@ class _FinderGamePageState extends State<FinderGamePage> {
     if (state == TimerFinishedState()) {
       final items = _game.gameState.generateCollectedResources();
 
-      int _getTrashCountFor(ItemType type) {
+      int getTrashCountFor(ItemType type) {
         return items.firstWhereOrNull((trash) => trash.type == type)?.score ??
             0;
       }
@@ -117,16 +146,24 @@ class _FinderGamePageState extends State<FinderGamePage> {
         context: context,
         items: items,
         onDismiss: () {
-          unawaited(ServiceProvider.get<TrashReserveRepository>().addResource(
-            plastic: _getTrashCountFor(ItemType.plastic),
-            paper: _getTrashCountFor(ItemType.paper),
-            glass: _getTrashCountFor(ItemType.glass),
-            organic: _getTrashCountFor(ItemType.organic),
-            electronics: _getTrashCountFor(ItemType.electronic),
-          ));
+          unawaited(
+            ServiceProvider.get<TrashReserveRepository>().addResource(
+              plastic: getTrashCountFor(ItemType.plastic),
+              paper: getTrashCountFor(ItemType.paper),
+              glass: getTrashCountFor(ItemType.glass),
+              organic: getTrashCountFor(ItemType.organic),
+              electronics: getTrashCountFor(ItemType.electronic),
+            ),
+          );
           Navigator.of(context).maybePop();
         },
       );
     }
+  }
+
+  void _handleTutorialCompleted(BuildContext context) {
+    _game.overlays.remove(TutorialOverlay.id);
+    context.read<TimerCubit>().start();
+    context.read<TutorialCubit>().tutorialIsShown();
   }
 }

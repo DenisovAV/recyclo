@@ -1,113 +1,115 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game_challenge/catcher_game/main_scene/components.dart';
-import 'package:flutter_game_challenge/common.dart';
-import 'package:flutter_game_challenge/landing/common/team_constants.dart';
-import 'package:flutter_game_challenge/landing/models/team_member.dart';
-import 'package:flutter_game_challenge/landing/widgets/brand_text.dart';
-import 'package:flutter_game_challenge/landing/widgets/landing_item.dart';
+import 'package:recyclo/common.dart';
+import 'package:recyclo/landing/models/team_member.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class TeamItem extends StatelessWidget {
-  const TeamItem({super.key});
+class TeamMemberWidget extends StatefulWidget {
+  const TeamMemberWidget(this.member, {super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-
-    return LandingItem(
-        color: FlutterGameChallengeColors.aboutAppBackground,
-        child: LayoutBuilder(builder: (context, constraints) {
-          final isSmallDevice = constraints.maxWidth < 800;
-
-          return Padding(
-            padding: EdgeInsets.all(isSmallDevice ? 15 : 50.0),
-            child: Column(
-              children: [
-                Center(
-                  child: BrandText(
-                    l10n.teamTitle,
-                    style: TextStyle(
-                      fontSize: 48,
-                      color: FlutterGameChallengeColors.textStroke,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30,),
-                Wrap(
-                  spacing: 30,
-                  runSpacing: 30,
-                  children: TeamConstants.teams.map<Widget>(_TeamMemberWidget.new).toList(),
-                )
-              ],
-            ),
-          );
-        }));
-  }
-}
-
-class _TeamMemberWidget extends StatelessWidget {
   final TeamMember member;
 
-  const _TeamMemberWidget(this.member);
+  @override
+  State<TeamMemberWidget> createState() => _TeamMemberWidgetState();
+}
+
+class _TeamMemberWidgetState extends State<TeamMemberWidget> {
+  late bool _isHovered;
+
+  @override
+  void initState() {
+    _isHovered = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 500,
-      child: Row(
-        children: [
-          Container(
-            width: 104,
-            height: 104,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(52),
-              ),
-            ),
-            child: Stack(
+    return AnimatedOpacity(
+      opacity: _isHovered ? 0.6 : 1,
+      duration: const Duration(milliseconds: 100),
+      child: MouseRegion(
+        onEnter: _onEnter,
+        onExit: _onExit,
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: _openMemberProfile,
+          child: SizedBox(
+            width: 500,
+            child: Row(
               children: [
-                member.photo.image(),
-                Center(
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(50),
-                      ),
-                      border: Border.all(
-                        width: 4,
-                        color: member.color,
-                      ),
+                Container(
+                  width: 104,
+                  height: 104,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(52),
                     ),
                   ),
+                  child: Stack(
+                    children: [
+                      widget.member.photo.image(),
+                      Center(
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(50),
+                            ),
+                            border: Border.all(
+                              width: 4,
+                              color: widget.member.color,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.member.fullName,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: FlutterGameChallengeColors.textStroke,
+                        decoration: _isHovered ? TextDecoration.none : TextDecoration.underline,
+                      ),
+                    ),
+                    Text(
+                      widget.member.role,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: FlutterGameChallengeColors.textStroke.withOpacity(0.5),
+                        decoration: _isHovered ? TextDecoration.none : TextDecoration.underline,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-          SizedBox(
-            width: 15,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              BrandText(
-                member.fullName,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: FlutterGameChallengeColors.textStroke,
-                ),
-              ),
-              BrandText(
-                member.role,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: FlutterGameChallengeColors.textStroke.withOpacity(0.5),
-                ),
-              ),
-            ],
-          )
-        ],
+        ),
       ),
     );
+  }
+
+  void _openMemberProfile() {
+    launchUrl(Uri.parse(widget.member.profileUrl));
+  }
+
+  void _onEnter(_) {
+    setState(() {
+      _isHovered = true;
+    });
+  }
+
+  void _onExit(_) {
+    setState(() {
+      _isHovered = false;
+    });
   }
 }
