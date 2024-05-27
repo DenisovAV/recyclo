@@ -1,7 +1,8 @@
 import 'dart:async';
-import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/artifact_details/cubit/artifact_details_cubit.dart';
 import 'package:recyclo/artifact_details/cubit/artifact_details_state.dart';
@@ -10,13 +11,28 @@ import 'package:recyclo/artifacts/artifacts_model.dart';
 import 'package:recyclo/artifacts/widgets/artifact_requirements_status.dart';
 import 'package:recyclo/artifacts/widgets/artifact_status_icon.dart';
 import 'package:recyclo/common.dart';
+import 'package:recyclo/widgets/focusable.dart';
+import 'package:recyclo/widgets/tv_button.dart';
 
 const _kArtifactRequirementSize = 48.0;
 
-class ArtifactDetailsTv extends StatelessWidget {
+class ArtifactDetailsTv extends StatefulWidget {
   const ArtifactDetailsTv({
     super.key,
   });
+
+  @override
+  State<ArtifactDetailsTv> createState() => _ArtifactDetailsTvState();
+}
+
+class _ArtifactDetailsTvState extends State<ArtifactDetailsTv> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,22 +86,56 @@ class ArtifactDetailsTv extends StatelessWidget {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
-                                  Text(
-                                    state.name,
-                                    style: context.generalTextStyle(
-                                      fontSize: 28,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 2),
                                   Expanded(
-                                    child: Text(
-                                      state.description,
-                                      style: context.generalTextStyle(
-                                        fontSize: 14,
-                                      ),
+                                    child: Focusable(
+                                      onKeyEvent: _onKeyPressed,
+                                      autofocus: true,
+                                      builder: (context, isFocused) {
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            border: Border.all(
+                                              width: 2.0,
+                                              color: FlutterGameChallengeColors
+                                                  .artifactGreen
+                                                  .withOpacity(
+                                                isFocused ? 1 : 0,
+                                              ),
+                                            ),
+                                          ),
+                                          padding: const EdgeInsets.only(
+                                            left: 8,
+                                            right: 8,
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                state.name,
+                                                style: context.generalTextStyle(
+                                                  fontSize: 28,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 2),
+                                              Expanded(
+                                                child: SingleChildScrollView(
+                                                  controller: _scrollController,
+                                                  child: Text(
+                                                    state.description,
+                                                    style: context
+                                                        .generalTextStyle(
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ),
                                   const SizedBox(height: 8),
@@ -184,30 +234,24 @@ class ArtifactDetailsTv extends StatelessWidget {
                     if (state.model.status == ArtifactStatus.readyForCraft ||
                         state.model.status == ArtifactStatus.notEnoughResources)
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          width: 380,
-                          child: FlatButton(
-                            onPressed: () {
-                              BlocProvider.of<ArtifactDetailsCubit>(context)
-                                  .craftArtifact(state.model);
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        child: TvButton(
+                          text: context.l10n.buttonCraft,
+                          onPressed: () {
+                            BlocProvider.of<ArtifactDetailsCubit>(context)
+                                .craftArtifact(state.model);
 
-                              unawaited(
-                                showDialog(
-                                  context: context,
-                                  builder: (_) => GameMessageDialog(
-                                    title:
-                                        context.l10n.artifactCraftedDialogTitle,
-                                    body:
-                                        context.l10n.artifactCraftedDialogBody,
-                                  ),
+                            unawaited(
+                              showDialog(
+                                context: context,
+                                builder: (_) => GameMessageDialog(
+                                  title:
+                                      context.l10n.artifactCraftedDialogTitle,
+                                  body: context.l10n.artifactCraftedDialogBody,
                                 ),
-                              );
-                            },
-                            isActive: state.model.status ==
-                                ArtifactStatus.readyForCraft,
-                            text: context.l10n.buttonCraft,
-                          ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                   ],
@@ -218,151 +262,38 @@ class ArtifactDetailsTv extends StatelessWidget {
       },
     );
   }
-}
 
-class _ScrollableText extends StatefulWidget {
-  const _ScrollableText({
-    required this.title,
-    required this.description,
-    required this.imagePath,
-    required this.status,
-  });
+  KeyEventResult _onKeyPressed(FocusNode node, KeyEvent event) {
+    if (event is! KeyDownEvent) {
+      return KeyEventResult.ignored;
+    }
 
-  final String title;
-  final String description;
-  final String imagePath;
-  final ArtifactStatus status;
+    if (event.logicalKey == LogicalKeyboardKey.arrowUp &&
+        _scrollController.offset > 0) {
+      _scrollController.animateTo(
+        math.max(
+          0,
+          _scrollController.offset - 100,
+        ),
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInCubic,
+      );
 
-  @override
-  State<_ScrollableText> createState() => _ScrollableTextState();
-}
+      return KeyEventResult.handled;
+    } else if (event.logicalKey == LogicalKeyboardKey.arrowDown &&
+        _scrollController.offset < _scrollController.position.maxScrollExtent) {
+      _scrollController.animateTo(
+        math.min(
+          _scrollController.position.maxScrollExtent,
+          _scrollController.offset + 100,
+        ),
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInCubic,
+      );
 
-class _ScrollableTextState extends State<_ScrollableText> {
-  final _scrollController = ScrollController();
+      return KeyEventResult.handled;
+    }
 
-  bool _showUnderline = true;
-  double _imageOffset = 0;
-
-  static const _imageMinHeight = 80.0;
-  static const _contentHeight = 120.0;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _scrollController.addListener(() {
-      final maxStroke = _scrollController.position.maxScrollExtent;
-      final showUnderline = _scrollController.offset < maxStroke;
-
-      setState(() {
-        _showUnderline = showUnderline;
-        _imageOffset = _scrollController.offset;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Stack(
-          children: [
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(38),
-                    topRight: Radius.circular(38),
-                  ),
-                  child: Image.asset(
-                    widget.imagePath,
-                    width: constraints.maxWidth,
-                    height: max(
-                      _imageMinHeight,
-                      min(
-                            constraints.maxWidth,
-                            constraints.maxHeight - _contentHeight,
-                          ) -
-                          _imageOffset,
-                    ),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: ArtifactStatusIcon(
-                      status: widget.status,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12,
-              ),
-              child: Column(
-                children: [
-                  const SizedBox(height: _imageMinHeight),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      controller: _scrollController,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: min(
-                                  constraints.maxWidth,
-                                  constraints.maxHeight - _contentHeight,
-                                ) -
-                                _imageMinHeight,
-                          ),
-                          ColoredBox(
-                            color: FlutterGameChallengeColors.detailsBackground,
-                            child: Column(
-                              children: [
-                                const SizedBox(height: 8),
-                                Text(
-                                  widget.title,
-                                  style: context.generalTextStyle(
-                                    fontSize: 28,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  widget.description,
-                                  style: context.generalTextStyle(
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 2,
-                    decoration: BoxDecoration(
-                      color: _showUnderline
-                          ? FlutterGameChallengeColors.textStroke
-                          : null,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        );
-      },
-    );
+    return KeyEventResult.ignored;
   }
 }
