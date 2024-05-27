@@ -13,6 +13,8 @@ import 'package:recyclo/menu/cubit/main_page_cubit.dart';
 import 'package:recyclo/menu/cubit/main_page_state.dart';
 import 'package:recyclo/menu/widgets/main_menu_background_tv.dart';
 import 'package:recyclo/service_provider.dart';
+import 'package:recyclo/settings/cubit/settings_cubit.dart';
+import 'package:recyclo/settings/settings_page_tv.dart';
 import 'package:recyclo/trash_reserve/trash_reserve_widget.dart';
 import 'package:recyclo/widgets/focusable.dart';
 import 'package:recyclo/widgets/scale_widget.dart';
@@ -81,8 +83,8 @@ class _MainMenuPageTvState extends State<MainMenuPageTv> {
                         MainPageArtifactDetailsState() =>
                           const _ArtifactsContent(),
                         MainPageArtifactsState() => const _ArtifactsContent(),
-                        MainPageTutorialState() => const SizedBox(),
-                        MainPageSettingsState() => const SizedBox(),
+                        MainPageTutorialState() => _TutorialContent(),
+                        MainPageSettingsState() => _SettingsContent(),
                       },
                     ),
                   );
@@ -213,16 +215,76 @@ class _MainMenuContent extends StatelessWidget {
             title: context.l10n.mainMenuTutorialItemTitle,
             iconPath: Assets.images.tutorial.path,
             selectedIconPath: Assets.images.tutorialSelected.path,
-            onTap: () {},
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToTutorial();
+            },
           ),
           _MainMenuItem(
             title: context.l10n.mainMenuSettingsItemTitle,
             iconPath: Assets.images.settings.path,
             selectedIconPath: Assets.images.settingsSelected.path,
-            onTap: () {},
+            onTap: () {
+              BlocProvider.of<MainPageCubit>(context).navigateToSettings();
+            },
           ),
         ],
       ),
+    );
+  }
+}
+
+class _TutorialContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder(
+      tween: Tween<double>(
+        begin: 1,
+        end: 0,
+      ),
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+      builder: (context, v, child) {
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: Transform.translate(
+            offset: Offset(0, v * 320),
+            child: Container(
+              width: 300.0,
+              height: 320,
+              decoration: const BoxDecoration(
+                color: FlutterGameChallengeColors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
+                ),
+                border: Border(
+                  top: BorderSide(
+                    width: 2,
+                    color: FlutterGameChallengeColors.primary1,
+                  ),
+                  left: BorderSide(
+                    width: 2,
+                    color: FlutterGameChallengeColors.primary1,
+                  ),
+                  right: BorderSide(
+                    width: 2,
+                    color: FlutterGameChallengeColors.primary1,
+                  ),
+                ),
+              ),
+              padding: const EdgeInsets.all(28),
+              child: Flexible(
+                child: Semantics(
+                  image: true,
+                  excludeSemantics: true,
+                  label: context.l10n.tutorialDescription,
+                  child: Assets.images.howToPlayWithoutSpaces.image(),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -252,6 +314,11 @@ class _MainMenuItemState extends State<_MainMenuItem>
   Widget build(BuildContext context) {
     return Focusable(
       autofocus: widget.autofocus,
+      onFocusChange: (isFocused) {
+        if (isFocused) {
+          BlocProvider.of<MainPageCubit>(context).playTapSound();
+        }
+      },
       builder: (context, isFocused) {
         return GestureDetector(
           onTap: widget.onTap,
@@ -297,6 +364,16 @@ class _ArtifactsContent extends StatelessWidget {
     return BlocProvider<ArtifactsCubit>(
       create: (_) => ServiceProvider.get<ArtifactsCubit>(),
       child: const ArtifactsListPage(),
+    );
+  }
+}
+
+class _SettingsContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<SettingsCubit>(
+      create: (_) => ServiceProvider.get<SettingsCubit>(),
+      child: const SettingsPageTv(),
     );
   }
 }

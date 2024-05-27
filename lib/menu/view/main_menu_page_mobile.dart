@@ -13,7 +13,7 @@ import 'package:recyclo/menu/view/menu_item.dart';
 import 'package:recyclo/menu/widgets/main_menu_background.dart';
 import 'package:recyclo/service_provider.dart';
 import 'package:recyclo/settings/cubit/settings_cubit.dart';
-import 'package:recyclo/settings/settings_page.dart';
+import 'package:recyclo/settings/settings_page_mobile.dart';
 import 'package:recyclo/trash_reserve/trash_reserve_widget.dart';
 
 class MainMenuPageMobile extends StatelessWidget {
@@ -279,7 +279,7 @@ class _SettingsContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<SettingsCubit>(
       create: (_) => ServiceProvider.get<SettingsCubit>(),
-      child: const SettingsPage(),
+      child: const SettingsPageMobile(),
     );
   }
 }

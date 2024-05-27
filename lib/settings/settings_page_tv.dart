@@ -6,82 +6,58 @@ import 'package:recyclo/settings/cubit/settings_cubit.dart';
 import 'package:recyclo/settings/cubit/settings_state.dart';
 import 'package:recyclo/settings/widgets/recyclo_switch.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class SettingsPageTv extends StatelessWidget {
+  const SettingsPageTv({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return TweenAnimationBuilder(
-      tween: Tween<double>(
-        begin: 1,
-        end: 0,
+    return Container(
+      width: 600,
+      padding: const EdgeInsets.only(
+        top: 20,
+        left: 12,
+        right: 12,
       ),
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeOut,
-      builder: (context, v, child) {
-        return LayoutBuilder(
-          builder: (context, constraints) {
-            return Transform.translate(
-              offset: Offset(
-                0,
-                constraints.maxHeight * v,
-              ),
-              child: child,
-            );
-          },
-        );
-      },
-      child: SafeArea(
-        bottom: false,
-        child: Container(
-          width: 600,
-          padding: const EdgeInsets.only(
-            top: 20,
-            left: 12,
-            right: 12,
+      decoration: const BoxDecoration(
+        color: FlutterGameChallengeColors.detailsBackground,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+        ),
+        border: Border(
+          left: BorderSide(
+            color: FlutterGameChallengeColors.primary1,
+            width: 2,
           ),
-          decoration: const BoxDecoration(
-            color: FlutterGameChallengeColors.detailsBackground,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40),
-              topRight: Radius.circular(40),
-            ),
-            border: Border(
-              left: BorderSide(
-                color: FlutterGameChallengeColors.primary1,
-                width: 2,
-              ),
-              top: BorderSide(
-                color: FlutterGameChallengeColors.primary1,
-                width: 2,
-              ),
-              right: BorderSide(
-                color: FlutterGameChallengeColors.primary1,
-                width: 2,
-              ),
-            ),
+          top: BorderSide(
+            color: FlutterGameChallengeColors.primary1,
+            width: 2,
           ),
-          child: Column(
-            children: [
-              Semantics(
-                header: true,
-                focusable: true,
-                child: Text(
-                  context.l10n.gameSettings,
-                  style: context.generalTextStyle(
-                    fontSize: 28,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 24),
-              const _AudioSettings(),
-              const SizedBox(height: 36),
-              const _AccessibilitySettings(),
-              const SizedBox(height: 36),
-              _LanguageSettings(),
-            ],
+          right: BorderSide(
+            color: FlutterGameChallengeColors.primary1,
+            width: 2,
           ),
         ),
+      ),
+      child: Column(
+        children: [
+          Semantics(
+            header: true,
+            focusable: true,
+            child: Text(
+              context.l10n.gameSettings,
+              style: context.generalTextStyle(
+                fontSize: 28,
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          const _AudioSettings(),
+          const SizedBox(height: 36),
+          const _AccessibilitySettings(),
+          const SizedBox(height: 36),
+          _LanguageSettings(),
+        ],
       ),
     );
   }

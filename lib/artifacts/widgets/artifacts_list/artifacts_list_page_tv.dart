@@ -58,6 +58,7 @@ class _ArtifactsListPageTvState extends State<ArtifactsListPageTv> {
                   description: context.l10n.artifactNewspaperDescripton,
                   autofocus: true,
                   onFocusChange: (hasFocus) {
+                    BlocProvider.of<MainPageCubit>(context).playTapSound();
                     if (hasFocus) {
                       _scrollController.animateTo(
                         0,
@@ -73,6 +74,7 @@ class _ArtifactsListPageTvState extends State<ArtifactsListPageTv> {
                   imagePath: Assets.images.artifactShampoo.path,
                   description: context.l10n.artifactShampooDescripton,
                   onFocusChange: (hasFocus) {
+                    BlocProvider.of<MainPageCubit>(context).playTapSound();
                     if (hasFocus) {
                       _scrollController.animateTo(
                         0,
@@ -88,6 +90,7 @@ class _ArtifactsListPageTvState extends State<ArtifactsListPageTv> {
                   imagePath: Assets.images.artifactPlant.path,
                   description: context.l10n.artifactPlantDescripton,
                   onFocusChange: (hasFocus) {
+                    BlocProvider.of<MainPageCubit>(context).playTapSound();
                     if (hasFocus) {
                       _scrollController.animateTo(
                         0,
@@ -104,6 +107,7 @@ class _ArtifactsListPageTvState extends State<ArtifactsListPageTv> {
                   description: context.l10n.artifactLaptopDescripton,
                   onFocusChange: (hasFocus) {
                     if (hasFocus) {
+                      BlocProvider.of<MainPageCubit>(context).playTapSound();
                       _scrollController.animateTo(
                         _scrollController.position.maxScrollExtent,
                         duration: const Duration(milliseconds: 200),
@@ -119,6 +123,7 @@ class _ArtifactsListPageTvState extends State<ArtifactsListPageTv> {
                   description: context.l10n.artifactCarDescripton,
                   onFocusChange: (hasFocus) {
                     if (hasFocus) {
+                      BlocProvider.of<MainPageCubit>(context).playTapSound();
                       _scrollController.animateTo(
                         _scrollController.position.maxScrollExtent,
                         duration: const Duration(milliseconds: 200),
@@ -134,6 +139,7 @@ class _ArtifactsListPageTvState extends State<ArtifactsListPageTv> {
                   description: context.l10n.artifactHouseDescripton,
                   onFocusChange: (hasFocus) {
                     if (hasFocus) {
+                      BlocProvider.of<MainPageCubit>(context).playTapSound();
                       _scrollController.animateTo(
                         _scrollController.position.maxScrollExtent,
                         duration: const Duration(milliseconds: 200),
