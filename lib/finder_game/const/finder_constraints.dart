@@ -18,4 +18,9 @@ class FinderConstraints {
     final itemSize = gameWidth * FinderConstraints.trashSizeFactor;
     return Vector2(itemSize, itemSize);
   }
+
+  static const maxGameWidth = 500.0;
+  static const minGameWith = 320.0;
+  static const maxGameHeight = 1100.0;
+  static const minGameHeight = 500.0;
 }

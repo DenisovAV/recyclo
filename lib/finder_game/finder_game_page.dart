@@ -10,6 +10,7 @@ import 'package:recyclo/finder_game/finder_game.dart';
 import 'package:recyclo/finder_game/finder_state.dart';
 import 'package:recyclo/finder_game/overlays/finder_hud.dart';
 import 'package:recyclo/finder_game/overlays/game_start_overlay.dart';
+import 'package:recyclo/finder_game/widget/finder_game_wrapper.dart';
 import 'package:recyclo/service_provider.dart';
 
 import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
@@ -38,11 +39,6 @@ class FinderGamePage extends StatefulWidget {
 }
 
 class _FinderGamePageState extends State<FinderGamePage> {
-  static const _maxGameWidth = 500.0;
-  static const _minGameWith = 320.0;
-  static const _maxGameHeight = 1100.0;
-  static const _minGameHeight = 500.0;
-
   late final FinderGame _game;
 
   @override
@@ -71,13 +67,7 @@ class _FinderGamePageState extends State<FinderGamePage> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxWidth: _maxGameWidth,
-                    maxHeight: _maxGameHeight,
-                    minWidth: _minGameWith,
-                    minHeight: _minGameHeight,
-                  ),
+                child: FinderGameWrapper(
                   child: GameWidget(
                     game: _game,
                     overlayBuilderMap: {
