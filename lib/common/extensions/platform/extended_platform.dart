@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 
@@ -9,25 +7,30 @@ class ExtendedPlatform {
       return;
     }
 
-    if (Platform.isAndroid) {
+    if (defaultTargetPlatform == TargetPlatform.android) {
       final deviceInfo = DeviceInfoPlugin();
       final androidInfo = await deviceInfo.androidInfo;
-      isTv =
-          androidInfo.systemFeatures.contains('android.software.leanback_only');
-    } else if (Platform.isIOS || Platform.isWindows) {
+      isTv = androidInfo.systemFeatures.contains('android.software.leanback_only');
+    } else if (defaultTargetPlatform == TargetPlatform.iOS ||
+        defaultTargetPlatform == TargetPlatform.windows) {
       isTv = false;
     } else {
-      isTv = Platform.isLinux;
+      isTv = defaultTargetPlatform == TargetPlatform.linux;
     }
   }
 
-  static bool get isAndroid => !kIsWeb && Platform.isAndroid;
-  static bool get isApple => !kIsWeb && Platform.isIOS || Platform.isMacOS;
+  static bool get isAndroid => !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
+
+  static bool get isApple =>
+      !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS ||
+      defaultTargetPlatform == TargetPlatform.macOS;
 
   static bool get isWeb => kIsWeb;
 
   static bool isTv = false;
 
-  static bool isTizen =
-      !kIsWeb && Platform.isLinux && !Platform.isAndroid && !Platform.isIOS;
+  static bool isTizen = !kIsWeb &&
+      defaultTargetPlatform == TargetPlatform.linux &&
+      defaultTargetPlatform != TargetPlatform.android &&
+      defaultTargetPlatform != TargetPlatform.iOS;
 }
