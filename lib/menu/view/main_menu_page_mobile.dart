@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/app/view/app.dart';
-import 'package:recyclo/artifacts/cubit/artifacts_cubit.dart';
-import 'package:recyclo/artifacts/widgets/artifacts_list_page.dart';
+import 'package:recyclo/artifacts/widgets/artifacts_list/artifacts_list_page.dart';
 import 'package:recyclo/catcher_game/catcher_game_page.dart';
 import 'package:recyclo/clicker_game/clicker_game_page.dart';
 import 'package:recyclo/common.dart';
@@ -14,7 +13,7 @@ import 'package:recyclo/menu/view/menu_item.dart';
 import 'package:recyclo/menu/widgets/main_menu_background.dart';
 import 'package:recyclo/service_provider.dart';
 import 'package:recyclo/settings/cubit/settings_cubit.dart';
-import 'package:recyclo/settings/settings_page.dart';
+import 'package:recyclo/settings/settings_page_mobile.dart';
 import 'package:recyclo/trash_reserve/trash_reserve_widget.dart';
 
 class MainMenuPageMobile extends StatelessWidget {
@@ -50,8 +49,9 @@ class MainMenuPageMobile extends StatelessWidget {
                       child: switch (state) {
                         MainPageInitialState() => _MainMenuContent(),
                         MainPageChooseGameState() => _ChooseGameContent(),
-                        MainPageArtifactDetailsState() => _ArtifactsContent(),
-                        MainPageArtifactsState() => _ArtifactsContent(),
+                        MainPageArtifactDetailsState() =>
+                          const ArtifactsListPage(),
+                        MainPageArtifactsState() => const SizedBox(),
                         MainPageTutorialState() => _TutorialContent(),
                         MainPageSettingsState() => _SettingsContent(),
                       },
@@ -209,16 +209,6 @@ class _ChooseGameContent extends StatelessWidget {
   }
 }
 
-class _ArtifactsContent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider<ArtifactsCubit>(
-      create: (_) => ServiceProvider.get<ArtifactsCubit>(),
-      child: const ArtifactsListPage(),
-    );
-  }
-}
-
 class _TutorialContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -289,7 +279,7 @@ class _SettingsContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<SettingsCubit>(
       create: (_) => ServiceProvider.get<SettingsCubit>(),
-      child: const SettingsPage(),
+      child: const SettingsPageMobile(),
     );
   }
 }

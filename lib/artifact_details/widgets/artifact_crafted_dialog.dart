@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:recyclo/common.dart';
+import 'package:recyclo/widgets/tv_button.dart';
 
 class GameMessageDialog extends StatelessWidget {
-
   const GameMessageDialog({
     required this.title,
     required this.body,
@@ -46,12 +46,21 @@ class GameMessageDialog extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 40),
-            FlatButton(
-              text: context.l10n.buttonOk,
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
+            if (ExtendedPlatform.isTv)
+              TvButton(
+                text: context.l10n.buttonOk,
+                autofocus: true,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            else
+              FlatButton(
+                text: context.l10n.buttonOk,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
           ],
         ),
       ),

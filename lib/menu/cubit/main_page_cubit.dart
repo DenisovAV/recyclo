@@ -29,32 +29,36 @@ class MainPageCubit extends Cubit<MainPageState> {
   }
 
   void navigateToChooseGame() {
-    _musicService.playSound(Sounds.buttonTap);
+    playTapSound();
     emit(MainPageChooseGameState());
   }
 
-  void navigateToMainPage() {
+  void playTapSound() {
     _musicService.playSound(Sounds.buttonTap);
+  }
+
+  void navigateToMainPage() {
+    playTapSound();
     emit(MainPageInitialState());
   }
 
   void navigateToArtifacts() {
-    _musicService.playSound(Sounds.buttonTap);
+    playTapSound();
     emit(MainPageArtifactsState());
   }
 
   void navigateToArtifactDetails() {
-    _musicService.playSound(Sounds.buttonTap);
+    playTapSound();
     emit(MainPageArtifactDetailsState());
   }
 
   void navigateToTutorial() {
-    _musicService.playSound(Sounds.buttonTap);
+    playTapSound();
     emit(MainPageTutorialState());
   }
 
   void navigateToSettings() {
-    _musicService.playSound(Sounds.buttonTap);
+    playTapSound();
     emit(MainPageSettingsState());
   }
 

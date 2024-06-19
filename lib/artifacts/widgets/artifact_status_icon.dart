@@ -5,10 +5,12 @@ import 'package:recyclo/common.dart';
 class ArtifactStatusIcon extends StatelessWidget {
   const ArtifactStatusIcon({
     required this.status,
+    this.borderColor,
     super.key,
   });
 
   final ArtifactStatus status;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class ArtifactStatusIcon extends StatelessWidget {
         color: _getColorByStatus(),
         border: Border.all(
           width: 2,
-          color: FlutterGameChallengeColors.textStroke,
+          color: borderColor ?? FlutterGameChallengeColors.textStroke,
         ),
         borderRadius: BorderRadius.circular(24),
       ),
