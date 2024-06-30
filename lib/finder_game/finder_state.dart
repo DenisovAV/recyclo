@@ -5,18 +5,19 @@ import 'package:recyclo/clicker_game/game_models/trash_type.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/finder_game/components/item.dart';
 import 'package:recyclo/finder_game/const/finder_constraints.dart';
+import 'package:recyclo/finder_game/finder_size.dart';
 
 class FinderState extends Component with HasGameRef {
   FinderState({
     required this.gameWidgetSize,
-    required this.topPadding,
+    required this.finderSize,
   })  : currentTargetTypes = ValueNotifier([]),
         trashItems = ValueNotifier([]),
         _sortedTrash = {},
         _trashBin = TrashBin();
 
   final Vector2 gameWidgetSize;
-  final double topPadding;
+  final FinderSize finderSize;
 
   final ValueNotifier<List<TrashType>> currentTargetTypes;
   final ValueNotifier<List<Item>> trashItems;
@@ -48,13 +49,16 @@ class FinderState extends Component with HasGameRef {
   }
 
   void _generateTrashItems() {
-    final itemSize = FinderConstraints.getTrashItemSize(game.size.x);
+    final itemSize = FinderConstraints.getTrashItemSize(
+      game.size.x,
+      finderSize.trashSizeFactor,
+    );
     final cellWidth = itemSize.x;
     final cellHeight = itemSize.y;
 
-    final topTrashPadding = topPadding +
+    final topTrashPadding = finderSize.topPadding +
         gameWidgetSize.y *
-            FinderConstraints.trashAdditionalTopPaddingPercentage;
+            FinderConstraints.trashAdditionalTopPaddingPercentageMobile;
 
     final columns =
         ((gameWidgetSize.x - 2 * FinderConstraints.sidePadding) / cellWidth)
