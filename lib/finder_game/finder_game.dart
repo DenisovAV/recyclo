@@ -50,12 +50,14 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
       BackgroundFog(
         sprite: Sprite(
           Flame.images.fromCache(
-            Assets.images.fogDark.path,
+            ExtendedPlatform.isTv
+                ? Assets.images.fogDarkTv.path
+                : Assets.images.fogDark.path,
           ),
         ),
         position: Vector2(
           0,
-          finderSize.topPadding,
+          finderSize.fogPositionOffsetY,
         ),
         size: size,
       ),
@@ -69,7 +71,7 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
         ),
         position: Vector2(
           0,
-          finderSize.topPadding,
+          finderSize.fogPositionOffsetY,
         ),
         topPadding: finderSize.topPadding,
       ),

@@ -15,6 +15,7 @@ class FinderSize {
       trashSizeFactor: FinderConstraints.trashSizeFactorTv,
       trashAdditionalTopPaddingPercentage:
           FinderConstraints.trashAdditionalTopPaddingPercentageMobile,
+      fogPositionOffsetY: 0,
     );
   }
 
@@ -32,6 +33,7 @@ class FinderSize {
       trashSizeFactor: FinderConstraints.trashSizeFactorMobile,
       trashAdditionalTopPaddingPercentage:
           FinderConstraints.trashAdditionalTopPaddingPercentageMobile,
+      fogPositionOffsetY: topPadding,
     );
   }
 
@@ -43,6 +45,7 @@ class FinderSize {
     required this.topPadding,
     required this.trashSizeFactor,
     required this.trashAdditionalTopPaddingPercentage,
+    required this.fogPositionOffsetY,
   });
 
   final double minWidth;
@@ -52,4 +55,5 @@ class FinderSize {
   final double topPadding;
   final double trashSizeFactor;
   final double trashAdditionalTopPaddingPercentage;
+  final double fogPositionOffsetY;
 }
