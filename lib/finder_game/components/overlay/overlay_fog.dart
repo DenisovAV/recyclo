@@ -7,6 +7,7 @@ import 'package:flame/events.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:recyclo/common/assets/assets.gen.dart';
+import 'package:recyclo/common/extensions/platform.dart';
 import 'package:recyclo/finder_game/components/item.dart';
 import 'package:recyclo/finder_game/components/overlay/overlay_render_mode.dart';
 import 'package:recyclo/finder_game/components/overlay/overlay_renderer.dart';
@@ -164,7 +165,7 @@ class OverlayFog extends PositionComponent
 
   void _loadImages() {
     fogImage = Flame.images.fromCache(
-      Assets.images.fog.path,
+      ExtendedPlatform.isTv ? Assets.images.fogTv.path : Assets.images.fog.path,
     );
     maskImage = Flame.images.fromCache(
       Assets.images.holeMask.path,

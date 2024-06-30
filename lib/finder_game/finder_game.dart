@@ -5,10 +5,11 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:recyclo/common/assets.dart';
+import 'package:recyclo/common/extensions/platform/extended_platform.dart';
 import 'package:recyclo/finder_game/components/background_fog.dart';
 import 'package:recyclo/finder_game/components/overlay/overlay_fog.dart';
-import 'package:recyclo/finder_game/const/finder_constraints.dart';
 import 'package:recyclo/finder_game/events/finder_game_event.dart';
+import 'package:recyclo/finder_game/finder_size.dart';
 import 'package:recyclo/finder_game/finder_state.dart';
 import 'package:recyclo/finder_game/util/finder_sound_player.dart';
 
@@ -16,13 +17,19 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
   FinderGame() : super(zoom: 1);
 
   late final FinderState gameState;
-  
-  StreamController<FinderGameEvent> streamController = StreamController.broadcast();
+
+  StreamController<FinderGameEvent> streamController =
+      StreamController.broadcast();
   Stream<FinderGameEvent> get eventStream => streamController.stream;
 
   @override
   Future<void> onLoad() async {
+    final finderSize = ExtendedPlatform.isTv
+        ? FinderSize.tv(gameSizeY: size.y)
+        : FinderSize.mobile(gameSizeY: size.y);
+
     camera.moveTo(size / 2);
+
     await Flame.images.loadAll(
       [
         Assets.images.fog.path,
@@ -32,28 +39,41 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
       ],
     );
 
-    final topPadding = size.y * FinderConstraints.topPaddingPercentage;
+    gameState = FinderState(
+      gameWidgetSize: size,
+      finderSize: finderSize,
+    );
 
-    gameState = FinderState(gameWidgetSize: size, topPadding: topPadding);
-    await add(gameState);
-    await add(FinderSoundPlayer());
-    await add(
+    await addAll([
+      gameState,
+      FinderSoundPlayer(),
       BackgroundFog(
         sprite: Sprite(
           Flame.images.fromCache(
-            Assets.images.fogDark.path,
+            ExtendedPlatform.isTv
+                ? Assets.images.fogDarkTv.path
+                : Assets.images.fogDark.path,
           ),
         ),
-        position: Vector2(0, topPadding),
+        position: Vector2(
+          0,
+          finderSize.fogPositionOffsetY,
+        ),
         size: size,
       ),
-    );
+    ]);
     await addAll(gameState.trashItems.value);
     await add(
       OverlayFog(
-        size: Vector2(size.x, size.y),
-        position: Vector2(0, topPadding),
-        topPadding: topPadding,
+        size: Vector2(
+          size.x,
+          size.y,
+        ),
+        position: Vector2(
+          0,
+          finderSize.fogPositionOffsetY,
+        ),
+        topPadding: finderSize.topPadding,
       ),
     );
 
