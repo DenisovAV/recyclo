@@ -11,11 +11,11 @@ class ExtendedPlatform {
       final deviceInfo = DeviceInfoPlugin();
       final androidInfo = await deviceInfo.androidInfo;
       isTv = androidInfo.systemFeatures.contains('android.software.leanback_only');
-    } else if (defaultTargetPlatform == TargetPlatform.iOS ||
-        defaultTargetPlatform == TargetPlatform.windows) {
-      isTv = false;
+    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+      const tvMode = String.fromEnvironment('TV_MODE');
+      isTv = tvMode == 'ON';
     } else {
-      isTv = defaultTargetPlatform == TargetPlatform.linux;
+      isTv = false;
     }
   }
 
@@ -28,6 +28,8 @@ class ExtendedPlatform {
   static bool get isWeb => kIsWeb;
 
   static bool isTv = false;
+
+  static bool get isAppleTv => !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS && isTv;
 
   static bool isTizen = !kIsWeb &&
       defaultTargetPlatform == TargetPlatform.linux &&
