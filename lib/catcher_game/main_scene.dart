@@ -14,8 +14,7 @@ import 'package:recyclo/common.dart';
 
 typedef CatchCallback = void Function(ItemType dropType);
 
-class MainScene extends PositionComponent
-    with TapCallbacks, HasGameRef<CatcherGame> {
+class MainScene extends PositionComponent with TapCallbacks, HasGameRef<CatcherGame> {
   MainScene({
     required this.onPauseResumeGameCallback,
     required this.onResetCallback,
@@ -129,17 +128,22 @@ class MainScene extends PositionComponent
 
   void onDragUpdate(DragUpdateDetails details) {
     if (game.status == CatcherGameStatusType.playing) {
-      if (_boxContainer.toRect().contains(details.localPosition) &&
-          !_isHorizontalDragHandled) {
+      if (_boxContainer.toRect().contains(details.localPosition) && !_isHorizontalDragHandled) {
         _boxContainer.handleDragUpdate(details);
       } else if (!_boxContainer.toRect().contains(details.localPosition) &&
           !_isHorizontalDragHandled) {
-        onDragEnd(DragEndDetails());
+        onDragEnd();
       }
     }
   }
 
-  void onDragEnd(DragEndDetails details) {
+  void onKeyBoardTap(DragUpdateDetails details) {
+    _boxContainer.handleDragUpdate(details);
+    _isHorizontalDragHandled = false;
+    onDragEnd();
+  }
+
+  void onDragEnd() {
     if (game.status == CatcherGameStatusType.playing) {
       if (!_isHorizontalDragHandled) {
         _boxContainer.handleDragEnd();
@@ -189,8 +193,7 @@ class MainScene extends PositionComponent
       _boxContainer.handleCatch(isSuccessful: false);
     }
 
-    if (_omissionsToShowTutorial >=
-        DebugBalancingTableConfig.maxOmissionsToShowTutorial) {
+    if (_omissionsToShowTutorial >= DebugBalancingTableConfig.maxOmissionsToShowTutorial) {
       _omissionsToShowTutorial = 1;
       _tutorialContainer.showTutorial();
     }
