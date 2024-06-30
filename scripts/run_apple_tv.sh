@@ -26,7 +26,7 @@ fvm flutter clean
 
 #build for ios
 fvm flutter pub get
-fvm flutter build ios --simulator --target lib/main_development.dart
+fvm flutter build ios --simulator --flavor development --target lib/main_development.dart
 
 #move ios tvos folders
 sh scripts/switch_target.sh tvos
