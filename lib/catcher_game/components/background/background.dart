@@ -3,11 +3,11 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:recyclo/catcher_game/game.dart';
-import 'package:recyclo/common.dart';
 
 class Background extends PositionComponent with HasGameRef<CatcherGame> {
   Background({
     required this.sprite,
+    super.anchor = Anchor.bottomCenter,
   });
 
   final Sprite sprite;
@@ -18,31 +18,31 @@ class Background extends PositionComponent with HasGameRef<CatcherGame> {
 
   @override
   void render(Canvas canvas) {
-    sprite.renderRect(
-      canvas,
-      rect,
-    );
+    if (isLoaded) {
+      sprite.renderRect(
+        canvas,
+        rect,
+      );
+    }
   }
 
   @override
   void onGameResize(Vector2 size) {
-    rect = Rect.fromCenter(
-      center: Offset(
-        size.toSize().width / 2,
-        size.toSize().height / game.scaleType.denominator,
-      ),
-      width: game.sizeConfig.tileSize * tilesWidth,
-      height: game.sizeConfig.tileSize * tilesHeight,
-    );
+    if (isLoaded) {
+      final gameSize = game.canvasSize.toSize();
+      // Get the aspect ratio of the sprite image
+      final spriteAspectRatio = sprite.src.width / sprite.src.height;
 
-    super.onGameResize(size);
+      // Calculate the height of the Rect based on the aspect ratio and the width of the game canvas
+      final rectHeight = gameSize.width / spriteAspectRatio;
+
+      rect = Rect.fromLTWH(
+        0,
+        gameSize.height - rectHeight,
+        gameSize.width,
+        rectHeight,
+      );
+      super.onGameResize(size);
+    }
   }
-}
-
-extension on AccessibilityGameScaleType {
-  double get denominator => switch (this) {
-        AccessibilityGameScaleType.small => 2.05,
-        AccessibilityGameScaleType.medium => 2.35,
-        AccessibilityGameScaleType.large => 2.9,
-      };
 }
