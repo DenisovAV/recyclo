@@ -145,6 +145,12 @@ class MainScene extends PositionComponent
     onDragEnd();
   }
 
+  void onEnterTap() {
+    if(game.status == CatcherGameStatusType.tutorial) {
+      _tutorialContainer.onHideTutorial();
+    }
+  }
+
   void onDragEnd() {
     if (game.status == CatcherGameStatusType.playing) {
       if (!_isHorizontalDragHandled) {

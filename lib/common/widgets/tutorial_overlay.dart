@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:recyclo/common.dart';
+import 'package:recyclo/widgets/focusable.dart';
 
 class TutorialOverlay extends StatelessWidget {
   const TutorialOverlay({
@@ -38,11 +40,14 @@ class TutorialOverlay extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
-                    child: GestureDetector(
-                      onTap: onGameStart,
-                      child: Assets.images.catcher.tutorial.play.image(
-                        width: 48,
-                        height: 48,
+                    child: Focusable(
+                      autofocus: true,
+                      builder: (context, _) => GestureDetector(
+                        onTap: onGameStart,
+                        child: Assets.images.catcher.tutorial.play.image(
+                          width: 48,
+                          height: 48,
+                        ),
                       ),
                     ),
                   ),

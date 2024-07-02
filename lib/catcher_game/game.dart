@@ -102,9 +102,12 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector, K
     Set<LogicalKeyboardKey> keysPressed,
   ) {
     final isKeyDown = event is KeyDownEvent;
-    final isSpace = keysPressed.contains(LogicalKeyboardKey.space);
-    final isLeft = keysPressed.contains(LogicalKeyboardKey.arrowLeft);
-    final isRight = keysPressed.contains(LogicalKeyboardKey.arrowRight);
+    final isSpace = event.logicalKey == LogicalKeyboardKey.space;
+    final isLeft = event.logicalKey == LogicalKeyboardKey.arrowLeft;
+    final isRight = event.logicalKey == LogicalKeyboardKey.arrowRight;
+    final isEnter = event.logicalKey == LogicalKeyboardKey.enter;
+
+
 
     if (isSpace) {
       _switchBetweenPauseAndPlaying();
@@ -112,6 +115,12 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector, K
     }
 
     if (isKeyDown) {
+
+      if(isEnter) {
+        mainScene?.onEnterTap();
+        return KeyEventResult.handled;
+      }
+
       if (isLeft || isRight) {
         final details = DragStartDetails(
           localPosition: Offset(_currentLocalPosition, 0.0),

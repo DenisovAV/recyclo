@@ -113,4 +113,11 @@ class TutorialContainer extends PositionComponent
       scene.onPauseResumeGameCallback();
     }
   }
+
+  void onHideTutorial() {
+    _buttonComponent.isVisible = false;
+    game.overlays.add(TimerOverlay.id);
+    game.status = CatcherGameStatusType.pause;
+    scene.onPauseResumeGameCallback();
+  }
 }
