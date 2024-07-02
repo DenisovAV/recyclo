@@ -27,40 +27,36 @@ class Background extends PositionComponent with HasGameRef<CatcherGame> {
   @override
   void onGameResize(Vector2 size) {
     if (isLoaded) {
+      final gameSize = game.canvasSize.toSize();
+
       if (ExtendedPlatform.isTv) {
-        _createRectForTv();
+        _createRectForTv(gameSize);
       } else {
-        _createRect();
+        _createRect(gameSize);
       }
 
       super.onGameResize(size);
     }
   }
 
-  void _createRectForTv() {
-    final gameSize = game.canvasSize.toSize();
-
-    // Set the width and height of the Rect to the width and height of the game canvas
+  void _createRectForTv(Size size) {
     rect = Rect.fromLTWH(
       0,
       0,
-      gameSize.width,
-      gameSize.height,
+      size.width,
+      size.height,
     );
   }
 
-  void _createRect() {
-    final gameSize = game.canvasSize.toSize();
-    // Get the aspect ratio of the sprite image
+  void _createRect(Size size) {
     final spriteAspectRatio = sprite.src.width / sprite.src.height;
 
-    // Calculate the height of the Rect based on the aspect ratio and the width of the game canvas
-    final rectHeight = gameSize.width / spriteAspectRatio;
+    final rectHeight = size.width / spriteAspectRatio;
 
     rect = Rect.fromLTWH(
       0,
-      gameSize.height - rectHeight,
-      gameSize.width,
+      size.height - rectHeight,
+      size.width,
       rectHeight,
     );
   }
