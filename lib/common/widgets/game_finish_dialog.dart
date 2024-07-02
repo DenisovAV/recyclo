@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/common/widgets/item_container.dart';
+import 'package:recyclo/widgets/focusable.dart';
 
 const _itemsInnerPadding = 4.0;
 const _dialogContentInnerPadding = 12.0;
@@ -107,14 +108,19 @@ Future<void> showGameFinishDialog({
                       ),
                     ),
                   const SizedBox(height: 24),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      onDismiss();
+                  Focusable(
+                    autofocus: true,
+                    builder: (context, _) {
+                      return FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          onDismiss();
+                        },
+                        text: items.isEmpty
+                            ? context.l10n.gameFinishDialogTryAgainButtonTitle
+                            : context.l10n.gameFinishDialogButtonTitle,
+                      );
                     },
-                    text: items.isEmpty
-                        ? context.l10n.gameFinishDialogTryAgainButtonTitle
-                        : context.l10n.gameFinishDialogButtonTitle,
                   ),
                 ],
               ),
