@@ -440,8 +440,12 @@ class $AssetsImagesCatcherBgGen {
   AssetGenImage get bg =>
       const AssetGenImage('assets/images/catcher/bg/bg.png');
 
+  /// File path: assets/images/catcher/bg/tv_bg.png
+  AssetGenImage get tvBg =>
+      const AssetGenImage('assets/images/catcher/bg/tv_bg.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [bg];
+  List<AssetGenImage> get values => [bg, tvBg];
 }
 
 class $AssetsImagesCatcherBoxesGen {

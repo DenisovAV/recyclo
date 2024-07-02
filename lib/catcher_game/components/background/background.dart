@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:recyclo/catcher_game/game.dart';
+import 'package:recyclo/common/extensions/platform/extended_platform.dart';
 
 class Background extends PositionComponent with HasGameRef<CatcherGame> {
   Background({
@@ -12,9 +13,6 @@ class Background extends PositionComponent with HasGameRef<CatcherGame> {
 
   final Sprite sprite;
   late Rect rect;
-
-  static const double tilesWidth = 9;
-  static const double tilesHeight = 20;
 
   @override
   void render(Canvas canvas) {
@@ -30,19 +28,36 @@ class Background extends PositionComponent with HasGameRef<CatcherGame> {
   void onGameResize(Vector2 size) {
     if (isLoaded) {
       final gameSize = game.canvasSize.toSize();
-      // Get the aspect ratio of the sprite image
-      final spriteAspectRatio = sprite.src.width / sprite.src.height;
 
-      // Calculate the height of the Rect based on the aspect ratio and the width of the game canvas
-      final rectHeight = gameSize.width / spriteAspectRatio;
+      if (ExtendedPlatform.isTv) {
+        _createRectForTv(gameSize);
+      } else {
+        _createRect(gameSize);
+      }
 
-      rect = Rect.fromLTWH(
-        0,
-        gameSize.height - rectHeight,
-        gameSize.width,
-        rectHeight,
-      );
       super.onGameResize(size);
     }
+  }
+
+  void _createRectForTv(Size size) {
+    rect = Rect.fromLTWH(
+      0,
+      0,
+      size.width,
+      size.height,
+    );
+  }
+
+  void _createRect(Size size) {
+    final spriteAspectRatio = sprite.src.width / sprite.src.height;
+
+    final rectHeight = size.width / spriteAspectRatio;
+
+    rect = Rect.fromLTWH(
+      0,
+      size.height - rectHeight,
+      size.width,
+      rectHeight,
+    );
   }
 }

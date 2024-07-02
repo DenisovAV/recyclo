@@ -1,5 +1,8 @@
 import 'package:flame/components.dart';
 import 'package:recyclo/common/entities/accessibility_game_scale_type.dart';
+import 'package:recyclo/common/extensions/platform/extended_platform.dart';
+
+const _defaultTileDenominatorForTV = 25.0;
 
 class SizeConfig extends Component {
   SizeConfig(this._gameScale);
@@ -12,7 +15,10 @@ class SizeConfig extends Component {
 
   @override
   void onGameResize(Vector2 size) {
-    _tileSize = size.toSize().width / _gameScale.denominator;
+    _tileSize = size.toSize().width /
+        (ExtendedPlatform.isTv
+            ? _defaultTileDenominatorForTV
+            : _gameScale.denominator);
     super.onGameResize(size);
   }
 }

@@ -11,6 +11,7 @@ import 'package:recyclo/catcher_game/game_models.dart';
 import 'package:recyclo/catcher_game/main_scene.dart';
 import 'package:recyclo/common/entities/game_difficulty_level_type.dart';
 import 'package:recyclo/common/entities/item_type.dart';
+import 'package:recyclo/common/extensions/platform/extended_platform.dart';
 import 'package:vector_math/vector_math.dart' as vector_math;
 
 typedef AssetsByItemTypeCallback = List<String> Function(ItemType dropType);
@@ -74,12 +75,20 @@ class DropContainer extends PositionComponent
     _dropFinalPointPositionY =
         boxContainer.y - (tile * DropContainerConfig.finalDropY);
 
-    _dropInitialPositionX = (size.width / 2) * DropContainerConfig.firstDropX;
-    _leftDropInitialPositionX =
-        (size.width / 2) * DropContainerConfig.secondDropX;
+    _dropInitialPositionX = (size.width / 2) *
+        (ExtendedPlatform.isTv
+            ? DropContainerConfig.rightDropXForTV
+            : DropContainerConfig.rightDropX);
+    _leftDropInitialPositionX = (size.width / 2) *
+        (ExtendedPlatform.isTv
+            ? DropContainerConfig.leftDropXForTV
+            : DropContainerConfig.leftDropX);
 
-    _commonDropInitialPositionY =
-        size.height - (tile * DropContainerConfig.commonDropY);
+    _commonDropInitialPositionY = size.height -
+        (tile *
+            (ExtendedPlatform.isTv
+                ? DropContainerConfig.commonDropYForTV
+                : DropContainerConfig.commonDropY));
 
     for (var i = 0; i < DropContainerConfig.trajectoryCount; i++) {
       trajectory.add(

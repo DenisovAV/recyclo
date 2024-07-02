@@ -32,6 +32,7 @@ class AssetsLoader {
 
   List<String> _gameAssets() => [
         Assets.images.catcher.bg.bg.path,
+        Assets.images.catcher.bg.tvBg.path,
         Assets.images.catcher.animations.pause.path,
         Assets.images.catcher.animations.reset.path,
         Assets.images.catcher.tutorial.tutorial.path,
