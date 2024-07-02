@@ -9,6 +9,8 @@ import 'package:recyclo/catcher_game/components.dart';
 import 'package:recyclo/catcher_game/game.dart';
 import 'package:recyclo/common.dart';
 
+const _boxContainerVerticalPositionDivisor = 0.6;
+
 class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   BoxContainer() {
     super.anchor = Anchor.centerLeft;
@@ -36,9 +38,6 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   bool _finishAnimation = false;
   bool _resizeInProgress = false;
 
-  // Required to prevent box resizing when showing overlay.
-  Vector2 _currentSize = Vector2.zero();
-
   void _resize(Size size) {
     _resizeInProgress = true;
 
@@ -60,17 +59,16 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
     height = _chosenBoxWidth + _swappingBoxWidth;
 
     x = 0;
-    y = initialBoxList.length == 7
-        ? screenSize.height -
-            (tile * BoxContainerConfig.containerSevenPositionY)
-        : screenSize.height - (tile * BoxContainerConfig.containerPositionY);
+    y = game.canvasSize.toSize().height -
+        (tile * BoxContainerConfig.bigBoxSize) /
+            _boxContainerVerticalPositionDivisor;
 
     _chosenPositionY =
         y - (_chosenBoxWidth - _swappingBoxWidth) / initialBoxList.length;
 
     _containerClip = Rect.fromLTRB(
       game.mainScene!.background.rect.left,
-      height,
+      0,
       game.mainScene!.background.rect.right,
       screenSize.height,
     );
@@ -105,8 +103,7 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
 
   @override
   void onGameResize(Vector2 size) {
-    if (isLoaded && _currentSize != size) {
-      _currentSize = size;
+    if (isLoaded) {
       _resize(size.toSize());
     }
     super.onGameResize(size);

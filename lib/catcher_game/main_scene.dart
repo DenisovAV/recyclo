@@ -14,7 +14,8 @@ import 'package:recyclo/common.dart';
 
 typedef CatchCallback = void Function(ItemType dropType);
 
-class MainScene extends PositionComponent with TapCallbacks, HasGameRef<CatcherGame> {
+class MainScene extends PositionComponent
+    with TapCallbacks, HasGameRef<CatcherGame> {
   MainScene({
     required this.onPauseResumeGameCallback,
     required this.onResetCallback,
@@ -128,7 +129,8 @@ class MainScene extends PositionComponent with TapCallbacks, HasGameRef<CatcherG
 
   void onDragUpdate(DragUpdateDetails details) {
     if (game.status == CatcherGameStatusType.playing) {
-      if (_boxContainer.toRect().contains(details.localPosition) && !_isHorizontalDragHandled) {
+      if (_boxContainer.toRect().contains(details.localPosition) &&
+          !_isHorizontalDragHandled) {
         _boxContainer.handleDragUpdate(details);
       } else if (!_boxContainer.toRect().contains(details.localPosition) &&
           !_isHorizontalDragHandled) {
@@ -193,7 +195,8 @@ class MainScene extends PositionComponent with TapCallbacks, HasGameRef<CatcherG
       _boxContainer.handleCatch(isSuccessful: false);
     }
 
-    if (_omissionsToShowTutorial >= DebugBalancingTableConfig.maxOmissionsToShowTutorial) {
+    if (_omissionsToShowTutorial >=
+        DebugBalancingTableConfig.maxOmissionsToShowTutorial) {
       _omissionsToShowTutorial = 1;
       _tutorialContainer.showTutorial();
     }
