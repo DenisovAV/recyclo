@@ -145,9 +145,18 @@ class MainScene extends PositionComponent
     onDragEnd();
   }
 
-  void onEnterTap() {
-    if(game.status == CatcherGameStatusType.tutorial) {
-      _tutorialContainer.onHideTutorial();
+  void handleEnterOrSelectButtonTap() {
+    switch (game.status) {
+      case CatcherGameStatusType.playing:
+      case CatcherGameStatusType.pause:
+        onPauseResumeGameCallback();
+        _buttonsContainer.triggerPlayPauseButtonAnimation();
+        break;
+      case CatcherGameStatusType.tutorial:
+        _tutorialContainer.onHideTutorial();
+        break;
+      case CatcherGameStatusType.result:
+        break;
     }
   }
 

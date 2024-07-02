@@ -16,7 +16,8 @@ typedef UpdateStatusCallback = void Function(CatcherGameStatusType status);
 typedef WaveCallback = void Function(int value);
 typedef LevelCallback = void Function(int level);
 
-class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector, KeyboardEvents {
+class CatcherGame extends FlameGame
+    with TapCallbacks, HorizontalDragDetector, KeyboardEvents {
   CatcherGame({
     bool? isPenaltyEnabled,
     AccessibilityGameScaleType? gameScaleType,
@@ -46,7 +47,8 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector, K
     mainScene = MainScene(
       onPauseResumeGameCallback: _handlePauseResumeGameCallback,
       onResetCallback: _handleOnResetCallback,
-      assetsByItemTypeCallback: ServiceProvider.get<AssetsLoader>().getAssetsListByItemType,
+      assetsByItemTypeCallback:
+          ServiceProvider.get<AssetsLoader>().getAssetsListByItemType,
     );
 
     await add(mainScene!);
@@ -106,8 +108,8 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector, K
     final isLeft = event.logicalKey == LogicalKeyboardKey.arrowLeft;
     final isRight = event.logicalKey == LogicalKeyboardKey.arrowRight;
     final isEnter = event.logicalKey == LogicalKeyboardKey.enter;
-
-
+    // Select keyboard event is typical for a TV remote.
+    final isSelect = event.logicalKey == LogicalKeyboardKey.select;
 
     if (isSpace) {
       _switchBetweenPauseAndPlaying();
@@ -115,9 +117,8 @@ class CatcherGame extends FlameGame with TapCallbacks, HorizontalDragDetector, K
     }
 
     if (isKeyDown) {
-
-      if(isEnter) {
-        mainScene?.onEnterTap();
+      if (isEnter || isSelect) {
+        mainScene?.handleEnterOrSelectButtonTap();
         return KeyEventResult.handled;
       }
 

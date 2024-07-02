@@ -136,6 +136,15 @@ class ButtonsContainer extends PositionComponent
     }
   }
 
+  void triggerPlayPauseButtonAnimation() {
+    _pauseOverlay.isVisible = false;
+    buttonList
+        .firstWhere(
+          (btn) => btn.buttonType == ButtonType.pausePlay,
+        )
+        .playing = true;
+  }
+
   VoidCallback _onFinishCallback(ButtonType type) {
     VoidCallback callBack;
     switch (type) {
