@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:recyclo/framework/key_simulator.dart';
 
 class RemoteController {
-
   factory RemoteController() => _instance ?? RemoteController._();
 
   RemoteController._();
@@ -35,15 +34,43 @@ class RemoteController {
     return false;
   }
 
-  void triggerKey(LogicalKeyboardKey key) {
+  void triggerKey(LogicalKeyboardKey key) async {
     if (LogicalKeyboardKey.arrowLeft == key) {
-      FocusManager.instance.primaryFocus!.focusInDirection(TraversalDirection.left);
+      await simulateKeyEvent(
+        PhysicalKeyboardKey.arrowLeft,
+        isDown: true,
+      );
+      await simulateKeyEvent(
+        PhysicalKeyboardKey.arrowLeft,
+        isDown: false,
+      );
     } else if (LogicalKeyboardKey.arrowRight == key) {
-      FocusManager.instance.primaryFocus!.focusInDirection(TraversalDirection.right);
+      await simulateKeyEvent(
+        PhysicalKeyboardKey.arrowRight,
+        isDown: true,
+      );
+      await simulateKeyEvent(
+        PhysicalKeyboardKey.arrowRight,
+        isDown: false,
+      );
     } else if (LogicalKeyboardKey.arrowUp == key) {
-      FocusManager.instance.primaryFocus!.focusInDirection(TraversalDirection.up);
+      await simulateKeyEvent(
+        PhysicalKeyboardKey.arrowUp,
+        isDown: true,
+      );
+      await simulateKeyEvent(
+        PhysicalKeyboardKey.arrowUp,
+        isDown: false,
+      );
     } else if (LogicalKeyboardKey.arrowDown == key) {
-      FocusManager.instance.primaryFocus!.focusInDirection(TraversalDirection.down);
+      await simulateKeyEvent(
+        PhysicalKeyboardKey.arrowDown,
+        isDown: true,
+      );
+      await simulateKeyEvent(
+        PhysicalKeyboardKey.arrowDown,
+        isDown: false,
+      );
     }
   }
 

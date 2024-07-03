@@ -29,7 +29,7 @@ BuildAppDebug() {
   fi
 
   ROOTDIR=$(dirname "$PROJECT_DIR")
-  OUTDIR=$ROOTDIR/build/ios/Debug-iphonesimulator
+  OUTDIR=$ROOTDIR/build/ios/Debug-development-iphonesimulator
   mkdir -p $OUTDIR
 
 
@@ -53,7 +53,7 @@ BuildAppDebug() {
     --tfa --target=flutter \
     -DTV_MODE=ON \
     --output-dill "$OUTDIR/App.framework/flutter_assets/kernel_blob.bin" \
-    "$FLUTTER_APPLICATION_PATH/lib/main.dart"
+    "$FLUTTER_APPLICATION_PATH/lib/main_development.dart"
 
 
   echo " └─Compiling JIT Snapshot"
@@ -148,7 +148,7 @@ BuildAppRelease() {
   DEVICE_TOOLS=$FLUTTER_LOCAL_ENGINE/out/ios_release/clang_x64
 
   ROOTDIR=$(dirname "$PROJECT_DIR")
-  OUTDIR=$ROOTDIR/build/ios/Debug-iphonesimulator
+  OUTDIR=$ROOTDIR/build/ios/Debug-development-iphonesimulator
   mkdir -p $OUTDIR
 
   echo " └─Coping Flutter.framework"
@@ -169,7 +169,7 @@ BuildAppRelease() {
     --aot --tfa --target=flutter \
     -DTV_MODE=ON \
     --output-dill "$OUTDIR/app.dill" \
-    "$FLUTTER_APPLICATION_PATH/lib/main.dart"
+    "$FLUTTER_APPLICATION_PATH/lib/main_production.dart"
 
   echo " └─Compiling AOT Assembly"
 

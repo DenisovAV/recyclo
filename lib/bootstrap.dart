@@ -28,8 +28,9 @@ class AppBlocObserver extends BlocObserver {
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await ExtendedPlatform.initialize();
 
-  if (!kIsWeb) {
+  if (!kIsWeb && !ExtendedPlatform.isAppleTv) {
     await FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
   }
 
@@ -38,8 +39,6 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   };
 
   await ServiceProvider.initialize();
-  await ExtendedPlatform.initialize();
-
   if (ExtendedPlatform.isAppleTv) {
     RemoteController().init();
   }
