@@ -17,9 +17,8 @@ import 'package:recyclo/finder_game/events/finder_game_event.dart';
 import 'package:recyclo/finder_game/finder_game.dart';
 
 class OverlayFog extends PositionComponent
-    with DragCallbacks, CollisionCallbacks, HasGameReference<FinderGame> {
+    with CollisionCallbacks, HasGameReference<FinderGame> {
   OverlayFog({
-    required super.size,
     required super.position,
     required this.topPadding,
   }) : super(priority: 5);
@@ -105,12 +104,10 @@ class OverlayFog extends PositionComponent
     game.gameState.collectTrash(itemToCollect);
   }
 
-  @override
   Future<void> onDragStart(DragStartEvent event) async {
-    super.onDragStart(event);
     game.streamController.add(FinderGameEvent(type: EventType.dragStarted));
     renderMode = OverlayRenderMode.hole;
-    dragPosition = event.localPosition;
+    dragPosition = event.localPosition - Vector2(0, topPadding);
 
     await add(
       collider
@@ -119,15 +116,12 @@ class OverlayFog extends PositionComponent
     );
   }
 
-  @override
   void onDragUpdate(DragUpdateEvent event) {
-    dragPosition = event.localEndPosition;
+    dragPosition = event.localEndPosition - Vector2(0, topPadding);
     collider.position = colliderPosition;
   }
 
-  @override
   void onDragEnd(DragEndEvent event) {
-    super.onDragEnd(event);
     game.streamController.add(FinderGameEvent(type: EventType.dragEnded));
     renderMode = OverlayRenderMode.bushes;
     remove(collider);

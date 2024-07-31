@@ -4,6 +4,8 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:recyclo/common/assets.dart';
 import 'package:recyclo/common/extensions/platform/extended_platform.dart';
 import 'package:recyclo/finder_game/components/background_fog.dart';
@@ -13,10 +15,14 @@ import 'package:recyclo/finder_game/finder_size.dart';
 import 'package:recyclo/finder_game/finder_state.dart';
 import 'package:recyclo/finder_game/util/finder_sound_player.dart';
 
-class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
+class FinderGame extends Forge2DGame
+    with TapDetector, HasCollisionDetection, KeyboardEvents, DragCallbacks {
   FinderGame() : super(zoom: 1);
 
   late final FinderState gameState;
+  late final OverlayFog overlayFog;
+
+  Vector2 dragPosition = Vector2(0, 0);
 
   StreamController<FinderGameEvent> streamController =
       StreamController.broadcast();
@@ -44,6 +50,14 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
       finderSize: finderSize,
     );
 
+    overlayFog = OverlayFog(
+      position: Vector2(
+        0,
+        finderSize.fogPositionOffsetY,
+      ),
+      topPadding: finderSize.topPadding,
+    );
+
     await addAll([
       gameState,
       FinderSoundPlayer(),
@@ -62,22 +76,39 @@ class FinderGame extends Forge2DGame with TapDetector, HasCollisionDetection {
         size: size,
       ),
     ]);
+
     await addAll(gameState.trashItems.value);
-    await add(
-      OverlayFog(
-        size: Vector2(
-          size.x,
-          size.y,
-        ),
-        position: Vector2(
-          0,
-          finderSize.fogPositionOffsetY,
-        ),
-        topPadding: finderSize.topPadding,
-      ),
-    );
+    await add(overlayFog);
 
     return super.onLoad();
+  }
+
+  @override
+  Future<void> onDragStart(DragStartEvent event) async {
+    super.onDragStart(event);
+    dragPosition = event.localPosition;
+    await overlayFog.onDragStart(event);
+  }
+
+  @override
+  void onDragUpdate(DragUpdateEvent event) {
+    super.onDragUpdate(event);
+    dragPosition = event.localEndPosition;
+    overlayFog.onDragUpdate(event);
+  }
+
+  @override
+  void onDragEnd(DragEndEvent event) {
+    super.onDragEnd(event);
+    overlayFog.onDragEnd(event);
+  }
+
+  @override
+  KeyEventResult onKeyEvent(
+    KeyEvent event,
+    Set<LogicalKeyboardKey> keysPressed,
+  ) {
+    return KeyEventResult.handled;
   }
 
   @override
