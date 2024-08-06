@@ -15,6 +15,9 @@ import 'package:recyclo/finder_game/const/finder_constraints.dart';
 import 'package:recyclo/finder_game/events/event_type.dart';
 import 'package:recyclo/finder_game/events/finder_game_event.dart';
 import 'package:recyclo/finder_game/finder_game.dart';
+import 'package:recyclo/finder_game/keyboard_arrow.dart';
+
+const _keyboardShift = 10.0;
 
 class OverlayFog extends PositionComponent
     with CollisionCallbacks, HasGameReference<FinderGame> {
@@ -136,7 +139,44 @@ class OverlayFog extends PositionComponent
     if (other.parent is Item) {
       currentCollisionItem = other.parent as Item?;
 
-      _resetTimer();
+      if (ExtendedPlatform.isTv) {
+      } else {
+        _resetTimer();
+      }
+    }
+  }
+
+  void handleArrow(KeyboardArrow arrow) {
+    switch (arrow) {
+      case KeyboardArrow.up:
+        dragPosition = Vector2(dragPosition.x, dragPosition.y - _keyboardShift);
+      case KeyboardArrow.down:
+        dragPosition = Vector2(dragPosition.x, dragPosition.y + _keyboardShift);
+      case KeyboardArrow.left:
+        dragPosition = Vector2(dragPosition.x - _keyboardShift, dragPosition.y);
+      case KeyboardArrow.right:
+        dragPosition = Vector2(dragPosition.x + _keyboardShift, dragPosition.y);
+    }
+
+    collider.position = colliderPosition;
+  }
+
+  Future<void> handleSelectKey() async {
+    if (renderMode == OverlayRenderMode.bushes) {
+      game.streamController.add(FinderGameEvent(type: EventType.dragStarted));
+      renderMode = OverlayRenderMode.hole;
+
+      dragPosition = size / 2;
+
+      await add(
+        collider
+          ..position = colliderPosition
+          ..size = colliderSize,
+      );
+    } else {
+      game.streamController.add(FinderGameEvent(type: EventType.dragEnded));
+      renderMode = OverlayRenderMode.bushes;
+      remove(collider);
     }
   }
 

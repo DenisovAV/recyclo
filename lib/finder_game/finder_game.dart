@@ -13,6 +13,7 @@ import 'package:recyclo/finder_game/components/overlay/overlay_fog.dart';
 import 'package:recyclo/finder_game/events/finder_game_event.dart';
 import 'package:recyclo/finder_game/finder_size.dart';
 import 'package:recyclo/finder_game/finder_state.dart';
+import 'package:recyclo/finder_game/keyboard_arrow.dart';
 import 'package:recyclo/finder_game/util/finder_sound_player.dart';
 
 class FinderGame extends Forge2DGame
@@ -108,6 +109,43 @@ class FinderGame extends Forge2DGame
     KeyEvent event,
     Set<LogicalKeyboardKey> keysPressed,
   ) {
+    final isKeyDown = event is KeyDownEvent;
+    //final isSpace = event.logicalKey == LogicalKeyboardKey.space;
+    final isLeft = event.logicalKey == LogicalKeyboardKey.arrowLeft;
+    final isRight = event.logicalKey == LogicalKeyboardKey.arrowRight;
+    final isUp = event.logicalKey == LogicalKeyboardKey.arrowUp;
+    final isDown = event.logicalKey == LogicalKeyboardKey.arrowDown;
+    final isEnter = event.logicalKey == LogicalKeyboardKey.enter;
+    // Select keyboard event is typical for a TV remote.
+    final isSelect = event.logicalKey == LogicalKeyboardKey.select;
+
+    if (isKeyDown) {
+      if (isEnter || isSelect) {
+        overlayFog.handleSelectKey();
+        return KeyEventResult.handled;
+      }
+
+      if (isLeft) {
+        overlayFog.handleArrow(KeyboardArrow.left);
+        return KeyEventResult.handled;
+      }
+
+      if (isRight) {
+        overlayFog.handleArrow(KeyboardArrow.right);
+        return KeyEventResult.handled;
+      }
+
+      if (isUp) {
+        overlayFog.handleArrow(KeyboardArrow.up);
+        return KeyEventResult.handled;
+      }
+
+      if (isDown) {
+        overlayFog.handleArrow(KeyboardArrow.down);
+        return KeyEventResult.handled;
+      }
+    }
+
     return KeyEventResult.handled;
   }
 
