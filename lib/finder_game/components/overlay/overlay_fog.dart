@@ -139,10 +139,7 @@ class OverlayFog extends PositionComponent
     if (other.parent is Item) {
       currentCollisionItem = other.parent as Item?;
 
-      if (ExtendedPlatform.isTv) {
-      } else {
-        _resetTimer();
-      }
+      _resetTimer();
     }
   }
 
