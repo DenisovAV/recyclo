@@ -22,7 +22,7 @@ class ExtendedPlatform {
   }
 
   static bool get isAndroid => !kIsWeb && Platform.isAndroid;
-  static bool get isApple => !kIsWeb && Platform.isIOS || Platform.isMacOS;
+  static bool get isApple => !kIsWeb && Platform.isIOS || !kIsWeb && Platform.isMacOS;
 
   static bool get isWeb => kIsWeb;
 

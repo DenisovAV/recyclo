@@ -29,7 +29,7 @@ class _MainMenuPageTvState extends State<MainMenuPageTv> {
 
     _playerController = VideoPlayerController.asset(Assets.images.earth)
       ..setLooping(true)
-      ..play()
+      // ..play()
       ..initialize().then((_) {
         setState(() {});
       });
@@ -39,7 +39,7 @@ class _MainMenuPageTvState extends State<MainMenuPageTv> {
 
   void _onPlayerStopped() {
     if (!_playerController.value.isPlaying) {
-      _playerController.play();
+      // _playerController.play();
     }
   }
 
