@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/app/view/app.dart';
@@ -36,7 +35,7 @@ class _MainMenuPageTvState extends State<MainMenuPageTv> {
 
     _playerController = VideoPlayerController.asset(Assets.images.earth)
       ..setLooping(true)
-      // ..play()
+      ..play()
       ..initialize().then((_) {
         setState(() {});
       });
@@ -46,7 +45,7 @@ class _MainMenuPageTvState extends State<MainMenuPageTv> {
 
   void _onPlayerStopped() {
     if (!_playerController.value.isPlaying) {
-      // _playerController.play();
+      _playerController.play();
     }
   }
 

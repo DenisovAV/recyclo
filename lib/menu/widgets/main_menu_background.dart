@@ -37,7 +37,7 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
 
     _playerController = VideoPlayerController.asset(Assets.images.earth)
       ..setLooping(true)
-      // ..play()
+      ..play()
       ..initialize().then((_) {
         setState(() {});
       });
@@ -75,7 +75,7 @@ class _MainMenuBackgroundState extends State<MainMenuBackground>
 
   void _onPlayerStopped() {
     if (!_playerController.value.isPlaying) {
-      // _playerController.play();
+      _playerController.play();
     }
   }
 
