@@ -19,6 +19,15 @@ class TrashItemComponent extends BodyComponent {
   final TrashItemData trashData;
   late final SpriteComponent backgroundSprite;
   late final SpriteComponent trashSprite;
+  bool isFocused = false;
+
+  final Effect _focusedEffect = ColorEffect(
+    Colors.green.shade400,
+    EffectController(
+      duration: .5,
+      // alternate: true,
+    ),
+  );
 
   @override
   Future<void> onLoad() async {
@@ -48,7 +57,29 @@ class TrashItemComponent extends BodyComponent {
 
   @override
   void render(Canvas canvas) {
-    // Do not draw anything for the body itself to ensure it's "transparent"
+    if (isFocused) {
+      final paint = Paint()
+        ..color = Colors.yellow.withOpacity(0.5)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 5.0;
+      final rect = Rect.fromCenter(
+        center: Offset(position.x, position.y),
+        width: baseSize.x * trashData.sizeMultiplier,
+        height: baseSize.y * trashData.sizeMultiplier,
+      );
+      canvas.drawRect(rect, paint);
+    }
+  }
+
+  void setFocused({required bool isFocused}) {
+    if (isFocused) {
+      backgroundSprite.add(_focusedEffect);
+    } else if (!isFocused && this.isFocused) {
+        _focusedEffect.recede(0.5);
+        backgroundSprite.remove(_focusedEffect);
+    }
+
+    this.isFocused = isFocused;
   }
 
   @override

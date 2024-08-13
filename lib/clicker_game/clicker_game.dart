@@ -4,13 +4,18 @@ import 'package:flame/events.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:recyclo/clicker_game/components/bound_component.dart';
 import 'package:recyclo/clicker_game/const/clicker_constraints.dart';
 import 'package:recyclo/clicker_game/game_state.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/settings/persistence/settings_persistence.dart';
 
-class ClickerGame extends Forge2DGame with TapDetector {
+import 'components/cursor_component.dart';
+import 'components/trash_item_components.dart';
+
+class ClickerGame extends Forge2DGame
+    with TapDetector, HasKeyboardHandlerComponents {
   ClickerGame({required this.context, required this.settingsPersistence})
       : super(
           gravity: Vector2(0, -10),
@@ -20,6 +25,9 @@ class ClickerGame extends Forge2DGame with TapDetector {
   late final ClickerState gameState;
   final BuildContext context;
   final SettingsPersistence settingsPersistence;
+  late final CursorComponent cursor;
+
+  TrashItemComponent? focusedItem;
 
   @override
   Future<void> onLoad() async {
@@ -28,6 +36,16 @@ class ClickerGame extends Forge2DGame with TapDetector {
     await addAll(createBoundaries());
     await add(gameState);
     await addAll(gameState.trashItems.value);
+
+    cursor = CursorComponent(
+      position: size / 2,
+      onItemSelected: () {},
+      onPositionChanged: _onCursorPositionChanged,
+      cursorSize: size,
+      gameAreaSize: size,
+      speed: 10,
+    );
+    await add(cursor);
 
     return super.onLoad();
   }
@@ -60,19 +78,38 @@ class ClickerGame extends Forge2DGame with TapDetector {
         .firstWhereOrNull((item) => item.containsPoint(worldPosition));
 
     if (tappedItem != null) {
-      if (gameState.currentTargetTypes.value.lastOrNull ==
-          tappedItem.trashData.classification) {
-        SemanticsService.announce(
-          tappedItem.trashData.name,
-          TextDirection.ltr,
-        );
-        tappedItem.onCollected();
-        gameState.collectTrash(tappedItem);
-      } else {
-        tappedItem.onMiss();
-        final isPenaltyEnbled = settingsPersistence.getPenaltyFlag();
-        if (isPenaltyEnbled) {
-          overlays.add(TimerReductionOrIncrementEffect.idReduction);
+      handleItemTapped(tappedItem);
+    }
+  }
+
+  void handleItemTapped(TrashItemComponent tappedItem) {
+    if (gameState.currentTargetTypes.value.lastOrNull ==
+        tappedItem.trashData.classification) {
+      SemanticsService.announce(
+        tappedItem.trashData.name,
+        TextDirection.ltr,
+      );
+      tappedItem.onCollected();
+      gameState.collectTrash(tappedItem);
+    } else {
+      tappedItem.onMiss();
+      final isPenaltyEnbled = settingsPersistence.getPenaltyFlag();
+      if (isPenaltyEnbled) {
+        overlays.add(TimerReductionOrIncrementEffect.idReduction);
+      }
+    }
+  }
+
+  void _onCursorPositionChanged(Vector2 cursorPosition) {
+    if (focusedItem?.containsPoint(cursorPosition) ?? false) {
+    } else {
+      for (final item in gameState.trashItems.value) {
+        if (item.containsPoint(cursorPosition)) {
+          if (focusedItem != item) {
+            focusedItem?.setFocused(isFocused: false);
+            item.setFocused(isFocused: true);
+            focusedItem = item;
+          }
         }
       }
     }

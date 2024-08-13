@@ -26,10 +26,6 @@ class ClickerState extends Component {
     _generateTrashItems();
   }
 
-  void punishPlayer() {
-    // TODO(Dmytro): show tutorial overlay on 3-rd miss =- take 5 seconds away
-  }
-
   void collectTrash(TrashItemComponent trash) {
     trashItems.value.remove(trash);
     currentTargetTypes.value = List.from(
