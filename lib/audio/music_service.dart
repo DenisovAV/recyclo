@@ -22,21 +22,7 @@ class MusicService {
   bool _isSoundsEnabled;
   AssetSource? _latestSource;
 
-  ValueNotifier<AppLifecycleState>? _lifecycleNotifier;
   StreamSubscription<void>? _songCompletedSubscription;
-
-  // ignore: avoid_setters_without_getters
-  set lifecycleNotifier(ValueNotifier<AppLifecycleState> value) {
-    _lifecycleNotifier = value;
-
-    _lifecycleNotifier?.addListener(() async {
-      final appState = _lifecycleNotifier?.value;
-
-      appState != AppLifecycleState.resumed
-          ? await _musicPlayer.pause()
-          : await _musicPlayer.resume();
-    });
-  }
 
   Future<void> stopMusic() {
     return _musicPlayer.stop();
@@ -55,6 +41,14 @@ class MusicService {
       tempSubscription?.cancel();
       tempPlayer.dispose();
     });
+  }
+
+  void handleLifecycleStateChange(AppLifecycleState appState) {
+    if (_isMusicEnabled) {
+      appState != AppLifecycleState.resumed
+          ? _musicPlayer.pause()
+          : _musicPlayer.resume();
+    }
   }
 
   void _updateIsSoundsEnabled() {

@@ -3,46 +3,61 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:recyclo/catcher_game/game.dart';
-import 'package:recyclo/common.dart';
+import 'package:recyclo/common/extensions/platform/extended_platform.dart';
 
 class Background extends PositionComponent with HasGameRef<CatcherGame> {
   Background({
     required this.sprite,
+    super.anchor = Anchor.bottomCenter,
   });
 
   final Sprite sprite;
   late Rect rect;
 
-  static const double tilesWidth = 9;
-  static const double tilesHeight = 20;
-
   @override
   void render(Canvas canvas) {
-    sprite.renderRect(
-      canvas,
-      rect,
-    );
+    if (isLoaded) {
+      sprite.renderRect(
+        canvas,
+        rect,
+      );
+    }
   }
 
   @override
   void onGameResize(Vector2 size) {
-    rect = Rect.fromCenter(
-      center: Offset(
-        size.toSize().width / 2,
-        size.toSize().height / game.scaleType.denominator,
-      ),
-      width: game.sizeConfig.tileSize * tilesWidth,
-      height: game.sizeConfig.tileSize * tilesHeight,
-    );
+    if (isLoaded) {
+      final gameSize = game.canvasSize.toSize();
 
-    super.onGameResize(size);
+      if (ExtendedPlatform.isTv) {
+        _createRectForTv(gameSize);
+      } else {
+        _createRect(gameSize);
+      }
+
+      super.onGameResize(size);
+    }
   }
-}
 
-extension on AccessibilityGameScaleType {
-  double get denominator => switch (this) {
-        AccessibilityGameScaleType.small => 2.05,
-        AccessibilityGameScaleType.medium => 2.35,
-        AccessibilityGameScaleType.large => 2.9,
-      };
+  void _createRectForTv(Size size) {
+    rect = Rect.fromLTWH(
+      0,
+      0,
+      size.width,
+      size.height,
+    );
+  }
+
+  void _createRect(Size size) {
+    final spriteAspectRatio = sprite.src.width / sprite.src.height;
+
+    final rectHeight = size.width / spriteAspectRatio;
+
+    rect = Rect.fromLTWH(
+      0,
+      size.height - rectHeight,
+      size.width,
+      rectHeight,
+    );
+  }
 }

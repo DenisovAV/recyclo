@@ -6,8 +6,8 @@ import 'package:recyclo/settings/cubit/settings_cubit.dart';
 import 'package:recyclo/settings/cubit/settings_state.dart';
 import 'package:recyclo/settings/widgets/recyclo_switch.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class SettingsPageMobile extends StatelessWidget {
+  const SettingsPageMobile({super.key});
 
   @override
   Widget build(BuildContext context) {

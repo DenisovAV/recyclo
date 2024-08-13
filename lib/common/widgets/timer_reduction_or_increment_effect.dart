@@ -6,10 +6,12 @@ class TimerReductionOrIncrementEffect extends StatefulWidget {
     super.key,
     required this.text,
     required this.onAnimationEnded,
+    this.showBackground = true,
   });
 
   final String text;
   final VoidCallback onAnimationEnded;
+  final bool showBackground;
 
   static const idReduction = 'timer_reduction_overlay';
   static const idIncrement = 'timer_increment_overlay';
@@ -81,28 +83,32 @@ class TimerReductionOrIncrementEffectState
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      child: ColoredBox(
-        color: Colors.black.withOpacity(0.3),
-        child: AnimatedBuilder(
-          animation: _controller,
-          builder: (context, child) {
-            return Align(
-              alignment: _translateAnimation.value,
-              child: Transform.scale(
-                scale: _scaleAnimation.value,
-                child: Text(
-                  widget.text,
-                  textAlign: TextAlign.center,
-                  style: context.textStyle(),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+    final child = AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Align(
+          alignment: _translateAnimation.value,
+          child: Transform.scale(
+            scale: _scaleAnimation.value,
+            child: Text(
+              widget.text,
+              textAlign: TextAlign.center,
+              style: context.textStyle(),
+            ),
+          ),
+        );
+      },
     );
+
+    return widget.showBackground
+        ? GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            child: ColoredBox(
+              color: Colors.black.withOpacity(0.3),
+              child: child,
+            ),
+          )
+        : child;
   }
 
   void statusListener(AnimationStatus status) {

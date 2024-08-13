@@ -7,6 +7,7 @@ class Focusable extends StatelessWidget {
     required this.builder,
     this.autofocus = false,
     this.onFocusChange,
+    this.onKeyEvent,
     super.key,
   });
 
@@ -14,6 +15,7 @@ class Focusable extends StatelessWidget {
   final Widget Function(BuildContext, bool) builder;
   final bool autofocus;
   final ValueChanged<bool>? onFocusChange;
+  final KeyEventResult Function(FocusNode, KeyEvent)? onKeyEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class Focusable extends StatelessWidget {
       return _Focusable(
         builder: builder,
         autofocus: autofocus,
+        onKeyEvent: onKeyEvent,
         onFocusChange: onFocusChange,
       );
     }
@@ -32,6 +35,7 @@ class Focusable extends StatelessWidget {
 class _Focusable extends StatefulWidget {
   const _Focusable({
     required this.builder,
+    this.onKeyEvent,
     this.autofocus = false,
     this.onFocusChange,
   });
@@ -40,6 +44,7 @@ class _Focusable extends StatefulWidget {
   final Widget Function(BuildContext, bool) builder;
   final bool autofocus;
   final ValueChanged<bool>? onFocusChange;
+  final KeyEventResult Function(FocusNode, KeyEvent)? onKeyEvent;
 
   @override
   State<_Focusable> createState() => _FocusableState();
@@ -62,19 +67,20 @@ class _FocusableState extends State<_Focusable> {
   Widget build(BuildContext context) {
     return Focus(
       key: _key,
-      onKey: (node, key) {
-        if (key is! RawKeyDownEvent) {
-          return KeyEventResult.ignored;
-        }
+      onKeyEvent: widget.onKeyEvent ??
+          (node, key) {
+            if (key is! KeyDownEvent) {
+              return KeyEventResult.ignored;
+            }
 
-        if (key.hasSubmitIntent) {
-          _calculateSubmitActions();
-          _callbackHolder?.onSubmit?.call();
-          return KeyEventResult.handled;
-        }
+            if (key.hasSubmitIntent) {
+              _calculateSubmitActions();
+              _callbackHolder?.onSubmit?.call();
+              return KeyEventResult.handled;
+            }
 
-        return KeyEventResult.ignored;
-      },
+            return KeyEventResult.ignored;
+          },
       focusNode: _focusNode,
       onFocusChange: (newValue) {
         widget.onFocusChange?.call(_focusNode.hasFocus);
@@ -89,14 +95,18 @@ class _FocusableState extends State<_Focusable> {
 
     if (widget is GestureDetector) {
       _callbackHolder = _CallbackHolder(
-          onSubmit: widget.onTap, onLongPress: widget.onLongPress);
+        onSubmit: widget.onTap,
+        onLongPress: widget.onLongPress,
+      );
 
       return;
     }
 
     if (widget is InkWell) {
       _callbackHolder = _CallbackHolder(
-          onSubmit: widget.onTap, onLongPress: widget.onLongPress);
+        onSubmit: widget.onTap,
+        onLongPress: widget.onLongPress,
+      );
 
       return;
     }
@@ -120,7 +130,7 @@ class _CallbackHolder {
   VoidCallback? onLongPress;
 }
 
-extension SubmitAction on RawKeyEvent {
+extension SubmitAction on KeyEvent {
   bool get hasSubmitIntent =>
       logicalKeysTap.contains(logicalKey) || logicalKey.debugName == 'Select';
 }

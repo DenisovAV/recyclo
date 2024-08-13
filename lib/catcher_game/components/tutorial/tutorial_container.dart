@@ -17,9 +17,8 @@ class TutorialContainer extends PositionComponent
 
   final MainScene scene;
 
-  late final Sprite _tutorialBackground;
+  late final VisibleComponent _tutorialBackground;
   late final SolidBackground _resultBackgroundComponent;
-  late final Background _backgroundComponent;
   late final VisibleComponent _buttonComponent;
 
   @override
@@ -35,16 +34,18 @@ class TutorialContainer extends PositionComponent
       ),
     );
 
-    _tutorialBackground = Sprite(
-      game.images.fromCache(
-        Assets.images.catcher.tutorial.tutorial.path,
+    _tutorialBackground = VisibleComponent(
+      anchor: Anchor.bottomCenter,
+      sprite: Sprite(
+        game.images.fromCache(
+          Assets.images.catcher.tutorial.tutorial.path,
+        ),
       ),
     );
-    _backgroundComponent = Background(sprite: _tutorialBackground);
 
     await addAll([
       _resultBackgroundComponent,
-      _backgroundComponent,
+      _tutorialBackground,
       _buttonComponent,
     ]);
     return super.onLoad();
@@ -71,6 +72,17 @@ class TutorialContainer extends PositionComponent
           y,
         );
 
+      final spriteAspectRatio = _tutorialBackground.sprite.image.width /
+          _tutorialBackground.sprite.image.height;
+      final tutorialBackgroundWidth = newSize.height * spriteAspectRatio;
+
+      _tutorialBackground
+        ..size = Vector2(
+          tutorialBackgroundWidth,
+          newSize.height,
+        )
+        ..position = Vector2(x, y);
+
       _resultBackgroundComponent.size = Vector2(newSize.width, newSize.height);
 
       super.onGameResize(size);
@@ -81,7 +93,7 @@ class TutorialContainer extends PositionComponent
   void render(Canvas canvas) {
     if (game.status == CatcherGameStatusType.tutorial) {
       _resultBackgroundComponent.render(canvas);
-      _backgroundComponent.render(canvas);
+      _tutorialBackground.render(canvas);
       _buttonComponent.render(canvas);
     }
   }
@@ -97,6 +109,7 @@ class TutorialContainer extends PositionComponent
     game.status = CatcherGameStatusType.tutorial;
     scene.onPauseResumeGameCallback();
     _buttonComponent.isVisible = true;
+    _tutorialBackground.isVisible = true;
     game.overlays.remove(TimerOverlay.id);
   }
 
@@ -108,9 +121,18 @@ class TutorialContainer extends PositionComponent
   void onTapDown(TapDownEvent event) {
     if (_buttonComponent.toRect().contains(event.canvasPosition.toOffset())) {
       _buttonComponent.isVisible = false;
+      _tutorialBackground.isVisible = false;
       game.overlays.add(TimerOverlay.id);
       game.status = CatcherGameStatusType.pause;
       scene.onPauseResumeGameCallback();
     }
+  }
+
+  void onHideTutorial() {
+    _buttonComponent.isVisible = false;
+    _tutorialBackground.isVisible = false;
+    game.overlays.add(TimerOverlay.id);
+    game.status = CatcherGameStatusType.pause;
+    scene.onPauseResumeGameCallback();
   }
 }

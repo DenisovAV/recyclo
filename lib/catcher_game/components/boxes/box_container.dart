@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/extensions.dart';
@@ -8,6 +9,9 @@ import 'package:flutter/widgets.dart';
 import 'package:recyclo/catcher_game/components.dart';
 import 'package:recyclo/catcher_game/game.dart';
 import 'package:recyclo/common.dart';
+
+const _boxContainerVerticalPositionDivisor = 0.6;
+const _boxContainerVerticalPositionDivisorForTV = 0.77;
 
 class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   BoxContainer() {
@@ -36,9 +40,6 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
   bool _finishAnimation = false;
   bool _resizeInProgress = false;
 
-  // Required to prevent box resizing when showing overlay.
-  Vector2 _currentSize = Vector2.zero();
-
   void _resize(Size size) {
     _resizeInProgress = true;
 
@@ -60,29 +61,36 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
     height = _chosenBoxWidth + _swappingBoxWidth;
 
     x = 0;
-    y = initialBoxList.length == 7
-        ? screenSize.height -
-            (tile * BoxContainerConfig.containerSevenPositionY)
-        : screenSize.height - (tile * BoxContainerConfig.containerPositionY);
+    y = game.canvasSize.toSize().height -
+        (tile * BoxContainerConfig.bigBoxSize) /
+            (ExtendedPlatform.isTv
+                ? _boxContainerVerticalPositionDivisorForTV
+                : _boxContainerVerticalPositionDivisor);
+
+    final spacing = initialBoxList.length == 7
+        ? (tile * BoxContainerConfig.gapSevenSize)
+        : (tile * BoxContainerConfig.gapSize);
 
     _chosenPositionY =
         y - (_chosenBoxWidth - _swappingBoxWidth) / initialBoxList.length;
 
+    final totalWidthOfFiveBoxes =
+        _chosenBoxWidth + (_swappingBoxWidth * 2) + spacing;
+
+    final centerOfScreen = screenSize.width / 2;
+
     _containerClip = Rect.fromLTRB(
-      game.mainScene!.background.rect.left,
-      height,
-      game.mainScene!.background.rect.right,
+      centerOfScreen - totalWidthOfFiveBoxes / 2,
+      0,
+      centerOfScreen + totalWidthOfFiveBoxes / 2,
       screenSize.height,
     );
+
     boxContainerClip = Rect.fromCenter(
       center: Offset(screenSize.width / 2, y),
       width: screenSize.width,
       height: _chosenBoxWidth * BoxContainerConfig.containerClipSize,
     );
-
-    final spacing = initialBoxList.length == 7
-        ? (tile * BoxContainerConfig.gapSevenSize)
-        : (tile * BoxContainerConfig.gapSize);
 
     _resizeEachBox(
       spacing: spacing,
@@ -105,8 +113,7 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
 
   @override
   void onGameResize(Vector2 size) {
-    if (isLoaded && _currentSize != size) {
-      _currentSize = size;
+    if (isLoaded) {
       _resize(size.toSize());
     }
     super.onGameResize(size);
@@ -285,52 +292,19 @@ class BoxContainer extends PositionComponent with HasGameRef<CatcherGame> {
     required double bigWidth,
     required double width,
   }) {
-    for (final hook in _hooksPosX) {
-      switch (_hooksPosX.indexOf(hook)) {
-        case 0:
-          _hooksPosX[0] = width / 2;
-        case 1:
-          _hooksPosX[1] = (_hooksPosX[0] - spacing) - (smallWidth / 2);
-        case 2:
-          _hooksPosX[2] = (_hooksPosX[0] + spacing) + (smallWidth / 2);
-        case 3:
-          _hooksPosX[3] = (_hooksPosX[1] - spacing) - (smallWidth / 2);
-        case 4:
-          _hooksPosX[4] = (_hooksPosX[2] + spacing) + (smallWidth / 2);
-        case 5:
-          _hooksPosX[5] = (_hooksPosX[3] - spacing) - (smallWidth / 2);
-        case 6:
-          _hooksPosX[6] = (_hooksPosX[4] + spacing) + (smallWidth / 2);
-        case 7:
-          _hooksPosX[7] = (_hooksPosX[5] - spacing) - (smallWidth / 2);
-        case 8:
-          _hooksPosX[8] = (_hooksPosX[6] + spacing) + (smallWidth / 2);
-        case 9:
-          _hooksPosX[9] = (_hooksPosX[7] - spacing) - (smallWidth / 2);
-        case 10:
-          _hooksPosX[10] = (_hooksPosX[8] + spacing) + (smallWidth / 2);
-        case 11:
-          _hooksPosX[11] = (_hooksPosX[9] - spacing) - (smallWidth / 2);
-        case 12:
-          _hooksPosX[12] = (_hooksPosX[10] + spacing) + (smallWidth / 2);
-        case 13:
-          _hooksPosX[13] = (_hooksPosX[11] - spacing) - (smallWidth / 2);
-        case 14:
-          _hooksPosX[14] = (_hooksPosX[12] + spacing) + (smallWidth / 2);
-        case 15:
-          _hooksPosX[15] = (_hooksPosX[13] - spacing) - (smallWidth / 2);
-        case 16:
-          _hooksPosX[16] = (_hooksPosX[14] + spacing) + (smallWidth / 2);
-        case 17:
-          _hooksPosX[17] = (_hooksPosX[15] - spacing) - (smallWidth / 2);
-        case 18:
-          _hooksPosX[18] = (_hooksPosX[16] + spacing) + (smallWidth / 2);
-        case 19:
-          _hooksPosX[19] = (_hooksPosX[17] - spacing) - (smallWidth / 2);
-        case 20:
-          _hooksPosX[20] = (_hooksPosX[18] + spacing) + (smallWidth / 2);
+    _hooksPosX.forEachIndexed((index, element) {
+      if (index == 0) {
+        _hooksPosX[0] = width / 2;
+      } else if (index == 1) {
+        _hooksPosX[index] = (_hooksPosX[0] - spacing) - (smallWidth / 2);
+      } else if (index.isOdd) {
+        _hooksPosX[index] =
+            (_hooksPosX[index - 2] - spacing) - (smallWidth / 2);
+      } else {
+        _hooksPosX[index] =
+            (_hooksPosX[index - 2] + spacing) + (smallWidth / 2);
       }
-    }
+    });
 
     for (final box in boxContainerList) {
       if (box.order == 0) {

@@ -8,6 +8,7 @@ class ArtifactRequirementsStatus extends StatelessWidget {
     required this.count,
     required this.isEnough,
     required this.color,
+    this.width = 56.0,
     super.key,
   });
 
@@ -15,14 +16,13 @@ class ArtifactRequirementsStatus extends StatelessWidget {
   final int count;
   final bool isEnough;
   final Color color;
-
-  static const _width = 56.0;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return Semantics(
       label: context.l10n.toCraftResourceType(
-         count,
+        count,
         isEnough.toString(),
         type.name,
       ),
@@ -30,8 +30,8 @@ class ArtifactRequirementsStatus extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: _width,
-            height: _width,
+            width: width,
+            height: width,
             decoration: BoxDecoration(
               color: isEnough
                   ? FlutterGameChallengeColors.artifactGreen
@@ -44,8 +44,8 @@ class ArtifactRequirementsStatus extends StatelessWidget {
             ),
           ),
           Container(
-            width: _width,
-            height: _width,
+            width: width,
+            height: width,
             margin: const EdgeInsets.only(top: 8),
             alignment: Alignment.center,
             decoration: BoxDecoration(

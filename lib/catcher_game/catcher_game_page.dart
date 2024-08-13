@@ -79,15 +79,18 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                maxWidth: constraints.maxWidth > _maxGameWidth
-                                    ? _maxGameWidth
-                                    : constraints.maxWidth,
-                                maxHeight:
-                                    constraints.maxHeight > _maxGameHeight
-                                        ? _maxGameHeight
-                                        : constraints.maxHeight,
-                              ),
+                              constraints: ExtendedPlatform.isTv
+                                  ? const BoxConstraints.expand()
+                                  : BoxConstraints(
+                                      maxWidth:
+                                          constraints.maxWidth > _maxGameWidth
+                                              ? _maxGameWidth
+                                              : constraints.maxWidth,
+                                      maxHeight:
+                                          constraints.maxHeight > _maxGameHeight
+                                              ? _maxGameHeight
+                                              : constraints.maxHeight,
+                                    ),
                               child: Material(
                                 elevation: 9,
                                 child: GameWidget(
@@ -101,6 +104,7 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
                                               text: '+5',
                                               onAnimationEnded:
                                                   _handleTimerIncrementEffectAnimationEnd,
+                                              showBackground: false,
                                             ),
                                     TimerReductionOrIncrementEffect.idReduction:
                                         (_, __) =>
@@ -108,6 +112,7 @@ class _CatcherGamePageState extends State<CatcherGamePage> {
                                               text: '-5',
                                               onAnimationEnded:
                                                   _handleTimerReductionEffectAnimationEnd,
+                                              showBackground: false,
                                             ),
                                   },
                                 ),

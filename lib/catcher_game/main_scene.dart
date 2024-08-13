@@ -47,7 +47,13 @@ class MainScene extends PositionComponent
     waveList = Levels.levels(game.difficultyType).first.waves;
 
     background = Background(
-      sprite: Sprite(game.images.fromCache(Assets.images.catcher.bg.bg.path)),
+      sprite: Sprite(
+        game.images.fromCache(
+          ExtendedPlatform.isTv
+              ? Assets.images.catcher.bg.tvBg.path
+              : Assets.images.catcher.bg.bg.path,
+        ),
+      ),
     );
     _boxContainer = BoxContainer();
     _buttonsContainer = ButtonsContainer(
@@ -134,12 +140,33 @@ class MainScene extends PositionComponent
         _boxContainer.handleDragUpdate(details);
       } else if (!_boxContainer.toRect().contains(details.localPosition) &&
           !_isHorizontalDragHandled) {
-        onDragEnd(DragEndDetails());
+        onDragEnd();
       }
     }
   }
 
-  void onDragEnd(DragEndDetails details) {
+  void onKeyBoardTap(DragUpdateDetails details) {
+    _boxContainer.handleDragUpdate(details);
+    _isHorizontalDragHandled = false;
+    onDragEnd();
+  }
+
+  void handleEnterOrSelectButtonTap() {
+    switch (game.status) {
+      case CatcherGameStatusType.playing:
+      case CatcherGameStatusType.pause:
+        onPauseResumeGameCallback();
+        _buttonsContainer.triggerPlayPauseButtonAnimation();
+        break;
+      case CatcherGameStatusType.tutorial:
+        _tutorialContainer.onHideTutorial();
+        break;
+      case CatcherGameStatusType.result:
+        break;
+    }
+  }
+
+  void onDragEnd() {
     if (game.status == CatcherGameStatusType.playing) {
       if (!_isHorizontalDragHandled) {
         _boxContainer.handleDragEnd();

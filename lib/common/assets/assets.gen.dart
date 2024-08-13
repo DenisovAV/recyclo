@@ -168,6 +168,13 @@ class $AssetsImagesGen {
   AssetGenImage get fogDark =>
       const AssetGenImage('assets/images/fog_dark.png');
 
+  /// File path: assets/images/fog_dark_tv.png
+  AssetGenImage get fogDarkTv =>
+      const AssetGenImage('assets/images/fog_dark_tv.png');
+
+  /// File path: assets/images/fog_tv.png
+  AssetGenImage get fogTv => const AssetGenImage('assets/images/fog_tv.png');
+
   /// File path: assets/images/game_mode_cathcer.png
   AssetGenImage get gameModeCathcer =>
       const AssetGenImage('assets/images/game_mode_cathcer.png');
@@ -331,6 +338,8 @@ class $AssetsImagesGen {
         exampleScreenMobile,
         fog,
         fogDark,
+        fogDarkTv,
+        fogTv,
         gameModeCathcer,
         gameModeClicker,
         gameModeFinder,
@@ -431,8 +440,12 @@ class $AssetsImagesCatcherBgGen {
   AssetGenImage get bg =>
       const AssetGenImage('assets/images/catcher/bg/bg.png');
 
+  /// File path: assets/images/catcher/bg/tv_bg.png
+  AssetGenImage get tvBg =>
+      const AssetGenImage('assets/images/catcher/bg/tv_bg.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [bg];
+  List<AssetGenImage> get values => [bg, tvBg];
 }
 
 class $AssetsImagesCatcherBoxesGen {

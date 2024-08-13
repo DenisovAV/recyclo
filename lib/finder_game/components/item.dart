@@ -4,7 +4,9 @@ import 'package:flame/effects.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:recyclo/clicker_game/game_models/trash_item.dart';
+import 'package:recyclo/common/extensions.dart';
 import 'package:recyclo/finder_game/const/finder_constraints.dart';
+import 'package:recyclo/finder_game/finder_size.dart';
 
 class Item extends PositionComponent with HasGameRef {
   Item(
@@ -19,7 +21,14 @@ class Item extends PositionComponent with HasGameRef {
   Future<void> onLoad() async {
     await super.onLoad();
 
-    final itemSize = FinderConstraints.getTrashItemSize(game.size.x);
+    final finderSize = ExtendedPlatform.isTv
+        ? FinderSize.tv(gameSizeY: game.size.y)
+        : FinderSize.mobile(gameSizeY: game.size.y);
+
+    final itemSize = FinderConstraints.getTrashItemSize(
+      game.size.x,
+      finderSize.trashSizeFactor,
+    );
     trashSprite = SpriteComponent(
       sprite: Sprite(
         await Flame.images.load(trashData.assetPath),

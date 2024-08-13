@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recyclo/clicker_game/overlays/game_hud.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/finder_game/finder_game.dart';
+import 'package:recyclo/finder_game/finder_game_widget_size.dart';
 import 'package:recyclo/finder_game/finder_state.dart';
 import 'package:recyclo/finder_game/overlays/finder_hud.dart';
 import 'package:recyclo/finder_game/overlays/game_start_overlay.dart';
@@ -15,7 +16,11 @@ import 'package:recyclo/service_provider.dart';
 import 'package:recyclo/trash_reserve/trash_reserve_repository.dart';
 
 class FinderGamePage extends StatefulWidget {
-  const FinderGamePage({super.key});
+  FinderGamePage({super.key});
+
+  final finderSize = ExtendedPlatform.isTv
+      ? FinderGameWidgetSize.tv()
+      : FinderGameWidgetSize.mobile();
 
   static MaterialPageRoute<void> route() {
     return MaterialPageRoute<void>(
@@ -28,7 +33,7 @@ class FinderGamePage extends StatefulWidget {
             create: (_) => ServiceProvider.get<TutorialCubit>(),
           ),
         ],
-        child: const FinderGamePage(),
+        child: FinderGamePage(),
       ),
     );
   }
@@ -38,11 +43,6 @@ class FinderGamePage extends StatefulWidget {
 }
 
 class _FinderGamePageState extends State<FinderGamePage> {
-  static const _maxGameWidth = 500.0;
-  static const _minGameWith = 320.0;
-  static const _maxGameHeight = 1100.0;
-  static const _minGameHeight = 500.0;
-
   late final FinderGame _game;
 
   @override
@@ -72,11 +72,11 @@ class _FinderGamePageState extends State<FinderGamePage> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxWidth: _maxGameWidth,
-                    maxHeight: _maxGameHeight,
-                    minWidth: _minGameWith,
-                    minHeight: _minGameHeight,
+                  constraints: BoxConstraints(
+                    maxWidth: widget.finderSize.maxWidth,
+                    maxHeight: widget.finderSize.maxHeight,
+                    minWidth: widget.finderSize.minWidth,
+                    minHeight: widget.finderSize.minHeight,
                   ),
                   child: GameWidget(
                     game: _game,

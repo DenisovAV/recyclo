@@ -32,6 +32,7 @@ class AssetsLoader {
 
   List<String> _gameAssets() => [
         Assets.images.catcher.bg.bg.path,
+        Assets.images.catcher.bg.tvBg.path,
         Assets.images.catcher.animations.pause.path,
         Assets.images.catcher.animations.reset.path,
         Assets.images.catcher.tutorial.tutorial.path,
@@ -44,7 +45,9 @@ class AssetsLoader {
         ..._electricAssets(),
         ..._plasticAssets(),
         Assets.images.fog.path,
+        Assets.images.fogTv.path,
         Assets.images.fogDark.path,
+        Assets.images.fogDarkTv.path,
         Assets.images.holeMask.path,
         Assets.images.hole.path,
         Assets.images.clicker.images.cloud.path,
