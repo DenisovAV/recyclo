@@ -41,6 +41,9 @@ class ClickerGame extends Forge2DGame
       position: size / 2,
       onItemSelected: () {},
       onPositionChanged: _onCursorPositionChanged,
+      cursorSize: size,
+      gameAreaSize: size,
+      speed: 10,
     );
     await add(cursor);
 
