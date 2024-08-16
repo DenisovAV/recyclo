@@ -49,8 +49,8 @@ class ClickerGamePage extends StatefulWidget {
 class _ClickerGamePageState extends State<ClickerGamePage> {
   late final ClickerGame _game;
 
-  static const _maxGameWidth = 500.0;
-  static const _maxGameHeight = 1100.0;
+  static const _maxGameWidth = double.maxFinite;
+  static const _maxGameHeight = double.maxFinite;
 
   @override
   void initState() {
