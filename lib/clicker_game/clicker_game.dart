@@ -42,7 +42,7 @@ class ClickerGame extends Forge2DGame with TapDetector, HasKeyboardHandlerCompon
       gameAreaSize: size,
       speed: 10,
     );
-    if (ExtendedPlatform.isTv || ExtendedPlatform.isTv) {
+    if (ExtendedPlatform.isTv || ExtendedPlatform.isTizen) {
       await add(cursor);
     }
 
