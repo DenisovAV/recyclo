@@ -4,18 +4,15 @@ import 'package:flame/events.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:recyclo/clicker_game/components/bound_component.dart';
+import 'package:recyclo/clicker_game/components/cursor_component.dart';
+import 'package:recyclo/clicker_game/components/trash_item_components.dart';
 import 'package:recyclo/clicker_game/const/clicker_constraints.dart';
 import 'package:recyclo/clicker_game/game_state.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/settings/persistence/settings_persistence.dart';
 
-import 'components/cursor_component.dart';
-import 'components/trash_item_components.dart';
-
-class ClickerGame extends Forge2DGame
-    with TapDetector, HasKeyboardHandlerComponents {
+class ClickerGame extends Forge2DGame with TapDetector, HasKeyboardHandlerComponents {
   ClickerGame({required this.context, required this.settingsPersistence})
       : super(
           gravity: Vector2(0, -10),
@@ -45,14 +42,15 @@ class ClickerGame extends Forge2DGame
       gameAreaSize: size,
       speed: 10,
     );
-    await add(cursor);
+    if (ExtendedPlatform.isTv || ExtendedPlatform.isTizen) {
+      await add(cursor);
+    }
 
     return super.onLoad();
   }
 
   List<Component> createBoundaries() {
-    final safePadding =
-        MediaQuery.paddingOf(context).top + ClickerConstraints.topPadding;
+    final safePadding = MediaQuery.paddingOf(context).top + ClickerConstraints.topPadding;
     const bottomThreshold = 200.0;
     final screenSize = size;
 
@@ -74,8 +72,8 @@ class ClickerGame extends Forge2DGame
 
     final worldPosition = info.eventPosition.widget;
 
-    final tappedItem = gameState.trashItems.value
-        .firstWhereOrNull((item) => item.containsPoint(worldPosition));
+    final tappedItem =
+        gameState.trashItems.value.firstWhereOrNull((item) => item.containsPoint(worldPosition));
 
     if (tappedItem != null) {
       handleItemTapped(tappedItem);
@@ -83,8 +81,7 @@ class ClickerGame extends Forge2DGame
   }
 
   void handleItemTapped(TrashItemComponent tappedItem) {
-    if (gameState.currentTargetTypes.value.lastOrNull ==
-        tappedItem.trashData.classification) {
+    if (gameState.currentTargetTypes.value.lastOrNull == tappedItem.trashData.classification) {
       SemanticsService.announce(
         tappedItem.trashData.name,
         TextDirection.ltr,
