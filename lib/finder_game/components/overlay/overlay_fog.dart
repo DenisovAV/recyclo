@@ -15,11 +15,13 @@ import 'package:recyclo/finder_game/const/finder_constraints.dart';
 import 'package:recyclo/finder_game/events/event_type.dart';
 import 'package:recyclo/finder_game/events/finder_game_event.dart';
 import 'package:recyclo/finder_game/finder_game.dart';
+import 'package:recyclo/finder_game/keyboard_arrow.dart';
+
+const _keyboardShift = 10.0;
 
 class OverlayFog extends PositionComponent
-    with DragCallbacks, CollisionCallbacks, HasGameReference<FinderGame> {
+    with CollisionCallbacks, HasGameReference<FinderGame> {
   OverlayFog({
-    required super.size,
     required super.position,
     required this.topPadding,
   }) : super(priority: 5);
@@ -105,12 +107,10 @@ class OverlayFog extends PositionComponent
     game.gameState.collectTrash(itemToCollect);
   }
 
-  @override
   Future<void> onDragStart(DragStartEvent event) async {
-    super.onDragStart(event);
     game.streamController.add(FinderGameEvent(type: EventType.dragStarted));
     renderMode = OverlayRenderMode.hole;
-    dragPosition = event.localPosition;
+    dragPosition = event.localPosition - Vector2(0, topPadding);
 
     await add(
       collider
@@ -119,15 +119,12 @@ class OverlayFog extends PositionComponent
     );
   }
 
-  @override
   void onDragUpdate(DragUpdateEvent event) {
-    dragPosition = event.localEndPosition;
+    dragPosition = event.localEndPosition - Vector2(0, topPadding);
     collider.position = colliderPosition;
   }
 
-  @override
   void onDragEnd(DragEndEvent event) {
-    super.onDragEnd(event);
     game.streamController.add(FinderGameEvent(type: EventType.dragEnded));
     renderMode = OverlayRenderMode.bushes;
     remove(collider);
@@ -143,6 +140,40 @@ class OverlayFog extends PositionComponent
       currentCollisionItem = other.parent as Item?;
 
       _resetTimer();
+    }
+  }
+
+  void handleArrow(KeyboardArrow arrow) {
+    switch (arrow) {
+      case KeyboardArrow.up:
+        dragPosition = Vector2(dragPosition.x, dragPosition.y - _keyboardShift);
+      case KeyboardArrow.down:
+        dragPosition = Vector2(dragPosition.x, dragPosition.y + _keyboardShift);
+      case KeyboardArrow.left:
+        dragPosition = Vector2(dragPosition.x - _keyboardShift, dragPosition.y);
+      case KeyboardArrow.right:
+        dragPosition = Vector2(dragPosition.x + _keyboardShift, dragPosition.y);
+    }
+
+    collider.position = colliderPosition;
+  }
+
+  Future<void> handleSelectKey() async {
+    if (renderMode == OverlayRenderMode.bushes) {
+      game.streamController.add(FinderGameEvent(type: EventType.dragStarted));
+      renderMode = OverlayRenderMode.hole;
+
+      dragPosition = size / 2;
+
+      await add(
+        collider
+          ..position = colliderPosition
+          ..size = colliderSize,
+      );
+    } else {
+      game.streamController.add(FinderGameEvent(type: EventType.dragEnded));
+      renderMode = OverlayRenderMode.bushes;
+      remove(collider);
     }
   }
 
