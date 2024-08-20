@@ -12,4 +12,7 @@ class FontFamily {
 
   /// Font family: Sniglet
   static const String sniglet = 'Sniglet';
+
+  /// Font family: SourceSansPro
+  static const String sourceSansPro = 'SourceSansPro';
 }

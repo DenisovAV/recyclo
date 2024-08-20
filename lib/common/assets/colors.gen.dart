@@ -667,6 +667,9 @@ class FlutterGameChallengeColors {
     },
   );
 
+  /// Color: #FFBF9DCA
+  static const Color webosTextColor = Color(0xFFBF9DCA);
+
   /// Color: #FFFFFF
   static const Color white = Color(0xFFFFFFFF);
 

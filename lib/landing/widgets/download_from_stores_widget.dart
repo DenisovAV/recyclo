@@ -14,6 +14,10 @@ class DownloadFromStoresWidget extends StatelessWidget {
       alignment: WrapAlignment.center,
       children: [
         DownloadButton(
+          image: Assets.images.lgConectStore.image(),
+          url: 'https://play.google.com/store/apps/details?id=dev.recyclo.games',
+        ),
+        DownloadButton(
           image: Assets.images.downloadGooglePlayButton.image(),
           url: 'https://play.google.com/store/apps/details?id=dev.recyclo.games',
         ),
