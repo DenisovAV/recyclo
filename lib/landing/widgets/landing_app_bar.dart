@@ -13,7 +13,7 @@ class LandingAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isSmallDevice = constraints.maxWidth < 800;
+        final isSmallDevice = constraints.maxWidth < 1200;
 
         if (isSmallDevice) {
           return Material(

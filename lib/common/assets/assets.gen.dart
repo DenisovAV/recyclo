@@ -67,6 +67,21 @@ class $AssetsAudioGen {
       ];
 }
 
+class $AssetsCursorsGen {
+  const $AssetsCursorsGen();
+
+  /// File path: assets/cursors/Cursor-Active.png
+  AssetGenImage get cursorActive =>
+      const AssetGenImage('assets/cursors/Cursor-Active.png');
+
+  /// File path: assets/cursors/Cursor-Rested.png
+  AssetGenImage get cursorRested =>
+      const AssetGenImage('assets/cursors/Cursor-Rested.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [cursorActive, cursorRested];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -223,6 +238,16 @@ class $AssetsImagesGen {
   /// File path: assets/images/icon_ok.png
   AssetGenImage get iconOk => const AssetGenImage('assets/images/icon_ok.png');
 
+  /// File path: assets/images/lamp.png
+  AssetGenImage get lamp => const AssetGenImage('assets/images/lamp.png');
+
+  /// File path: assets/images/lg_conect_store.png
+  AssetGenImage get lgConectStore =>
+      const AssetGenImage('assets/images/lg_conect_store.png');
+
+  /// File path: assets/images/lg_logo.png
+  AssetGenImage get lgLogo => const AssetGenImage('assets/images/lg_logo.png');
+
   /// File path: assets/images/logo_description.png
   AssetGenImage get logoDescription =>
       const AssetGenImage('assets/images/logo_description.png');
@@ -237,6 +262,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/paper.png
   AssetGenImage get paper => const AssetGenImage('assets/images/paper.png');
 
+  /// File path: assets/images/plant.png
+  AssetGenImage get plant => const AssetGenImage('assets/images/plant.png');
+
   /// File path: assets/images/plastic.png
   AssetGenImage get plastic => const AssetGenImage('assets/images/plastic.png');
 
@@ -247,6 +275,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/recycle_logo.svg
   SvgGenImage get recycleLogoSvg =>
       const SvgGenImage('assets/images/recycle_logo.svg');
+
+  /// File path: assets/images/remote_control.png
+  AssetGenImage get remoteControl =>
+      const AssetGenImage('assets/images/remote_control.png');
 
   /// File path: assets/images/sasha_photo.png
   AssetGenImage get sashaPhoto =>
@@ -284,6 +316,10 @@ class $AssetsImagesGen {
   AssetGenImage get tvBackground =>
       const AssetGenImage('assets/images/tv_background.png');
 
+  /// File path: assets/images/tv_gameplay.png
+  AssetGenImage get tvGameplay =>
+      const AssetGenImage('assets/images/tv_gameplay.png');
+
   /// File path: assets/images/up.png
   AssetGenImage get up => const AssetGenImage('assets/images/up.png');
 
@@ -302,6 +338,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/wallet_screen.png
   AssetGenImage get walletScreen =>
       const AssetGenImage('assets/images/wallet_screen.png');
+
+  /// File path: assets/images/webos_logo.png
+  AssetGenImage get webosLogo =>
+      const AssetGenImage('assets/images/webos_logo.png');
 
   /// File path: assets/images/yehor_photo.png
   AssetGenImage get yehorPhoto =>
@@ -353,13 +393,18 @@ class $AssetsImagesGen {
         iconForbidden,
         iconGeer,
         iconOk,
+        lamp,
+        lgConectStore,
+        lgLogo,
         logoDescription,
         nikitaPhoto,
         organic,
         paper,
+        plant,
         plastic,
         recycleLogoPng,
         recycleLogoSvg,
+        remoteControl,
         sashaPhoto,
         screenshotGame1,
         screenshotGame2,
@@ -369,11 +414,13 @@ class $AssetsImagesGen {
         tutorial,
         tutorialSelected,
         tvBackground,
+        tvGameplay,
         up,
         viewInGoogleWalletAndroid,
         vityaPhoto,
         vovaPhoto,
         walletScreen,
+        webosLogo,
         yehorPhoto,
         yuraPhoto
       ];
@@ -699,6 +746,7 @@ class Assets {
   Assets._();
 
   static const $AssetsAudioGen audio = $AssetsAudioGen();
+  static const $AssetsCursorsGen cursors = $AssetsCursorsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLicensesGen licenses = $AssetsLicensesGen();
 }

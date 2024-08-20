@@ -39,4 +39,5 @@
     <color name="toggle_switch_enabled">#FF1DB51A</color>
     <color name="toggle_switch_disabled">#FFB5231A</color>
     <color name="settings_accent">#FFDED1DC</color>
+    <color name="webos_text_color">#FFBF9DCA</color>
 </resources>

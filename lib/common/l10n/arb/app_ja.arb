@@ -280,5 +280,6 @@
   "gameSpeedSettings": "ゲームスピード",
   "@gameSpeedSettings": {
     "description": "ゲーム速度設定ラベル"
-  }
+  },
+  "webOsItemTitle": "webOs"
 }

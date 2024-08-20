@@ -317,5 +317,10 @@
     "description": "Game speed settings label"
   },
   "earthAnimation": "Earth spinning among the skyies animation",
-  "tutorialDescription": "Tutorial explains how to sort trash. Bucket, plastic bottle, plastic shovel, cup to 'Plastic' bucket. Book, box, newspaper, letter to 'Paper' bucket. Gamepad, phone, battery, bulb to 'Electric' bucket. Banana skin, apple snaw, junk food, old cheese to 'Organic' bucket. Wine bottle, glass, ceramic cup, glass decoration to 'Glass' bucket."
+  "tutorialDescription": "Tutorial explains how to sort trash. Bucket, plastic bottle, plastic shovel, cup to 'Plastic' bucket. Book, box, newspaper, letter to 'Paper' bucket. Gamepad, phone, battery, bulb to 'Electric' bucket. Banana skin, apple snaw, junk food, old cheese to 'Organic' bucket. Wine bottle, glass, ceramic cup, glass decoration to 'Glass' bucket.",
+  "webOsItemTitle": "webOs",
+  "yourSmartTv": "Your Smart TV",
+  "webOsDescription1": " becomes a gaming platform with the support of the Magic Remote.\u2028\u2028Discover the gaming capabilities of your TV with “Recyclo” using the",
+  "toPlayRightNow": " to play right now.",
+  "lgMagicRemote": " LG Magic Remote"
 }

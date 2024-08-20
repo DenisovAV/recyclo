@@ -71,6 +71,9 @@ flutter:
     - family: Sniglet
       fonts:
         - asset: assets/fonts/Sniglet-Regular.ttf
+    - family: SourceSansPro
+      fonts:
+        - asset: assets/fonts/SourceSansPro-Regular.otf
 
 flutter_gen:
   output: lib/common/assets/

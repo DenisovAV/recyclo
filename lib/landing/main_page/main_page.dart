@@ -3,6 +3,7 @@ import 'package:recyclo/common.dart';
 import 'package:recyclo/landing/index.dart';
 import 'package:recyclo/landing/widgets/artefacts_item.dart';
 import 'package:recyclo/landing/widgets/download_from_stores_widget.dart';
+import 'package:recyclo/landing/widgets/web_os_item.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -38,40 +39,27 @@ class _MainPageState extends State<MainPage> {
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height,
-                child:
-                    Assets.images.cloudsBackground.image(fit: BoxFit.fitHeight),
+                child: Assets.images.cloudsBackground.image(fit: BoxFit.fitHeight),
               ),
               ListView(
                 controller: _controller,
                 children: [
-                  const SizedBox(
-                    height: 150,
-                  ),
+                  const SizedBox(height: 150),
                   const AboutUsItem(),
-                  const SizedBox(
-                    height: 50,
-                  ),
+                  const SizedBox(height: 50),
+                  const WebOsItem(),
+                  const SizedBox(height: 50),
                   const GamesItem(),
-                  const SizedBox(
-                    height: 50,
-                  ),
+                  const SizedBox(height: 50),
                   const MechanicsWidget(),
-                  const SizedBox(
-                    height: 50,
-                  ),
+                  const SizedBox(height: 50),
                   const ArtefactsItem(),
-                  const SizedBox(
-                    height: 50,
-                  ),
+                  const SizedBox(height: 50),
                   const TeamWidget(),
-                  const SizedBox(
-                    height: 50,
-                  ),
+                  const SizedBox(height: 50),
                   if (isSmallDevice) ...[
                     const DownloadFromStoresWidget(),
-                    const SizedBox(
-                      height: 50,
-                    ),
+                    const SizedBox(height: 50),
                   ],
                 ],
               ),
@@ -80,9 +68,7 @@ class _MainPageState extends State<MainPage> {
                 left: 0,
                 right: 0,
                 height: 100,
-                child: LandingAppBar(
-                  onTap: _onScrollingButtonTap,
-                ),
+                child: LandingAppBar(onTap: _onScrollingButtonTap),
               ),
             ],
           ),
