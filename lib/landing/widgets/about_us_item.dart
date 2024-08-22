@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/landing/widgets/brand_text.dart';
+import 'package:recyclo/landing/widgets/image_switcher.dart';
 import 'package:recyclo/landing/widgets/landing_item.dart';
 import 'package:recyclo/landing/widgets/link_widget.dart';
 
@@ -18,9 +20,7 @@ class AboutUsItem extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(isSmallDevice ? 10 : 50),
             child: Center(
-              child: isSmallDevice
-                  ? const _AboutUsMobile()
-                  : const _AboutUsDesktop(),
+              child: isSmallDevice ? const _AboutUsMobile() : const _AboutUsDesktop(),
             ),
           ),
         );
@@ -37,9 +37,7 @@ class _AboutUsDesktop extends StatelessWidget {
     final l10n = context.l10n;
 
     return ConstrainedBox(
-      constraints: const BoxConstraints(
-        maxWidth: 900,
-      ),
+      constraints: const BoxConstraints(maxWidth: 900),
       child: Column(
         children: [
           Center(
@@ -51,13 +49,15 @@ class _AboutUsDesktop extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 50,
+          const SizedBox(height: 50),
+          SizedBox(
+            height: 300,
+            width: 400,
+            child: ImageSwitcher(
+              images: [Assets.images.exampleScreen.image(), Assets.images.exampleScreenTv.image()],
+            ),
           ),
-          Assets.images.exampleScreen.image(),
-          const SizedBox(
-            height: 50,
-          ),
+          const SizedBox(height: 50),
           LayoutBuilder(
             builder: (context, constraints) {
               return Assets.images.logoDescription.image(
@@ -66,9 +66,7 @@ class _AboutUsDesktop extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(
-            height: 50,
-          ),
+          const SizedBox(height: 50),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -81,9 +79,7 @@ class _AboutUsDesktop extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 30,
-              ),
+              const SizedBox(width: 30),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,13 +126,9 @@ class _AboutUsMobile extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
-          height: 25,
-        ),
+        const SizedBox(height: 25),
         Assets.images.exampleScreenMobile.image(),
-        const SizedBox(
-          height: 25,
-        ),
+        const SizedBox(height: 25),
         BrandText(
           l10n.aboutAppRecycleContentTextColumnLeft,
           style: const TextStyle(
@@ -151,12 +143,8 @@ class _AboutUsMobile extends StatelessWidget {
             color: FlutterGameChallengeColors.textStroke,
           ),
         ),
-        const SizedBox(
-          height: 25,
-        ),
-        const LinkWidget(
-          linkColor: FlutterGameChallengeColors.textStroke,
-        ),
+        const SizedBox(height: 25),
+        const LinkWidget(linkColor: FlutterGameChallengeColors.textStroke),
       ],
     );
   }
