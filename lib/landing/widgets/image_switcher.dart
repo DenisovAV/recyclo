@@ -28,11 +28,6 @@ class ImageCarouselState extends State<ImageSwitcher> {
           duration: const Duration(milliseconds: 500),
           curve: Curves.easeIn,
         );
-        // if (_time == _maxTimerValue) {
-        //   _time = 0;
-        // } else {
-        //   _time++;
-        // }
       });
     });
   }
