@@ -54,7 +54,7 @@ class _AboutUsDesktop extends StatelessWidget {
             height: 300,
             width: 400,
             child: ImageSwitcher(
-              images: [Assets.images.exampleScreen.image(), Assets.images.exampleScreenTv.image()],
+              images: [Assets.images.exampleScreenTv.image(), Assets.images.exampleScreen.image()],
             ),
           ),
           const SizedBox(height: 50),

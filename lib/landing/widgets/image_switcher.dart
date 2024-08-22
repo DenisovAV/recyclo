@@ -14,8 +14,6 @@ class ImageSwitcher extends StatefulWidget {
 
 class ImageCarouselState extends State<ImageSwitcher> {
   int _currentIndex = 0;
-  // int _time = 0;
-  // final int _maxTimerValue = 5;
   late final Timer _timer;
 
   late final PageController _pageController;
