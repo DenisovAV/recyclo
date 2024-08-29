@@ -27,7 +27,7 @@ class DownloadFromStoresWidget extends StatelessWidget {
         ),
         PlayOnlineButton(
           onTap: () {
-            Navigator.of(context).push(LoadingPage.route());
+            Navigator.of(context).pushNamed('/game');
           },
         ),
       ],

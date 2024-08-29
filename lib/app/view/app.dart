@@ -25,17 +25,8 @@ class App extends StatelessWidget {
         DeviceOrientation.landscapeRight,
       ],
     ]);
-    return AppLifecycleObserver(
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) => PreloadCubit(
-              Images(prefix: ''),
-            )..loadSequentially(),
-          ),
-        ],
-        child: const AppView(),
-      ),
+    return const AppLifecycleObserver(
+      child: AppView(),
     );
   }
 }
@@ -46,8 +37,7 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AppLocalizationsProvider>(
-      create: (_) =>
-          ServiceProvider.get<AppLocalizationsProvider>()..getLocale(),
+      create: (_) => ServiceProvider.get<AppLocalizationsProvider>()..getLocale(),
       child: Consumer<AppLocalizationsProvider>(
         builder: (context, provider, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
