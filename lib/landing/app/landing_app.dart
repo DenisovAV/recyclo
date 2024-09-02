@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:recyclo/app/app_localisations_provider.dart';
 import 'package:recyclo/common.dart';
 import 'package:recyclo/landing/index.dart';
+import 'package:recyclo/loading/loading.dart';
 import 'package:recyclo/service_provider.dart';
 
 class LandingApp extends StatelessWidget {
@@ -39,9 +40,13 @@ class LandingApp extends StatelessWidget {
           ),
           textTheme: GoogleFonts.snigletTextTheme(),
         ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const MainPage(),
+          '/game': (context) => const LoadingPage(),
+        },
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const MainPage(),
       ),
     );
   }

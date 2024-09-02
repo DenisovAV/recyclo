@@ -9,21 +9,6 @@ import 'package:recyclo/menu/view/main_menu_page.dart';
 class LoadingPage extends StatefulWidget {
   const LoadingPage({super.key});
 
-  static Route<void> route() {
-    return MaterialPageRoute<void>(
-      builder: (_) => MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) => PreloadCubit(
-              Images(prefix: ''),
-            )..loadSequentially(),
-          ),
-        ],
-        child: const LoadingPage(),
-      ),
-    );
-  }
-
   @override
   State<LoadingPage> createState() => _LoadingPageState();
 }
@@ -49,13 +34,22 @@ class _LoadingPageState extends State<LoadingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PreloadCubit, PreloadState>(
-      listenWhen: (prevState, state) => !prevState.isComplete && state.isComplete,
-      listener: (context, state) => onPreloadComplete(context),
-      child: const Scaffold(
-        backgroundColor: FlutterGameChallengeColors.primary1,
-        body: Center(
-          child: _LoadingInternal(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => PreloadCubit(
+            Images(prefix: ''),
+          )..loadSequentially(),
+        ),
+      ],
+      child: BlocListener<PreloadCubit, PreloadState>(
+        listenWhen: (prevState, state) => !prevState.isComplete && state.isComplete,
+        listener: (context, state) => onPreloadComplete(context),
+        child: const Scaffold(
+          backgroundColor: FlutterGameChallengeColors.primary1,
+          body: Center(
+            child: _LoadingInternal(),
+          ),
         ),
       ),
     );
